@@ -5,11 +5,13 @@ import { Header, Title, Button, FormGroup, Grid, GridContainer, Label, TextInput
 import { useTranslation } from '../../../i18n/client'
 import { useAppSelector, useAppDispatch } from "@/lib/hooks"
 import { addIncome, IncomeItem, selectIcomeItems } from "@/lib/features/ledger/income/incomeSlice"
+import { useRouter } from "next/navigation"
 
 export default function Page() {
     const { t } = useTranslation('en')
     const items = useAppSelector(state => selectIcomeItems(state))
     const dispatch = useAppDispatch()
+    const router = useRouter()
 
     function addIncomeClicked() {
         const name = (document.querySelector('#add_income_what') as HTMLInputElement).value
@@ -22,20 +24,15 @@ export default function Page() {
             amount,
         }
         dispatch(addIncome(incomeItem))
+        router.push('/ledger/income/list')
     }
-
-    const incomeItemElements = items.map((item: IncomeItem) => {
-        return (
-            <div>{item.name} - {item.description} - {item.amount}</div>
-        )
-    })
 
     return (
         <div>
             <Header basic={true}>
                 <div className="usa-nav-container">
                     <div className="usa-navbar">
-                        <Title>Add Income</Title>
+                        <Title>{t('add_income_title')}</Title>
                     </div>
                 </div>
             </Header>
@@ -43,7 +40,8 @@ export default function Page() {
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
-                            <h2>{t('add_income_header')}</h2>
+                            <h3>{t('add_income_header')}</h3>
+                            <h3>{t('add_income_title')}</h3>
                             <FormGroup>
                                 <Label htmlFor="add_income_what">{t('add_income_what_name')}</Label>
                                 <TextInput id="add_income_what" name="add_income_what" type="text" />
@@ -62,8 +60,7 @@ export default function Page() {
                             <FormGroup>
                                 <Button type="button" onClick={addIncomeClicked}>Continue</Button>
                             </FormGroup>
-                            {incomeItemElements}
-                        </main>
+                         </main>
                     </Grid>
                 </GridContainer>
             </div>

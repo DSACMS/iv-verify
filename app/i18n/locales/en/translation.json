@@ -1,8 +1,19 @@
 {
-    "first": "this is the new translation!",
+    "first": "first",
+    "add_income_title": "Add Income",
     "add_income_header": "Add a person, client, or company who paid you in the last 30 days",
     "add_income_what_name": "What is the name of the person, client, or company that you worked for?",
     "add_income_describe": "In your own words, describe the type of work you did",
     "add_income_total_amount": "Total amount paid to you in the last 30 days.",
-    "add_income_total_total": "Add up the payments from this person, client, or company and enter it below."
+    "add_income_total_total": "Add up the payments from this person, client, or company and enter it below.",
+    "list_income_title": "Self employment income summaray",
+    "list_income_header": "Would you like to add another person, client, or company who paid you in the last 30 days?",
+    "list_income_subheader": "Add another person, client, or company below",
+    "list_income_list_header": "Your work",
+    "list_income_add_button": "Add another person, client, or company",
+    "list_income_done_button": "Done",
+    "list_income_delete_button": "Delete",
+    "list_income_delete_are_you_sure": "Are you sure you would like to delete this item?",
+    "list_income_yes_delete_item": "Yes, remove this income item",
+    "list_income_no_delete_item": "No, take me back to the list"
 }
