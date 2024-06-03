@@ -58,7 +58,7 @@ export default function Page() {
                                 <TextInput id="add_income_total_amount" name="add_income_total_amount" type="number" />
                             </FormGroup>
                             <FormGroup>
-                                <Button type="button" onClick={addIncomeClicked}>Continue</Button>
+                                <Button type="button" name="continue_button" onClick={addIncomeClicked}>{t('add_income_button')}</Button>
                             </FormGroup>
                          </main>
                     </Grid>
