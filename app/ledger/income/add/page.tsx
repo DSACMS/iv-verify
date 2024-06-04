@@ -30,7 +30,7 @@ export default function Page() {
         addIncomeClicked(data)
     })
 
-    function addIncomeClicked({name, description, amount}) {
+    function addIncomeClicked({name, description, amount}: FormData) {
 
         const incomeItem: IncomeItem = {
             name,
@@ -47,9 +47,9 @@ export default function Page() {
         }
 
         const errMessages = Object.keys(errors).filter((key) => {
-            return errors[key]?.message
+            return (errors as any)[key]?.message
         }).map((key => {
-            return <li>{errors[key]?.message}</li>
+            return <li key={key}>{(errors as any)[key]?.message}</li>
         }))
 
         if (errMessages.length == 0) {

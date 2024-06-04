@@ -1,17 +1,17 @@
 import { ErrorMessage, Label, TextInput } from "@trussworks/react-uswds"
-import React from "react"
+import React, { FocusEventHandler } from "react"
 
 type Args = {
     id: string
     name: string
     label: string
     error: string | undefined
-    onBlur: Function
-    onChange: Function
-    type?: string
+    onBlur: FocusEventHandler<HTMLInputElement>
+    onChange: FocusEventHandler<HTMLInputElement>
+    type?: 'text' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'url'
 }
 
-export default React.forwardRef<HTMLInputElement, Args>(
+const TextFieldWithValidation = React.forwardRef<HTMLInputElement, Args>(
     ({ id, name, label, error, onBlur, onChange, type }: Args, ref) => {
         return (
             <>
@@ -29,3 +29,6 @@ export default React.forwardRef<HTMLInputElement, Args>(
         )
     }
 )
+
+TextFieldWithValidation.displayName = "TextFieldWithValidation"
+export default TextFieldWithValidation
