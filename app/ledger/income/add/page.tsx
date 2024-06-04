@@ -1,7 +1,7 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Label, TextInput, Alert } from '@trussworks/react-uswds' 
+import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert } from '@trussworks/react-uswds' 
 import { useTranslation } from '../../../i18n/client'
 import { useAppDispatch } from "@/lib/hooks"
 import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
@@ -23,12 +23,10 @@ export default function Page() {
     const {
         register,
         formState: { errors },
-        handleSubmit,
-        control
+        handleSubmit
     } = useForm<FormData>()
 
     const onSubmit: SubmitHandler<FormData> = (data => {
-        console.log(data)
         addIncomeClicked(data)
     })
 
@@ -111,7 +109,7 @@ export default function Page() {
                                     />
                                 </FormGroup>
                                 <FormGroup>
-                                    <Button type="submit" name="continue_button">{t('add_income_button')}</Button>
+                                    <Button type="submit" name="continue_button" data-testid="continue_button">{t('add_income_button')}</Button>
                                 </FormGroup>
                             </Form>
                          </main>
