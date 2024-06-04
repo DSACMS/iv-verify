@@ -18,7 +18,7 @@ export default function Page() {
     const deleteRef = useRef<ModalRef[]>([])
 
     const incomeItemElements = items.map((item: IncomeItem, idx: number) => {
-        return <Item item={item} index={idx} />
+        return <Item key={idx} item={item} index={idx} />
     })
 
     function addItemClicked() {

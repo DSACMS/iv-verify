@@ -1,22 +1,38 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, FormGroup, Grid, GridContainer, Label, TextInput } from '@trussworks/react-uswds' 
+import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Label, TextInput, Alert } from '@trussworks/react-uswds' 
 import { useTranslation } from '../../../i18n/client'
-import { useAppSelector, useAppDispatch } from "@/lib/hooks"
-import { addIncome, IncomeItem, selectIcomeItems } from "@/lib/features/ledger/income/incomeSlice"
+import { useAppDispatch } from "@/lib/hooks"
+import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
+import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form"
+import TextFieldWithValidation from "./TextFieldWithValidation"
 
 export default function Page() {
     const { t } = useTranslation('en')
-    const items = useAppSelector(state => selectIcomeItems(state))
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    function addIncomeClicked() {
-        const name = (document.querySelector('#add_income_what') as HTMLInputElement).value
-        const description = (document.querySelector('#add_income_describe') as HTMLInputElement).value
-        const amount = parseFloat((document.querySelector('#add_income_total_amount') as HTMLInputElement).value)
+    type FormData = {
+        name: string
+        description: string
+        amount: number
+    }
+
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+        control
+    } = useForm<FormData>()
+
+    const onSubmit: SubmitHandler<FormData> = (data => {
+        console.log(data)
+        addIncomeClicked(data)
+    })
+
+    function addIncomeClicked({name, description, amount}) {
 
         const incomeItem: IncomeItem = {
             name,
@@ -26,6 +42,12 @@ export default function Page() {
         dispatch(addIncome(incomeItem))
         router.push('/ledger/income/list')
     }
+
+    // function errorSummary(errors: FieldErrors<FormData>) {
+    //     for (const key of Object.keys(errors)) {
+    //         if (errorsamount?.message)
+    //     }
+    // }
 
     return (
         <div>
@@ -42,24 +64,41 @@ export default function Page() {
                         <main className="usa-layout-docs">
                             <h3>{t('add_income_header')}</h3>
                             <h3>{t('add_income_title')}</h3>
-                            <FormGroup>
-                                <Label htmlFor="add_income_what">{t('add_income_what_name')}</Label>
-                                <TextInput id="add_income_what" name="add_income_what" type="text" />
-                            </FormGroup>
+                            <Form onSubmit={handleSubmit(onSubmit)}>
+                                {/* {errors. > 0 && (
+                                    <Alert type="error" headingLevel="h4">Errors</Alert>
+                                )} */}
+                                <FormGroup>
+                                    <TextFieldWithValidation
+                                        id="name"
+                                        {...register("name", {required: {value: true, message: t('add_income_required_field')}})}
+                                        label={t('add_income_what_name')}
+                                        error={errors.name?.message}
+                                    />
+                                </FormGroup>
 
-                            <FormGroup>
-                                <Label htmlFor="add_income_describe">{t('add_income_describe')}</Label>
-                                <TextInput id="add_income_describe" name="add_income_describe" type="text" />
-                            </FormGroup>
+                                <FormGroup>
+                                    <TextFieldWithValidation 
+                                        id="description" 
+                                        {...register("description", {required: {value: true, message: t('add_income_required_field')} })} 
+                                        label={t('add_income_describe')} 
+                                        error={errors.description?.message} 
+                                    />
+                                </FormGroup>
 
-                            <FormGroup>
-                                <Label htmlFor="add_income_total_amount">{t('add_income_total_amount')}</Label>
-                                <span className="usa-hint">{t('add_income_total_total')}</span>
-                                <TextInput id="add_income_total_amount" name="add_income_total_amount" type="number" />
-                            </FormGroup>
-                            <FormGroup>
-                                <Button type="button" name="continue_button" onClick={addIncomeClicked}>{t('add_income_button')}</Button>
-                            </FormGroup>
+                                <FormGroup>
+                                    <TextFieldWithValidation
+                                        type="number"
+                                        id="amount"
+                                        {...register("amount", { required: { value: true, message: t('add_income_required_field')}})}
+                                        label={t('add_income_total_amount')}
+                                        error={errors.amount?.message}
+                                    />
+                                </FormGroup>
+                                <FormGroup>
+                                    <Button type="submit" name="continue_button">{t('add_income_button')}</Button>
+                                </FormGroup>
+                            </Form>
                          </main>
                     </Grid>
                 </GridContainer>

@@ -7,7 +7,7 @@ interface ItemProps {
     item: IncomeItem
     index: number
 }
-export default function({ item, index }: ItemProps) {
+export default function Item({ item, index }: ItemProps) {
     const ref = useRef(null)
     const { t } = useTranslation('en')
     const dispatch = useAppDispatch()

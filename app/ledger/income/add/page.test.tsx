@@ -45,10 +45,30 @@ describe('Add Income To Ledger Page', () => {
         expect(mockRouter).toMatchObject({
             asPath: "/ledger/income/list"
         })
-
     })
 
     it('Displays error messages when fields are empty', () => {
+        fireEvent.change(screen.getByLabelText('What is the name of the person, client, or company that you worked for?'), {
+            target: {
+                value: 'Jane'
+            }
+        })
+           
+        fireEvent.change(screen.getByLabelText('In your own words, describe the type of work you did'), {
+            target: {
+                value: 'Landscaping'
+            }
+        })
 
+        fireEvent.change(screen.getByLabelText('Total amount paid to you in the last 30 days.'), {
+            target: {
+                value: '40.00'
+            }
+        })
+
+        fireEvent.click(screen.getByText('Continue'), new MouseEvent('click'))
+        expect(mockRouter).toMatchObject({
+            asPath: "/ledger/income/add"
+        })
     })
 })
