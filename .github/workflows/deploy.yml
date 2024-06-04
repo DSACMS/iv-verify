@@ -13,10 +13,10 @@ jobs:
         env:
           CF_USERNAME: ${{ secrets.CLOUD_GOV_DEPLOY_USERNAME }}
           CF_PASSWORD: ${{ secrets.CLOUD_GOV_DEPLOY_PASSWORD }}
-        run: cf login -a api.fr.cloud.gov -u ${CF_USERNAME} -p ${CF_PASSWORD}
+        run: ./cf login -a api.fr.cloud.gov -u ${CF_USERNAME} -p ${CF_PASSWORD}
       - uses: actions/checkout@v4
       - name: Use Node.js
         uses: actions/setup-node@v4
       - run: npm ci
       - run: npm run build
-      - run: cf push
+      - run: ./cf push
