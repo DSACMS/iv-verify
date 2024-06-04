@@ -1,9 +1,6 @@
 name: Deploy
 concurrency: production
-# on:
-#   push:
-#     branches:
-#       - main
+on: workflow_dispatch
 
 jobs:
   deployment:
