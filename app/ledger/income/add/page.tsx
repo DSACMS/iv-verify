@@ -43,11 +43,28 @@ export default function Page() {
         router.push('/ledger/income/list')
     }
 
-    // function errorSummary(errors: FieldErrors<FormData>) {
-    //     for (const key of Object.keys(errors)) {
-    //         if (errorsamount?.message)
-    //     }
-    // }
+    function errorSummary(errors: FieldErrors<FormData>) {
+        if (!errors) {
+            return <></>
+        }
+
+        const errMessages = Object.keys(errors).filter((key) => {
+            return errors[key]?.message
+        }).map((key => {
+            return <li>{errors[key]?.message}</li>
+        }))
+
+        if (errMessages.length == 0) {
+            return <></>
+        }
+
+        return (
+            <Alert type="error" headingLevel="h3">
+                {t('add_income_error_header')}
+                {errMessages}
+            </Alert>
+        )
+    }
 
     return (
         <div>
@@ -65,13 +82,11 @@ export default function Page() {
                             <h3>{t('add_income_header')}</h3>
                             <h3>{t('add_income_title')}</h3>
                             <Form onSubmit={handleSubmit(onSubmit)}>
-                                {/* {errors. > 0 && (
-                                    <Alert type="error" headingLevel="h4">Errors</Alert>
-                                )} */}
+                                {errorSummary(errors)}
                                 <FormGroup>
                                     <TextFieldWithValidation
                                         id="name"
-                                        {...register("name", {required: {value: true, message: t('add_income_required_field')}})}
+                                        {...register("name", {required: {value: true, message: t('add_income_name_field_required')}})}
                                         label={t('add_income_what_name')}
                                         error={errors.name?.message}
                                     />
@@ -80,7 +95,7 @@ export default function Page() {
                                 <FormGroup>
                                     <TextFieldWithValidation 
                                         id="description" 
-                                        {...register("description", {required: {value: true, message: t('add_income_required_field')} })} 
+                                        {...register("description", {required: {value: true, message: t('add_income_description_field_required')} })} 
                                         label={t('add_income_describe')} 
                                         error={errors.description?.message} 
                                     />
@@ -90,7 +105,7 @@ export default function Page() {
                                     <TextFieldWithValidation
                                         type="number"
                                         id="amount"
-                                        {...register("amount", { required: { value: true, message: t('add_income_required_field')}})}
+                                        {...register("amount", { required: { value: true, message: t('add_income_amount_field_required')}})}
                                         label={t('add_income_total_amount')}
                                         error={errors.amount?.message}
                                     />
