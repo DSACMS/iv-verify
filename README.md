@@ -1,3 +1,4 @@
+[![CI](https://github.com/JosephGasiorekUSDS/verify-nextjs/actions/workflows/build.yml/badge.svg)](https://github.com/JosephGasiorekUSDS/verify-nextjs/actions/workflows/build.yml)
 
 ## Getting Started
 First, install the dependencies:
