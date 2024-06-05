@@ -42,7 +42,7 @@ export default function Page() {
             <Header basic={true}>
                 <div className="usa-nav-container">
                     <div className="usa-navbar">
-                        <Title>{t('list_income_title')}</Title>
+                        <Title data-testid="list_income_title">{t('list_income_title')}</Title>
                     </div>
                 </div>
             </Header>
@@ -64,8 +64,8 @@ export default function Page() {
                                 </Card>
                             </CardGroup>
                             <ButtonGroup type="default">
-                                <Button type="button" onClick={addItemClicked}>{t('list_income_add_button')}</Button>
-                                <Button type="button">{t('list_income_done_button')}</Button>
+                                <Button type="button" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_button')}</Button>
+                                <Button type="button" data-testid="done_button">{t('list_income_done_button')}</Button>
                             </ButtonGroup>
                         </main>
                     </Grid>

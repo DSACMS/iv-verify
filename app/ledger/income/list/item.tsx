@@ -21,7 +21,7 @@ export default function Item({ item, index }: ItemProps) {
             <Grid col={1}>*</Grid>
             <Grid col={6} tablet={{col: 9}}>
                 <div>{item.name}</div>
-                <div>${item.amount}</div>
+                <div>{`$${item.amount}`}</div>
                 <div>{item.description}</div>
             </Grid>
             <Grid col={5} tablet={{col: 2}}>
