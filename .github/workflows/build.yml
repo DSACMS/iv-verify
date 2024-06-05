@@ -14,4 +14,23 @@ jobs:
         uses: actions/setup-node@v4
       - run: npm ci
       - run: npm run build
-      - run: npm test
+      - run: npx vitest --reporter=junit --outputFile=./test-output.xml --watch=false
+      - name: Python setup
+        if: always()
+        uses: actions/setup-python@v3
+        with:
+          python-version: '3.x'
+      - name: TestRail CLI upload results
+        if: always()
+        env:
+          TR_API_KEY: ${{ secrets.TR_API_KEY }}
+        run: |
+          pip install trcli
+          trcli -y \
+            -h https://testrailent.cms.gov/ \
+            --project "PROJECT NAME" \
+            -k ${TR_API_KEY} \
+            parse_junit \
+            --title "${{ github.event.pull_request.title }}" \
+            --run-description ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} \
+            -f "test-output.xml"
