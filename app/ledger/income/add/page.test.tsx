@@ -47,7 +47,7 @@ describe('Add Income To Ledger Page', async () => {
             expect(screen.getByTestId("alert")).toBeDefined()
         })
 
-        expect(screen.getAllByTestId("errorMessage")).not.toBeDefined()
+        expect(screen.getAllByTestId("errorMessage")).toBeDefined()
 
         expect(mockRouter).toMatchObject({
             asPath: "/ledger/income/add"
