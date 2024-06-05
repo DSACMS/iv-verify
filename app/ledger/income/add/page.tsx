@@ -103,7 +103,7 @@ export default function Page() {
                                     <TextFieldWithValidation
                                         type="number"
                                         id="amount"
-                                        {...register("amount", { required: { value: true, message: t('add_income_amount_field_required')}})}
+                                        {...register("amount", { valueAsNumber:true, required: { value: true, message: t('add_income_amount_field_required')}})}
                                         label={t('add_income_total_amount')}
                                         error={errors.amount?.message}
                                     />

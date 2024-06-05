@@ -13,7 +13,7 @@
     "add_income_amount_field_required": "Amount field is required",
     "add_income_error_header": "There are errors in the form below.",
     "list_income_title": "Self employment income summaray",
-    "list_income_header": "Would you like to add another person, client, or company who paid you in the last 30 days?",
+    "list_income_header": "Would you like to add another person, client, or company who paid you in the last {{day_count}} days?",
     "list_income_subheader": "Add another person, client, or company below",
     "list_income_list_header": "Your work",
     "list_income_add_button": "Add another person, client, or company",
@@ -21,5 +21,6 @@
     "list_income_delete_button": "Delete",
     "list_income_delete_are_you_sure": "Are you sure you would like to delete this item?",
     "list_income_yes_delete_item": "Yes, remove this income item",
-    "list_income_no_delete_item": "No, take me back to the list"
+    "list_income_no_delete_item": "No, take me back to the list",
+    "list_income_total": "Total income past {{day_count}} days: ${{amount}}"
 }

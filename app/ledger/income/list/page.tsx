@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation"
 import { useRef } from "react"
 import Item from './item'
 
+const DAY_COUNT = 30
+
 export default function Page() {
     const { t } = useTranslation('en')
     const router = useRouter()
@@ -25,6 +27,16 @@ export default function Page() {
         router.push("/ledger/income/add")
     }
 
+    function getTotal() {
+        let total = items.reduce((t, item) => t + item.amount, 0)
+
+        if (total > 0) {
+            return (t('list_income_total', {day_count: DAY_COUNT, amount: total}))
+        }
+
+        return <></>
+    }
+
     return (
         <div>
             <Header basic={true}>
@@ -38,7 +50,7 @@ export default function Page() {
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
-                            <h3>{t('list_income_header')}</h3>
+                            <h3>{t('list_income_header', {day_count: DAY_COUNT})}</h3>
                             <span className="usa-hint">{t('list_income_subheader')}</span>
                             <CardGroup>
                                 <Card className="grid-col-12 margin-top-4">
@@ -47,6 +59,7 @@ export default function Page() {
                                         <GridContainer>
                                             {incomeItemElements}
                                         </GridContainer>
+                                        {getTotal()}
                                     </CardBody>
                                 </Card>
                             </CardGroup>
