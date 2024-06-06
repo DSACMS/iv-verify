@@ -2,7 +2,7 @@
 
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, ButtonGroup, AccordionItemProps, Card, CardBody, CardHeader, Grid, GridContainer, Label, TextInput, ModalRef, Accordion } from '@trussworks/react-uswds' 
+import { Header, Title, Button, ButtonGroup, HeadingLevel, Card, CardBody, CardHeader, Grid, GridContainer, Label, TextInput, ModalRef, Accordion } from '@trussworks/react-uswds' 
 import { useTranslation } from '../../i18n/client'
 import { useAppSelector, useAppDispatch } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
@@ -15,7 +15,7 @@ export default function Page() {
     const { t } = useTranslation('en')
     const router = useRouter()
 
-    const testItems: AccordionItemProps[] = [
+    const testItems = [
         {
           title: t('expenses_landing_what_counts_heading'),
           content: (
@@ -34,7 +34,7 @@ export default function Page() {
           ),
           expanded: true,
           id: 'expenses_landing_what_counts',
-          headingLevel: 'h4',
+          headingLevel: 'h4' as HeadingLevel,
         }, {
             title: t('expenses_landing_need_heading'),
             content: (
@@ -44,7 +44,7 @@ export default function Page() {
             ),
             expanded: true,
             id: 'expenses_landing_need',
-            headingLevel: 'h4',
+            headingLevel: 'h4' as HeadingLevel,
         }
     ]
 
