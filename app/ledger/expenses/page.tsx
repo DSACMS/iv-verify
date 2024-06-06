@@ -2,14 +2,10 @@
 
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, ButtonGroup, HeadingLevel, Card, CardBody, CardHeader, Grid, GridContainer, Label, TextInput, ModalRef, Accordion } from '@trussworks/react-uswds' 
+import { Header, Title, Button, HeadingLevel, Grid, GridContainer, Accordion } from '@trussworks/react-uswds' 
 import { useTranslation } from '../../i18n/client'
-import { useAppSelector, useAppDispatch } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
-import { useRef } from "react"
 import Link from 'next/link'
-
-const DAY_COUNT = 30
 
 export default function Page() {
     const { t } = useTranslation('en')
