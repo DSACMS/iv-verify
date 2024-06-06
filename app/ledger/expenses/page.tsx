@@ -48,6 +48,10 @@ export default function Page() {
         }
     ]
 
+    function addItemClicked() {
+        router.push("/ledger/expenses/add")
+    }
+
     return (
         <div>
             <Header basic={true}>
@@ -61,13 +65,13 @@ export default function Page() {
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
-                            <h3 className="margin-bottom-2">{t('expenses_landing_heading')}</h3>
+                            <h3 className="margin-bottom-2" data-testid="expenses_landing_what_counts_heading">{t('expenses_landing_heading')}</h3>
                             <span className="usa-hint">{t('expenses_landing_subheading')}</span>
                             <Accordion multiselectable={true} items={testItems} className="margin-top-3 margin-bottom-3" />
                             <p className="text-center">
-                                <Button type="button" className="margin-bottom-3">{t('expenses_landing_add_button')}</Button>
+                                <Button type="button" onClick={addItemClicked} data-testid="add_expenses_button" className="margin-bottom-3">{t('expenses_landing_add_button')}</Button>
                                 <br />
-                                <Link href="/ledger/expenses/summary" className="usa-link">{t('expenses_landing_do_not_have_link')}</Link>
+                                <Link href="/ledger/expenses/summary" data-testid="no_expenses_link" className="usa-link">{t('expenses_landing_do_not_have_link')}</Link>
                             </p>
                         </main>
                     </Grid>
