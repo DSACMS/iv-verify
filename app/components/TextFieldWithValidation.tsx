@@ -23,6 +23,7 @@ const TextFieldWithValidation = React.forwardRef<HTMLInputElement, Args>(
                     inputRef={ref}
                     onBlur={onBlur}
                     onChange={onChange}
+                    {...(error !== undefined ? {validationStatus: 'error'} : {})}
                 />
                 <ErrorMessage>{error}</ErrorMessage>
             </>
