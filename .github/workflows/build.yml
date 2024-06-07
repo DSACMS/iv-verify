@@ -29,7 +29,7 @@ jobs:
           trcli -y \
             -h https://testrailent.cms.gov/ \
             --project "CMS Sandbox" \
-            -k "$TR_API_KEY \
+            -k "$TR_API_KEY" \
             parse_junit \
             --title "${{ github.event.pull_request.title }}" \
             --run-description ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} \
