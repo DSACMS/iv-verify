@@ -1,14 +1,15 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ErrorMessage, ComboBox, Label } from '@trussworks/react-uswds' 
+import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ErrorMessage, ComboBox, Label, ValidationChecklist, ValidationItem } from '@trussworks/react-uswds' 
 import { useTranslation } from '../../../i18n/client'
 import { useAppDispatch } from "@/lib/hooks"
-import { addExpense, selectExpenseItems } from "@/lib/features/ledger/expenses/expensesSlice"
+import { ExpenseItem, addExpense, selectExpenseItems } from "@/lib/features/ledger/expenses/expensesSlice"
 import { useRouter } from "next/navigation"
 import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form"
 import TextFieldWithValidation from "../../../components/TextFieldWithValidation"
 import { useRef, useImperativeHandle } from "react"
+import exp from "constants"
 
 export default function Page() {
     const { t } = useTranslation('en')
@@ -43,7 +44,41 @@ export default function Page() {
 
     const onSubmit: SubmitHandler<FormData> = (data => {
         console.log(data)
+        const expenseItem: ExpenseItem = {
+            name: data.name,
+            expenseType: data.expenseType,
+            amount: data.amount,
+            isMileage: data.isMileage,
+            date: new Date(data.date)
+        }
+
+        dispatch(addExpense(expenseItem))
+        router.push('/ledger/expense/list')
     })
+
+    function errorSummary() {
+        if (!errors) {
+            return <></>
+        }
+
+        const validationItems = Object.keys(errors).filter((key) => {
+            return (errors as any)[key]?.message
+        }).map((key => {
+            return <ValidationItem id={key} key={key} isValid={false}>{(errors as any)[key]?.message}</ValidationItem>
+        }))
+
+        if (validationItems.length == 0) {
+            return <></>
+        }
+
+        return (
+            <Alert type="error" validation heading="Expense Requirements" headingLevel="h3" className="margin-top-3">
+                <ValidationChecklist id="validation-code">
+                    {validationItems}
+                </ValidationChecklist>
+            </Alert>
+        )
+    }
 
     return (
         <div>
@@ -61,7 +96,7 @@ export default function Page() {
                             <h3>{t('add_expense_header')}</h3>
                             <h4 className="margin-top-2">{t('add_expense_subheader', {month_count: '3'})}</h4>
                             <Form onSubmit={handleSubmit(onSubmit)}>
-                                {/* {errorSummary(errors)} */}
+                                {errorSummary()}
                                 <FormGroup>
                                     <TextFieldWithValidation
                                         id="name"
@@ -120,7 +155,8 @@ export default function Page() {
                                     <Controller
                                         name="expenseType"
                                         control={control}
-                                        rules={{ required: {value: true, message: t('add_expense_type_required')}}}
+                                        // Question if this field is optional or required https://confluenceent.cms.gov/pages/viewpage.action?spaceKey=SFIV&title=IRT+Epics+and+Stories
+                                        // rules={{ required: {value: true, message: t('add_expense_type_required')}}}
                                         render={({ field }) => (
                                             <>
                                                 <Label htmlFor="expenseType">{t('add_expense_type_field')}</Label>

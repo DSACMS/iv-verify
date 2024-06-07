@@ -45,7 +45,7 @@ export default function Page() {
     ]
 
     function addItemClicked() {
-        router.push("/ledger/expenses/add")
+        router.push("/ledger/expense/add")
     }
 
     return (
