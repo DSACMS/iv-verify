@@ -38,5 +38,13 @@
     "expenses_landing_need_heading": "Do I need to submit receipts?",
     "expenses_landing_need_body": "Usually you won't be asked to send in receipts or proof of expenses. In some cases you may be selected for a random audit. Keep receipts, or bank statements that match your costs just in case.",
     "expenses_landing_add_button": "Add expenses",
-    "expenses_landing_do_not_have_link": "I don't have expenses to report"
+    "expenses_landing_do_not_have_link": "I don't have expenses to report",
+    "expenses_snap_standard_title": "SNAP self employement expenses",
+    "expenses_snap_standard_header": "Are your monthly expenses or costs from self employed work more than ${{amount}}?",
+    "expenses_snap_standard_subheader": "Expenses or costs from self employment work are deducted from your income",
+    "expenses_snap_standard_no_header": "No, my monthly expenses are ${{amount}} or less",
+    "expenses_snap_standard_no_subheader": "Great! You don't need to provide any more information",
+    "expenses_snap_standard_yes_header": "Yes, my monthly expenses are more than ${{amount}}",
+    "expenses_snap_standard_yes_subheader": "we will recommend you itemize or detail your expenses",
+    "expenses_snap_standard_continue": "Continue"
 }
