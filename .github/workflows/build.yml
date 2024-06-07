@@ -30,6 +30,7 @@ jobs:
           trcli -y \
             -h https://testrailent.cms.gov/ \
             -u $TR_USERNAME \
+            -p $TR_API_KEY \
             --project "CMS Sandbox" \
             -k $TR_API_KEY \
             parse_junit \
