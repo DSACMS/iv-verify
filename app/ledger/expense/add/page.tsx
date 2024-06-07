@@ -1,7 +1,7 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ErrorMessage } from '@trussworks/react-uswds' 
+import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ErrorMessage, ComboBox, Label } from '@trussworks/react-uswds' 
 import { useTranslation } from '../../../i18n/client'
 import { useAppDispatch } from "@/lib/hooks"
 import { addExpense, selectExpenseItems } from "@/lib/features/ledger/expenses/expensesSlice"
@@ -29,6 +29,17 @@ export default function Page() {
         formState: { errors },
         handleSubmit
     } = useForm<FormData>({ defaultValues: { isMileage: false }})
+
+    const expenseTypeOptions = [
+        t('add_expense_materials'),
+        t('add_expense_travel'),
+        t('add_expense_equipment'),
+        t('add_expense_advertising'),
+        t('add_expense_cost'),
+        t('add_expense_other')
+    ].map((str) => {
+        return { value: str, label: str }
+    })
 
     const onSubmit: SubmitHandler<FormData> = (data => {
         console.log(data)
@@ -81,12 +92,17 @@ export default function Page() {
                                         name="date"
                                         control={control}
                                         rules={{ required: {value:true, message: t('add_expense_date_required')} }}
-                                        render={({ field }) =>
-                                            <DatePicker
-                                                id="date"
-                                                {...field}
-                                                {...(errors.date?.message !== undefined ? {validationStatus: 'error'} : {})}
-                                            />
+                                        render={({ field }) => (
+                                            <>
+                                                <Label htmlFor="date">{t('add_expense_date_field')}</Label>
+                                                <p className="usa-hint font-body-2xs">{t('add_expense_date_hint')}</p>
+                                                <DatePicker
+                                                    id="date"
+                                                    {...field}
+                                                    {...(errors.date?.message !== undefined ? {validationStatus: 'error'} : {})}
+                                                />
+                                            </>
+                                            )
                                         }
                                         />
                                 </FormGroup>
@@ -97,6 +113,26 @@ export default function Page() {
                                         {...register("amount", { valueAsNumber:true, validate: (value) => value > 0, required:{value: true, message: t('add_expense_amount_required')}})}
                                         label={t('add_expense_amount_field')}
                                         error={errors.amount?.message}
+                                    />
+                                </FormGroup>
+                                
+                                <FormGroup>
+                                    <Controller
+                                        name="expenseType"
+                                        control={control}
+                                        rules={{ required: {value: true, message: t('add_expense_type_required')}}}
+                                        render={({ field }) => (
+                                            <>
+                                                <Label htmlFor="expenseType">{t('add_expense_type_field')}</Label>
+                                                <p className="usa-hint font-body-2xs">{t('add_expense_type_hint')}</p>
+                                                <ComboBox
+                                                    id="expenseType"
+                                                    options={expenseTypeOptions}
+                                                    {...field}
+                                                />
+                                            </>
+                                            )
+                                        }
                                     />
                                 </FormGroup>
 

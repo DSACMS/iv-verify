@@ -42,5 +42,6 @@
     "add_expense_other": "Other",
     "add_expense_name_required": "The name field is required",
     "add_expense_date_required": "The date field is required",
-    "add_expense_amount_required": "The amount field is required"
+    "add_expense_amount_required": "The amount field is required",
+    "add_expense_type_required": "The expense type field is required"
 }
