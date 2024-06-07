@@ -24,10 +24,12 @@ jobs:
         if: always()
         env:
           TR_API_KEY: ${{ secrets.TR_API_KEY }}
+          TR_USERNAME: ${{ secrets.TR_USERNAME }}
         run: |
           pip install trcli
           trcli -y \
             -h https://testrailent.cms.gov/ \
+            -u $TR_USERNAME \
             --project "CMS Sandbox" \
             -k $TR_API_KEY \
             parse_junit \
