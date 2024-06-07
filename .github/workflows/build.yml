@@ -28,9 +28,10 @@ jobs:
           pip install trcli
           trcli -y \
             -h https://testrailent.cms.gov/ \
-            --project "PROJECT NAME" \
-            -k ${TR_API_KEY} \
+            --project "CMS Sandbox" \
+            -k "$TR_API_KEY \
             parse_junit \
             --title "${{ github.event.pull_request.title }}" \
             --run-description ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }} \
             -f "test-output.xml"
+            --section-id "118850"
