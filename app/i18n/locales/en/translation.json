@@ -43,5 +43,21 @@
     "add_expense_name_required": "The name field is required",
     "add_expense_date_required": "The date field is required",
     "add_expense_amount_required": "The amount field is required",
-    "add_expense_type_required": "The expense type field is required"
+    "add_expense_type_required": "The expense type field is required",
+    "expenses_landing_title": "Expenses",
+    "expenses_landing_heading": "Tell us about your business expenses",
+    "expenses_landing_subheading": "Many things can reduce your income from self employment work and help you get more benefits. Common expenses are things like materials, supplies, and equipment you had to buy, or money you spent traveling to a job.",
+    "expenses_landing_what_counts_heading": "What counts as expenses?",
+    "expenses_landing_what_counts_body": "You can usually count any business expense that the Internal Revenue Service (IRS) allows.",
+    "expenses_landing_what_counts_list_header": "Some examples of business expenses are:",
+    "expenses_landing_what_counts_list_one": "Equipment (repair and rentals of business equipment)",
+    "expenses_landing_what_counts_list_two": "Materials and supplies (stationary, postage, cleaning supplies)",
+    "expenses_landing_what_counts_list_three": "Business property (rent for business space, utilities, insurance premiums)",
+    "expenses_landing_what_counts_list_four": "Travel costs (car mileage and parking fees)",
+    "expenses_landing_what_counts_list_five": "Advertising for you business (signs, flyers, printing)",
+    "expenses_landing_what_counts_list_six": "Costs of materials bought to resell or used to make a product",
+    "expenses_landing_need_heading": "Do I need to submit receipts?",
+    "expenses_landing_need_body": "Usually you won't be asked to send in receipts or proof of expenses. In some cases you may be selected for a random audit. Keep receipts, or bank statements that match your costs just in case.",
+    "expenses_landing_add_button": "Add expenses",
+    "expenses_landing_do_not_have_link": "I don't have expenses to report"
 }
