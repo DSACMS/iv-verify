@@ -103,6 +103,7 @@ export default function Page() {
                                         {...register("name", {required:{value: true, message: t('add_expense_name_required')}})}
                                         label={t('add_expense_name_field')}
                                         error={errors.name?.message}
+                                        data-testid="name"
                                     />
                                 </FormGroup>
 
@@ -116,6 +117,7 @@ export default function Page() {
                                                 {...field}
                                                 label={t('add_expense_mileage_field')}
                                                 value="true"
+                                                data-testid="isMileage"
                                             />
                                         }
                                     />
@@ -133,6 +135,7 @@ export default function Page() {
                                                 <p className="usa-hint font-body-2xs">{t('add_expense_date_hint')}</p>
                                                 <DatePicker
                                                     id="date"
+                                                    data-testid="date"
                                                     {...field}
                                                     {...(errors.date?.message !== undefined ? {validationStatus: 'error'} : {})}
                                                 />
@@ -148,6 +151,7 @@ export default function Page() {
                                         {...register("amount", { valueAsNumber:true, validate: (value) => value > 0, required:{value: true, message: t('add_expense_amount_required')}})}
                                         label={t('add_expense_amount_field')}
                                         error={errors.amount?.message}
+                                        data-testid="amount"
                                     />
                                 </FormGroup>
                                 
@@ -165,6 +169,7 @@ export default function Page() {
                                                     id="expenseType"
                                                     options={expenseTypeOptions}
                                                     {...field}
+                                                    data-testid="expenseType"
                                                 />
                                             </>
                                             )
@@ -172,7 +177,7 @@ export default function Page() {
                                     />
                                 </FormGroup>
 
-                                <Button type="submit">{t('add_expense_continue_button')}</Button>
+                                <Button type="submit" data-testid="continue_button">{t('add_expense_continue_button')}</Button>
                             </Form>
                          </main>
                     </Grid>
