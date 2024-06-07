@@ -43,7 +43,6 @@ export default function Page() {
     })
 
     const onSubmit: SubmitHandler<FormData> = (data => {
-        console.log(data)
         const expenseItem: ExpenseItem = {
             name: data.name,
             expenseType: data.expenseType,
