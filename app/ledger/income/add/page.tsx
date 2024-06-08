@@ -2,12 +2,12 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert } from '@trussworks/react-uswds' 
-import { useTranslation } from '../../../i18n/client'
+import { useTranslation } from '@/app/i18n/client'
 import { useAppDispatch } from "@/lib/hooks"
 import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form"
-import TextFieldWithValidation from "../../../components/TextFieldWithValidation"
+import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 
 export default function Page() {
     const { t } = useTranslation('en')
