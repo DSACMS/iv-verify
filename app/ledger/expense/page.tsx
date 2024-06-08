@@ -3,7 +3,7 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button, HeadingLevel, Grid, GridContainer, Accordion } from '@trussworks/react-uswds' 
-import { useTranslation } from '../../i18n/client'
+import { useTranslation } from '@/app/i18n/client'
 import { useRouter } from "next/navigation"
 import Link from 'next/link'
 
@@ -45,7 +45,7 @@ export default function Page() {
     ]
 
     function addItemClicked() {
-        router.push("/ledger/expenses/add")
+        router.push("/ledger/expense/add")
     }
 
     return (

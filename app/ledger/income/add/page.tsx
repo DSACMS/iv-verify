@@ -2,12 +2,12 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert } from '@trussworks/react-uswds' 
-import { useTranslation } from '../../../i18n/client'
+import { useTranslation } from '@/app/i18n/client'
 import { useAppDispatch } from "@/lib/hooks"
 import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form"
-import TextFieldWithValidation from "./TextFieldWithValidation"
+import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 
 export default function Page() {
     const { t } = useTranslation('en')
@@ -101,9 +101,8 @@ export default function Page() {
 
                                 <FormGroup>
                                     <TextFieldWithValidation
-                                        type="number"
                                         id="amount"
-                                        {...register("amount", { valueAsNumber:true, required: { value: true, message: t('add_income_amount_field_required')}})}
+                                        {...register("amount", { valueAsNumber:true, validate: (value) => value > 0, required: { value: true, message: t('add_income_amount_field_required')}})}
                                         label={t('add_income_total_amount')}
                                         error={errors.amount?.message}
                                     />
