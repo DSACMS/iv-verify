@@ -59,5 +59,19 @@
     "expenses_landing_need_heading": "Do I need to submit receipts?",
     "expenses_landing_need_body": "Usually you won't be asked to send in receipts or proof of expenses. In some cases you may be selected for a random audit. Keep receipts, or bank statements that match your costs just in case.",
     "expenses_landing_add_button": "Add expenses",
-    "expenses_landing_do_not_have_link": "I don't have expenses to report"
+    "expenses_landing_do_not_have_link": "I don't have expenses to report",
+    "statement_set_title": "Statement of lost job",
+    "statement_set_header": "Tell us about the job you lost or ended in the past {{day_count}} days",
+    "statement_set_subheader": "This information will be used to create a legal statement attesting to the details about your last job.",
+    "statement_set_name_field": "What is the name of the person, client, or company you stopped working for?",
+    "statement_set_name_field_required": "Name field is required",
+    "statement_set_last_day_field": "When was your last day of work?",
+    "statement_set_last_day_required": "Last day of work is required",
+    "statement_set_last_day_hint": "(MM/DD/YYYY)",
+    "statement_set_amount_field": "What is the amount of your last paycheck",
+    "statement_set_amount_required": "Amount field is required",
+    "statement_set_last_paycheck_field": "When was your last payment for this work?",
+    "statement_set_last_paycheck_hint": "(MM/DD/YYYY)",
+    "statement_set_last_paycheck_required": "Last payment date is required",
+    "statement_set_continue": "Continue"
 }
