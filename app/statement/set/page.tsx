@@ -30,12 +30,11 @@ export default function Page() {
     } = useForm<FormData>()
 
     const onSubmit: SubmitHandler<FormData> = (data => {
-        console.log(data)
         const signedStatement: SignedStatementState = {
             name: data.name,
-            lastDayOfWork: new Date(data.lastDayOfWork),
+            lastDayOfWork: data.lastDayOfWork,
             amount: data.amount,
-            lastPayment: new Date(data.lastPayment),
+            lastPayment: data.lastPayment,
         }
 
         dispatch(setSignedStatement(signedStatement))

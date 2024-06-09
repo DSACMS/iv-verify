@@ -3,9 +3,9 @@ import type { RootState } from '@/lib/store'
 
 export interface SignedStatementState {
     name?: string
-    lastDayOfWork?: Date
+    lastDayOfWork?: string
     amount?: number
-    lastPayment?: Date
+    lastPayment?: string
 }
 
 export const initialState: SignedStatementState = { }
