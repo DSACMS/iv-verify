@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import StoreProvider  from './StoreProvider'
 import "./globals.css";
+import GovernmentBanner from "./components/GovernmentBanner";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,7 +17,7 @@ function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}><StoreProvider>{children}</StoreProvider></body>
+      <body className={inter.className}><StoreProvider><GovernmentBanner />{children}</StoreProvider></body>
     </html>
   );
 }
