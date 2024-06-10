@@ -8,11 +8,13 @@ type Args = {
     error: string | undefined
     onBlur: FocusEventHandler<HTMLInputElement>
     onChange: FocusEventHandler<HTMLInputElement>
-    type?: 'text' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'url'
+    type?: 'text' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'url',
+    'data-testid'?: string
 }
 
 const TextFieldWithValidation = React.forwardRef<HTMLInputElement, Args>(
-    ({ id, name, label, error, onBlur, onChange, type }: Args, ref) => {
+    (args: Args, ref) => {
+        const { id, name, label, error, onBlur, onChange, type } = args
         return (
             <>
                 {label !== undefined ? <Label htmlFor={name}>{label}</Label> : ''}
@@ -23,6 +25,8 @@ const TextFieldWithValidation = React.forwardRef<HTMLInputElement, Args>(
                     inputRef={ref}
                     onBlur={onBlur}
                     onChange={onChange}
+                    {...(error !== undefined ? {validationStatus: 'error'} : {})}
+                    data-testid={args['data-testid']}
                 />
                 <ErrorMessage>{error}</ErrorMessage>
             </>
