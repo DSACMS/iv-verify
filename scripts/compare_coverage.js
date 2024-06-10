@@ -8,7 +8,8 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath}) => {
         for (const fileName of Object.keys(data)) {
             const lines = data[fileName].s
             totalLines += lines.length
-            const coveredLinesForFile = lines.filter((line) => line > 0)
+
+            const coveredLinesForFile = Object.values(lines).filter((line) => line > 0)
             coveredLines += coveredLinesForFile.length
         }
 
