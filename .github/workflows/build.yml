@@ -61,6 +61,7 @@ jobs:
             core.setOutput('mainWorkflowRunSha', mainWorkflowRun.head_sha)
       - name: Download coverage artifact from build of main branch
         uses: actions/download-artifact@v4
+        id: download-coverage-file
         with:
           name: verify-prototype-covearge-${{ steps.find-workflow-run-id.outputs.mainWorkflowRunSha }}.json
           run-id: ${{ steps.find-workflow-run-id.outputs.mainWorkflowRunId }}
@@ -69,12 +70,14 @@ jobs:
         uses: actions/github-script@v7
         env:
           MAIN_WORKFLOW_RUN_SHA: ${{ steps.find-workflow-run-id.outputs.mainWorkflowRunSha }}
+          COVERAGE_FILE_PATH: ${{ steps.download-coverage-file.outputs.download-path }}
         with:
           script: |
             console.log('in action script')
             const script = require('./scripts/compare_coverage.js')
             console.log('required script')
             const mainWorkflowRunSha = process.env['MAIN_WORKFLOW_RUN_SHA']
-            console.log(mainWorkflowRunSha)
-            script({github, context, mainWorkflowRunSha})
+            const coverageFilePath = process.env['COVERAGE_FILE_PATH']
+            console.log(mainWorkflowRunSha, coverageFilePath)
+            script({github, context, mainWorkflowRunSha, coverageFilePath})
             console.log('finished')
