@@ -84,5 +84,16 @@
     "expenses_summary_no_delete_item": "No, take me back to the list",
     "expenses_summary_total": "Total expenses added: ${{amount}}",
     "expenses_summary_add_button": "Add another expense",
-    "expenses_summary_review_button": "Continue to review"
+    "expenses_summary_review_button": "Continue to review",
+    "intro_title": "Verify.gov | Self employment",
+    "intro_header": "Send proof of your income from freelance, independent contract, or self employed work",
+    "intro_subheader": "We'll help you document your self employed or cash based income and send it to your benefits application so you can get benefits faster",
+    "intro_secure": "Your information is secure",
+    "intro_get_started_button": "Get Started",
+    "intro_how_do_i_know_header": "How do I know if I'm self employed?",
+    "intro_how_do_i_know_body_list_header": "A person may be self-employed if",
+    "intro_how_do_i_know_list_have_expenses": "they have business eexpenses that aren't paid back by anyone they work for.",
+    "intro_how_do_i_know_list_they_receive": "they receive tax form 1099-MISC from a company or individual at the end of the year.",
+    "intro_how_do_i_know_list_own": "they own or run their own business.",
+    "intro_how_do_i_know_list_benefits": "they do not get employment benefits or tax contributions from the individual or company they work for."
 }
