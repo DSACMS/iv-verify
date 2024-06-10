@@ -29,8 +29,10 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
             const prCoverage = coverageForFile(prCoverageData[fileName].s)
             const mainCoverage = coverageForFile(mainCoverageData[fileName].s)
 
-            let prettyFileName = fileName.slice(fileName.indexOf('verify-nextjs'))
-            message += `- ${prettyFileName} went from ${mainCoverage}% to ${prCoverage}%<br />`
+            if (prCoverage != mainCoverage) {
+                let prettyFileName = fileName.slice(fileName.indexOf('verify-nextjs'))
+                message += `- ${prettyFileName} went from ${mainCoverage}% to ${prCoverage}%<br />`
+            }
         }
 
         message += "</details>"
@@ -38,7 +40,7 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
     }
 
     function coverageForFile(lines) {
-        const covered = Object.values(lines).filter((line) => line > 0)
+        const covered = Object.values(lines).filter((line) => line > 0).length
         const total = Object.keys(lines).length
 
         if (total == 0) {
