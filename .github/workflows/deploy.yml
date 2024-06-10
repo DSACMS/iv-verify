@@ -20,3 +20,5 @@ jobs:
           CF_PASSWORD: ${{ secrets.CLOUD_GOV_DEPLOY_PASSWORD }}
         run: ./cf login -a api.fr.cloud.gov -u ${CF_USERNAME} -p ${CF_PASSWORD}
       - run: ./cf push
+      - name: Post Slack Message
+        run: curl --header "Content-Type: applicaiton/json" --request POST --data '{user: "${{github.actor}}", prototype_url: "https://verify-prototype.fr.cloud.gov/ledger/income/add", "commit_url": "${{ github.server_url }}/${{ github.repository }}/commit/${{github.sha}}"}' https://hooks.slack.com/triggers/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
