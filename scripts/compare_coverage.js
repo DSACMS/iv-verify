@@ -19,6 +19,35 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
         return Math.floor((coveredLines / totalLines) * 100)
     }
 
+    function commentDetails(mainCoverageData, prCoverageData) {
+        let message = "<br /><details><summary>Changes by file:</summary>"
+        for (let fileName of Object.keys(prCoverageData)) {
+            if (mainCoverageData[fileName] == null) {
+                continue
+            }
+
+            const prCoverage = coverageForFile(prCoverageData[fileName].s)
+            const mainCoverage = coverageForFile(mainCoverageData[fileName].s)
+
+            let prettyFileName = fileName.slice(fileName.indexOf('verify-nextjs'))
+            message += `- ${prettyFileName} went from ${mainCoverage}% to ${prCoverage}%<br />`
+        }
+
+        message += "</details>"
+        return message
+    }
+
+    function coverageForFile(lines) {
+        const covered = Object.values(lines).filter((line) => line > 0)
+        const total = Object.keys(lines).length
+
+        if (total == 0) {
+            return 0
+        }
+
+        return Math.floor((covered / total) * 100)
+    }
+
     fs.readFile("coverage/coverage.json", function(err, data) {
         if (err) { throw err }
 
@@ -35,10 +64,10 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
             let message = "This pull request "
             if (prTotalCoverage > mainTotalCoverage) {
                 // Coverage increased
-                message = `This pull request raised the overall code coverage by ${prTotalCoverage-mainTotalCoverage}%`
+                message = `This pull request raised the overall code coverage by ${prTotalCoverage-mainTotalCoverage}%.${commentDetails(mainCoverageData, prCoverageData)}`
             } else if (prTotalCoverage < mainTotalCoverage) {
                 // Coverage decreased
-                message = `This pull request lowered the overall code coverage by ${mainTotalCoverage-prTotalCoverage}%`
+                message = `This pull request lowered the overall code coverage by ${mainTotalCoverage-prTotalCoverage}%.${commentDetails(mainCoverageData, prCoverageData)}`
             } else {
                 // Coverage is the same
                 message = "This pull request did not change the overall code coverage."
