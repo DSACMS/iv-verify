@@ -73,5 +73,16 @@
     "statement_set_last_paycheck_field": "When was your last payment for this work?",
     "statement_set_last_paycheck_hint": "(MM/DD/YYYY)",
     "statement_set_last_paycheck_required": "Last payment date is required",
-    "statement_set_continue": "Continue"
+    "statement_set_continue": "Continue",
+    "expenses_summary_title": "Expenses Summary",
+    "expenses_summary_header": "Your expenses",
+    "expenses_summary_subheader": "Add another expense below or continue to review and submit this ledger",
+    "expenses_summary_list_header": "Your expenses",
+    "expenses_summary_list_delete": "Delete",
+    "expenses_summary_delete_are_you_sure": "Are you sure you would like to delete this expense?",
+    "expenses_summary_yes_delete_item": "Yes, remove this expense",
+    "expenses_summary_no_delete_item": "No, take me back to the list",
+    "expenses_summary_total": "Total expenses added: ${{amount}}",
+    "expenses_summary_add_button": "Add another expense",
+    "expenses_summary_review_button": "Continue to review"
 }
