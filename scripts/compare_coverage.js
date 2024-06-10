@@ -5,7 +5,7 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath}) => {
     function computeTotalCoverage(data) {
         let totalLines = 0
         let coveredLines = 0
-        for (const fileName of data) {
+        for (const fileName of Object.keys(data)) {
             const lines = data[fileName].s
             totalLines += lines.length
             const coveredLinesForFile = lines.filter((line) => line > 0)
