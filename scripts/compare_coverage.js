@@ -36,7 +36,7 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
             if (prTotalCoverage > mainTotalCoverage) {
                 // Coverage increased
                 message = "Coverage Increased"
-            } else if (prCoverageData < mainTotalCoverage) {
+            } else if (prTotalCoverage < mainTotalCoverage) {
                 // Coverage decreased
                 message = "Coverage decreased"
             } else {
@@ -44,7 +44,6 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
                 message = "Covearge is the same"
             }
 
-            console.log(message)
             github.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
