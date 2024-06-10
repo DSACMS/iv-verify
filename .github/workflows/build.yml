@@ -15,6 +15,10 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run coverage
+      - name: Upload Coverage Data
+        uses: actions/upload-artifact@v4
+        with:
+          path: coverage/coverage.json
       - name: Generate token
         id: generate-token
         uses: actions/create-github-app-token@v1
