@@ -54,31 +54,31 @@ describe('Add Income To Ledger Page', async () => {
         })
     })
 
-    // it('Navigates when fields are filled in', async () => {
-    //     fireEvent.change(screen.getByLabelText('What is the name of the person, client, or company that you worked for?'), {
-    //         target: {
-    //             value: 'Jane'
-    //         }
-    //     })
+    it('Navigates when fields are filled in', async () => {
+        fireEvent.change(screen.getByLabelText('What is the name of the person, client, or company that you worked for?'), {
+            target: {
+                value: 'Jane'
+            }
+        })
            
-    //     fireEvent.change(screen.getByLabelText('In your own words, describe the type of work you did'), {
-    //         target: {
-    //             value: 'Landscaping'
-    //         }
-    //     })
+        fireEvent.change(screen.getByLabelText('In your own words, describe the type of work you did'), {
+            target: {
+                value: 'Landscaping'
+            }
+        })
 
-    //     fireEvent.change(screen.getByLabelText('Total amount paid to you in the last 30 days.'), {
-    //         target: {
-    //             value: '40.00'
-    //         }
-    //     })
+        fireEvent.change(screen.getByLabelText('Total amount paid to you in the last 30 days.'), {
+            target: {
+                value: '40.00'
+            }
+        })
 
-    //     fireEvent.click(screen.getByText('Continue'))
+        fireEvent.click(screen.getByText('Continue'))
 
-    //     await waitFor(() => {
-    //         expect(mockRouter).toMatchObject({
-    //             asPath: "/ledger/income/list"
-    //         })
-    //     })
-    // })
+        await waitFor(() => {
+            expect(mockRouter).toMatchObject({
+                asPath: "/ledger/income/list"
+            })
+        })
+    })
 })
