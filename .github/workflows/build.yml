@@ -16,7 +16,7 @@ jobs:
       - run: npm run build
       - run: npm run coverage
       - name: Find workflow id
-        uses: actions@github-script@v7
+        uses: actions/github-script@v7
         id: find-workflow-id
         with:
           script: |
@@ -34,7 +34,7 @@ jobs:
             }
             core.setOutput('mainWorkflowId', mainWorkflow.id)
       - name: Find Latest Run id
-        uses: actions@github-script@v7
+        uses: actions@/ithub-script@v7
         id: find-workflow-run-id
         env:
           MAIN_WORKFLOW_ID: ${{ steps.find-workflow-id.outputs.mainWorkflowId }}
@@ -64,7 +64,7 @@ jobs:
           run-id: ${{ steps.find-workflow-run-id.outputs.mainWorkflowRunId }}
           github-token: ${{ secrets.GH_TOKEN_COVERAGE }}
       - name: Diff code coverage results
-        uses: actions@github-script@v7
+        uses: actions@/ithub-script@v7
         env:
           MAIN_WORKFLOW_RUN_SHA: ${{ steps.find-workflow-run-id.outputs.mainWorkflowRunSha }}
         with:
