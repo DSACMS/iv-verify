@@ -1,4 +1,5 @@
-module.exports = ({github, context, MAIN_WORKFLOW_RUN_SHA}) => {
+module.exports = ({github, context, mainWorkflowRunSha}) => {
+    console.log('in compare_coverage')
     const fs = require('fs')
 
     function computeTotalCoverage(data) {
@@ -23,7 +24,7 @@ module.exports = ({github, context, MAIN_WORKFLOW_RUN_SHA}) => {
 
         const prCoverageData = JSON.parse(data)
 
-        fs.readFile(`verify-prototype-covearge-${MAIN_WORKFLOW_RUN_SHA}.json`, function(err, data) {
+        fs.readFile(`verify-prototype-covearge-${mainWorkflowRunSha}.json`, function(err, data) {
             if (err) { throw err }
 
             const mainCoverageData = JSON.parse(data)
