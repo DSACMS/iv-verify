@@ -73,10 +73,10 @@ jobs:
           COVERAGE_FILE_PATH: ${{ steps.download-coverage-file.outputs.download-path }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         with:
+          github-token: ${{ secrets.GH_TOKEN_COVERAGE }}
           script: |
             const script = require('./scripts/compare_coverage.js')
             const mainWorkflowRunSha = process.env['MAIN_WORKFLOW_RUN_SHA']
             const coverageFilePath = process.env['COVERAGE_FILE_PATH']
             const prNumber = process.env['PR_NUMBER']
-            console.log(prNumber)
             script({github, context, mainWorkflowRunSha, coverageFilePath, prNumber})
