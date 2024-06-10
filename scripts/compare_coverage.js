@@ -6,10 +6,11 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
         let coveredLines = 0
         for (const fileName of Object.keys(data)) {
             const lines = data[fileName].s
-            totalLines += lines.length
+            totalLines += Object.keys(lines).length
 
             const coveredLinesForFile = Object.values(lines).filter((line) => line > 0)
             coveredLines += coveredLinesForFile.length
+            console.log(coveredLines, totalLines)
         }
 
         if (totalLines == 0) {
@@ -30,6 +31,7 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
             const mainCoverageData = JSON.parse(data)
 
             const prTotalCoverage = computeTotalCoverage(prCoverageData)
+            console.log('---')
             const mainTotalCoverage = computeTotalCoverage(mainCoverageData)
 
             let message = ""
