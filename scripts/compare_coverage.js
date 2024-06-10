@@ -35,10 +35,10 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
             let message = "This pull request "
             if (prTotalCoverage > mainTotalCoverage) {
                 // Coverage increased
-                message = `This pull request raised the overall code coverage by ${prTotalCoverage-mainTotalCoverage}`
+                message = `This pull request raised the overall code coverage by ${prTotalCoverage-mainTotalCoverage}%`
             } else if (prTotalCoverage < mainTotalCoverage) {
                 // Coverage decreased
-                message = `This pull request lowered the overall code coverage by ${mainTotalCoverage-prTotalCoverage}`
+                message = `This pull request lowered the overall code coverage by ${mainTotalCoverage-prTotalCoverage}%`
             } else {
                 // Coverage is the same
                 message = "This pull request did not change the overall code coverage."

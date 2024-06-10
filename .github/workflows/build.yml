@@ -15,11 +15,17 @@ jobs:
       - run: npm ci
       - run: npm run build
       - run: npm run coverage
+      - name: Generate token
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.CODE_COVERAGE_APP_ID }}
+          private-key: ${{ secrets.CODE_COVERAGE_APP_SECRET }}
       - name: Find workflow id
         uses: actions/github-script@v7
         id: find-workflow-id
         with:
-          github-token: ${{ secrets.GH_TOKEN_COVERAGE }}
+          github-token: ${{ steps.generate-token.outputs.token }}
           script: |
             const workflows = await github.request('GET /repos/{owner}/{repo}/actions/workflows', {
               owner: context.repo.owner,
@@ -40,7 +46,7 @@ jobs:
         env:
           MAIN_WORKFLOW_ID: ${{ steps.find-workflow-id.outputs.mainWorkflowId }}
         with:
-          github-token: ${{ secrets.GH_TOKEN_COVERAGE }}
+          github-token: ${{ steps.generate-token.outputs.token }}
           script: |
             const mainWorkflowId = process.env['MAIN_WORKFLOW_ID']
             const baseSha = "${{ github.event.pull_request.base.sha }}"
@@ -65,7 +71,7 @@ jobs:
         with:
           name: verify-prototype-covearge-${{ steps.find-workflow-run-id.outputs.mainWorkflowRunSha }}.json
           run-id: ${{ steps.find-workflow-run-id.outputs.mainWorkflowRunId }}
-          github-token: ${{ secrets.GH_TOKEN_COVERAGE }}
+          github-token: ${{ steps.generate-token.outputs.token }}
       - name: Diff code coverage results
         uses: actions/github-script@v7
         env:
@@ -73,7 +79,7 @@ jobs:
           COVERAGE_FILE_PATH: ${{ steps.download-coverage-file.outputs.download-path }}
           PR_NUMBER: ${{ github.event.pull_request.number }}
         with:
-          github-token: ${{ secrets.GH_TOKEN_COVERAGE }}
+          github-token: ${{ steps.generate-token.outputs.token }}
           script: |
             const script = require('./scripts/compare_coverage.js')
             const mainWorkflowRunSha = process.env['MAIN_WORKFLOW_RUN_SHA']
