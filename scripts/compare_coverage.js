@@ -33,16 +33,27 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath}) => {
             const prTotalCoverage = computeTotalCoverage(prCoverageData)
             const mainTotalCoverage = computeTotalCoverage(mainCoverageData)
 
+            let message = ""
             if (prTotalCoverage > mainTotalCoverage) {
                 // Coverage increased
-                console.log("Coverage Increased")
+                message = "Coverage Increased"
             } else if (prCoverageData < mainTotalCoverage) {
                 // Coverage decreased
-                console.log("Coverage decreased")
+                message = "Coverage decreased"
             } else {
                 // Coverage is the same
-                console.log("Covearge is the same")
+                message = "Covearge is the same"
             }
+
+            github.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: github.event.number,
+                body: message,
+                headers: {
+                  'X-GitHub-Api-Version': '2022-11-28'
+                }
+              })
         })
     })
 }
