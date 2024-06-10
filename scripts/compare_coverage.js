@@ -1,4 +1,4 @@
-module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath}) => {
+module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumber}) => {
     const fs = require('fs')
 
     function computeTotalCoverage(data) {
@@ -44,10 +44,11 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath}) => {
                 message = "Covearge is the same"
             }
 
+            console.log(message)
             github.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
                 owner: context.repo.owner,
                 repo: context.repo.repo,
-                issue_number: github.event.number,
+                issue_number: prNumber,
                 body: message,
                 headers: {
                   'X-GitHub-Api-Version': '2022-11-28'

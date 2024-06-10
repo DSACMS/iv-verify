@@ -71,17 +71,12 @@ jobs:
         env:
           MAIN_WORKFLOW_RUN_SHA: ${{ steps.find-workflow-run-id.outputs.mainWorkflowRunSha }}
           COVERAGE_FILE_PATH: ${{ steps.download-coverage-file.outputs.download-path }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
         with:
           script: |
-            console.log('in action script')
             const script = require('./scripts/compare_coverage.js')
-            console.log('required script')
             const mainWorkflowRunSha = process.env['MAIN_WORKFLOW_RUN_SHA']
             const coverageFilePath = process.env['COVERAGE_FILE_PATH']
-            console.log(mainWorkflowRunSha, coverageFilePath)
-            const fs = require('fs');
-            fs.readdirSync(coverageFilePath).forEach(file => {
-              console.log(file);
-            });
-            script({github, context, mainWorkflowRunSha, coverageFilePath})
-            console.log('finished')
+            const prNumber = process.env['PR_NUMBER']
+            console.log(prNumber)
+            script({github, context, mainWorkflowRunSha, coverageFilePath, prNumber})
