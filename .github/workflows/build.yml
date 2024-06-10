@@ -29,8 +29,6 @@ jobs:
               }
             })
 
-            console.log(workflows)
-            console.log(workflows.data)
             const mainWorkflow = workflows.data.workflows.find((workflow) => workflow.name == "Main")
             if (!mainWorkflow || !mainWorkflow.id) {
               return core.setFailed('Unable to find main workflow id')
@@ -45,7 +43,7 @@ jobs:
           github-token: ${{ secrets.GH_TOKEN_COVERAGE }}
           script: |
             const mainWorkflowId = process.env['MAIN_WORKFLOW_ID']
-            const baseSha = github.event.pull_request.base.sha
+            const baseSha = "${{ github.event.pull_request.base.sha }}"
             const mainWorkflowRuns = await github.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs', {
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -55,7 +53,8 @@ jobs:
               }
             })
 
-            const mainWorkflowRun = mainWorkflowRuns.find((run) => run.head_sha)
+            console.log(mainWorkflowRuns)
+            const mainWorkflowRun = mainWorkflowRuns.data.workflow_runs.find((run) => run.head_sha == baseSha)
             if (!mainWorkflowRun) {
               return core.setFailed("Unable to find main workflow run")
             }
