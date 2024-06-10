@@ -73,5 +73,8 @@ jobs:
           script: |
             console.log('in action script')
             const script = require('./scripts/compare_coverage.js')
-
+            console.log('required script')
+            const mainWorkflowRunSha = process.env['MAIN_WORKFLOW_RUN_SHA']
+            console.log(mainWorkflowRunSha)
+            script({github, context, mainWorkflowRunSha})
             console.log('finished')
