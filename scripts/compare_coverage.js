@@ -1,5 +1,4 @@
 module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath}) => {
-    console.log('in compare_coverage')
     const fs = require('fs')
 
     function computeTotalCoverage(data) {
