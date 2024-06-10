@@ -20,7 +20,7 @@ jobs:
         id: find-workflow-id
         with:
           script: |
-            const workflows = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows', {
+            const workflows = await github.request('GET /repos/{owner}/{repo}/actions/workflows', {
               owner: context.repo.owner,
               repo: context.repo.repo,
               headers: {
@@ -42,7 +42,7 @@ jobs:
           script: |
             const mainWorkflowId = process.env['MAIN_WORKFLOW_ID']
             const baseSha = github.event.pull_request.base.sha
-            const mainWorkflowRuns = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs', {
+            const mainWorkflowRuns = await github.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs', {
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: mainWorkflowId,
