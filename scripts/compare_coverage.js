@@ -24,7 +24,7 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath}) => {
 
         const prCoverageData = JSON.parse(data)
 
-        fs.readFile(coverageFilePath, function(err, data) {
+        fs.readFile(`${coverageFilePath}/verify-prototype-covearge-${mainWorkflowRunSha}.json`, function(err, data) {
             if (err) { throw err }
 
             const mainCoverageData = JSON.parse(data)
