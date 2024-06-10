@@ -53,7 +53,6 @@ jobs:
               }
             })
 
-            console.log(mainWorkflowRuns)
             const mainWorkflowRun = mainWorkflowRuns.data.workflow_runs.find((run) => run.head_sha == baseSha)
             if (!mainWorkflowRun) {
               return core.setFailed("Unable to find main workflow run")
@@ -72,5 +71,8 @@ jobs:
           MAIN_WORKFLOW_RUN_SHA: ${{ steps.find-workflow-run-id.outputs.mainWorkflowRunSha }}
         with:
           script: |
+            console.log('in action script')
             const script = require('./scripts/compare_coverage.js')
+            console.log('required script')
             script({github, context, process.env['MAIN_WORKFLOW_RUN_SHA']})
+            console.log('finished')
