@@ -10,7 +10,6 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
 
             const coveredLinesForFile = Object.values(lines).filter((line) => line > 0)
             coveredLines += coveredLinesForFile.length
-            console.log(coveredLines, totalLines)
         }
 
         if (totalLines == 0) {
@@ -31,19 +30,18 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
             const mainCoverageData = JSON.parse(data)
 
             const prTotalCoverage = computeTotalCoverage(prCoverageData)
-            console.log('---')
             const mainTotalCoverage = computeTotalCoverage(mainCoverageData)
 
-            let message = ""
+            let message = "This pull request "
             if (prTotalCoverage > mainTotalCoverage) {
                 // Coverage increased
-                message = "Coverage Increased"
+                message = `This pull request raised the overall code coverage by ${prTotalCoverage-mainTotalCoverage}`
             } else if (prTotalCoverage < mainTotalCoverage) {
                 // Coverage decreased
-                message = "Coverage decreased"
+                message = `This pull request lowered the overall code coverage by ${mainTotalCoverage-prTotalCoverage}`
             } else {
                 // Coverage is the same
-                message = "Covearge is the same"
+                message = "This pull request did not change the overall code coverage."
             }
 
             github.request('POST /repos/{owner}/{repo}/issues/{issue_number}/comments', {
