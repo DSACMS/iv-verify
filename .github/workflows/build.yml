@@ -29,6 +29,7 @@ jobs:
               }
             })
 
+            console.log(workflows)
             const mainWorkflow = workflows.workflows.filter((workflow) => workflow.name == "Main")
             if (!mainWorkflow || !mainWorkflow.id) {
               return core.setFailed('Unable to find main workflow id')
