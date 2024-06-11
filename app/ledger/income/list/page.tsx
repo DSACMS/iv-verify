@@ -29,12 +29,8 @@ export default function Page() {
 
     function getTotal() {
         let total = items.reduce((t, item) => t + item.amount, 0)
+        return (t('list_income_total', {day_count: DAY_COUNT, amount: total}))
 
-        if (total > 0) {
-            return (t('list_income_total', {day_count: DAY_COUNT, amount: total}))
-        }
-
-        return <></>
     }
 
     return (
@@ -54,7 +50,7 @@ export default function Page() {
                             <span className="usa-hint">{t('list_income_subheader')}</span>
                             <CardGroup>
                                 <Card className="grid-col-12 margin-top-4">
-                                    <CardHeader><b>{t('list_income_list_header')}</b></CardHeader>
+                                    {incomeItemElements.length > 0 && (<CardHeader><b>{t('list_income_list_header')}</b></CardHeader>)}
                                     <CardBody>
                                         <GridContainer>
                                             {incomeItemElements}
