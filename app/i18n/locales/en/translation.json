@@ -92,5 +92,16 @@
     "expenses_summary_no_delete_item": "No, take me back to the list",
     "expenses_summary_total": "Total expenses added: ${{amount}}",
     "expenses_summary_add_button": "Add another expense",
-    "expenses_summary_review_button": "Continue to review"
+    "expenses_summary_review_button": "Continue to review",
+    "statement_sign_title": "Read and sign",
+    "statement_sign_header": "Read the information below and sign this legal statement to submit this proof of payments",
+    "statement_sign_subheader": "You must check the boxes below and type your name. This is a legally binding statement.",
+    "statement_sign_card_header": "Legal Statement",
+    "statement_sign_card_body": "I understand that only business related expenses will be allowed and that information I provided may affect my benefits.\n\nI hereby certify that I have ended by job or employment with {{name}} on {{- last_day_of_work}} for which I was paid on {{- last_pay_date}} in the amount of ${{amount}} I do not anticipate any future payments from this person or company.\n\nFurthermore I declare under penalty of perjury that the information I provided is true and correct to the best of my knowledge",
+    "statement_sign_checkbox": "I understand and agree to the statement above",
+    "statement_sign_checkbox_required": "You must fill in the checkbox",
+    "statement_sign_name_label": "Type your full name",
+    "statement_sign_name_hint": "This is your legal signature",
+    "statement_sign_name_required": "You must sign your name",
+    "statement_sign_button": "Sign and submit"
 }
