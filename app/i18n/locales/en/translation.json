@@ -92,5 +92,13 @@
     "expenses_summary_no_delete_item": "No, take me back to the list",
     "expenses_summary_total": "Total expenses added: ${{amount}}",
     "expenses_summary_add_button": "Add another expense",
-    "expenses_summary_review_button": "Continue to review"
+    "expenses_summary_review_button": "Continue to review",
+    "benefits_title": "Benefits Programs",
+    "benefits_header": "When benefit programs should the ledger demonstrate?",
+    "benefits_subheader_select": "Select which benefits you would like to see a demonstration of.",
+    "benefits_medicaid": "Medicaid (healthcare)",
+    "benefits_snap": "SNAP (food assistance)",
+    "benefits_continue_button": "Continue",
+    "benefits_snap_hint": "Note: Currently the ledger will assume a 50% standard deduction is available for SNAP.",
+    "benefits_error_message": "You must select at least one of the benefits below"
 }

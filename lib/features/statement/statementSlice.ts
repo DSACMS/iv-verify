@@ -16,7 +16,7 @@ export const statementSlice = createSlice({
     initialState,
     reducers: {
         setSignedStatement: (state, action: PayloadAction<SignedStatementState>) => {
-            state = action.payload
+            return {...action.payload}
         }
     }
 })
