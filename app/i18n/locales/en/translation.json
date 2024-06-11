@@ -91,9 +91,9 @@
     "intro_secure": "Your information is secure",
     "intro_get_started_button": "Get Started",
     "intro_how_do_i_know_header": "How do I know if I'm self employed?",
-    "intro_how_do_i_know_body_list_header": "A person may be self-employed if",
-    "intro_how_do_i_know_list_have_expenses": "they have business eexpenses that aren't paid back by anyone they work for.",
-    "intro_how_do_i_know_list_they_receive": "they receive tax form 1099-MISC from a company or individual at the end of the year.",
-    "intro_how_do_i_know_list_own": "they own or run their own business.",
-    "intro_how_do_i_know_list_benefits": "they do not get employment benefits or tax contributions from the individual or company they work for."
+    "intro_how_do_i_know_body_list_header": "A person may be self-employed if:",
+    "intro_how_do_i_know_list_have_expenses": "They have business eexpenses that aren't paid back by anyone they work for.",
+    "intro_how_do_i_know_list_they_receive": "They receive tax form 1099-MISC from a company or individual at the end of the year.",
+    "intro_how_do_i_know_list_own": "They own or run their own business.",
+    "intro_how_do_i_know_list_benefits": "They do not get employment benefits or tax contributions from the individual or company they work for."
 }
