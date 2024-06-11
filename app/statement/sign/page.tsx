@@ -1,7 +1,7 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, DatePicker, Label, CardHeader, Card, CardBody, CardGroup, Checkbox } from '@trussworks/react-uswds' 
+import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, CardHeader, Card, CardBody, CardGroup, Checkbox } from '@trussworks/react-uswds' 
 import { useTranslation } from '@/app/i18n/client'
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
@@ -58,12 +58,7 @@ export default function Page() {
                                     <Card>
                                         <CardHeader><b>{t('statement_sign_card_header')}</b></CardHeader>
                                         <CardBody className="text-pre-line">
-                                            {t('statement_sign_card_body', {
-                                                name: signedStatement.name,
-                                                last_day_of_work: signedStatement.lastDayOfWork,
-                                                last_pay_date: signedStatement.lastPayment,
-                                                amount: signedStatement.amount
-                                            })}
+                                            {t('statement_sign_card_body')}
                                         </CardBody>
                                     </Card>
                                 </CardGroup>
