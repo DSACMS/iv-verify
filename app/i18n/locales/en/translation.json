@@ -101,5 +101,16 @@
     "statement_confirmation_portal": "Your portal home page will be updated with your self employment ledger as a submitted document",
     "statement_confirmation_download_copy": "Download a copy of your self employment ledger and keep it for your records",
     "statement_confirmation_download_button": "Download proof",
-    "statement_confirmation_image_alt": "Ledger"
+    "statement_confirmation_image_alt": "Ledger",
+    "intro_title": "Verify.gov | Self employment",
+    "intro_header": "Send proof of your income from freelance, independent contract, or self employed work",
+    "intro_subheader": "We'll help you document your self employed or cash based income and send it to your benefits application so you can get benefits faster",
+    "intro_secure": "Your information is secure",
+    "intro_get_started_button": "Get Started",
+    "intro_how_do_i_know_header": "How do I know if I'm self employed?",
+    "intro_how_do_i_know_body_list_header": "A person may be self-employed if:",
+    "intro_how_do_i_know_list_have_expenses": "They have business eexpenses that aren't paid back by anyone they work for.",
+    "intro_how_do_i_know_list_they_receive": "They receive tax form 1099-MISC from a company or individual at the end of the year.",
+    "intro_how_do_i_know_list_own": "They own or run their own business.",
+    "intro_how_do_i_know_list_benefits": "They do not get employment benefits or tax contributions from the individual or company they work for."
 }
