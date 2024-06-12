@@ -1,95 +1,69 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+'use client'
+
+import "@trussworks/react-uswds/lib/uswds.css"
+import "@trussworks/react-uswds/lib/index.css"
+
+import { useTranslation } from "@/app/i18n/client";
+import { useRouter } from "next/navigation";
+import { Grid, GridContainer, Header, Title, Icon, Button, Accordion, HeadingLevel } from "@trussworks/react-uswds";
 
 export default function Home() {
-  return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>app/page.tsx</code>
-        </p>
+  const { t } = useTranslation('en')
+  const router = useRouter()
+
+  function getStartedClicked() {
+    router.push('/benefits/')
+  }
+
+  const items = [
+    {
+      title: t('intro_how_do_i_know_header'),
+      content: (
         <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+          <p className="margin-bottom-3">{t('intro_how_do_i_know_body_list_header')}</p>
+          <ul>
+            <li>{t('intro_how_do_i_know_list_have_expenses')}</li>
+            <li>{t('intro_how_do_i_know_list_they_receive')}</li>
+            <li>{t('intro_how_do_i_know_list_own')}</li>
+            <li>{t('intro_how_do_i_know_list_benefits')}</li>
+          </ul>
         </div>
+      ),
+      expanded: true,
+      id: 'intro_how_do_i_know',
+      headingLevel: 'h4' as HeadingLevel,
+    }]
+  
+  return (
+    <div>
+      <Header basic={true}>
+          <div className="usa-nav-container">
+              <div className="usa-navbar">
+                  <Title>{t('intro_title')}</Title>
+              </div>
+          </div>
+      </Header>
+      <div className="usa-section">
+          <GridContainer>
+              <Grid row gap>
+                  <main className="usa-layout-docs">
+                    <h3 className="margin-bottom-2" data-testid="intro_header">{t('intro_header')}</h3>
+                    <span className="usa-hint">{t('intro_subheader')}</span>
+
+                    <div className="margin-top-4">
+                      <Icon.Lock className="margin-right-1" /> 
+                      {t('intro_secure')}
+                    </div>
+
+                    <p className="text-center">
+                      <Button type="button" onClick={getStartedClicked} data-testid="get_started_button" className="margin-bottom-3 margin-top-3">{t('intro_get_started_button')}</Button>
+                    </p>
+
+                    <Accordion multiselectable={true} items={items} />
+                  </main>
+              </Grid>
+            </GridContainer>
       </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+    </div>
   );
 }
