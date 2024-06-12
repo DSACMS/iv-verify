@@ -92,5 +92,14 @@
     "expenses_summary_no_delete_item": "No, take me back to the list",
     "expenses_summary_total": "Total expenses added: ${{amount}}",
     "expenses_summary_add_button": "Add another expense",
-    "expenses_summary_review_button": "Continue to review"
+    "expenses_summary_review_button": "Continue to review",
+    "statement_confirmation_title": "Confirmation",
+    "statement_confirmation_header": "Great, we've sent your self employment ledger to the benefit programs you have applied to",
+    "statement_confirmation_subheader": "Your confirmation number is: {{number}}",
+    "statement_confirmation_what_next": "What happens next",
+    "statement_confirmation_benefit_worker": "A benefit program worker will review your document and make sure they have the information you need",
+    "statement_confirmation_portal": "Your portal home page will be updated with your self employment ledger as a submitted document",
+    "statement_confirmation_download_copy": "Download a copy of your self employment ledger and keep it for your records",
+    "statement_confirmation_download_button": "Download proof",
+    "statement_confirmation_image_alt": "Ledger"
 }
