@@ -6,6 +6,7 @@ export interface SignedStatementState {
     lastDayOfWork?: string
     amount?: number
     lastPayment?: string
+    confirmationNumber?: string
     understood?: boolean
     signedName?: string
 }
@@ -18,12 +19,15 @@ export const statementSlice = createSlice({
     initialState,
     reducers: {
         setSignedStatement: (state, action: PayloadAction<SignedStatementState>) => {
-            return {...action.payload}
+            return { ...action.payload }
+        },
+        setConfimationNumber: (state, action: PayloadAction<string>) => {
+            state.confirmationNumber = action.payload
         }
     }
 })
 
-export const { setSignedStatement } = statementSlice.actions
+export const { setSignedStatement, setConfimationNumber } = statementSlice.actions
 export const selectSignedStatement = (state: RootState) => state.statement
 
 export default statementSlice.reducer
