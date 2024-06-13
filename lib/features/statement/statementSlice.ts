@@ -6,6 +6,8 @@ export interface SignedStatementState {
     lastDayOfWork?: string
     amount?: number
     lastPayment?: string
+    understood?: boolean
+    signedName?: string
 }
 
 export const initialState: SignedStatementState = { }
