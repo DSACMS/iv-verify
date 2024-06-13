@@ -8,6 +8,7 @@ import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
+import TextAreaWithValidation from "@/app/components/TextAreaWithValidation"
 
 export default function Page() {
     const { t } = useTranslation('en')
@@ -78,24 +79,24 @@ export default function Page() {
                     <Grid row gap>
                         <main className="usa-layout-docs">
                             <h3>{t('add_income_header')}</h3>
-                            <h3>{t('add_income_title')}</h3>
                             <Form onSubmit={handleSubmit(onSubmit)}>
                                 {errorSummary(errors)}
                                 <FormGroup>
                                     <TextFieldWithValidation
                                         id="name"
-                                        {...register("name", {required: {value: true, message: t('add_income_name_field_required')}})}
+                                        {...register("name", {required: {value: true, message: t('add_income_name_field_required')}, maxLength: { value: 100, message: t('add_income_name_field_length')}})}
                                         label={t('add_income_what_name')}
                                         error={errors.name?.message}
                                     />
                                 </FormGroup>
 
                                 <FormGroup>
-                                    <TextFieldWithValidation 
+                                    <TextAreaWithValidation
                                         id="description" 
-                                        {...register("description", {required: {value: true, message: t('add_income_description_field_required')} })} 
+                                        {...register("description", {required: {value: true, message: t('add_income_description_field_required')}, maxLength: {value: 500, message: t('add_income_description_field_length')} })} 
                                         label={t('add_income_describe')} 
                                         error={errors.description?.message} 
+                                        className="height-10"
                                     />
                                 </FormGroup>
 

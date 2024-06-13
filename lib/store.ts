@@ -3,6 +3,8 @@ import counterReducer from './features/counter/counterSlice'
 import incomeReducer from './features/ledger/income/incomeSlice'
 import expenseReducer from './features/ledger/expenses/expensesSlice'
 import statementReducer from './features/statement/statementSlice'
+import benefitsReducer from './features/benefits/benefitsSlice'
+
 export const makeStore = () => {
     return configureStore({
         reducer: {
@@ -10,6 +12,7 @@ export const makeStore = () => {
             incomeLedger: incomeReducer,
             expensesLedger: expenseReducer,
             statement: statementReducer,
+            benefits: benefitsReducer,
         }
     })
 }

@@ -7,6 +7,8 @@ export interface SignedStatementState {
     amount?: number
     lastPayment?: string
     confirmationNumber?: string
+    understood?: boolean
+    signedName?: string
 }
 
 export const initialState: SignedStatementState = { }

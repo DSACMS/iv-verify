@@ -57,7 +57,7 @@ export default function Page() {
                             <h3>{t('statement_set_header', {day_count: 30})}</h3>
                             <h4 className="margin-top-2">{t('statement_set_subheader')}</h4>
                             <Form onSubmit={handleSubmit(onSubmit)}>
-                                <ErrorSummary errors={errors} />
+                                <ErrorSummary errors={errors} headingText="" />
                                 <FormGroup>
                                     <TextFieldWithValidation
                                         id="name"
