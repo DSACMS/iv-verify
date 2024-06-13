@@ -38,7 +38,7 @@ export default function Page() {
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
-                            <div className="margin-bottom-5">
+                            <div className="margin-bottom-5" data-testid="review-header">
                                 <LedgerReviewHeader benefits={benefits} snapIncomeTotal={incomeTotal} medicaidIncomeTotal={incomeTotal} />
                                 <div className="text-center margin-top-3">
                                     <Link href="#" className="usa-link">{t("review_download_copy")}</Link>
@@ -50,7 +50,7 @@ export default function Page() {
                                 <ExpenseList header={t('review_expenses_header', {days: DAY_COUNT})} />
                                 <SnapExpenses benefits={benefits} snapIncomeTotal={incomeTotal} />
 
-                                <Button type="button" data-testid="continue_button" onClick={continueButtonClicked}>{t('review_continue_button')}</Button>
+                                <Button type="button" data-testid="continue-button" onClick={continueButtonClicked}>{t('review_continue_button')}</Button>
                             </div>
                         </main>
                     </Grid>

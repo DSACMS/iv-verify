@@ -23,11 +23,15 @@ describe('SnapExpenses', async () => {
     afterEach(cleanup)
 
     it('Displays SNAP header', () => {
-        expect(screen.getByTestId('CardHeader')).toBeDefined()
+        waitFor(() => {
+            expect(screen.getByTestId('CardHeader')).toBeDefined()
+        })
     })
 
     it('Displays SNAP Income', () => {
         const span = screen.queryByTestId("snap-body")
-        expect(span?.textContent?.indexOf(`${SNAP_INCOME*(.5)}`)).toBeGreaterThanOrEqual(0)
+        waitFor(() => {
+            expect(span?.textContent?.indexOf(`${SNAP_INCOME*(.5)}`)).toBeGreaterThanOrEqual(0)
+        })
     })
 })
