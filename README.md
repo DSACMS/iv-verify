@@ -28,6 +28,14 @@ pnpm dev
 bun dev
 ```
 
+Then disable `nextjs` telemetry by running your choice of:
+
+```
+npx next telemetry disable
+yarn next telemetry disable
+pnpm exec next telemetry disable
+bun next telemetry disable
+```
 
 Open [http://localhost:3000/ledger/income/add](http://localhost:3000/ledger/income/add) with your browser to see the result.
 
