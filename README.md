@@ -20,21 +20,12 @@ Next, run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Then disable `nextjs` telemetry by running your choice of:
 
-```
+```bash
 npx next telemetry disable
-yarn next telemetry disable
-pnpm exec next telemetry disable
-bun next telemetry disable
 ```
 
 Open [http://localhost:3000/ledger/income/add](http://localhost:3000/ledger/income/add) with your browser to see the result.
@@ -58,11 +49,16 @@ Next has a style where routing is determined by file structure. You'll find all 
 #### `public`
 Where any public assets are stored.
 
-## Run tests
+## Tests and linting
 Testing is a first-class citizen here
 
 ```bash
+# to run tests
 npm run test
+# to check coverage
+npm run coverage
+# to lint
+npm run lint
 ```
 
 ## Deploy
