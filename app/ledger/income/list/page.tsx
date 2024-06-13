@@ -9,6 +9,7 @@ import { removeIncome, IncomeItem, selectIcomeItems } from "@/lib/features/ledge
 import { useRouter } from "next/navigation"
 import { useRef } from "react"
 import Item from './item'
+import { selectBenefits } from "@/lib/features/benefits/benefitsSlice"
 
 const DAY_COUNT = 30
 
@@ -16,8 +17,7 @@ export default function Page() {
     const { t } = useTranslation('en')
     const router = useRouter()
     const items = useAppSelector(state => selectIcomeItems(state))
-    const dispatch = useAppDispatch()
-    const deleteRef = useRef<ModalRef[]>([])
+    const benefits = useAppSelector(state => selectBenefits(state))
 
     const incomeItemElements = items.map((item: IncomeItem, idx: number) => {
         return <Item key={idx} item={item} index={idx} />
@@ -27,10 +27,19 @@ export default function Page() {
         router.push("/ledger/income/add")
     }
 
+    function doneClicked() {
+        if (benefits.snap && !benefits.medicaid) {
+            // For SNAP Only Flow
+            router.push('/ledger/expense/snap')
+        } else {
+            // For Medicaid Only or SNAP+Medicaid Flows
+            router.push('/ledger/expense')
+        }
+    }
+
     function getTotal() {
         let total = items.reduce((t, item) => t + item.amount, 0)
         return (t('list_income_total', {day_count: DAY_COUNT, amount: total}))
-
     }
 
     return (
@@ -61,7 +70,7 @@ export default function Page() {
                             </CardGroup>
                             <ButtonGroup type="default">
                                 <Button type="button" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_button')}</Button>
-                                <Button type="button" data-testid="done_button">{t('list_income_done_button')}</Button>
+                                <Button type="button" onClick={doneClicked} data-testid="done_button">{t('list_income_done_button')}</Button>
                             </ButtonGroup>
                         </main>
                     </Grid>
