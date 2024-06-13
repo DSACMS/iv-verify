@@ -53,7 +53,7 @@ export default function Page() {
                             <h3>{t('statement_sign_header', {day_count: 30})}</h3>
                             <div className="margin-top-2">{t('statement_sign_subheader')}</div>
                             <Form onSubmit={handleSubmit(onSubmit)}>
-                                <ErrorSummary errors={errors} />
+                                <ErrorSummary errors={errors} headingText="" />
                                 <CardGroup className="margin-top-5">
                                     <Card>
                                         <CardHeader><b>{t('statement_sign_card_header')}</b></CardHeader>
