@@ -125,7 +125,7 @@
     "review_legally_sign": "Next you'll legally sign and submit this statement",
     "review_income_header": "Money you received (last {{days}} days)",
     "review_expenses_header": "Your expenses (last {{days}} days)",
-    "review_span_expenses_header": "Your expenses",
+    "review_snap_expenses_header": "Your expenses",
     "review_snap_expenses_body": "SNAP Standard expense deduction ({{deduction}}% of your income): ${{amount}}",
     "review_continue_button": "Continue"
 }

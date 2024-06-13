@@ -1,6 +1,6 @@
 import { BenefitsState } from "@/lib/features/benefits/benefitsSlice"
+import { useTranslation } from "@/app/i18n/client"
 import { Card, CardBody, CardGroup, CardHeader } from "@trussworks/react-uswds"
-import { useTranslation } from "react-i18next"
 
 interface SnapExpensesProps {
     benefits: BenefitsState
@@ -21,9 +21,9 @@ export default function SnapExpenses({benefits, snapIncomeTotal}: SnapExpensesPr
         <div>
             <CardGroup>
                 <Card>
-                    <CardHeader>{t('review_span_expenses_header')}</CardHeader>
+                    <CardHeader>{t('review_snap_expenses_header')}</CardHeader>
                     <CardBody>
-                        {t('review_snap_expenses_body', {deduction: deductionAmount, amount})}
+                        <span data-testid="snap-body">{t('review_snap_expenses_body', {deduction: deductionAmount, amount})}</span>
                     </CardBody>
                 </Card>
             </CardGroup>
