@@ -42,7 +42,6 @@ describe('SNAP Recommend Deduction Screen', async () => {
         waitFor(() => {
             expect(radio.checked).toEqual(true)
         })
-        console.log('checked', radio.checked)
         fireEvent.click(screen.getByTestId("continue-button"))
 
 
