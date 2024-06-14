@@ -28,11 +28,10 @@ export default function Page() {
     const onSubmit: SubmitHandler<FormData> = (data => {
         const { snapRadio } = data
 
-        // TODO: Navigate to the approprate screen
         if (snapRadio == "yes") {
-            console.log("yes")
+            router.push("/ledger/expense")
         } else if (snapRadio == "no") {
-            console.log("no")
+            router.push("/ledger/review")
         }
     })
 
@@ -50,25 +49,25 @@ export default function Page() {
                     <Grid row gap>
                         <main className="usa-layout-docs">
                             <Form onSubmit={handleSubmit(onSubmit)}>
-                                <h3 className="margin-bottom-2" data-testid="expenses_landing_what_counts_heading">{t('expenses_snap_standard_header', {amount: MONTHLY_AMOUNT})}</h3>
+                                <h3 className="margin-bottom-2" data-testid="expense-snap-header">{t('expenses_snap_standard_header', {amount: MONTHLY_AMOUNT})}</h3>
                                 <span className="usa-hint">{t('expenses_snap_standard_subheader')}</span>
                                 <Controller
                                     name="snapRadio"
                                     control={control}
                                     render={({ field: {onChange, ...props} }) => 
-                                        <Radio id="no_radio" {...props} onChange={onChange} label={t('expenses_snap_standard_no_header', {amount: MONTHLY_AMOUNT})} labelDescription={t('expenses_snap_standard_no_subheader')} tile className="margin-top-5" value="no" />
+                                        <Radio id="no_radio" {...props} onChange={onChange} label={t('expenses_snap_standard_no_header', {amount: MONTHLY_AMOUNT})} labelDescription={t('expenses_snap_standard_no_subheader')} tile className="margin-top-5" value="no" data-testid="no_radio" />
                                     }
                                 />
                                 <Controller
                                     name="snapRadio"
                                     control={control}
                                     render={({ field: {onChange, ...props} }) => 
-                                        <Radio id="yes_radio" {...props} onChange={onChange} label={t('expenses_snap_standard_yes_header', {amount: MONTHLY_AMOUNT})} labelDescription={t('expenses_snap_standard_yes_subheader')} tile value="yes" />
+                                        <Radio id="yes_radio" {...props} onChange={onChange} label={t('expenses_snap_standard_yes_header', {amount: MONTHLY_AMOUNT})} labelDescription={t('expenses_snap_standard_yes_subheader')} tile value="yes" data-testid="yes_radio" />
                                     }
                                 />
 
                                 <p className="text-center margin-top-5">
-                                    <Button type="submit">{t('expenses_snap_standard_continue')}</Button>
+                                    <Button type="submit" data-testid="continue-button">{t('expenses_snap_standard_continue')}</Button>
                                 </p>
                             </Form>
                         </main>
