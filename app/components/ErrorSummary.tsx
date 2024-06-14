@@ -3,9 +3,10 @@ import { FieldErrors } from "react-hook-form"
 
 type Props = {
     errors: FieldErrors
+    headingText: string
 }
 
-export default function ErrorSummary({errors}: Props) {
+export default function ErrorSummary({errors, headingText}: Props) {
     if (!errors) {
         return <></>
     }
@@ -21,7 +22,7 @@ export default function ErrorSummary({errors}: Props) {
     }
 
     return (
-        <Alert type="error" validation heading="Expense Requirements" headingLevel="h3" className="margin-top-3">
+        <Alert type="error" validation heading={headingText} headingLevel="h3" className="margin-top-3">
             <ValidationChecklist id="validation-code">
                 {validationItems}
             </ValidationChecklist>

@@ -7,25 +7,30 @@ import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 
-describe('Expense Landing Screen', async () => {
+describe('Intro Page', async () => {
     let store: EnhancedStore
     beforeEach(() => {
         vi.mock('next/navigation', () => require('next-router-mock'))
-        mockRouter.push('/ledger/income/add')
+        mockRouter.push('/')
         store = makeStore()
         render (<Provider store={store}><Page /></Provider>)
     })
     afterEach(cleanup)
 
     it('shows header', () => {
-        expect(screen.getByTestId('expenses_landing_what_counts_heading')).toBeDefined()
+        expect(screen.getByTestId('intro_header')).toBeDefined()
     })
 
     it('shows add button', () => {
-        expect(screen.getByTestId('add_expenses_button')).toBeDefined()
+        expect(screen.getByTestId('get_started_button')).toBeDefined()
     })
 
-    it('shows summary button', () => {
-        expect(screen.getByTestId('no_expenses_link')).toBeDefined()
+    it('navigates when clicked', async () => {
+        fireEvent.click(screen.getByTestId('get_started_button'))
+        await waitFor(() => {
+            expect(mockRouter).toMatchObject({
+                asPath: "/benefits"
+            })
+        })
     })
 })

@@ -29,6 +29,7 @@ export const incomeSlice = createSlice({
 })
 
 export const { addIncome, removeIncome } = incomeSlice.actions
-export const selectIcomeItems = (state: RootState) => state.incomeLedger.items
+export const selectIncomeItems = (state: RootState) => state.incomeLedger.items
+export const selectIncomeTotal = (state: RootState) => state.incomeLedger.items.reduce((val, item) => item.amount + val, 0)
 
 export default incomeSlice.reducer

@@ -7,25 +7,31 @@ import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 
-describe('Expense Landing Screen', async () => {
+describe('Review Screen', async () => {
     let store: EnhancedStore
     beforeEach(() => {
         vi.mock('next/navigation', () => require('next-router-mock'))
-        mockRouter.push('/ledger/income/add')
+        mockRouter.push('/ledger/review')
         store = makeStore()
         render (<Provider store={store}><Page /></Provider>)
     })
     afterEach(cleanup)
 
     it('shows header', () => {
-        expect(screen.getByTestId('expenses_landing_what_counts_heading')).toBeDefined()
+        expect(screen.getByTestId('review-header')).toBeDefined()
     })
 
-    it('shows add button', () => {
-        expect(screen.getByTestId('add_expenses_button')).toBeDefined()
+    it('shows continue button', () => {
+        expect(screen.getByTestId('continue-button')).toBeDefined()
     })
 
-    it('shows summary button', () => {
-        expect(screen.getByTestId('no_expenses_link')).toBeDefined()
+    it('Clicking button navigates', () => {
+        fireEvent.click(screen.getByTestId('continue-button'))
+
+        waitFor(() => {
+            expect(mockRouter).toMatchObject({
+                asPath: "/statement/sign"
+            })
+        })
     })
 })
