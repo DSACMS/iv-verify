@@ -28,7 +28,7 @@ export default function Page() {
               </ul>
             </div>
           ),
-          expanded: true,
+          expanded: false,
           id: 'expenses_landing_what_counts',
           headingLevel: 'h4' as HeadingLevel,
         }, {
@@ -38,7 +38,7 @@ export default function Page() {
                     {t('expenses_landing_need_body')}
                 </p>
             ),
-            expanded: true,
+            expanded: false,
             id: 'expenses_landing_need',
             headingLevel: 'h4' as HeadingLevel,
         }
