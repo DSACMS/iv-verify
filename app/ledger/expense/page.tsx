@@ -67,7 +67,7 @@ export default function Page() {
                             <p className="text-center">
                                 <Button type="button" onClick={addItemClicked} data-testid="add_expenses_button" className="margin-bottom-3">{t('expenses_landing_add_button')}</Button>
                                 <br />
-                                <Link href="/ledger/expenses/summary" data-testid="no_expenses_link" className="usa-link">{t('expenses_landing_do_not_have_link')}</Link>
+                                <Link href="/ledger/review" data-testid="no_expenses_link" className="usa-link">{t('expenses_landing_do_not_have_link')}</Link>
                             </p>
                         </main>
                     </Grid>

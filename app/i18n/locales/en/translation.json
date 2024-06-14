@@ -149,5 +149,12 @@
     "review_expenses_header": "Your expenses (last {{days}} days)",
     "review_snap_expenses_header": "Your expenses",
     "review_snap_expenses_body": "SNAP Standard expense deduction ({{deduction}}% of your income): ${{amount}}",
-    "review_continue_button": "Continue"
+    "review_continue_button": "Continue",
+    "snap_recommend_deduction_title": "SNAP self employment expenses",
+    "snap_recommend_deduction_header": "Because you told us your busienss related expenses are ${{amount}}, we recommend you take the self employment standard expense deduction for your SNAP income",
+    "snap_recommend_deduction_subheader": "The SNAP standard expense deduction may get you more SNAP benefits",
+    "snap_recommend_deduction_take_header": "Take the standard deduction",
+    "snap_recommend_deduction_take_body": "We recommend this!",
+    "snap_recommend_deduction_do_not_take_header": "Do not take the SNAP standard deduction, use my Medicaid expenses",
+    "snap_recommend_deduction_continue_button": "Continue"
 }
