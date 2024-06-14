@@ -32,5 +32,6 @@ export const expenseSlice = createSlice({
 
 export const { addExpense, removeExpense } = expenseSlice.actions
 export const selectExpenseItems = (state: RootState) => state.expensesLedger.items
+export const selectExpenseTotal = (state: RootState) => state.expensesLedger.items.reduce((val, item) => item.amount + val, 0)
 
 export default expenseSlice.reducer

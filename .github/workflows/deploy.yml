@@ -23,6 +23,6 @@ jobs:
       - name: Post Slack Message
         run: |
           curl --header "Content-Type: application/json" \
-            --request POST \ 
-            --data '{"user": "${{github.actor}}", "prototype_url": "https://verify-prototype.fr.cloud.gov/ledger/income/add", "commit_url": "${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}"}' \ 
+            --request POST \
+            --data '{"user": "${{github.actor}}", "prototype_url": "https://verify-prototype.fr.cloud.gov/", "commit_url": "${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}"}' \
             https://hooks.slack.com/triggers/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
