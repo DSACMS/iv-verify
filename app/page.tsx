@@ -29,7 +29,7 @@ export default function Home() {
           </ul>
         </div>
       ),
-      expanded: true,
+      expanded: false,
       id: 'intro_how_do_i_know',
       headingLevel: 'h4' as HeadingLevel,
     }]
