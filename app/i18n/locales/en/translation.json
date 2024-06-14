@@ -133,5 +133,21 @@
     "intro_how_do_i_know_list_have_expenses": "They have business eexpenses that aren't paid back by anyone they work for.",
     "intro_how_do_i_know_list_they_receive": "They receive tax form 1099-MISC from a company or individual at the end of the year.",
     "intro_how_do_i_know_list_own": "They own or run their own business.",
-    "intro_how_do_i_know_list_benefits": "They do not get employment benefits or tax contributions from the individual or company they work for."
+    "intro_how_do_i_know_list_benefits": "They do not get employment benefits or tax contributions from the individual or company they work for.",
+    "review_title": "Income and expenses summary",
+    "review_header": "Total calculated self employment income",
+    "review_snap_income": "SNAP Income: ${{amount}}",
+    "review_medicaid_income": "Medicaid Income: ${{amount}}",
+    "review_medicaid_only_income": "Total calculated self employment income for Medicaid: ${{amount}}",
+    "review_snap_only_income": "Total calculated self cmployment income for SNAP: ${{amount}}",
+    "review_ledger_sent_medicaid_snap": "This is the ledger that will be sent to your Medicaid and SNAP applications",
+    "review_ledger_sent_medicaid_only": "This is the ledger that will be sent to your Medicaid applicaton",
+    "review_ledger_sent_snap_only": "This is the ledger that will be sent to your SNAP application",
+    "review_download_copy": "Download a copy of your ledger and keep it",
+    "review_legally_sign": "Next you'll legally sign and submit this statement",
+    "review_income_header": "Money you received (last {{days}} days)",
+    "review_expenses_header": "Your expenses (last {{days}} days)",
+    "review_snap_expenses_header": "Your expenses",
+    "review_snap_expenses_body": "SNAP Standard expense deduction ({{deduction}}% of your income): ${{amount}}",
+    "review_continue_button": "Continue"
 }
