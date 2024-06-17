@@ -18,14 +18,12 @@ export default function ExpenseListItem({ item, index }: ItemProps) {
         dispatch(removeExpense(index))
     }
 
-    const dateStr = item.date.toDateString()
-
     return (
         <Grid row gap className="margin-bottom-5">
             <Grid col={1}>*</Grid>
             <Grid col={6} tablet={{col: 9}}>
                 <div>{item.name}</div>
-                <div>{dateStr}</div>
+                <div>{item.date}</div>
                 <div>{`$${item.amount}`}</div>
             </Grid>
             <Grid col={5} tablet={{col: 2}}>
