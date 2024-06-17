@@ -31,7 +31,7 @@ describe('List Income in Ledger Page', async () => {
     it('shows expenses in a list', () => {
         const expense1: ExpenseItem = {
             name: "Supplies: Gas",
-            date: new Date(),
+            date: "2024/11/07",
             amount: 20,
             isMileage: true,
             expenseType: "Other"
@@ -39,7 +39,7 @@ describe('List Income in Ledger Page', async () => {
 
         const expense2: ExpenseItem = {
             name: "Clothing for work",
-            date: new Date(),
+            date: "2024/11/09",
             amount: 49,
             isMileage: false,
             expenseType: "Other"
