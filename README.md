@@ -62,7 +62,9 @@ npm run lint
 ```
 
 ## Deploy
-Joe help!
+1. Go to https://github.com/JosephGasiorekUSDS/verify-nextjs/actions/workflows/deploy.yml
+1. Click "Run Workflow" button on the right
+1. Click "Run Workflow" in the dialog that appears
 
 ## Resources
 ### Project-specific
@@ -76,15 +78,4 @@ Joe help!
 
 ## Technical notes and deferred decisions
 
-* From [Benefits chooser](https://github.com/JosephGasiorekUSDS/verify-nextjs/pull/15), the notion of program constants and type definitions for them. Asking the question of using oo inheritance to customize by state?
-* From [Add income fixes](https://github.com/JosephGasiorekUSDS/verify-nextjs/pull/16/files), let's get with DF translation folks to learn some best practices (Kate can facilitate)
-* From [Read and sign](https://github.com/JosephGasiorekUSDS/verify-nextjs/pull/18/files), 
-	- design review "process"
-	- router tests as own test type
-	- todo for kate: look over truss components and defaults and learn how to customize
-	- make * the default for required fields
-* From [Confirmation](https://github.com/JosephGasiorekUSDS/verify-nextjs/pull/20/files)
-	- image storage paradigm (a decision to defer until we know more about state needs with external forms/images/assets)
-	- default layout-type page inside nextjs?
-* from building the readme document:
-	- having both components translations and Page notions inside of the same directory feels confusing. I wonder if there's a way to make these more clear. I tried to note what each each directory in the `app` directory was up above but we should keep an eye on this and see how easy it is to understand overtime --kate
+Moved to [ADR](/adr) directory
