@@ -6,7 +6,8 @@
         ],
         "chromeLaunchConfig": {
             "ignoreHTTPSErrors": true,
-            "headless": true
+            "headless": true,
+            "executablePath": "/usr/bin/google-chrome"
         }
     }
 }
