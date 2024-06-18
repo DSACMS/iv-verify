@@ -90,3 +90,7 @@ jobs:
             const coverageFilePath = process.env['COVERAGE_FILE_PATH']
             const prNumber = process.env['PR_NUMBER']
             script({github, context, mainWorkflowRunSha, coverageFilePath, prNumber})
+      - name: Run dev server for a11y testing
+        run: npm run dev &
+      - name: Run pa11y testing
+        run: npm run pa11y-ci
