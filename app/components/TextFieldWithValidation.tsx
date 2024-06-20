@@ -1,4 +1,4 @@
-import { ErrorMessage, Label, TextInput } from "@trussworks/react-uswds"
+import { ErrorMessage, Label, RequiredMarker, TextInput } from "@trussworks/react-uswds"
 import React, { FocusEventHandler } from "react"
 
 type Args = {
@@ -10,6 +10,7 @@ type Args = {
     onChange: FocusEventHandler<HTMLInputElement>
     type?: 'text' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'url',
     'data-testid'?: string
+    requiredMarker?: boolean
 }
 
 const TextFieldWithValidation = React.forwardRef<HTMLInputElement, Args>(
@@ -17,7 +18,7 @@ const TextFieldWithValidation = React.forwardRef<HTMLInputElement, Args>(
         const { id, name, label, error, onBlur, onChange, type } = args
         return (
             <>
-                {label !== undefined ? <Label htmlFor={name}>{label}</Label> : ''}
+                {label !== undefined ? <Label htmlFor={name} requiredMarker={args.requiredMarker}>{label}</Label> : ''}
                 <TextInput
                     id={id}
                     name={name}
