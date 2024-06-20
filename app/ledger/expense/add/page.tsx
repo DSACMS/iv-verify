@@ -48,7 +48,7 @@ export default function Page() {
             expenseType: data.expenseType,
             amount: data.amount,
             isMileage: data.isMileage,
-            date: new Date(data.date)
+            date: data.date
         }
 
         dispatch(addExpense(expenseItem))
