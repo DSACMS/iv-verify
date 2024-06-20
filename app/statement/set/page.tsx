@@ -2,7 +2,7 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, DatePicker, Label } from '@trussworks/react-uswds' 
-import { useTranslation } from '@/app/i18n/client'
+import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { SubmitHandler, useForm, Controller } from "react-hook-form"
@@ -11,7 +11,7 @@ import ErrorSummary from "@/app/components/ErrorSummary"
 import { SignedStatementState, setSignedStatement } from "@/lib/features/statement/statementSlice"
 
 export default function Page() {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
 

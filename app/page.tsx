@@ -3,12 +3,12 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 
-import { useTranslation } from "@/app/i18n/client";
+import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 import { Grid, GridContainer, Header, Title, Icon, Button, Accordion, HeadingLevel } from "@trussworks/react-uswds";
 
 export default function Home() {
-  const { t } = useTranslation('en')
+  const { t } = useTranslation()
   const router = useRouter()
 
   function getStartedClicked() {

@@ -1,4 +1,4 @@
-import { useTranslation } from "@/app/i18n/client"
+import { useTranslation } from "react-i18next"
 import { IncomeItem, removeIncome } from "@/lib/features/ledger/income/incomeSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup } from "@trussworks/react-uswds"
@@ -9,7 +9,7 @@ interface ItemProps {
 }
 export default function IncomeListItem({ item, index }: ItemProps) {
     const ref = useRef(null)
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const dispatch = useAppDispatch()
 
     function onDeleteClicked() {

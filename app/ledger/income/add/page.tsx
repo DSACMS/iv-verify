@@ -2,7 +2,7 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert } from '@trussworks/react-uswds' 
-import { useTranslation } from '@/app/i18n/client'
+import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from "@/lib/hooks"
 import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
@@ -11,7 +11,7 @@ import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import TextAreaWithValidation from "@/app/components/TextAreaWithValidation"
 
 export default function Page() {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
 

@@ -4,7 +4,7 @@ import { IncomeItem, selectIncomeItems, selectIncomeTotal } from "@/lib/features
 import { useAppSelector } from "@/lib/hooks"
 import IncomeListItem from "./IncomeListItem"
 import { Card, CardBody, CardGroup, CardHeader, GridContainer } from "@trussworks/react-uswds"
-import { useTranslation } from "@/app/i18n/client"
+import { useTranslation } from "react-i18next"
 
 interface Props {
     dayCount: number
@@ -12,7 +12,7 @@ interface Props {
 }
 
 export default function IncomeList({dayCount, header}: Props) {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const items = useAppSelector(state => selectIncomeItems(state))
     const incomeTotal = useAppSelector(state => selectIncomeTotal(state))
     const incomeItemElements = items.map((item: IncomeItem, idx: number) => {

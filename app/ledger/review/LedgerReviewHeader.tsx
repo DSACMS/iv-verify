@@ -1,5 +1,5 @@
 import { BenefitsState } from "@/lib/features/benefits/benefitsSlice"
-import { useTranslation } from "@/app/i18n/client"
+import { useTranslation } from "react-i18next"
 
 interface ReviewHeaderProps {
     benefits: BenefitsState
@@ -8,7 +8,7 @@ interface ReviewHeaderProps {
 }
 
 export default function LedgerReviewHeader({benefits, snapIncomeTotal, medicaidIncomeTotal}: ReviewHeaderProps) {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
 
     if (benefits.medicaid && benefits.snap) {
         return (
