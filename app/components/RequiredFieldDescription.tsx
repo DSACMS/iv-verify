@@ -6,7 +6,7 @@ export default function RequiredFieldDescription() {
     const { t } = useTranslation('en')
     return (
         <div className="margin-top-1">
-            <Trans i18nKey="required_field_description" t={t} components={[<RequiredMarker />]} />
+            <Trans i18nKey="required_field_description" t={t} components={[<RequiredMarker key='asterisk' />]} />
         </div>
     )
 }

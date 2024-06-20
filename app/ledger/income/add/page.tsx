@@ -90,6 +90,7 @@ export default function Page() {
                                         label={t('add_income_what_name')}
                                         error={errors.name?.message}
                                         requiredMarker={true}
+                                        data-testid="name"
                                     />
                                 </FormGroup>
 
@@ -100,6 +101,7 @@ export default function Page() {
                                         label={t('add_income_describe')} 
                                         error={errors.description?.message} 
                                         className="height-10"
+                                        data-testid="description"
                                     />
                                 </FormGroup>
 
@@ -110,6 +112,7 @@ export default function Page() {
                                         label={t('add_income_total_amount')}
                                         error={errors.amount?.message}
                                         requiredMarker={true}
+                                        data-testid="amount"
                                     />
                                 </FormGroup>
                                 <FormGroup>
