@@ -33,7 +33,7 @@ export default function Page() {
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
-                            <Form method="POST" action="/api/export">
+                            <Form method="POST" action="/api/export" onSubmit={() => {}}>
                                 <h3>{t('statement_confirmation_header')}</h3>
                                 <div className="margin-top-2 margin-bottom-5">{t('statement_confirmation_subheader', { 
                                     number: signedStatement?.confirmationNumber ?? 'XXX' 
