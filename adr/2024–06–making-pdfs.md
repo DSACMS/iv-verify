@@ -43,21 +43,6 @@ I expect this image to show the system components for MVP with proposed long ter
 	+ wicked_pdf
 - how often do we expect to revise the forms? What is the maintenance burden?
 
-### Decisions to be made
-
-#### immediately, for MVP
-- tool
-	+ must be js package that works in the browser
-	+ limited file size
-	+ accessible pdfs
-	+ 
-- system architecture (if any required)
-	+ is this a standalone service? (depends on whether we want to share down the line; we can set it up as a standalone within our repo to start)
-- PDF layout(s)
-
-#### later on
-- Storage requirements
-
 ### Decision-making criteria
 - what are other trade-offs and decisions needed to be made around PDF?
 - MVP requirements versus a full system
@@ -67,14 +52,28 @@ I expect this image to show the system components for MVP with proposed long ter
 - mobile first
 	+ small file sizes
 	+ efficient use of compute
+- accessibility: does it build accessible pdfs
+- can handle i18n
 
 ### Resources
 * [dev.to pdf review (2021)](https://dev.to/handdot/generate-a-pdf-in-js-summary-and-comparison-of-libraries-3k0p)
 * [byby.dev review (2024)](https://byby.dev/js-pdf-libs)
 
-## Decision
+## Decisions
 
+### Technical
+
+#### Tooling
+
+#### System architecture changes
+
+### Product
+
+#### Layout of document and iterating over it
+
+#### Sharing a pdf service across all products/pilots
+
+### Deferred
+* Storage concerns (post-MVP)
 
 ## Consequences
-
-What becomes easier or more difficult to do because of this change?
