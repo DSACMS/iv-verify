@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation"
 import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import TextAreaWithValidation from "@/app/components/TextAreaWithValidation"
+import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 
 export default function Page() {
     const { t } = useTranslation('en')
@@ -80,6 +81,7 @@ export default function Page() {
                         <main className="usa-layout-docs">
                             <h3>{t('add_income_header')}</h3>
                             <Form onSubmit={handleSubmit(onSubmit)}>
+                                <RequiredFieldDescription />
                                 {errorSummary(errors)}
                                 <FormGroup>
                                     <TextFieldWithValidation
@@ -87,6 +89,8 @@ export default function Page() {
                                         {...register("name", {required: {value: true, message: t('add_income_name_field_required')}, maxLength: { value: 100, message: t('add_income_name_field_length')}})}
                                         label={t('add_income_what_name')}
                                         error={errors.name?.message}
+                                        requiredMarker={true}
+                                        data-testid="name"
                                     />
                                 </FormGroup>
 
@@ -97,6 +101,7 @@ export default function Page() {
                                         label={t('add_income_describe')} 
                                         error={errors.description?.message} 
                                         className="height-10"
+                                        data-testid="description"
                                     />
                                 </FormGroup>
 
@@ -106,6 +111,8 @@ export default function Page() {
                                         {...register("amount", { valueAsNumber:true, validate: (value) => value > 0, required: { value: true, message: t('add_income_amount_field_required')}})}
                                         label={t('add_income_total_amount')}
                                         error={errors.amount?.message}
+                                        requiredMarker={true}
+                                        data-testid="amount"
                                     />
                                 </FormGroup>
                                 <FormGroup>

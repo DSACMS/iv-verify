@@ -1,0 +1,10 @@
+{
+    "defaults": {
+        "runners": ["htmlcs"],
+        "chromeLaunchConfig": {
+            "ignoreHTTPSErrors": true,
+            "headless": true,
+            "executablePath": "/usr/bin/google-chrome"
+        }
+    }
+}

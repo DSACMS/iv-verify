@@ -1,7 +1,7 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, CardHeader, Card, CardBody, CardGroup, Checkbox } from '@trussworks/react-uswds' 
+import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, CardHeader, Card, CardBody, CardGroup, Checkbox, RequiredMarker } from '@trussworks/react-uswds' 
 import { useTranslation } from '@/app/i18n/client'
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
@@ -9,6 +9,7 @@ import { SubmitHandler, useForm, Controller } from "react-hook-form"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import ErrorSummary from "@/app/components/ErrorSummary"
 import { selectSignedStatement, setSignedStatement } from "@/lib/features/statement/statementSlice"
+import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 
 export default function Page() {
     const { t } = useTranslation('en')
@@ -53,6 +54,7 @@ export default function Page() {
                             <h3>{t('statement_sign_header', {day_count: 30})}</h3>
                             <div className="margin-top-2">{t('statement_sign_subheader')}</div>
                             <Form onSubmit={handleSubmit(onSubmit)}>
+                                <RequiredFieldDescription />
                                 <ErrorSummary errors={errors} headingText="" />
                                 <CardGroup className="margin-top-5">
                                     <Card>
@@ -71,7 +73,7 @@ export default function Page() {
                                             <Checkbox
                                                 id="understood"
                                                 {...field}
-                                                label={t('statement_sign_checkbox')}
+                                                label=<>{t('statement_sign_checkbox')}<RequiredMarker /></>
                                                 value="true"
                                                 data-testid="understood"
                                             />
@@ -88,6 +90,7 @@ export default function Page() {
                                         label={t('statement_sign_name_label')}
                                         error={errors.signedName?.message}
                                         data-testid="signedName"
+                                        requiredMarker
                                     />
                                 </FormGroup>
 

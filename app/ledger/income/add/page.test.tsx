@@ -18,25 +18,25 @@ describe('Add Income To Ledger Page', async () => {
     afterEach(cleanup)
 
     it('Shows Inputs', () => {
-        expect(screen.getByLabelText('What is the name of the person, client, or company that you worked for?')).toBeDefined()
-        expect(screen.getByLabelText('In your own words, describe the type of work you did')).toBeDefined()
-        expect(screen.getByLabelText('Total amount paid to you in the last 30 days.')).toBeDefined()
+        expect(screen.getByTestId("name")).toBeDefined()
+        expect(screen.getByTestId("description")).toBeDefined()
+        expect(screen.getByTestId("amount")).toBeDefined()
     })
 
     it('Displays error messages when fields are empty', async () => {
-        fireEvent.change(screen.getByLabelText('What is the name of the person, client, or company that you worked for?'), {
+        fireEvent.change(screen.getByTestId("name"), {
             target: {
                 value: ''
             }
         })
            
-        fireEvent.change(screen.getByLabelText('In your own words, describe the type of work you did'), {
+        fireEvent.change(screen.getByTestId("description"), {
             target: {
                 value: ''
             }
         })
 
-        fireEvent.change(screen.getByLabelText('Total amount paid to you in the last 30 days.'), {
+        fireEvent.change(screen.getByTestId("amount"), {
             target: {
                 value: ''
             }
@@ -55,19 +55,19 @@ describe('Add Income To Ledger Page', async () => {
     })
 
     it('Navigates when fields are filled in', async () => {
-        fireEvent.change(screen.getByLabelText('What is the name of the person, client, or company that you worked for?'), {
+        fireEvent.change(screen.getByTestId("name"), {
             target: {
                 value: 'Jane'
             }
         })
            
-        fireEvent.change(screen.getByLabelText('In your own words, describe the type of work you did'), {
+        fireEvent.change(screen.getByTestId("description"), {
             target: {
                 value: 'Landscaping'
             }
         })
 
-        fireEvent.change(screen.getByLabelText('Total amount paid to you in the last 30 days.'), {
+        fireEvent.change(screen.getByTestId("amount"), {
             target: {
                 value: '40.00'
             }

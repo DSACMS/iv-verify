@@ -5,7 +5,7 @@ export interface ExpenseItem {
     name: string
     expenseType: string
     amount: number
-    date: Date
+    date: string
     isMileage: boolean
 }
 
@@ -32,6 +32,6 @@ export const expenseSlice = createSlice({
 
 export const { addExpense, removeExpense } = expenseSlice.actions
 export const selectExpenseItems = (state: RootState) => state.expensesLedger.items
-export const selectExpenseTotal = (state: RootState) => state.expensesLedger.items.reduce((val, item) => item.amount + val, 0)
+export const selectExpenseTotal = (state: RootState) => state.expensesLedger.items.reduce((val: number, item: ExpenseItem) => item.amount + val, 0)
 
 export default expenseSlice.reducer
