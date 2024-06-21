@@ -1,10 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it, test } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { Provider } from 'react-redux'
 import LedgerReviewHeader from './LedgerReviewHeader'
-import { makeStore } from '@/lib/store'
-import { EnhancedStore } from '@reduxjs/toolkit'
 import { BenefitsState } from '@/lib/features/benefits/benefitsSlice'
+import TestWrapper from '@/app/TestWrapper'
 
 describe('Ledger Review Header', async () => {
     const SNAP_INCOME = 350.00
@@ -22,8 +20,7 @@ describe('Ledger Review Header', async () => {
                 snap: true,
             }
 
-            const store: EnhancedStore = makeStore()
-            render (<Provider store={store}><LedgerReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></Provider>)
+            render (<TestWrapper><LedgerReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
         })
 
         it('Displays SNAP and Medicaid header', () => {
@@ -55,8 +52,7 @@ describe('Ledger Review Header', async () => {
                 snap: false,
             }
 
-            const store: EnhancedStore = makeStore()
-            render (<Provider store={store}><LedgerReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></Provider>)
+            render (<TestWrapper><LedgerReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
         })
 
         it('Displays Medicaid only header', () => {
@@ -92,8 +88,7 @@ describe('Ledger Review Header', async () => {
                 snap: true,
             }
 
-            const store: EnhancedStore = makeStore()
-            render (<Provider store={store}><LedgerReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></Provider>)
+            render (<TestWrapper><LedgerReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
         })
 
         it('Does not display Medicaid only header', () => {
