@@ -4,6 +4,9 @@
 
 Proposed
 
+## Personnel involved in decision
+Kate Green, Joe Gasiorek, Yvette White
+
 ## Context
 [PR](https://github.com/JosephGasiorekUSDS/verify-nextjs/pull/28)
 
@@ -14,7 +17,8 @@ Because of this we need to explore many aspects of generating a PDF. These inclu
 
 
 ### Assumptions
-For this ADR we will consider MVP requirements over long-term system requirements but want to gather both so we can make the best short term decision with the long-term in mind.
+For this ADR we will assume:
+* MVP requirements take precedence over long-term system requirements but want to gather both so we can make the best short term decisions with the long term in mind
 
 [Image of System flow]
 I expect this image to show the system components for MVP with proposed long term components.
@@ -23,10 +27,12 @@ I expect this image to show the system components for MVP with proposed long ter
 
 ### Product
 - do we envision PDFs being a part of this System long-term or do we expect to phase it out? I expect that we will want to keep it like direct file kept the PDF option even though they had an API to submit to in MeF
-- what are requirements?
+- what are requirements for our pilot?
 	+ do different benefits have different forms?
 	+ how do we handle 0-n number of items?
 	+ do we have all the information required?
+- what are requirements for the CBV pilot?
+	+ 
 
 ### Technical
 - Will we store the files? Or will we only offer it for download and then deletion?
@@ -34,14 +40,19 @@ I expect this image to show the system components for MVP with proposed long ter
 	+ long-term is this a S3 problem storing these PDFs? Or do we just store the data at a point in time to generate the PDF later on? It depends on scale and how often we want to generate PDFs and whether we expect the PDFs to change and we need to make them forward compatible
 - what are PDF libraries that we can use?
 - what is Nava doing?
+	+ wicked_pdf
 - how often do we expect to revise the forms? What is the maintenance burden?
 
 ### Decisions to be made
 
 #### immediately, for MVP
 - tool
-	+ js package
+	+ must be js package that works in the browser
+	+ limited file size
+	+ accessible pdfs
+	+ 
 - system architecture (if any required)
+	+ is this a standalone service? (depends on whether we want to share down the line; we can set it up as a standalone within our repo to start)
 - PDF layout(s)
 
 #### later on
@@ -53,10 +64,16 @@ I expect this image to show the system components for MVP with proposed long ter
 - flexibility to eventually handle a complex ecosystem of states and forms
 	+ multiple states requirements
 	+ multiple forms
+- mobile first
+	+ small file sizes
+	+ efficient use of compute
+
+### Resources
+* [dev.to pdf review (2021)](https://dev.to/handdot/generate-a-pdf-in-js-summary-and-comparison-of-libraries-3k0p)
+* [byby.dev review (2024)](https://byby.dev/js-pdf-libs)
 
 ## Decision
 
-What is the change that we're proposing and/or doing?
 
 ## Consequences
 
