@@ -75,7 +75,7 @@ export default function Page() {
                                         rules={{ required: {value:true, message: t('statement_set_last_day_required')} }}
                                         render={({ field }) => (
                                             <>
-                                                <Label htmlFor="date">{t('statement_set_last_day_field')}</Label>
+                                                <Label htmlFor="lastDayOfWork">{t('statement_set_last_day_field')}</Label>
                                                 <p className="usa-hint font-body-2xs">{t('statement_set_last_day_hint')}</p>
                                                 <DatePicker
                                                     id="lastDayOfWork"
@@ -106,7 +106,7 @@ export default function Page() {
                                         rules={{ required: {value:true, message: t('statement_set_last_paycheck_required')} }}
                                         render={({ field }) => (
                                             <>
-                                                <Label htmlFor="date">{t('statement_set_last_paycheck_field')}</Label>
+                                                <Label htmlFor="lastPayment">{t('statement_set_last_paycheck_field')}</Label>
                                                 <p className="usa-hint font-body-2xs">{t('statement_set_last_paycheck_hint')}</p>
                                                 <DatePicker
                                                     id="lastPayment"

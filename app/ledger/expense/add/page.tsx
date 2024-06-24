@@ -1,8 +1,8 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ErrorMessage, ComboBox, Label, ValidationChecklist, ValidationItem } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
+import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ErrorMessage, ComboBox, Label, ValidationChecklist, ValidationItem, RequiredMarker } from '@trussworks/react-uswds' 
 import { useAppDispatch } from "@/lib/hooks"
 import { ExpenseItem, addExpense, selectExpenseItems } from "@/lib/features/ledger/expenses/expensesSlice"
 import { useRouter } from "next/navigation"
@@ -10,6 +10,7 @@ import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import { useRef, useImperativeHandle } from "react"
 import exp from "constants"
+import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 
 export default function Page() {
     const { t } = useTranslation()
@@ -95,6 +96,7 @@ export default function Page() {
                             <h3>{t('add_expense_header')}</h3>
                             <h4 className="margin-top-2">{t('add_expense_subheader', {month_count: '3'})}</h4>
                             <Form onSubmit={handleSubmit(onSubmit)}>
+                                <RequiredFieldDescription />
                                 {errorSummary()}
                                 <FormGroup>
                                     <TextFieldWithValidation
@@ -103,6 +105,7 @@ export default function Page() {
                                         label={t('add_expense_name_field')}
                                         error={errors.name?.message}
                                         data-testid="name"
+                                        requiredMarker
                                     />
                                 </FormGroup>
 
@@ -130,7 +133,7 @@ export default function Page() {
                                         rules={{ required: {value:true, message: t('add_expense_date_required')} }}
                                         render={({ field }) => (
                                             <>
-                                                <Label htmlFor="date">{t('add_expense_date_field')}</Label>
+                                                <Label htmlFor="date">{t('add_expense_date_field')}<RequiredMarker /></Label>
                                                 <p className="usa-hint font-body-2xs">{t('add_expense_date_hint')}</p>
                                                 <DatePicker
                                                     id="date"
@@ -151,6 +154,7 @@ export default function Page() {
                                         label={t('add_expense_amount_field')}
                                         error={errors.amount?.message}
                                         data-testid="amount"
+                                        requiredMarker
                                     />
                                 </FormGroup>
                                 
