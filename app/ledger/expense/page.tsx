@@ -3,12 +3,12 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button, HeadingLevel, Grid, GridContainer, Accordion } from '@trussworks/react-uswds' 
-import { useTranslation } from '@/app/i18n/client'
+import { useTranslation } from 'react-i18next'
 import { useRouter } from "next/navigation"
 import Link from 'next/link'
 
 export default function Page() {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const router = useRouter()
 
     const testItems = [

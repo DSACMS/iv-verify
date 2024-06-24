@@ -2,7 +2,7 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button,  Grid, GridContainer } from '@trussworks/react-uswds' 
-import { useTranslation } from '@/app/i18n/client'
+import { useTranslation } from 'react-i18next'
 import { useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { selectBenefits } from "@/lib/features/benefits/benefitsSlice"
@@ -16,7 +16,7 @@ import SnapExpenses from "./SnapExpenses"
 const DAY_COUNT = 30
 
 export default function Page() {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const router = useRouter()
     const benefits = useAppSelector(state => selectBenefits(state))
     const incomeTotal = useAppSelector(state => selectIncomeTotal(state))

@@ -1,8 +1,8 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
+import { useTranslation } from 'react-i18next'
 import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ErrorMessage, ComboBox, Label, ValidationChecklist, ValidationItem, RequiredMarker } from '@trussworks/react-uswds' 
-import { useTranslation } from '@/app/i18n/client'
 import { useAppDispatch } from "@/lib/hooks"
 import { ExpenseItem, addExpense, selectExpenseItems } from "@/lib/features/ledger/expenses/expensesSlice"
 import { useRouter } from "next/navigation"
@@ -13,7 +13,7 @@ import exp from "constants"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 
 export default function Page() {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
 

@@ -1,19 +1,18 @@
 import { afterEach, beforeEach, describe, expect, it, test } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { Provider } from 'react-redux'
 import Page from './page'
 import { makeStore } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
+import TestWrapper from '@/app/TestWrapper'
 
 describe('Add Income To Ledger Page', async () => {
     let store: EnhancedStore
     beforeEach(() => {
         vi.mock('next/navigation', () => require('next-router-mock'))
         mockRouter.push('/ledger/income/add')
-        store = makeStore()
-        render (<Provider store={store}><Page /></Provider>)
+        render (<TestWrapper><Page /></TestWrapper>)
     })
     afterEach(cleanup)
 

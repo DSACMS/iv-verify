@@ -1,12 +1,12 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, render, screen } from '@testing-library/react'
-import { Provider } from 'react-redux'
 import Page from './page'
 import { makeStore } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 import { setConfimationNumber } from '@/lib/features/statement/statementSlice'
+import TestWrapper from '@/app/TestWrapper'
 
 describe('Confirmation screen', async () => {
     let store: EnhancedStore
@@ -15,7 +15,7 @@ describe('Confirmation screen', async () => {
         mockRouter.push('/statement/confirmation')
         store = makeStore()
         store.dispatch(setConfimationNumber("1234567890"))
-        render (<Provider store={store}><Page /></Provider>)
+        render (<TestWrapper store={store}><Page /></TestWrapper>)
     })
     afterEach(cleanup)
 
