@@ -157,5 +157,7 @@
     "snap_recommend_deduction_take_body": "We recommend this!",
     "snap_recommend_deduction_do_not_take_header": "Do not take the SNAP standard deduction, use my Medicaid expenses",
     "snap_recommend_deduction_continue_button": "Continue",
-    "required_field_description": "A red asterisk (<0></0>) indicates a required field."
+    "required_field_description": "A red asterisk (<0></0>) indicates a required field.",
+    "nav_english": "English",
+    "nav_espanol": "Español"
 }

@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
 import { Grid, GridContainer, Header, Title, Icon, Button, Accordion, HeadingLevel, NavMenuButton, PrimaryNav, NavDropDownButton, Link } from "@trussworks/react-uswds";
 import { useState } from "react";
-import VerifyNav from "./components/VerifyNav";
+import VerifyNav from "@/app/components/VerifyNav";
 
 export default function Home() {
   const { t } = useTranslation()

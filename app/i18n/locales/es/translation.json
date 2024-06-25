@@ -11,5 +11,13 @@
     "intro_how_do_i_know_list_own": "Poseen o dirigen su propio negocio.",
     "intro_how_do_i_know_list_benefits": "No reciben beneficios laborales ni contribuciones fiscales del individuo o empresa para la que trabajan.",
     "nav_english": "English",
-    "nav_espanol": "Español"
+    "nav_espanol": "Español",
+    "benefits_title": "Programas de beneficios",
+    "benefits_header": "¿Cuándo deben demostrarse los programas de beneficios en el libro mayor?",
+    "benefits_subheader_select": "Seleccione los beneficios de los que le gustaría ver una demostración.",
+    "benefits_medicaid": "Medicaid (atención médica)",
+    "benefits_snap": "SNAP (asistencia alimentaria)",
+    "benefits_continue_button": "Continuar",
+    "benefits_snap_hint": "Nota: Actualmente, el libro mayor asumirá que hay una deducción estándar del 50 % disponible para SNAP.",
+    "benefits_error_message": "Debes seleccionar al menos uno de los siguientes beneficios"
 }
