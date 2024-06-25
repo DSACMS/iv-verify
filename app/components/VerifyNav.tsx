@@ -26,7 +26,6 @@ export default function VerifyNav(props: VerifyNavProps) {
         } else if (currentLocale == i18nConfig.defaultLocale) {
             router.push(`/${locale}/${currentPathname}`)
         } else {
-            alert(currentPathname.replace(`/${currentLocale}`, `/${locale}`) + "/")
             router.push(currentPathname.replace(`/${currentLocale}`, `/${locale}`) + "/")
         }
         router.refresh();

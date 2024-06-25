@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "pa11y-ci": "pa11y-ci --sitemap http://localhost:3000/api/sitemap --config .pa11yci --sitemap-exclude localhost:3000/benefits"
+    "pa11y-ci": "pa11y-ci --sitemap http://localhost:3000/api/sitemap --config .pa11yci --sitemap-exclude /benefits"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.5",
