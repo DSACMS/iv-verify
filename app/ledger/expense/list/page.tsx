@@ -3,14 +3,14 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button, ButtonGroup, CardGroup, ModalToggleButton, Modal, ModalHeading, ModalFooter, Card, CardBody, CardHeader, Grid, GridContainer, Label, TextInput, ModalRef } from '@trussworks/react-uswds' 
-import { useTranslation } from '../../../i18n/client'
+import { useTranslation } from 'react-i18next'
 import { useRouter } from "next/navigation"
 import ExpenseList from "@/app/components/ExpenseList"
 import { useAppSelector } from "@/lib/hooks"
 import { selectRecommendStandardDeduction } from "@/lib/store"
 
 export default function Page() {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const router = useRouter()
     const reccommendStandardDeduction = useAppSelector(state => selectRecommendStandardDeduction(state))
 

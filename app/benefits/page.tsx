@@ -2,7 +2,7 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Checkbox, Alert } from '@trussworks/react-uswds' 
-import { useTranslation } from '@/app/i18n/client'
+import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { SubmitHandler, useForm, Controller } from "react-hook-form"
@@ -10,7 +10,7 @@ import { selectBenefits, setBenefits } from "@/lib/features/benefits/benefitsSli
 import { useState } from "react"
 
 export default function Page() {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
     const benefits = useAppSelector(state => selectBenefits(state))

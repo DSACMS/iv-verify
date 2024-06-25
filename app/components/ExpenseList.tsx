@@ -1,5 +1,5 @@
 import { Card, CardBody, CardGroup, CardHeader, GridContainer } from "@trussworks/react-uswds";
-import { useTranslation } from "@/app/i18n/client";
+import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/lib/hooks";
 import { ExpenseItem, selectExpenseItems, selectExpenseTotal } from "@/lib/features/ledger/expenses/expensesSlice";
 import ExpenseListItem from "./ExpenseListItem";
@@ -9,7 +9,7 @@ interface ExpenseListProps {
 }
 
 export default function ExpenseList({header}: ExpenseListProps) {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const items = useAppSelector(state => selectExpenseItems(state))
     const expenseTotal = useAppSelector(state => selectExpenseTotal(state))
 

@@ -1,5 +1,5 @@
 import { BenefitsState } from "@/lib/features/benefits/benefitsSlice"
-import { useTranslation } from "@/app/i18n/client"
+import { useTranslation } from "react-i18next"
 import { Card, CardBody, CardGroup, CardHeader } from "@trussworks/react-uswds"
 
 interface SnapExpensesProps {
@@ -8,7 +8,7 @@ interface SnapExpensesProps {
 }
 
 export default function SnapExpenses({benefits, snapIncomeTotal}: SnapExpensesProps) {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
 
     if (!benefits.snap || !benefits.deductionAmount) {
         return <></>

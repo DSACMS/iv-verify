@@ -1,4 +1,4 @@
-import { useTranslation } from "@/app/i18n/client"
+import { useTranslation } from "react-i18next"
 import { ExpenseItem, removeExpense } from "@/lib/features/ledger/expenses/expensesSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup } from "@trussworks/react-uswds"
@@ -11,7 +11,7 @@ interface ItemProps {
 }
 export default function ExpenseListItem({ item, index }: ItemProps) {
     const ref = useRef(null)
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const dispatch = useAppDispatch()
 
     function onDeleteClicked() {

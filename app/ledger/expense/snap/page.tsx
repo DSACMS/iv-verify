@@ -5,11 +5,11 @@ import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button, HeadingLevel, Grid, GridContainer, Accordion, Radio, Form } from '@trussworks/react-uswds' 
 import { useRouter } from "next/navigation"
 import Link from 'next/link'
-import { useTranslation } from "@/app/i18n/client"
+import { useTranslation } from "react-i18next"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 
 export default function Page() {
-    const { t } = useTranslation('en')
+    const { t } = useTranslation()
     const router = useRouter()
 
     const MONTHLY_AMOUNT = "XXX.XX"

@@ -8,6 +8,7 @@ import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 import { BenefitsState, selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
 import { IncomeItem, addIncome } from '@/lib/features/ledger/income/incomeSlice'
+import TestWrapper from '@/app/TestWrapper'
 
 describe('SNAP Recommend Deduction Screen', async () => {
     let store: EnhancedStore
@@ -22,13 +23,14 @@ describe('SNAP Recommend Deduction Screen', async () => {
             medicaid: true,
         }
         store.dispatch(setBenefits(benefits))
+
         const incomeItem: IncomeItem = {
             amount: 100,
             name: "Suzy",
             description: "Yardwork",
         }
         store.dispatch(addIncome(incomeItem))
-        render (<Provider store={store}><Page /></Provider>)
+        render(<TestWrapper store={store}><Page /></TestWrapper>)
     })
     afterEach(cleanup)
 
