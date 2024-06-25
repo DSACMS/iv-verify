@@ -1,7 +1,7 @@
 import { Header, Link, NavMenuButton, PrimaryNav, Title } from "@trussworks/react-uswds"
 import { useState } from "react"
 import { useTranslation } from "react-i18next"
-import { i18nConfig } from "@/app/i18n"
+import { i18nConfig } from "@/app/constants"
 import { usePathname, useRouter } from "next/navigation"
 import { useCookies } from "react-cookie"
 
@@ -33,7 +33,7 @@ export default function VerifyNav(props: VerifyNavProps) {
     }
 
     function makeNavItem(text: string, lang: string) {
-        const isCurrent = i18n.language.startsWith(lang)
+        const isCurrent = i18n.language?.startsWith(lang) ?? "en"
         return <Link 
             href="#" 
             className={`usa-nav__link ${isCurrent ? "usa-current" : ""}`}

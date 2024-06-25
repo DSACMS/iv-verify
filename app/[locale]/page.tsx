@@ -3,10 +3,9 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 
-import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
-import { Grid, GridContainer, Header, Title, Icon, Button, Accordion, HeadingLevel, NavMenuButton, PrimaryNav, NavDropDownButton, Link } from "@trussworks/react-uswds";
-import { useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Grid, GridContainer, Icon, Button, Accordion, HeadingLevel } from "@trussworks/react-uswds";
 import VerifyNav from "@/app/components/VerifyNav";
 
 export default function Home() {
