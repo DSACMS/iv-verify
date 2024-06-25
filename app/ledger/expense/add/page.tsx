@@ -2,14 +2,12 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { useTranslation } from 'react-i18next'
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ErrorMessage, ComboBox, Label, ValidationChecklist, ValidationItem, RequiredMarker } from '@trussworks/react-uswds' 
+import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ComboBox, Label, ValidationChecklist, ValidationItem, RequiredMarker } from '@trussworks/react-uswds' 
 import { useAppDispatch } from "@/lib/hooks"
-import { ExpenseItem, addExpense, selectExpenseItems } from "@/lib/features/ledger/expenses/expensesSlice"
+import { ExpenseItem, addExpense } from "@/lib/features/ledger/expenses/expensesSlice"
 import { useRouter } from "next/navigation"
-import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form"
+import { SubmitHandler, useForm, Controller } from "react-hook-form"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
-import { useRef, useImperativeHandle } from "react"
-import exp from "constants"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 
 export default function Page() {

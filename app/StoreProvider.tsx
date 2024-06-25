@@ -1,6 +1,6 @@
 'use client'
 import { useRef } from "react"
-import { Provider, useDispatch } from "react-redux"
+import { Provider } from "react-redux"
 import { makeStore, AppStore } from '../lib/store'
 
 export default function StoreProvider({

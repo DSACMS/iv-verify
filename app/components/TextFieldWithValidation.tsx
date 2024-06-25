@@ -1,4 +1,4 @@
-import { ErrorMessage, Label, RequiredMarker, TextInput } from "@trussworks/react-uswds"
+import { ErrorMessage, Label, TextInput } from "@trussworks/react-uswds"
 import React, { FocusEventHandler } from "react"
 
 type Args = {
