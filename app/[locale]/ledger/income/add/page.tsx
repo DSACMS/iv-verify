@@ -1,7 +1,7 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert } from '@trussworks/react-uswds' 
+import { Button, Form, FormGroup, Grid, GridContainer, Alert } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from "@/lib/hooks"
 import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
@@ -10,6 +10,7 @@ import { FieldErrors, SubmitHandler, useForm } from "react-hook-form"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import TextAreaWithValidation from "@/app/components/TextAreaWithValidation"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
     const { t } = useTranslation()
@@ -68,13 +69,7 @@ export default function Page() {
 
     return (
         <div>
-            <Header basic={true}>
-                <div className="usa-nav-container">
-                    <div className="usa-navbar">
-                        <Title>{t('add_income_title')}</Title>
-                    </div>
-                </div>
-            </Header>
+            <VerifyNav title={t('add_income_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>

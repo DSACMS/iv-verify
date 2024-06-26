@@ -2,13 +2,14 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { useTranslation } from 'react-i18next'
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ComboBox, Label, ValidationChecklist, ValidationItem, RequiredMarker } from '@trussworks/react-uswds' 
+import { Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ComboBox, Label, ValidationChecklist, ValidationItem, RequiredMarker } from '@trussworks/react-uswds' 
 import { useAppDispatch } from "@/lib/hooks"
 import { ExpenseItem, addExpense } from "@/lib/features/ledger/expenses/expensesSlice"
 import { useRouter } from "next/navigation"
 import { SubmitHandler, useForm, Controller } from "react-hook-form"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
     const { t } = useTranslation()
@@ -80,13 +81,7 @@ export default function Page() {
 
     return (
         <div>
-            <Header basic={true}>
-                <div className="usa-nav-container">
-                    <div className="usa-navbar">
-                        <Title>{t('add_expense_title')}</Title>
-                    </div>
-                </div>
-            </Header>
+            <VerifyNav title={t('add_expense_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>

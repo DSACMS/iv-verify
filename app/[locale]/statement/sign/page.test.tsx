@@ -11,7 +11,10 @@ import { selectSignedStatement } from '@/lib/features/statement/statementSlice'
 describe('Sign Statement', async () => {
     let store: EnhancedStore
     beforeEach(() => {
-        vi.mock('next/navigation', () => require('next-router-mock'))
+        vi.mock('next/navigation', () => ({
+            useRouter: () =>  mockRouter,
+            usePathname: () => mockRouter.asPath,
+        }))
         mockRouter.push('/statement/sign')
         store = makeStore()
         render (<Provider store={store}><Page /></Provider>)

@@ -11,7 +11,10 @@ import { selectBenefits } from '@/lib/features/benefits/benefitsSlice'
 describe('Choose Benefits', async () => {
     let store: EnhancedStore
     beforeEach(() => {
-        vi.mock('next/navigation', () => require('next-router-mock'))
+        vi.mock('next/navigation', () => ({
+            useRouter: () =>  mockRouter,
+            usePathname: () => mockRouter.asPath,
+        }))
         mockRouter.push('/benefits')
         store = makeStore()
         render (<Provider store={store}><Page /></Provider>)

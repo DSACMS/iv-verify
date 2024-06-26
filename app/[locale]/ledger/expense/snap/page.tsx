@@ -2,10 +2,11 @@
 
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Grid, GridContainer, Radio, Form } from '@trussworks/react-uswds' 
+import { Button, Grid, GridContainer, Radio, Form } from '@trussworks/react-uswds' 
 import { useRouter } from "next/navigation"
 import { useTranslation } from "react-i18next"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
     const { t } = useTranslation()
@@ -34,13 +35,7 @@ export default function Page() {
 
     return (
         <div>
-            <Header basic={true}>
-                <div className="usa-nav-container">
-                    <div className="usa-navbar">
-                        <Title>{t('expenses_snap_standard_title')}</Title>
-                    </div>
-                </div>
-            </Header>
+            <VerifyNav title={t('expenses_snap_standard_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>

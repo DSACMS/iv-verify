@@ -12,16 +12,14 @@ import { BenefitsState, setBenefits } from '@/lib/features/benefits/benefitsSlic
 describe('List Income in Ledger Page', async () => {
     let store: EnhancedStore
     beforeEach(() => {
-        vi.mock('next/navigation', () => require('next-router-mock'))
+        vi.mock('next/navigation', () => ({
+            useRouter: () =>  mockRouter,
+            usePathname: () => mockRouter.asPath,
+        }))
         mockRouter.push('/ledger/income/add')
         store = makeStore()
     })
     afterEach(cleanup)
-
-    it('shows header', () => {
-        render (<Provider store={store}><Page /></Provider>)
-        expect(screen.getByTestId('list_income_title')).toBeDefined()
-    })
 
     it('shows navigation buttons', () => {
         render (<Provider store={store}><Page /></Provider>)

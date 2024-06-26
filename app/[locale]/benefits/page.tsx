@@ -1,13 +1,14 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, Checkbox, Alert } from '@trussworks/react-uswds' 
+import { Button, Form, FormGroup, Grid, GridContainer, Checkbox, Alert } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { SubmitHandler, useForm, Controller } from "react-hook-form"
 import { selectBenefits, setBenefits } from "@/lib/features/benefits/benefitsSlice"
 import { useState } from "react"
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
     const { t } = useTranslation()
@@ -46,13 +47,7 @@ export default function Page() {
 
     return (
         <div className="bg-base-light" style={{height: '100vh'}}>
-            <Header basic={true}>
-                <div className="usa-nav-container">
-                    <div className="usa-navbar">
-                        <Title>{t('benefits_title')}</Title>
-                    </div>
-                </div>
-            </Header>
+            <VerifyNav title={t('benefits_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>

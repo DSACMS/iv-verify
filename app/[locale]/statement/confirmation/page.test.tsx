@@ -11,7 +11,10 @@ import TestWrapper from '@/app/TestWrapper'
 describe('Confirmation screen', async () => {
     let store: EnhancedStore
     beforeEach(() => {
-        vi.mock('next/navigation', () => require('next-router-mock'))
+        vi.mock('next/navigation', () => ({
+            useRouter: () =>  mockRouter,
+            usePathname: () => mockRouter.asPath,
+        }))
         mockRouter.push('/statement/confirmation')
         store = makeStore()
         store.dispatch(setConfimationNumber("1234567890"))

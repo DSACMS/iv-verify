@@ -2,7 +2,7 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { useTranslation } from 'react-i18next'
-import { Header, Title, Button, Form, FormGroup, Grid, GridContainer, CardHeader, Card, CardBody, CardGroup, Checkbox, RequiredMarker } from '@trussworks/react-uswds' 
+import { Button, Form, FormGroup, Grid, GridContainer, CardHeader, Card, CardBody, CardGroup, Checkbox, RequiredMarker } from '@trussworks/react-uswds' 
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { SubmitHandler, useForm, Controller } from "react-hook-form"
@@ -10,6 +10,7 @@ import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import ErrorSummary from "@/app/components/ErrorSummary"
 import { selectSignedStatement, setSignedStatement } from "@/lib/features/statement/statementSlice"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
     const { t } = useTranslation()
@@ -40,13 +41,7 @@ export default function Page() {
 
     return (
         <div>
-            <Header basic={true}>
-                <div className="usa-nav-container">
-                    <div className="usa-navbar">
-                        <Title>{t('statement_sign_title')}</Title>
-                    </div>
-                </div>
-            </Header>
+            <VerifyNav title={t('statement_sign_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>

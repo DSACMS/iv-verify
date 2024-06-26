@@ -13,7 +13,7 @@ export default function VerifyNav(props: VerifyNavProps) {
     const { t, i18n } = useTranslation()
     const router = useRouter()
     const currentPathname = usePathname()
-    const [cookies, setCookie] = useCookies([i18nConfig.cookieName]);
+    const [_, setCookie] = useCookies([i18nConfig.cookieName]);
     const currentLocale = i18n.language
     const [expanded, setExpanded] = useState(false)
 
