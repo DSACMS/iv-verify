@@ -2,12 +2,13 @@
 
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, ButtonGroup, Grid, GridContainer } from '@trussworks/react-uswds' 
+import { Button, ButtonGroup, Grid, GridContainer } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
 import { useRouter } from "next/navigation"
 import { selectBenefits } from "@/lib/features/benefits/benefitsSlice"
 import { useAppSelector } from "@/lib/hooks"
 import IncomeList from "@/app/components/IncomeList"
+import VerifyNav from "@/app/components/VerifyNav"
 
 const DAY_COUNT = 30
 
@@ -32,13 +33,7 @@ export default function Page() {
 
     return (
         <div>
-            <Header basic={true}>
-                <div className="usa-nav-container">
-                    <div className="usa-navbar">
-                        <Title data-testid="list_income_title">{t('list_income_title')}</Title>
-                    </div>
-                </div>
-            </Header>
+            <VerifyNav title={t('list_income_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>

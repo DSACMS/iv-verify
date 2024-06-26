@@ -2,7 +2,7 @@
 
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, Grid, GridContainer, Radio, Form } from '@trussworks/react-uswds' 
+import { Button, Grid, GridContainer, Radio, Form } from '@trussworks/react-uswds' 
 import { useRouter } from "next/navigation"
 import { useTranslation } from "react-i18next"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
@@ -11,6 +11,7 @@ import { BenefitsState, selectBenefits, setBenefits } from "@/lib/features/benef
 import { selectExpenseTotal } from "@/lib/features/ledger/expenses/expensesSlice"
 import { useEffect } from "react"
 import { selectRecommendStandardDeduction } from "@/lib/store"
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
     const { t } = useTranslation()
@@ -52,13 +53,7 @@ export default function Page() {
 
     return (
         <div>
-            <Header basic={true}>
-                <div className="usa-nav-container">
-                    <div className="usa-navbar">
-                        <Title>{t('snap_recommend_deduction_title')}</Title>
-                    </div>
-                </div>
-            </Header>
+            <VerifyNav title={t('snap_recommend_deduction_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>

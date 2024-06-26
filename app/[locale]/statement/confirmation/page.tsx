@@ -1,13 +1,14 @@
 'use client'
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button,  Grid, GridContainer } from '@trussworks/react-uswds' 
+import { Button,  Grid, GridContainer } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
 import { useAppSelector } from "@/lib/hooks"
 import { selectSignedStatement } from "@/lib/features/statement/statementSlice"
 import Link from "next/link"
 import Image from "next/image"
 import ledgerImage from './ledger.png'
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
     const { t } = useTranslation()
@@ -15,13 +16,7 @@ export default function Page() {
 
     return (
         <div>
-            <Header basic={true}>
-                <div className="usa-nav-container">
-                    <div className="usa-navbar">
-                        <Title>{t('statement_confirmation_title')}</Title>
-                    </div>
-                </div>
-            </Header>
+            <VerifyNav title={t('statement_confirmation_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>

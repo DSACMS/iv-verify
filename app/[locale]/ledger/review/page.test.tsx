@@ -10,7 +10,10 @@ import mockRouter from 'next-router-mock'
 describe('Review Screen', async () => {
     let store: EnhancedStore
     beforeEach(() => {
-        vi.mock('next/navigation', () => require('next-router-mock'))
+        vi.mock('next/navigation', () => ({
+            useRouter: () =>  mockRouter,
+            usePathname: () => mockRouter.asPath,
+        }))
         mockRouter.push('/ledger/review')
         store = makeStore()
         render (<Provider store={store}><Page /></Provider>)

@@ -10,7 +10,10 @@ import mockRouter from 'next-router-mock'
 describe('Add Income To Ledger Page', async () => {
     let store: EnhancedStore
     beforeEach(() => {
-        vi.mock('next/navigation', () => require('next-router-mock'))
+        vi.mock('next/navigation', () => ({
+            useRouter: () =>  mockRouter,
+            usePathname: () => mockRouter.asPath,
+        }))
         mockRouter.push('/ledger/expense/add')
         store = makeStore()
         render (<Provider store={store}><Page /></Provider>)

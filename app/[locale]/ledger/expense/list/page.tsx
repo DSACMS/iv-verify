@@ -2,12 +2,13 @@
 
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, ButtonGroup, Grid, GridContainer } from '@trussworks/react-uswds' 
+import { Button, ButtonGroup, Grid, GridContainer } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
 import { useRouter } from "next/navigation"
 import ExpenseList from "@/app/components/ExpenseList"
 import { useAppSelector } from "@/lib/hooks"
 import { selectRecommendStandardDeduction } from "@/lib/store"
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
     const { t } = useTranslation()
@@ -28,13 +29,7 @@ export default function Page() {
 
     return (
         <div>
-            <Header basic={true}>
-                <div className="usa-nav-container">
-                    <div className="usa-navbar">
-                        <Title data-testid="list_expense_title">{t('expenses_summary_title')}</Title>
-                    </div>
-                </div>
-            </Header>
+            <VerifyNav title={t('expenses_summary_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>

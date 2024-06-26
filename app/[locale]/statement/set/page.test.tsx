@@ -10,7 +10,10 @@ import mockRouter from 'next-router-mock'
 describe('Set Signed Statment', async () => {
     let store: EnhancedStore
     beforeEach(() => {
-        vi.mock('next/navigation', () => require('next-router-mock'))
+        vi.mock('next/navigation', () => ({
+            useRouter: () =>  mockRouter,
+            usePathname: () => mockRouter.asPath,
+        }))
         mockRouter.push('/statement/set')
         store = makeStore()
         render (<Provider store={store}><Page /></Provider>)
