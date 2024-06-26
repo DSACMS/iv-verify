@@ -3,8 +3,7 @@ import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 import { Header, Title, Button,  Grid, GridContainer, Form } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { useRouter } from "next/navigation"
+import { useAppSelector } from "@/lib/hooks"
 import { selectSignedStatement } from "@/lib/features/statement/statementSlice"
 import Link from "next/link"
 import Image from "next/image"
@@ -14,8 +13,6 @@ import { selectExpenseTotal } from "@/lib/features/ledger/expenses/expensesSlice
 
 export default function Page() {
     const { t } = useTranslation()
-    const dispatch = useAppDispatch()
-    const router = useRouter()
     const signedStatement = useAppSelector((state) => selectSignedStatement(state))
     const totalIncome = useAppSelector((state) => selectIncomeTotal(state))
     const totalExpense = useAppSelector((state) => selectExpenseTotal(state))

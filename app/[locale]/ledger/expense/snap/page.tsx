@@ -2,9 +2,8 @@
 
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, HeadingLevel, Grid, GridContainer, Accordion, Radio, Form } from '@trussworks/react-uswds' 
+import { Header, Title, Button, Grid, GridContainer, Radio, Form } from '@trussworks/react-uswds' 
 import { useRouter } from "next/navigation"
-import Link from 'next/link'
 import { useTranslation } from "react-i18next"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 
@@ -19,8 +18,6 @@ export default function Page() {
     }
 
     const {
-        register,
-        formState: { errors },
         handleSubmit,
         control
     } = useForm<FormData>()

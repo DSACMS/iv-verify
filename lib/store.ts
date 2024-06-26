@@ -1,4 +1,4 @@
-import { Action, ConfigureStoreOptions, Store, combineReducers, configureStore } from "@reduxjs/toolkit";
+import { Action, combineReducers, configureStore } from "@reduxjs/toolkit";
 import incomeReducer, { selectIncomeTotal } from './features/ledger/income/incomeSlice'
 import expenseReducer, { selectExpenseTotal } from './features/ledger/expenses/expensesSlice'
 import statementReducer from './features/statement/statementSlice'
