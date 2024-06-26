@@ -8,7 +8,6 @@ async function getRes() {
 }
 
 const res = await getRes()
-console.log(res)
 
 await i18n
   .use(initReactI18next)
