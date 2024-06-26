@@ -9,6 +9,7 @@ export interface SignedStatementState {
     confirmationNumber?: string
     understood?: boolean
     signedName?: string
+    signedDate?: string
 }
 
 export const initialState: SignedStatementState = { }

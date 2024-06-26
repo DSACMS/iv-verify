@@ -8,8 +8,8 @@ import { selectSignedStatement } from "@/lib/features/statement/statementSlice"
 import Link from "next/link"
 import Image from "next/image"
 import ledgerImage from './ledger.png'
-import { selectIncomeTotal } from "@/lib/features/ledger/income/incomeSlice"
-import { selectExpenseTotal } from "@/lib/features/ledger/expenses/expensesSlice"
+import { selectIncomeItems, selectIncomeTotal } from "@/lib/features/ledger/income/incomeSlice"
+import { selectExpenseItems, selectExpenseTotal } from "@/lib/features/ledger/expenses/expensesSlice"
 import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
@@ -17,6 +17,12 @@ export default function Page() {
     const signedStatement = useAppSelector((state) => selectSignedStatement(state))
     const totalIncome = useAppSelector((state) => selectIncomeTotal(state))
     const totalExpense = useAppSelector((state) => selectExpenseTotal(state))
+    const incomeItems = useAppSelector((state) => selectIncomeItems(state))
+    const expenseItems = useAppSelector((state) => selectExpenseItems(state))
+    const statement = useAppSelector((state) => selectSignedStatement(state))
+
+    const incomeData = JSON.stringify(incomeItems)
+    const expenseData = JSON.stringify(expenseItems)
 
     return (
         <div>
@@ -25,7 +31,7 @@ export default function Page() {
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
-                            <Form method="POST" action="/api/export" onSubmit={() => {}}>
+                            <Form method="POST" action="/api/export" onSubmit={() => {}} target="_blank">
                                 <h3>{t('statement_confirmation_header')}</h3>
                                 <div className="margin-top-2 margin-bottom-5">{t('statement_confirmation_subheader', { 
                                     number: signedStatement?.confirmationNumber ?? 'XXX' 
@@ -46,6 +52,11 @@ export default function Page() {
                                 <div>
                                     <input type="hidden" name="totalIncome" value={totalIncome} />
                                     <input type="hidden" name="totalExpense" value={totalExpense} />
+                                    <input type="hidden" name="incomeData" value={incomeData} />
+                                    <input type="hidden" name="expenseData" value={expenseData} />
+                                    <input type="hidden" name="understood" value={statement.understood ? "true" : "false" } />
+                                    <input type="hidden" name="signedName" value={statement.signedName} />
+                                    <input type="hidden" name="signedDate" value={statement.signedDate} />
                                     <Button type="submit">{t('statement_confirmation_download_button')}</Button>
                                 </div>
                             </Form>
