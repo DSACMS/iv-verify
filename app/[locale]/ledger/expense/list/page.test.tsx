@@ -1,5 +1,5 @@
-import { afterEach, beforeEach, describe, expect, it, test } from 'vitest'
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { cleanup, render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import Page from './page'
 import { makeStore } from '@/lib/store'

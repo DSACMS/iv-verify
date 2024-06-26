@@ -48,7 +48,7 @@ export default function Page() {
             // User should not have been pushed to this screen
             return router.push('/ledger/review')
         }
-    }, [])
+    }, [benefits.snap, reccommendStandardDeduction, router])
 
     return (
         <div>

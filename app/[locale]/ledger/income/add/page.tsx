@@ -6,7 +6,7 @@ import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from "@/lib/hooks"
 import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
-import { FieldErrors, SubmitHandler, useForm, Controller } from "react-hook-form"
+import { FieldErrors, SubmitHandler, useForm } from "react-hook-form"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import TextAreaWithValidation from "@/app/components/TextAreaWithValidation"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"

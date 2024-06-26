@@ -2,7 +2,7 @@
 
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
-import { Header, Title, Button, ButtonGroup, CardGroup, ModalToggleButton, Modal, ModalHeading, ModalFooter, Card, CardBody, CardHeader, Grid, GridContainer, Label, TextInput, ModalRef } from '@trussworks/react-uswds' 
+import { Header, Title, Button, ButtonGroup, Grid, GridContainer } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
 import { useRouter } from "next/navigation"
 import ExpenseList from "@/app/components/ExpenseList"
