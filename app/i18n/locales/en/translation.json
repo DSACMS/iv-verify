@@ -14,7 +14,7 @@
     "add_income_description_field_length": "Description field can be no more than 500 characters",
     "add_income_amount_field_required": "Amount field is required",
     "add_income_error_header": "There are errors in the form below.",
-    "list_income_title": "Self employment income summaray",
+    "list_income_title": "Self employment income summary",
     "list_income_header": "Would you like to add another person, client, or company who paid you in the last {{day_count}} days?",
     "list_income_subheader": "Add another person, client, or company below",
     "list_income_list_header": "Your work",

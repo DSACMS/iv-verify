@@ -7,7 +7,10 @@ import TestWrapper from '@/app/TestWrapper'
 
 describe('Add Income To Ledger Page', async () => {
     beforeEach(() => {
-        vi.mock('next/navigation', () => require('next-router-mock'))
+        vi.mock('next/navigation', () => ({
+            useRouter: () =>  mockRouter,
+            usePathname: () => mockRouter.asPath,
+        }))
         mockRouter.push('/ledger/income/add')
         render (<TestWrapper><Page /></TestWrapper>)
     })

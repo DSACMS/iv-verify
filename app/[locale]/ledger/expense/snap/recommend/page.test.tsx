@@ -12,7 +12,10 @@ import TestWrapper from '@/app/TestWrapper'
 describe('SNAP Recommend Deduction Screen', async () => {
     let store: EnhancedStore
     beforeEach(() => {
-        vi.mock('next/navigation', () => require('next-router-mock'))
+        vi.mock('next/navigation', () => ({
+            useRouter: () =>  mockRouter,
+            usePathname: () => mockRouter.asPath,
+        }))
         mockRouter.push('/ledger/expense/snap/recommend')
         store = makeStore()
         const benefits: BenefitsState = {
