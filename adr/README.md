@@ -1,8 +1,9 @@
-# architecture design records
+# Architecture design records
 
-## table of contents
+## Table of contents
+1. [Making PDFs for self-attestation](2024-06-making-pdfs.md)
 
-## anticipated decisions to be made
+## Anticipated decisions to be made
 From from the initial readme page:
 
 * From [Benefits chooser](https://github.com/JosephGasiorekUSDS/verify-nextjs/pull/15), the notion of program constants and type definitions for them. Asking the question of using oo inheritance to customize by state?
@@ -15,6 +16,7 @@ From from the initial readme page:
 * From [Confirmation](https://github.com/JosephGasiorekUSDS/verify-nextjs/pull/20/files)
 	- image storage paradigm (a decision to defer until we know more about state needs with external forms/images/assets)
 	- default layout-type page inside nextjs?
+	- pdfs (first ADR in progress)
 * from building the readme document:
 	- having both components translations and Page notions inside of the same directory feels confusing. I wonder if there's a way to make these more clear. I tried to note what each each directory in the `app` directory was up above but we should keep an eye on this and see how easy it is to understand overtime --kate
 * from [SNAP recommended deduction](https://github.com/JosephGasiorekUSDS/verify-nextjs/pull/27/files)
