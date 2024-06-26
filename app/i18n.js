@@ -1,15 +1,19 @@
-import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
 import resourcesToBackend from 'i18next-resources-to-backend'
+import { i18nConfig } from './constants';
 
-i18n
-  .use(LanguageDetector)
-  .use(initReactI18next)
-  .use(resourcesToBackend((language, namespace) => import(`./i18n/locales/${language}/${namespace}.json`)))
-  .init({
-    debug: process.env.NODE_ENV !== "production" ,
-    fallbackLng: 'en'
-  });
+export async function initTranslations(
+  locale,
+  i18nInstance
+) {
+    i18nInstance = i18nInstance || createInstance()
+    i18nInstance.use(initReactI18next)
+    i18nInstance.use(resourcesToBackend((language, namespace) => import(`./i18n/locales/${language}/${namespace}.json`)))
 
-export default i18n;
+  return i18nInstance.init({
+      debug: process.env.NODE_ENV !== "production" ,
+      lng: locale,
+      fallbackLng: i18nConfig.defaultLocale,
+      supportedLngs: i18nConfig.locales,
+    })
+}
