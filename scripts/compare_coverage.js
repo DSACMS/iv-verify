@@ -63,6 +63,11 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
             const prTotalCoverage = computeTotalCoverage(prCoverageData)
             const mainTotalCoverage = computeTotalCoverage(mainCoverageData)
 
+            if (Math.abs(prTotalCoverage-mainTotalCoverage) < 2) {
+                console.log("Only a small coverage change")
+                return
+            }
+
             let message = "This pull request "
             if (prTotalCoverage > mainTotalCoverage) {
                 // Coverage increased
