@@ -3,9 +3,10 @@
 import "@trussworks/react-uswds/lib/uswds.css"
 import "@trussworks/react-uswds/lib/index.css"
 
-import { useTranslation } from "react-i18next";
 import { useRouter } from "next/navigation";
-import { Grid, GridContainer, Header, Title, Icon, Button, Accordion, HeadingLevel } from "@trussworks/react-uswds";
+import { useTranslation } from "react-i18next";
+import { Grid, GridContainer, Icon, Button, Accordion, HeadingLevel } from "@trussworks/react-uswds";
+import VerifyNav from "@/app/components/VerifyNav";
 
 export default function Home() {
   const { t } = useTranslation()
@@ -32,17 +33,12 @@ export default function Home() {
       expanded: false,
       id: 'intro_how_do_i_know',
       headingLevel: 'h4' as HeadingLevel,
-    }]
+    }
+  ]
   
   return (
     <div>
-      <Header basic={true}>
-          <div className="usa-nav-container">
-              <div className="usa-navbar">
-                  <Title>{t('intro_title')}</Title>
-              </div>
-          </div>
-      </Header>
+      <VerifyNav title={t('intro_title')} />
       <div className="usa-section">
           <GridContainer>
               <Grid row gap>
