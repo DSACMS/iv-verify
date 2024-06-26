@@ -34,6 +34,7 @@ export default function Page() {
         const newStatement = {...signedStatement}
         newStatement.signedName = data.signedName
         newStatement.understood = true
+        newStatement.signedDate = new Date().toDateString()
 
         dispatch(setSignedStatement(newStatement))
         router.push("/statement/confirmation")
