@@ -29,6 +29,3 @@ To set up GitHub teams:
 - When filling out the Repo Domains section in your CODEOWNERS.md file, use the team handles instead of or alongside individual usernames. This way, when a contributor opens a PR affecting a specific domain, they can simply tag the team, and every member of that team will be notified.
 
 -->
-
-/docs/ {Git usernames of documentation owners}  
-/frontend/ {Git usernames of frontend owners}
