@@ -24,4 +24,31 @@ This is a list of maintainers for this project. See [CODEOWNERS.md](./CODEOWNERS
 Total number of contributors: <!--CONTRIBUTOR COUNT START--> <!--CONTRIBUTOR COUNT END-->
 
 <!-- readme: contributors -start -->
+<table>
+	<tbody>
+		<tr>
+            <td align="center">
+                <a href="https://github.com/JosephGasiorekUSDS">
+                    <img src="https://avatars.githubusercontent.com/u/169079684?v=4" width="100;" alt="JosephGasiorekUSDS"/>
+                    <br />
+                    <sub><b>JosephGasiorekUSDS</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/kategreenUSDS">
+                    <img src="https://avatars.githubusercontent.com/u/105316441?v=4" width="100;" alt="kategreenUSDS"/>
+                    <br />
+                    <sub><b>Kate Green</b></sub>
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/4kategreen">
+                    <img src="https://avatars.githubusercontent.com/u/2008796?v=4" width="100;" alt="4kategreen"/>
+                    <br />
+                    <sub><b>Kate Green</b></sub>
+                </a>
+            </td>
+		</tr>
+	<tbody>
+</table>
 <!-- readme: contributors -end -->
