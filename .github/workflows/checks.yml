@@ -24,7 +24,7 @@ jobs:
         with:
 
 
-        
+
           # A path to the JSON/YAML Repolinter ruleset to use, relative to the workflow
           # working directory (i.e. under `$GITHUB_WORKSPACE`).
           #
