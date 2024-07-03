@@ -5,7 +5,7 @@ on:
 
 jobs:
   resolve-repolinter-json:
-    uses: DSACMS/repo-scaffolder/.github/workflows/extendJSONFile.yml@5804a907412728964a3c03c6484e232a43700f39
+    uses: JosephGasiorekUSDS/repo-scaffolder/.github/workflows/extendJSONFile.yml@jgasiorek-fix-brace
     with: 
       url_to_json: 'https://raw.githubusercontent.com/DSACMS/repo-scaffolder/main/tier4/%7B%7Bcookiecutter.project_slug%7D%7D/repolinter.json'
   
@@ -14,9 +14,7 @@ jobs:
     needs: resolve-repolinter-json
     runs-on: ubuntu-latest
     env:
-      
       RAW_JSON: ${{ needs.resolve-repolinter-json.outputs.raw-json }}
-      
     steps:
       - uses: actions/checkout@v4
       - run: echo $RAW_JSON > repolinter.json
