@@ -9,6 +9,7 @@ jobs:
     with: 
       url_to_json: 'https://raw.githubusercontent.com/DSACMS/repo-scaffolder/main/tier4/%7B%7Bcookiecutter.project_slug%7D%7D/repolinter.json'
   
+  
   repolinter-checks:
     name: Tier 4 Checks
     needs: resolve-repolinter-json
