@@ -5,11 +5,11 @@ on:
 
 jobs:
   resolve-repolinter-json:
-    uses: JosephGasiorekUSDS/repo-scaffolder/.github/workflows/extendJSONFile.yml@jgasiorek-fix-brace
+    uses: JosephGasiorekUSDS/repo-scaffolder/.github/workflows/extendJSONFile.yml@0b113cbb765938f4fb1a936bcec9c8850dcdb451
     with: 
       url_to_json: 'https://raw.githubusercontent.com/DSACMS/repo-scaffolder/main/tier4/%7B%7Bcookiecutter.project_slug%7D%7D/repolinter.json'
   
-  
+
   repolinter-checks:
     name: Tier 4 Checks
     needs: resolve-repolinter-json
