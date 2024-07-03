@@ -19,6 +19,7 @@ jobs:
       RAW_JSON: ${{ needs.resolve-repolinter-json.outputs.raw-json }}
     steps:
       - uses: actions/checkout@v4
+      - run: echo $RAW_JSON
       - run: echo $RAW_JSON > repolinter.json
       - uses: newrelic/repolinter-action@v1
         with:
