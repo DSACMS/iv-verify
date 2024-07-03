@@ -3,6 +3,7 @@ on:
   pull_request:
     branches: [main, dev]
 
+
 jobs:
   resolve-repolinter-json:
     uses: JosephGasiorekUSDS/repo-scaffolder/.github/workflows/extendJSONFile.yml@jgasiorek-fix-brace
