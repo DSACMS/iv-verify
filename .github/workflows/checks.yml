@@ -5,7 +5,7 @@ on:
 
 jobs:
   resolve-repolinter-json:
-    uses: DSACMS/repo-scaffolder/.github/workflows/extendJSONFile.yml@add-repolinter-workflows
+    uses: DSACMS/repo-scaffolder/.github/workflows/extendJSONFile.yml@5804a907412728964a3c03c6484e232a43700f39
     with: 
       url_to_json: 'https://raw.githubusercontent.com/DSACMS/repo-scaffolder/main/tier4/%7B%7Bcookiecutter.project_slug%7D%7D/repolinter.json'
   
