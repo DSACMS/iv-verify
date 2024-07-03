@@ -30,7 +30,11 @@ module.exports = ({github, context, mainWorkflowRunSha, coverageFilePath, prNumb
             const mainCoverage = coverageForFile(mainCoverageData[fileName].s)
 
             if (prCoverage != mainCoverage) {
-                let prettyFileName = fileName.slice(fileName.indexOf('verify-nextjs'))
+                let idx = fileName.indexOf("iv-verify")
+                if (idx === -1) {
+                    idx = fileName.indexOf('verify-nextjs') // old repo name
+                }
+                let prettyFileName = fileName.slice(idx)
                 message += `- ${prettyFileName} went from ${mainCoverage}% to ${prCoverage}%<br />`
             }
         }

@@ -8,7 +8,7 @@ Proposed
 Kate Green, Joe Gasiorek, Yvette White
 
 ## Context
-[PR](https://github.com/JosephGasiorekUSDS/verify-nextjs/pull/28)
+[PR](https://github.com/DSACMS/iv-verify/pull/28)
 
 ### Overview
 In order to submit self attestation forms to states, we anticipate needing to generate a PDF with the users data. This may not be the primary means of submission, but we will probably need to retain this path indefinitely. We do anticipate some states having an API, but others will likely need to have a PDF path as well.

@@ -38,9 +38,9 @@ We follow the [GitHub Flow Workflow](https://guides.github.com/introduction/flow
 2.  Check out the `main` branch
 3.  Create a feature branch
 4.  Write code and tests for your change
-5.  From your branch, make a pull request against `DSACMS/verify-nextjs/main`
+5.  From your branch, make a pull request against `DSACMS/iv-verify/main`
 6.  Work with repo maintainers to get your change reviewed
-7.  Wait for your change to be pulled into `DSACMS/verify-nextjs/main`
+7.  Wait for your change to be pulled into `DSACMS/iv-verify/main`
 8.  Delete your feature branch
 -->
 
@@ -161,7 +161,7 @@ authorship metadata will be preserved.
 <!-- TODO: Documentation Example
 
 We also welcome improvements to the project documentation or to the existing
-docs. Please file an [issue](https://github.com/DSACMS/verify-nextjs/issues).
+docs. Please file an [issue](https://github.com/DSACMS/iv-verify/issues).
 -->
 
 ## Policies
