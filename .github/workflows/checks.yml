@@ -23,9 +23,6 @@ jobs:
       - run: echo $RAW_JSON > repolinter.json
       - uses: newrelic/repolinter-action@v1
         with:
-
-
-
           # A path to the JSON/YAML Repolinter ruleset to use, relative to the workflow
           # working directory (i.e. under `$GITHUB_WORKSPACE`).
           #
@@ -44,10 +41,7 @@ jobs:
           #   non-intrusive notification.
           #
           # Default: "exit-code"
-          output_type: 'issue'
-
-
-
+          output_type: 'exit-code'
 
           # The title to use for the issue created by repolinter-action. This title
           # should indicate the purpose of the issue, as well as that it was created by
@@ -58,8 +52,6 @@ jobs:
           # Default: "[Repolinter] Open Source Policy Issues"
           output_name: '[Repolinter] Tier 4 Repository Hygiene Issue'
 
-
-
           # The name to use for the issue label created by repolinter-action. This name
           # should be unique to repolinter-action (i.e. not used by any other issue) to
           # prevent repolinter-action from getting confused.
@@ -68,8 +60,6 @@ jobs:
           #
           # Default: "repolinter"
           label_name: 'cms-oss-tier4'
-
-
 
           # The color to use for the issue label created by repolinter-action. The value
           # for this option should be an unprefixed RRGGBB hex string (ex. ff568a).
