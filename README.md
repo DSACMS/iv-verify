@@ -1,4 +1,4 @@
-# Income verification
+# About the Project - Income verification
 This application is uses:
 * NextJS
 * React
