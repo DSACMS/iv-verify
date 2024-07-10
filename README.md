@@ -1,6 +1,4 @@
-[![CI](https://github.com/JosephGasiorekUSDS/verify-nextjs/actions/workflows/build.yml/badge.svg)](https://github.com/JosephGasiorekUSDS/verify-nextjs/actions/workflows/build.yml)
-
-# Income verification
+# About the Project - Income verification
 This application is uses:
 * NextJS
 * React
@@ -62,7 +60,7 @@ npm run lint
 ```
 
 ## Deploy
-1. Go to https://github.com/JosephGasiorekUSDS/verify-nextjs/actions/workflows/deploy.yml
+1. Go to https://github.com/DSACMS/iv-verify/actions/workflows/deploy.yml
 1. Click "Run Workflow" button on the right
 1. Click "Run Workflow" in the dialog that appears
 
@@ -138,7 +136,7 @@ The contents of this repository are managed by **{responsible organization(s)}**
 
 ## Community
 
-The Verify NextJS team is taking a community-first and open source approach to the product development of this tool. We believe government software should be made in the open and be built and licensed such that anyone can download the code, run it themselves without paying money to third parties or using proprietary software, and use it as they will.
+The iv-verify team is taking a community-first and open source approach to the product development of this tool. We believe government software should be made in the open and be built and licensed such that anyone can download the code, run it themselves without paying money to third parties or using proprietary software, and use it as they will.
 
 We know that we can learn from a wide variety of communities, including those who will use or will be impacted by the tool, who are experts in technology, or who have experience with similar technologies deployed in other spaces. We are dedicated to creating forums for continuous conversation and feedback to help shape the design and development of the tool.
 
@@ -151,7 +149,7 @@ Principles and guidelines for participating in our open source community are can
 ## Governance
 <!-- TODO: Make a short statement about how the project is governed (formally, or informally) and link to the GOVERNANCE.md file.-->
 
-Information about how the Verify NextJS community is governed may be found in [GOVERNANCE.md](GOVERNANCE.md).
+Information about how the iv-verify community is governed may be found in [GOVERNANCE.md](GOVERNANCE.md).
 
 ## Feedback
 

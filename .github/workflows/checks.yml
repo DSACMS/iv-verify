@@ -4,9 +4,10 @@ on:
     branches: [main, dev]
 
 
+
 jobs:
   resolve-repolinter-json:
-    uses: DSACMS/repo-scaffolder/.github/workflows/extendJSONFile.yml@add-repolinter-workflows
+    uses: DSACMS/repo-scaffolder/.github/workflows/extendJSONFile.yml@main
     with: 
       url_to_json: 'https://raw.githubusercontent.com/DSACMS/repo-scaffolder/main/tier4/%7B%7Bcookiecutter.project_slug%7D%7D/repolinter.json'
   
@@ -15,11 +16,10 @@ jobs:
     needs: resolve-repolinter-json
     runs-on: ubuntu-latest
     env:
-      
       RAW_JSON: ${{ needs.resolve-repolinter-json.outputs.raw-json }}
-      
     steps:
       - uses: actions/checkout@v4
+      - run: echo $RAW_JSON
       - run: echo $RAW_JSON > repolinter.json
       - uses: newrelic/repolinter-action@v1
         with:
@@ -41,7 +41,7 @@ jobs:
           #   non-intrusive notification.
           #
           # Default: "exit-code"
-          output_type: 'issue'
+          output_type: 'exit-code'
 
           # The title to use for the issue created by repolinter-action. This title
           # should indicate the purpose of the issue, as well as that it was created by
