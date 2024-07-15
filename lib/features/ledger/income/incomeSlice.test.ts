@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 
 import reducer, {IncomeItem, addIncome, removeIncome, initialState, selectIncomeItems, selectIncomeTotal} from './incomeSlice'
 import { makeStore } from '@/lib/store'
