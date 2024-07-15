@@ -1,7 +1,5 @@
 'use client'
 
-import "@trussworks/react-uswds/lib/uswds.css"
-import "@trussworks/react-uswds/lib/index.css"
 import { Button, Grid, GridContainer, Radio, Form } from '@trussworks/react-uswds' 
 import { useRouter } from "next/navigation"
 import { useTranslation } from "react-i18next"

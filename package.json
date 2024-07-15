@@ -1,5 +1,5 @@
 {
-  "name": "verify",
+  "name": "iv-verify",
   "version": "0.1.0",
   "private": true,
   "scripts": {
