@@ -26,7 +26,7 @@ Then disable `nextjs` telemetry by running your choice of:
 npx next telemetry disable
 ```
 
-Open [http://localhost:3000/ledger/income/add](http://localhost:3000/ledger/income/add) with your browser to see the result.
+Open [http://localhost:3000/](http://localhost:3000/) with your browser to see the result.
 
 ## Development
 
