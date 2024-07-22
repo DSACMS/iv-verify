@@ -37,6 +37,7 @@ export default function VerifyNav(props: VerifyNavProps) {
             href="#" 
             className={`usa-nav__link ${isCurrent ? "usa-current" : ""}`}
             onClick={() => {changeLang(lang) }}
+            data-testid={`locale-${lang}`}
             >{text}</Link>
     }
 
