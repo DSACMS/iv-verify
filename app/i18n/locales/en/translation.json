@@ -159,5 +159,8 @@
     "snap_recommend_deduction_continue_button": "Continue",
     "required_field_description": "A red asterisk (<0></0>) indicates a required field.",
     "nav_english": "English",
-    "nav_espanol": "Español"
+    "nav_espanol": "Español",
+    "edit_income_title": "Edit Income",
+    "edit_income_header": "Enter a person, client, or company who paid you in the last 30 days",
+    "edit": "Edit"
 }

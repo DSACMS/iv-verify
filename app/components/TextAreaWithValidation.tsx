@@ -10,11 +10,12 @@ type Args = {
     onChange: FocusEventHandler<HTMLTextAreaElement>
     'data-testid'?: string
     className?: string
+    value?: string
 }
 
 const TextAreaWithValidation = React.forwardRef<HTMLTextAreaElement, Args>(
     (args: Args, ref) => {
-        const { id, name, label, error, onBlur, onChange, className } = args
+        const { id, name, label, error, onBlur, onChange, className, value } = args
         return (
             <>
                 {label !== undefined ? <Label htmlFor={name}>{label}</Label> : ''}
@@ -27,6 +28,7 @@ const TextAreaWithValidation = React.forwardRef<HTMLTextAreaElement, Args>(
                     {...(error !== undefined ? {validationStatus: 'error'} : {})}
                     data-testid={args['data-testid']}
                     className={className}
+                    defaultValue={value}
                 />
                 <ErrorMessage>{error}</ErrorMessage>
             </>
