@@ -1,6 +1,4 @@
 'use client'
-import "@trussworks/react-uswds/lib/uswds.css"
-import "@trussworks/react-uswds/lib/index.css"
 import { Button, Form, FormGroup, Grid, GridContainer, DatePicker, Label } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from "@/lib/hooks"
