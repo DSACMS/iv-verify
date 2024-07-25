@@ -40,7 +40,7 @@ export default function Page() {
         newBenefits.snap = data.snap
 
         dispatch(setBenefits(newBenefits))
-        router.push('/ledger/income/add')
+        router.push('/ledger/income')
     })
 
     return (
