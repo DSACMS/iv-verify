@@ -64,6 +64,26 @@ npm run lint
 1. Click "Run Workflow" button on the right
 1. Click "Run Workflow" in the dialog that appears
 
+### Change sandbox locations
+Here is how to migrate from one deployment namespace to another. We'll need to run a manual deployment to set up the namespace before setting up the gh action to reflect the new location. 
+
+1. In the new owner's repo, `npm i && npm run build` if you haven't already
+2. Edit the `manifest.yml` to create the name you want. I've been using `verify-ledger-prototype`
+2. `cf push [name-in-manifest]`
+
+On successful deployment, you can set up the gh actions deployment
+1. `cf create-service cloud-gov-service-account space-deployer [name-in-manifest]`
+2. `cf create-service-key [name-in-manifest] [your-key-name]`
+3. `cf service-key [name-in-manifest] [your-key-name]`
+4. A username and password will be printed in your terminal. Using these, proceed to the next steps:
+5. `gh secret set CLOUD_GOV_DEPLOY_USERNAME` and enter this secret when prompted
+6. `gh secret set CLOUD_GOV_DEPLOY_PASSWORD` and enter this secret when prompted
+7. From here, test out a deployment in the repo to test it out
+
+#### Resources
+- [Set secrets for gh actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-an-environment)
+- [`space-deployer` docs](https://cloud.gov/docs/services/cloud-gov-service-account/)
+
 ## Resources
 ### Project-specific
 `TODO`
@@ -83,7 +103,7 @@ Moved to [ADR](/adr) directory
 
 An up-to-date list of core team members can be found in [MAINTAINERS.md](MAINTAINERS.md). At this time, the project is still building the core team and defining roles and responsibilities. We are eagerly seeking individuals who would like to join the community and help us define and fill these roles.
 
-## Documentation Index 
+## Documentation Index
 
 <!-- TODO: This is a like a 'table of contents" for your documentation. Tier 0/1 projects with simple README.md files without many sections may or may not need this, but it is still extremely helpful to provide "bookmark" or "anchor" links to specific sections of your file to be referenced in tickets, docs, or other communication channels. -->
 
@@ -95,7 +115,7 @@ An up-to-date list of core team members can be found in [MAINTAINERS.md](MAINTAI
 
 **{list directories and descriptions}**
 
-# Development and Software Delivery Lifecycle 
+# Development and Software Delivery Lifecycle
 
 The following guide is for members of the project team who have access to the repository as well as code contributors. The main difference between internal and external contributions is that external contributors will need to fork the project and will not be able to merge their own pull requests. For more information on contribributing, see: [CONTRIBUTING.md](./CONTRIBUTING.md).
 
