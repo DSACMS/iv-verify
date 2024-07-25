@@ -1,8 +1,9 @@
 import { useTranslation } from "react-i18next"
 import { IncomeItem, removeIncome } from "@/lib/features/ledger/income/incomeSlice"
 import { useAppDispatch } from "@/lib/hooks"
-import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup } from "@trussworks/react-uswds"
+import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"
+import { useRouter } from "next/navigation"
 interface ItemProps {
     item: IncomeItem
     index: number
@@ -11,9 +12,14 @@ export default function IncomeListItem({ item, index }: ItemProps) {
     const ref = useRef(null)
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
+    const router = useRouter()
 
     function onDeleteClicked() {
         dispatch(removeIncome(index))
+    }
+
+    function editClicked() {
+        router.push(`/ledger/income/edit/${index}`)
     }
 
     return (
@@ -25,7 +31,8 @@ export default function IncomeListItem({ item, index }: ItemProps) {
                 <div>{item.description}</div>
             </Grid>
             <Grid col={5} tablet={{col: 2}}>
-                <ModalToggleButton modalRef={ref} opener>{t('list_income_delete_button')}</ModalToggleButton>
+                <Button type="button" outline className="margin-bottom-1" onClick={editClicked}>{t('edit')}</Button>
+                <ModalToggleButton modalRef={ref} opener outline className="margin-bottom-2">{t('list_income_delete_button')}</ModalToggleButton>
                 <Modal ref={ref} id="delete-modal">
                     <ModalHeading>{t('list_income_delete_are_you_sure')}</ModalHeading>
                     <ModalFooter>

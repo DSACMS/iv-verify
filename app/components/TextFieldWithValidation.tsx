@@ -11,11 +11,12 @@ type Args = {
     type?: 'text' | 'email' | 'number' | 'password' | 'search' | 'tel' | 'url',
     'data-testid'?: string
     requiredMarker?: boolean
+    value?: string
 }
 
 const TextFieldWithValidation = React.forwardRef<HTMLInputElement, Args>(
     (args: Args, ref) => {
-        const { id, name, label, error, onBlur, onChange, type } = args
+        const { id, name, label, error, onBlur, onChange, type, value } = args
         return (
             <>
                 {label !== undefined ? <Label htmlFor={name} requiredMarker={args.requiredMarker}>{label}</Label> : ''}
@@ -28,6 +29,7 @@ const TextFieldWithValidation = React.forwardRef<HTMLInputElement, Args>(
                     onChange={onChange}
                     {...(error !== undefined ? {validationStatus: 'error'} : {})}
                     data-testid={args['data-testid']}
+                    defaultValue={value}
                 />
                 <ErrorMessage>{error}</ErrorMessage>
             </>

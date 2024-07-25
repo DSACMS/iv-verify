@@ -1,6 +1,4 @@
 'use client'
-import "@trussworks/react-uswds/lib/uswds.css"
-import "@trussworks/react-uswds/lib/index.css"
 import { useTranslation } from 'react-i18next'
 import { Button, Form, FormGroup, Grid, GridContainer, Alert, Checkbox, DatePicker, ComboBox, Label, ValidationChecklist, ValidationItem, RequiredMarker } from '@trussworks/react-uswds' 
 import { useAppDispatch } from "@/lib/hooks"

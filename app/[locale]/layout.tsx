@@ -6,6 +6,7 @@ import GovernmentBanner from "@/app/components/GovernmentBanner";
 import InitialStateLoader from "@/app/InitialStateLoader";
 import TranslationsProvider from "../TranslationsProvider";
 import { i18nConfig } from "@/app/constants";
+import USWDSInclude from "../components/USWDSInclude";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -27,6 +28,7 @@ function RootLayout({
 }>) {
   return (
     <html lang={params.locale}>
+      <USWDSInclude />
       <body className={inter.className}>
         <StoreProvider>
           <InitialStateLoader>

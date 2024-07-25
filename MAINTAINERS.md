@@ -48,6 +48,13 @@ Total number of contributors: <!--CONTRIBUTOR COUNT START--> 4 <!--CONTRIBUTOR C
                     <sub><b>Kate Green</b></sub>
                 </a>
             </td>
+            <td align="center">
+                <a href="https://github.com/YvetteWhiteUSDS">
+                    <img src="https://avatars.githubusercontent.com/u/141157097?v=4" width="100;" alt="YvetteWhiteUSDS"/>
+                    <br />
+                    <sub><b>Yvette White</b></sub>
+                </a>
+            </td>
 		</tr>
 	<tbody>
 </table>
