@@ -172,7 +172,7 @@
     "income_landing_what_counts_list_receive_form": "They receive tax form 1099-MISC from a company or individual at the end of the year.",
     "income_landing_what_counts_list_own_businss": "They own or run their own business.",
     "income_landing_what_counts_list_employment_benefits": "They do not get employment benefits or tax contributions from the individual or company they work for.",
-    "income_landing_add": "Add self employed work"
+    "income_landing_add": "Add self employed work",
     "edit_income_title": "Edit Income",
     "edit_income_header": "Enter a person, client, or company who paid you in the last 30 days",
     "edit": "Edit"
