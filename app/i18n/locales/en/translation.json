@@ -36,7 +36,7 @@
   "add_income_what_name": "What is the name of the person, client, or company that you worked for?",
   "benefits_continue_button": "Continue",
   "benefits_error_message": "You must select at least one of the benefits below",
-  "benefits_header": "When benefit programs should the ledger demonstrate?",
+  "benefits_header": "Which benefit programs should the ledger demonstrate?",
   "benefits_medicaid": "Medicaid (healthcare)",
   "benefits_snap": "SNAP (food assistance)",
   "benefits_snap_hint": "Note: Currently the ledger will assume a 50% standard deduction is available for SNAP.",
