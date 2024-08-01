@@ -49,7 +49,7 @@ export default function VerifyNav(props: VerifyNavProps) {
     }
 
     const navItems = [
-        makeNavItem("Home", "/"),
+        makeNavItem(t('nav_home'), "/"),
         makeLangNavItem(t('nav_english'), "en"),
         makeLangNavItem(t('nav_espanol'), "es"),
     ]
