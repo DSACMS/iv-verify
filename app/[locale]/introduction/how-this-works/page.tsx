@@ -44,12 +44,12 @@ export default function Page() {
 
   return (
   	<div>
-  		<VerifyNav title={t('how_this_works_title')} />
+  		<VerifyNav title={t('intro_title')} />
   		<div className="usa-section">
   			<GridContainer>
   				<Grid row gap>
             <main className="usa-layout-docs">
-              <h3 className="margin-bottom-2" data-testid="how_this_works_header">{t('intro_header')}</h3>
+              <h3 className="margin-bottom-2" data-testid="how_this_works_header">{t('how_this_works_header')}</h3>
 
               <ProcessList>
                 <ProcessListItem>
