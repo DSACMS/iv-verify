@@ -7,7 +7,6 @@ import {
   Button, 
   Grid, 
   GridContainer, 
-  Icon, 
   HeadingLevel, 
   ProcessList,
   ProcessListItem 
@@ -25,7 +24,7 @@ export default function Page() {
   const whatIsSelfEmployment = [{
     title: t('how_this_works_accordion_what_is_self_employment_title'),
     content: (
-      <p>Lorem ipsum</p>
+      <p>{t('placeholder_text')}</p>
     ),
     expanded: false,
     id: 'what_is_self_employment',
@@ -35,7 +34,7 @@ export default function Page() {
   const whatExpensesCount = [{
     title: t('how_this_works_accordion_what_expenses_count_title'),
     content: (
-      <p>Lorem ipsum</p>
+      <p>{t('placeholder_text')}</p>
     ),
     expanded: false,
     id: 'what_expenses_count',

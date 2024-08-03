@@ -1,4 +1,5 @@
 {
+  "placeholder_text": "Lorem ipsum",
   "add_expense_advertising": "Advertising",
   "add_expense_amount_field": "How much is this expense?",
   "add_expense_amount_required": "The amount field is required",
