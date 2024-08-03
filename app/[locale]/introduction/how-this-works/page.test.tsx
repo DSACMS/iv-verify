@@ -24,11 +24,11 @@ describe('How this works page', async () => {
     expect(screen.getByTestId('how_this_works_header')).toBeDefined()
   })
 
-  it('navigates when clicked', () => {
+  it('navigates when clicked', async () => {
     fireEvent.click(screen.getByTestId('get_started_button'))
     await waitFor(() => {
         expect(mockRouter).toMatchObject({
-            asPath: "/introduction/benefits/"
+            asPath: "/introduction/benefits"
         })
     })
   })
