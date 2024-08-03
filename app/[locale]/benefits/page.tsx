@@ -44,7 +44,7 @@ export default function Page() {
     })
 
     return (
-        <div className="bg-base-light" style={{height: '100vh'}}>
+        <div style={{height: '100vh'}}>
             <VerifyNav title={t('benefits_title')} />
             <div className="usa-section">
                 <GridContainer>
@@ -63,7 +63,6 @@ export default function Page() {
                                         control={control}
                                         render={({ field }) => 
                                             <Checkbox
-                                                className="bg-base-light"
                                                 id="medicaid"
                                                 {...field}
                                                 label={t('benefits_medicaid')}
@@ -81,7 +80,6 @@ export default function Page() {
                                         control={control}
                                         render={({ field }) => 
                                             <Checkbox
-                                                className="bg-base-light"
                                                 id="snap"
                                                 {...field}
                                                 label={t('benefits_snap')}

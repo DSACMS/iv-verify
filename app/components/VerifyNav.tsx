@@ -31,7 +31,7 @@ export default function VerifyNav(props: VerifyNavProps) {
         router.refresh();
     }
 
-    function makeNavItem(text: string, lang: string) {
+    function makeLangNavItem(text: string, lang: string) {
         const isCurrent = i18n.language?.startsWith(lang) ?? "en"
         return <Link 
             href="#" 
@@ -41,9 +41,17 @@ export default function VerifyNav(props: VerifyNavProps) {
             >{text}</Link>
     }
 
+    function makeNavItem(text: string, url: string) {
+        return <Link
+            href={url}
+            className={`usa-nav__link`}
+            >{text}</Link>
+    }
+
     const navItems = [
-        makeNavItem(t('nav_english'), "en"),
-        makeNavItem(t('nav_espanol'), "es"),
+        makeNavItem(t('nav_home'), "/"),
+        makeLangNavItem(t('nav_english'), "en"),
+        makeLangNavItem(t('nav_espanol'), "es"),
     ]
 
     const onClick = () => {
