@@ -40,8 +40,11 @@ Open [http://localhost:3000/](http://localhost:3000/) with your browser to see t
 
 ## Development
 
-### Document structure
+### Repository structure
 This application uses NextJS's default file structure. You can learn more about this from [NextJS](https://nextjs.org/docs/getting-started/project-structure). 
+
+#### `adr`
+Architecture design records are in this directory.
 
 #### `app`
 Next has a style where routing is determined by file structure. You'll find all of the application files inside of the `app` directory.
@@ -58,17 +61,22 @@ Next has a style where routing is determined by file structure. You'll find all 
 #### `public`
 Where any public assets are stored.
 
+#### `scripts`
+Tooling and scripts to make the repository run smoothly and correctly.
+
 ## Tests and linting
-Testing is a first-class citizen here
 
 ```bash
 # to run tests
 npm run test
-# to check coverage
+# to check test coverage
 npm run coverage
-# to lint
-npm run lint
 ```
+
+### Coding style and linting
+This application uses NextJS's built in linter. It's run as part of pull request checks and you cannot merge without all checks passing. 
+
+To run the linter locally, use `npm run lint`.
 
 ## Deploy
 1. Go to https://github.com/DSACMS/iv-verify/actions/workflows/deploy.yml
