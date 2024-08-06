@@ -35,11 +35,12 @@ This application uses NextJS's default file structure. You can learn more about 
 
 #### `app`
 Next has a style where routing is determined by file structure. You'll find all of the application files inside of the `app` directory.
-* `components`: lots of code that are not USWDS components but are larger patterns in the application
+* `[locale]`: where the pages live
+* `api`: looks like api endpoints with some automagic nextjs things
+	- `POST /export`
+	- `GET /sitemap`
+* `components`: reused components in the application
 * `i18n`: translation keys
-* `ledger`
-* [Probably goes away soon? --kate] `sample`
-* `statement`
 
 #### `lib`
 `features` contains our redux stores, which is our data structure in this local-storage-focused app. You'll notice below that there's a question about Store default values and other data structure thoughts below in our notes and decisions but for now this is where we're keeping our data structures. As things become more complicated we will want to revisit our decisions in this area.
