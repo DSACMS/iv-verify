@@ -45,9 +45,23 @@ export default function Page() {
                             <h3 className="margin-bottom-2" data-testid="income_landing_what_counts_heading">{t('income_landing_header')}</h3>
                             <p>{t('income_landing_ask_header')}</p>
                             <ul className="margin-left-3 margin-top-1">
-                                <li>{t('income_landing_ask_who_paid')}</li>
-                                <li>{t('income_landing_ask_what_type')}</li>
-                                <li>{t('income_landing_ask_how_much')}</li>
+                                <li>
+                                    <b>{t('income_landing_ask_what_type')}</b> 
+                                    <p>{t('income_landing_ask_what_type_example')}</p>
+                                </li>
+                                <li>
+                                    <b>{t('income_landing_ask_business_name')}</b>
+                                </li>
+                                <li>
+                                    <b>{t('income_landing_ask_taxes')}</b>
+                                </li>
+                                <li>
+                                    <b>{t('income_landing_ask_who_paid')}</b> 
+                                    <p>{t('income_landing_ask_who_paid_example')}</p>
+                                </li>
+                                <li>
+                                    <b>{t('income_landing_ask_how_much')}</b>
+                                </li>
                             </ul>
                             <Accordion multiselectable={true} items={items} className="margin-top-3 margin-bottom-3" />
                             <Button type="button" onClick={addClicked} data-testid="add_income_button">{t('income_landing_add')}</Button>
