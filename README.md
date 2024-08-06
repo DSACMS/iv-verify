@@ -1,9 +1,19 @@
 # About the Project - Income verification
+This repo is a proof of concept of a mobile-first ledger for self employed workers to verify their income and expenses related to their self employment.
+
 This application is uses:
 * NextJS
 * React
 * USWDS react components
 * Deployment to cloud.gov
+
+## Documentation index
+
+- [Assumptions](#assumptions)
+- [Getting started](#getting-started)
+- [Development](#development)
+- [Deploy](#deploy)
+- [Resources](#resources)
 
 ## Assumptions
 Accessibility, unit testing, and translation are being built in from the ground up. We want to make sound decisions that allow this app to scale, but understand that we also want to make a few decisions as possible at this early stage. We are still learning about this problem space, but we are sure that accessibility, testing, and translation are important.
