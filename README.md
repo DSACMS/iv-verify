@@ -78,6 +78,9 @@ This application uses NextJS's built in linter. It's run as part of pull request
 
 To run the linter locally, use `npm run lint`.
 
+## Branching model
+At this time, the application is in an early enough stage that we are using `main` and feature branches only. When we deploy to production or increase the number of contributors, this section will be updated to more closely align with `gitflow` branching style.
+
 ## Deploy
 1. Go to https://github.com/DSACMS/iv-verify/actions/workflows/deploy.yml
 1. Click "Run Workflow" button on the right
