@@ -31,8 +31,8 @@ export default function IncomeListItem({ item, index }: ItemProps) {
                 <div>{item.description}</div>
             </Grid>
             <Grid col={5} tablet={{col: 2}}>
-                <Button type="button" outline className="margin-bottom-1" onClick={editClicked}>{t('edit')}</Button>
-                <ModalToggleButton modalRef={ref} opener outline className="margin-bottom-2">{t('list_income_delete_button')}</ModalToggleButton>
+                <Button type="button" unstyled onClick={editClicked}>{t('edit')}</Button>
+                <ModalToggleButton modalRef={ref} opener unstyled className="margin-bottom-2">{t('list_income_delete_button')}</ModalToggleButton>
                 <Modal ref={ref} id="delete-modal">
                     <ModalHeading>{t('list_income_delete_are_you_sure')}</ModalHeading>
                     <ModalFooter>
