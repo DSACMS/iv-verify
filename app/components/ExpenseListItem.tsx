@@ -1,7 +1,16 @@
 import { useTranslation } from "react-i18next"
 import { ExpenseItem, removeExpense } from "@/lib/features/ledger/expenses/expensesSlice"
 import { useAppDispatch } from "@/lib/hooks"
-import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup } from "@trussworks/react-uswds"
+import { useRouter } from "next/navigation"
+import { 
+    Button, 
+    ButtonGroup,
+    Grid, 
+    Modal, 
+    ModalFooter, 
+    ModalHeading, 
+    ModalToggleButton
+} from "@trussworks/react-uswds"
 import { useRef } from "react"
 type NewType = ExpenseItem
 
@@ -13,9 +22,14 @@ export default function ExpenseListItem({ item, index }: ItemProps) {
     const ref = useRef(null)
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
+    const router = useRouter()
 
     function onDeleteClicked() {
         dispatch(removeExpense(index))
+    }
+
+    function editClicked() {
+        router.push(`/ledger/income/edit/${index}`)
     }
 
     return (
@@ -27,7 +41,7 @@ export default function ExpenseListItem({ item, index }: ItemProps) {
                 <div>{`$${item.amount}`}</div>
             </Grid>
             <Grid col={5} tablet={{col: 2}}>
-                <ModalToggleButton modalRef={ref} opener>{t('expenses_summary_list_delete')}</ModalToggleButton>
+                <ModalToggleButton unstyled modalRef={ref} opener>{t('expenses_summary_list_delete')}</ModalToggleButton>
                 <Modal ref={ref} id="delete-modal">
                     <ModalHeading>{t('expenses_summary_delete_are_you_sure')}</ModalHeading>
                     <ModalFooter>
@@ -37,6 +51,7 @@ export default function ExpenseListItem({ item, index }: ItemProps) {
                         </ButtonGroup>
                     </ModalFooter>
                 </Modal>
+                <Button type="button" unstyled onClick={editClicked}>{t('edit')}</Button>
             </Grid>
             <Grid col={12}><hr /></Grid>
         </Grid>
