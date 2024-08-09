@@ -70,7 +70,7 @@
   "expenses_snap_standard_title": "SNAP self employement expenses",
   "expenses_snap_standard_yes_header": "Yes, my monthly expenses are more than ${{amount}}",
   "expenses_snap_standard_yes_subheader": "We will recommend you itemize or detail your expenses",
-  "expenses_summary_add_button": "Add another expense",
+  "expenses_summary_add_button": "+ Add another expense",
   "expenses_summary_delete_are_you_sure": "Are you sure you would like to delete this expense?",
   "expenses_summary_header": "Your expenses",
   "expenses_summary_list_delete": "Delete",

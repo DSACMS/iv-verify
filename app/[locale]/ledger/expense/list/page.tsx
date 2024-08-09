@@ -13,10 +13,6 @@ export default function Page() {
     const router = useRouter()
     const reccommendStandardDeduction = useAppSelector(state => selectRecommendStandardDeduction(state))
 
-    function addItemClicked() {
-        router.push("/ledger/expense/add")
-    }
-
     function doneClicked() {
         if (reccommendStandardDeduction) {
             router.push("/ledger/expense/snap/recommend")
@@ -35,10 +31,7 @@ export default function Page() {
                             <h3>{t('expenses_summary_header')}</h3>
                             <span className="usa-hint">{t('expenses_summary_subheader')}</span>
                             <ExpenseList header={t('expenses_summary_list_header')} />
-                            <ButtonGroup type="default">
-                                <Button type="button" onClick={addItemClicked} data-testid="add_another_button">{t('expenses_summary_add_button')}</Button>
-                                <Button type="button" onClick={doneClicked} data-testid="continue_button">{t('expenses_summary_review_button')}</Button>
-                            </ButtonGroup>
+                            <Button type="button" onClick={doneClicked} data-testid="continue_button">{t('expenses_summary_review_button')}</Button>
                         </main>
                     </Grid>
                 </GridContainer>
