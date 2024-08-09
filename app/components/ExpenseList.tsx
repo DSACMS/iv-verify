@@ -1,6 +1,7 @@
 import { Button, ButtonGroup, Card, CardBody, CardGroup, CardHeader, GridContainer } from "@trussworks/react-uswds";
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/lib/hooks";
+import { useRouter } from "next/navigation";
 import { ExpenseItem, selectExpenseItems, selectExpenseTotal } from "@/lib/features/ledger/expenses/expensesSlice";
 import ExpenseListItem from "./ExpenseListItem";
 
@@ -10,6 +11,7 @@ interface ExpenseListProps {
 
 export default function ExpenseList({header}: ExpenseListProps) {
     const { t } = useTranslation()
+    const router = useRouter()
     const items = useAppSelector(state => selectExpenseItems(state))
     const expenseTotal = useAppSelector(state => selectExpenseTotal(state))
 
