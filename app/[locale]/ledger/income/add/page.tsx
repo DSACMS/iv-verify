@@ -20,7 +20,7 @@ export default function Page() {
             amount,
         }
         dispatch(addIncome(incomeItem))
-        router.push('/ledger/income/list')
+        router.push('/ledger/income/add/payment')
     }
 
     return (

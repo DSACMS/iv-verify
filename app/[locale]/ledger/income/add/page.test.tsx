@@ -17,25 +17,11 @@ describe('Add Income To Ledger Page', async () => {
     afterEach(cleanup)
 
     it('Shows Inputs', () => {
-        expect(screen.getByTestId("name")).toBeDefined()
         expect(screen.getByTestId("description")).toBeDefined()
-        expect(screen.getByTestId("amount")).toBeDefined()
     })
 
-    it('Displays error messages when fields are empty', async () => {
-        fireEvent.change(screen.getByTestId("name"), {
-            target: {
-                value: ''
-            }
-        })
-           
+    it('Displays error messages when fields are empty', async () => {           
         fireEvent.change(screen.getByTestId("description"), {
-            target: {
-                value: ''
-            }
-        })
-
-        fireEvent.change(screen.getByTestId("amount"), {
             target: {
                 value: ''
             }
@@ -53,22 +39,10 @@ describe('Add Income To Ledger Page', async () => {
         })
     })
 
-    it('Navigates when fields are filled in', async () => {
-        fireEvent.change(screen.getByTestId("name"), {
-            target: {
-                value: 'Jane'
-            }
-        })
-           
+    it('Navigates when fields are filled in', async () => {           
         fireEvent.change(screen.getByTestId("description"), {
             target: {
                 value: 'Landscaping'
-            }
-        })
-
-        fireEvent.change(screen.getByTestId("amount"), {
-            target: {
-                value: '40.00'
             }
         })
 
@@ -76,7 +50,7 @@ describe('Add Income To Ledger Page', async () => {
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
-                asPath: "/ledger/income/list"
+                asPath: "/ledger/income/add/payment"
             })
         })
     })

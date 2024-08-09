@@ -2,75 +2,96 @@
 
 import ErrorSummary from "@/app/components/ErrorSummary"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
-import TextAreaWithValidation from "@/app/components/TextAreaWithValidation"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import { IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
-import { Button, Form, FormGroup } from "@trussworks/react-uswds"
+import { 
+  Button, 
+  Form, 
+  FormGroup, 
+  Radio 
+} from "@trussworks/react-uswds"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
 export interface IncomeFormJobProps {
-    onSubmit: SubmitHandler<IncomeFormJobData>
-    item?: IncomeItem
+  onSubmit: SubmitHandler<IncomeFormJobData>
+  item?: IncomeItem
 }
 
 export type IncomeFormJobData = {
-    name: string
-    description: string
-    amount: number
+  description: string
+  business: string
+  amount: number
+  taxesFiled: boolean
 }
 
 export default function IncomeFormJob(params: IncomeFormJobProps) {
-    const { t } = useTranslation()
+  const { t } = useTranslation()
 
-    const {
-        register,
-        formState: { errors },
-        handleSubmit
-    } = useForm<IncomeFormJobData>()
+  const {
+    register,
+    formState: { errors },
+    handleSubmit
+  } = useForm<IncomeFormJobData>()
 
-    return (
-        <Form onSubmit={handleSubmit(params.onSubmit)}>
-            <RequiredFieldDescription />
-            <ErrorSummary errors={errors} headingText={t('add_income_error_header')} />
-            <FormGroup>
-                <TextFieldWithValidation
-                    id="name"
-                    {...register("name", {required: {value: true, message: t('add_income_name_field_required')}, maxLength: { value: 100, message: t('add_income_name_field_length')}})}
-                    label={t('add_income_what_name')}
-                    error={errors.name?.message}
-                    requiredMarker={true}
-                    data-testid="name"
-                    value={params.item?.name}
-                />
-            </FormGroup>
+  return (
+    <Form onSubmit={handleSubmit(params.onSubmit)}>
+      <RequiredFieldDescription />
+      <ErrorSummary errors={errors} headingText={t('add_income_error_header')} />
 
-            <FormGroup>
-                <TextAreaWithValidation
-                    id="description" 
-                    {...register("description", {required: {value: true, message: t('add_income_description_field_required')}, maxLength: {value: 500, message: t('add_income_description_field_length')} })} 
-                    label={t('add_income_describe')} 
-                    error={errors.description?.message} 
-                    className="height-10"
-                    data-testid="description"
-                    value={params.item?.description}
-                />
-            </FormGroup>
+      <FormGroup>
+        <TextFieldWithValidation
+          id="description"
+          {...register("description", {
+            required: { 
+              value: true, 
+              message: t('add_income_description_field_required')}, 
+              maxLength: {
+                value: 500, 
+                message: t('add_income_description_field_length')
+              }
+            }
+          )}
+          label={t('add_income_describe')}
+          hint={t('add_income_describe_hint')}
+          error={errors.description?.message}
+          requiredMarker={true}
+          data-testid="description"
+          value={params.item?.description}
+        />
+      </FormGroup>
 
-            <FormGroup>
-                <TextFieldWithValidation
-                    id="amount"
-                    {...register("amount", { valueAsNumber:true, validate: (value) => value > 0, required: { value: true, message: t('add_income_amount_field_required')}})}
-                    label={t('add_income_total_amount')}
-                    error={errors.amount?.message}
-                    requiredMarker={true}
-                    data-testid="amount"
-                    value={params.item?.amount?.toString()}
-                />
-            </FormGroup>
-            <FormGroup>
-                <Button type="submit" name="continue_button" data-testid="continue_button">{t('add_income_button')}</Button>
-            </FormGroup>
-        </Form>
-    )
+      <FormGroup>
+        <TextFieldWithValidation
+          id="business"
+          label={t('add_income_business')}
+          hint={t('add_income_business_hint')}
+          error={errors.business?.message}
+          requiredMarker={false}
+          data-testid="business"
+          value={params.item?.business}
+        />
+      </FormGroup>
+
+      <FormGroup>
+        <legend className="usa-legend text-bold">{t('add_income_taxes')}</legend>
+        <Radio
+          id="taxesFiledNo"
+          name="taxes-filed"
+          label={t('add_income_taxes_no')}
+          tile
+        />
+        <Radio
+          id="taxesFiledYes"
+          name="taxes-filed"
+          label={t('add_income_taxes_yes')}
+          tile
+        />
+      </FormGroup>
+
+      <FormGroup>
+          <Button type="submit" name="continue_button" data-testid="continue_button">{t('add_income_button')}</Button>
+      </FormGroup>
+    </Form>
+  )
 }

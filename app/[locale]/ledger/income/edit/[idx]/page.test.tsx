@@ -28,21 +28,13 @@ describe('Edit Income Item Page', async () => {
     afterEach(cleanup)
 
     it('Shows Inputs', () => {
-        expect(screen.getByTestId("name")).toBeDefined()
-        expect((screen.getByTestId("name") as HTMLInputElement).value).toBe(item1.name)
         expect(screen.getByTestId("description")).toBeDefined()
         expect((screen.getByTestId("description") as HTMLAreaElement).textContent).toBe(item1.description)
-        expect(screen.getByTestId("amount")).toBeDefined()
-        expect((screen.getByTestId("amount") as HTMLInputElement).value).toBe(item1.amount.toString())
     })
 
     it('Navigates when fields are filled in', async () => {
-        const newName = "Jane"
         const newDescription = "Landscaping"
-        const newAmount = 45.00
-        fireEvent.change(screen.getByTestId("name"), { target: { value: newName } })
         fireEvent.change(screen.getByTestId("description"), { target: { value: newDescription } })
-        fireEvent.change(screen.getByTestId("amount"), { target: { value: newAmount.toString() } })
         fireEvent.click(screen.getByText('Continue'))
 
         await waitFor(() => {
@@ -52,15 +44,13 @@ describe('Edit Income Item Page', async () => {
 
             const items = store.getState().incomeLedger.items
             expect(items.length).toBe(1)
-            expect(items[0].name).toBe(newName)
             expect(items[0].description).toBe(newDescription)
-            expect(items[0].amount).toBe(newAmount)
         })
     })
 
 
     it('Displays error messages when fields are empty', async () => {
-        ["name", "description", "amount"].forEach((field) => {
+        ["description"].forEach((field) => {
             fireEvent.change(screen.getByTestId(field), { target: { value: '' }})
         })
 
