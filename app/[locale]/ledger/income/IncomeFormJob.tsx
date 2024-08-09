@@ -9,25 +9,25 @@ import { Button, Form, FormGroup } from "@trussworks/react-uswds"
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
-export interface IncomeItemFormProps {
-    onSubmit: SubmitHandler<IncomeItemFormData>
+export interface IncomeFormJobProps {
+    onSubmit: SubmitHandler<IncomeFormJobData>
     item?: IncomeItem
 }
 
-export type IncomeItemFormData = {
+export type IncomeFormJobData = {
     name: string
     description: string
     amount: number
 }
 
-export default function IncomeItemForm(params: IncomeItemFormProps) {
+export default function IncomeFormJob(params: IncomeFormJobProps) {
     const { t } = useTranslation()
 
     const {
         register,
         formState: { errors },
         handleSubmit
-    } = useForm<IncomeItemFormData>()
+    } = useForm<IncomeFormJobData>()
 
     return (
         <Form onSubmit={handleSubmit(params.onSubmit)}>

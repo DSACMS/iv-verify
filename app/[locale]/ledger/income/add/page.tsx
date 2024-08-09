@@ -5,14 +5,14 @@ import { useAppDispatch } from "@/lib/hooks"
 import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
-import IncomeItemForm, { IncomeItemFormData } from '@/app/[locale]/ledger/income/IncomeItemForm'
+import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/ledger/income/IncomeFormJob'
 
 export default function Page() {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    function addIncomeClicked({name, description, amount}: IncomeItemFormData) {
+    function addIncomeClicked({name, description, amount}: IncomeFormJobData) {
 
         const incomeItem: IncomeItem = {
             name,
@@ -31,7 +31,7 @@ export default function Page() {
                     <Grid row gap>
                         <main className="usa-layout-docs">
                             <h3>{t('add_income_header')}</h3>
-                            <IncomeItemForm onSubmit={addIncomeClicked} />
+                            <IncomeFormJob onSubmit={addIncomeClicked} />
                          </main>
                     </Grid>
                 </GridContainer>

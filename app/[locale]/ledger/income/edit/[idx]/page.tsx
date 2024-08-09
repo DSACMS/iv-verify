@@ -4,7 +4,7 @@ import { IncomeItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/le
 import { useAppSelector } from "@/lib/hooks"
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
-import IncomeItemForm, { IncomeItemFormData } from "@/app/[locale]/ledger/income/IncomeItemForm"
+import IncomeFormJob, { IncomeFormJobData } from "@/app/[locale]/ledger/income/IncomeFormJob"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
 
@@ -14,7 +14,7 @@ export default function EditIncome({ params }: { params: { idx: number } }) {
     const router = useRouter()
     const item = useAppSelector(state => selectIncomeItemAt(state, params.idx))
 
-    function editIncomeClicked({name, description, amount}: IncomeItemFormData) {
+    function editIncomeClicked({name, description, amount}: IncomeFormJobData) {
         dispatch(setIncomeItem({
             item: {
                 name,
@@ -35,7 +35,7 @@ export default function EditIncome({ params }: { params: { idx: number } }) {
                     <Grid row gap>
                         <main className="usa-layout-docs">
                             <h3>{t('edit_income_header')}</h3>
-                            <IncomeItemForm onSubmit={editIncomeClicked} item={item} />
+                            <IncomeFormJob onSubmit={editIncomeClicked} item={item} />
                          </main>
                     </Grid>
                 </GridContainer>
