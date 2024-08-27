@@ -155,7 +155,7 @@ Information about how the iv-verify community is governed may be found in [GOVER
 
 ## Feedback
 
-If you have ideas for how we can improve or add to our capacity building efforts and methods for welcoming people into our community, please let us know at **{contact_email}**. If you would like to comment on the tool itself, please let us know by filing an **issue on our GitHub repository.**
+If you have ideas for how we can improve or add to our capacity building efforts and methods for welcoming people into our community, please let us know at iv-verify@cms.hhs.gov. If you would like to comment on the tool itself, please let us know by filing an **issue on our GitHub repository.**
 
 ## Glossary
 
