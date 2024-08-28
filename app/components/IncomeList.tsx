@@ -2,8 +2,9 @@
 
 import { IncomeItem, selectIncomeItems, selectIncomeTotal } from "@/lib/features/ledger/income/incomeSlice"
 import { useAppSelector } from "@/lib/hooks"
+import { useRouter } from "next/navigation"
 import IncomeListItem from "./IncomeListItem"
-import { Card, CardBody, CardGroup, CardHeader, GridContainer } from "@trussworks/react-uswds"
+import { Button, ButtonGroup, Card, CardBody, CardGroup, CardHeader, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 
 export default function IncomeList({dayCount, header}: Props) {
     const { t } = useTranslation()
+    const router = useRouter()
     const items = useAppSelector(state => selectIncomeItems(state))
     const incomeTotal = useAppSelector(state => selectIncomeTotal(state))
     const incomeItemElements = items.map((item: IncomeItem, idx: number) => {
@@ -27,6 +29,10 @@ export default function IncomeList({dayCount, header}: Props) {
         return <></>
     }
 
+    function addItemClicked() {
+        router.push("/ledger/income/add")
+    }
+
     return (
         <CardGroup>
             <Card className="grid-col-12 margin-top-4">
@@ -36,6 +42,9 @@ export default function IncomeList({dayCount, header}: Props) {
                         {incomeItemElements}
                     </GridContainer>
                     {getTotal()}
+                    <ButtonGroup>
+                        <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_button')}</Button>
+                    </ButtonGroup>
                 </CardBody>
             </Card>
         </CardGroup>
