@@ -15,7 +15,7 @@ export default function Page() {
 
     function doneClicked() {
         if (reccommendStandardDeduction) {
-            router.push("/ledger/expense/snap/recommend")
+            router.push("/ledger/expense/snap")
         } else {
             router.push("/ledger/review")
         }

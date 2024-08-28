@@ -1,6 +1,6 @@
 'use client'
 
-import { Button, Grid, GridContainer, Radio, Form } from '@trussworks/react-uswds' 
+import { Accordion, Button, Grid, GridContainer, Radio, Form } from '@trussworks/react-uswds' 
 import { useRouter } from "next/navigation"
 import { useTranslation } from "react-i18next"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
@@ -23,6 +23,7 @@ export default function Page() {
         take_deduction: string
         do_not_take_deduction: string
     }
+
     const {
         handleSubmit,
         control
@@ -42,6 +43,20 @@ export default function Page() {
         }
     })
 
+    const items = [
+      {
+        title: t('snap_deduction_accordion_header'),
+        content: (
+          <div>
+            <pre>{t('snap_deduction_accordion_body')}</pre>
+          </div>
+        ),
+        expanded: false,
+        id: 'snap_deduction',
+        headingLevel: 'h4' as HeadingLevel,
+      }
+    ]
+
     useEffect(() => {
         if (!benefits.snap || !reccommendStandardDeduction) {
             // User should not have been pushed to this screen
@@ -51,31 +66,49 @@ export default function Page() {
 
     return (
         <div>
-            <VerifyNav title={t('snap_recommend_deduction_title')} />
+            <VerifyNav title={t('snap_deduction_title')} />
             <div className="usa-section">
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
                             <Form onSubmit={handleSubmit(onSubmit)}>
-                                <h3 className="margin-bottom-2" data-testid="snap_recommend_deduction_header">{t('snap_recommend_deduction_header', {amount: expenseTotal})}</h3>
-                                <span className="usa-hint">{t('snap_recommend_deduction_subheader')}</span>
+                                <h3 className="margin-bottom-2" data-testid="snap_deduction_header">{t('snap_deduction_header', {amount: expenseTotal})}</h3>
+
+                                <span className="usa-hint">{t('snap_deduction_subheader')}</span>
+
+                                <Accordion multiselectable={true} className="margin-top-2" items={items} />
+
                                 <Controller
                                     name="take_deduction"
                                     control={control}
                                     render={({ field }) => 
-                                        <Radio id="take_deduction_radio" {...field} label={t('snap_recommend_deduction_take_header')} labelDescription={t('snap_recommend_deduction_take_body')} tile className="margin-top-5" data-testid="take_deduction_radio" value="on" />
+                                        <Radio 
+                                            id="take_deduction_radio" {...field} 
+                                            label={t('snap_deduction_take_header')} 
+                                            labelDescription={t('snap_deduction_take_body')} 
+                                            tile 
+                                            className="margin-top-5" 
+                                            data-testid="take_deduction_radio" 
+                                            value="on" 
+                                        />
                                     }
                                 />
                                 <Controller
                                     name="do_not_take_deduction"
                                     control={control}
                                     render={({ field }) => 
-                                        <Radio disabled id="do_not_take_deduction_radio" {...field} label={t('snap_recommend_deduction_do_not_take_header')} tile data-testid="do_not_take_deduction_radio" value="on" />
+                                        <Radio 
+                                            id="do_not_take_deduction_radio" {...field} 
+                                            label={t('snap_deduction_do_not_take_header')} 
+                                            tile 
+                                            data-testid="do_not_take_deduction_radio" 
+                                            value="on" 
+                                        />
                                     }
                                 />
 
                                 <p className="text-center margin-top-5">
-                                    <Button type="submit" data-testid="continue-button">{t('snap_recommend_deduction_continue_button')}</Button>
+                                    <Button type="submit" data-testid="continue-button">{t('snap_deduction_continue_button')}</Button>
                                 </p>
                             </Form>
                         </main>
