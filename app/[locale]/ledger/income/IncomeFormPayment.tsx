@@ -57,7 +57,8 @@ export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
                 />
             </FormGroup>
             <FormGroup>
-                <Button type="submit" name="continue_button" data-testid="continue_button">{t('add_income_button')}</Button>
+                <Button type="button" name="more_button" data-testid="more_button">{t('add_income_button_more')}</Button>
+                <Button type="submit" name="continue_button" data-testid="continue_button">{t('add_income_button_done')}</Button>
             </FormGroup>
         </Form>
     )

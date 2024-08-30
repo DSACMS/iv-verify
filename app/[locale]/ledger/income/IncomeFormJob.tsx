@@ -52,8 +52,8 @@ export default function IncomeFormJob(params: IncomeFormJobProps) {
               }
             }
           )}
-          label={t('add_income_describe')}
-          hint={t('add_income_describe_hint')}
+          label={t('add_income_description')}
+          hint={t('add_income_description_hint')}
           error={errors.description?.message}
           requiredMarker={true}
           data-testid="description"
