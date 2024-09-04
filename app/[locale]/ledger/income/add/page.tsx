@@ -2,7 +2,7 @@
 import { Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from "@/lib/hooks"
-import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
+import { addJob, JobItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
 import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/ledger/income/IncomeFormJob'
@@ -12,14 +12,15 @@ export default function Page() {
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    function addIncomeClicked({name, description, amount}: IncomeFormJobData) {
+    function addIncomeClicked({description, business, amount, taxesFiled}: IncomeFormJobData) {
 
-        const incomeItem: IncomeItem = {
-            name,
+        const jobItem: JobItem = {
             description,
+            business,
             amount,
+            taxesFiled,
         }
-        dispatch(addIncome(incomeItem))
+        dispatch(addJob(jobItem))
         router.push('/ledger/income/add/payment')
     }
 

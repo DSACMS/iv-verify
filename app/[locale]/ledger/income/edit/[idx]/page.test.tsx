@@ -6,7 +6,7 @@ import mockRouter from 'next-router-mock'
 import TestWrapper from '@/app/TestWrapper'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
 import { makeStore } from '@/lib/store'
-import { IncomeItem, addIncome } from '@/lib/features/ledger/income/incomeSlice'
+import { IncomeItem, addJob } from '@/lib/features/ledger/income/incomeSlice'
 
 describe('Edit Income Item Page', async () => {
     let store: EnhancedStore
@@ -22,7 +22,7 @@ describe('Edit Income Item Page', async () => {
         }))
         mockRouter.push('/ledger/income/edit/0')
         store = makeStore()
-        store.dispatch(addIncome(item1))
+        store.dispatch(addJob(item1))
         render (<TestWrapper store={store}><Page params={{idx: 0}} /></TestWrapper>)
     })
     afterEach(cleanup)

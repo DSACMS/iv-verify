@@ -3,7 +3,7 @@
 import ErrorSummary from "@/app/components/ErrorSummary"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
-import { IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
+import { JobItem } from "@/lib/features/ledger/income/incomeSlice"
 import { 
   Button, 
   Form, 
@@ -15,7 +15,7 @@ import { useTranslation } from "react-i18next"
 
 export interface IncomeFormJobProps {
   onSubmit: SubmitHandler<IncomeFormJobData>
-  item?: IncomeItem
+  item?: JobItem
 }
 
 export type IncomeFormJobData = {
@@ -24,6 +24,10 @@ export type IncomeFormJobData = {
   amount: number
   taxesFiled: boolean
 }
+
+// const onTaxesRadioChanged = (value: Boolean) => {
+//   setTaxes(value)
+// }
 
 export default function IncomeFormJob(params: IncomeFormJobProps) {
   const { t } = useTranslation()
@@ -73,21 +77,23 @@ export default function IncomeFormJob(params: IncomeFormJobProps) {
         />
       </FormGroup>
 
-      <FormGroup>
+      {/* <FormGroup>
         <legend className="usa-legend text-bold">{t('add_income_taxes')}</legend>
         <Radio
           id="taxesFiledNo"
           name="taxes-filed"
           label={t('add_income_taxes_no')}
           tile
+          onChange={onTaxesRadioChanged(false)}
         />
         <Radio
           id="taxesFiledYes"
           name="taxes-filed"
           label={t('add_income_taxes_yes')}
           tile
+          onChange={onTaxesRadioChanged(true)}
         />
-      </FormGroup>
+      </FormGroup> */}
 
       <FormGroup>
           <Button type="submit" name="continue_button" data-testid="continue_button">{t('add_income_button')}</Button>

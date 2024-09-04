@@ -6,7 +6,7 @@ import { makeStore } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { addIncome, IncomeItem } from '@/lib/features/ledger/income/incomeSlice'
+import { addJob, IncomeItem } from '@/lib/features/ledger/income/incomeSlice'
 import { BenefitsState, setBenefits } from '@/lib/features/benefits/benefitsSlice'
 
 describe('List Income in Ledger Page', async () => {
@@ -39,8 +39,8 @@ describe('List Income in Ledger Page', async () => {
             amount: 75
         }
         const items = [item1, item2]
-        store.dispatch(addIncome(item1))
-        store.dispatch(addIncome(item2))
+        store.dispatch(addJob(item1))
+        store.dispatch(addJob(item2))
         render (<Provider store={store}><Page /></Provider>)
 
         for (let item of items) {

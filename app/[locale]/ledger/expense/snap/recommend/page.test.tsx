@@ -6,7 +6,7 @@ import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 import { BenefitsState, selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
-import { IncomeItem, addIncome } from '@/lib/features/ledger/income/incomeSlice'
+import { IncomeItem, addJob } from '@/lib/features/ledger/income/incomeSlice'
 import TestWrapper from '@/app/TestWrapper'
 
 describe('SNAP Recommend Deduction Screen', async () => {
@@ -31,7 +31,7 @@ describe('SNAP Recommend Deduction Screen', async () => {
             name: "Suzy",
             description: "Yardwork",
         }
-        store.dispatch(addIncome(incomeItem))
+        store.dispatch(addJob(incomeItem))
         render(<TestWrapper store={store}><Page /></TestWrapper>)
     })
     afterEach(cleanup)

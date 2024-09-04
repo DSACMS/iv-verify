@@ -5,8 +5,8 @@ import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 import TextAreaWithValidation from "@/app/components/TextAreaWithValidation"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import { IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
-import { Button, Form, FormGroup } from "@trussworks/react-uswds"
-import { SubmitHandler, useForm } from "react-hook-form"
+import { Button, DatePicker, Form, FormGroup, Label, RequiredMarker } from "@trussworks/react-uswds"
+import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
 export interface IncomeFormPaymentProps {
@@ -17,7 +17,7 @@ export interface IncomeFormPaymentProps {
 export type IncomeFormPaymentData = {
     amount: number
     date: string
-    name: string
+    payer: string
 }
 
 export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
@@ -25,6 +25,7 @@ export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
 
     const {
         register,
+        control,
         formState: { errors },
         handleSubmit
     } = useForm<IncomeFormPaymentData>()
@@ -34,8 +35,8 @@ export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
             <FormGroup>
                 <TextFieldWithValidation
                     id="amount"
-                    {...register("amount", { valueAsNumber:true, validate: (value) => value > 0, required: { value: true, message: t('add_income_amount_field_required')}})}
-                    label={t('add_income_total_amount')}
+                    {...register("amount", { valueAsNumber:true, validate: (value) => value > 0, required: { value: true, message: t('add_income_payment_amount_field_required')}})}
+                    label={t('add_income_payment_amount')}
                     error={errors.amount?.message}
                     requiredMarker={true}
                     data-testid="amount"
@@ -43,17 +44,35 @@ export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
                 />
             </FormGroup>
 
-            {/* Date */}
+            <FormGroup>
+                <Controller
+                    name="date"
+                    control={control}
+                    rules={{ required: {value:true, message: t('add_income_required_field')} }}
+                    render={({ field }) => (
+                        <>
+                            <Label htmlFor="date">{t('add_income_payment_date')}<RequiredMarker /></Label>
+                            <DatePicker
+                                id="date"
+                                data-testid="date"
+                                {...field}
+                                {...(errors.date?.message !== undefined ? {validationStatus: 'error'} : {})}
+                            />
+                        </>
+                        )
+                    }
+                    />
+            </FormGroup>
 
             <FormGroup>
                 <TextFieldWithValidation
-                    id="name"
-                    {...register("name", {required: {value: true, message: t('add_income_name_field_required')}, maxLength: { value: 100, message: t('add_income_name_field_length')}})}
-                    label={t('add_income_what_name')}
-                    error={errors.name?.message}
+                    id="payer"
+                    {...register("payer", {required: {value: true, message: t('add_income_payment_payer_required')}, maxLength: { value: 100, message: t('add_income_payment_payer_length')}})}
+                    label={t('add_income_payment_payer')}
+                    error={errors.payer?.message}
                     requiredMarker={true}
-                    data-testid="name"
-                    value={params.item?.name}
+                    data-testid="payer"
+                    value={params.item?.payer}
                 />
             </FormGroup>
             <FormGroup>

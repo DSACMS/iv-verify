@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import reducer, {IncomeItem, addIncome, removeIncome, initialState, selectIncomeItems, selectIncomeTotal} from './incomeSlice'
+import reducer, {IncomeItem, addJob, removeIncome, initialState, selectIncomeItems, selectIncomeTotal} from './incomeSlice'
 import { makeStore } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
 
@@ -23,7 +23,7 @@ describe('IncomeSlice', () => {
         })
 
         it('should handle adding income items', () => {
-            expect(reducer(initialState, addIncome(item))).toEqual({items:[item]})
+            expect(reducer(initialState, addJob(item))).toEqual({items:[item]})
         })
 
         it('should handle removing income items', () => {
@@ -35,8 +35,8 @@ describe('IncomeSlice', () => {
         let store: EnhancedStore
         beforeEach(() => {
             store = makeStore()
-            store.dispatch(addIncome(item))
-            store.dispatch(addIncome(item2))
+            store.dispatch(addJob(item))
+            store.dispatch(addJob(item2))
         })
 
         it('can select all income items', () => {
