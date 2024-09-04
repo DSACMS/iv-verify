@@ -21,7 +21,6 @@ export interface IncomeFormJobProps {
 export type IncomeFormJobData = {
   description: string
   business: string
-  amount: number
   taxesFiled: boolean
 }
 
@@ -65,6 +64,7 @@ export default function IncomeFormJob(params: IncomeFormJobProps) {
       <FormGroup>
         <TextFieldWithValidation
           id="business"
+          {...register("business")}
           label={t('add_income_business')}
           hint={t('add_income_business_hint')}
           error={errors.business?.message}

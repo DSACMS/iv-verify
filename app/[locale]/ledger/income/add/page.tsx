@@ -12,12 +12,11 @@ export default function Page() {
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    function addIncomeClicked({description, business, amount, taxesFiled}: IncomeFormJobData) {
+    function addIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
 
         const jobItem: JobItem = {
             description,
             business,
-            amount,
             taxesFiled
         }
         dispatch(addJob(jobItem))

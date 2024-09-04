@@ -29,14 +29,14 @@ describe('List Income in Ledger Page', async () => {
     
     it('shows items in list', () => {
         const item1: IncomeItem = {
-            name: 'fname lname',
             description: 'desc1',
-            amount: 40
+            business: 'fname lname',
+            taxesFiled: false
         }
         const item2: IncomeItem = {
-            name : 'foo bar',
             description: 'desc2',
-            amount: 75
+            business : 'foo bar',
+            taxesFiled: true
         }
         const items = [item1, item2]
         store.dispatch(addJob(item1))
@@ -44,9 +44,8 @@ describe('List Income in Ledger Page', async () => {
         render (<Provider store={store}><Page /></Provider>)
 
         for (let item of items) {
-            expect(screen.getByText(item.name))
             expect(screen.getByText(item.description))
-            expect(screen.getByText("$" + item.amount))
+            expect(screen.getByText(item.business))
         }
     })
 

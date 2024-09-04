@@ -6,14 +6,14 @@ import mockRouter from 'next-router-mock'
 import TestWrapper from '@/app/TestWrapper'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
 import { makeStore } from '@/lib/store'
-import { IncomeItem, addJob } from '@/lib/features/ledger/income/incomeSlice'
+import { JobItem, addJob } from '@/lib/features/ledger/income/incomeSlice'
 
 describe('Edit Income Item Page', async () => {
     let store: EnhancedStore
-    const item1: IncomeItem = {
-        name: 'fname lname',
+    const item1: JobItem = {
         description: 'desc1',
-        amount: 40
+        business: 'business!',
+        taxesFiled: false
     }
     beforeEach(() => {
         vi.mock('next/navigation', () => ({
@@ -35,7 +35,7 @@ describe('Edit Income Item Page', async () => {
     it('Navigates when fields are filled in', async () => {
         const newDescription = "Landscaping"
         fireEvent.change(screen.getByTestId("description"), { target: { value: newDescription } })
-        fireEvent.click(screen.getByText('Continue'))
+        fireEvent.click(screen.getByText('Add income'))
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
@@ -54,7 +54,7 @@ describe('Edit Income Item Page', async () => {
             fireEvent.change(screen.getByTestId(field), { target: { value: '' }})
         })
 
-        fireEvent.click(screen.getByText('Continue'))
+        fireEvent.click(screen.getByText('Add income'))
         await waitFor(() => {
             expect(screen.getByTestId("alert")).toBeDefined()
         })

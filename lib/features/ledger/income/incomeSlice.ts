@@ -4,7 +4,6 @@ import type { RootState } from '../../../store'
 export interface JobItem {
     description: string
     business: string
-    amount: number
     taxesFiled: boolean
 }
 export interface PaymentItem {

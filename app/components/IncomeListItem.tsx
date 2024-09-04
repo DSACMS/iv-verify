@@ -26,9 +26,8 @@ export default function IncomeListItem({ item, index }: ItemProps) {
         <Grid row gap className="margin-bottom-5">
             <Grid col={1}>*</Grid>
             <Grid col={6} tablet={{col: 9}}>
-                <div>{item.name}</div>
-                <div>{`$${item.amount}`}</div>
                 <div>{item.description}</div>
+                <div>{item.business}</div>
             </Grid>
             <Grid col={5} tablet={{col: 2}}>
                 <ModalToggleButton modalRef={ref} opener unstyled className="margin-bottom-2">{t('list_income_delete_button')}</ModalToggleButton>
