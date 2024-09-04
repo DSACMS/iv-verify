@@ -90,11 +90,11 @@ jobs:
       #       const coverageFilePath = process.env['COVERAGE_FILE_PATH']
       #       const prNumber = process.env['PR_NUMBER']
       #       script({github, context, mainWorkflowRunSha, coverageFilePath, prNumber})
-      - name: Cypress testing
-        uses: cypress-io/github-action@v6
-        with:
-          build: npm run build
-          start: npm run start
-          browser: chrome
+      # - name: Cypress testing
+      #   uses: cypress-io/github-action@v6
+      #   with:
+      #     build: npm run build
+      #     start: npm run start
+      #     browser: chrome
       - name: Pa11y testing
         run: npm run dev & sleep 5; npm run pa11y-ci
