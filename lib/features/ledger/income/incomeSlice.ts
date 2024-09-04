@@ -14,12 +14,12 @@ export interface PaymentItem {
 }
 
 export interface SetIncomePayload {
-    item: IncomeItem
+    item: JobItem
     idx: number
 }
 
 interface IncomeState {
-    items: IncomeItem[]
+    items: JobItem[]
 }
 
 export const initialState: IncomeState = {

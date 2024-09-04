@@ -25,15 +25,12 @@ export type IncomeFormJobData = {
   taxesFiled: boolean
 }
 
-// const onTaxesRadioChanged = (value: Boolean) => {
-//   setTaxes(value)
-// }
-
 export default function IncomeFormJob(params: IncomeFormJobProps) {
   const { t } = useTranslation()
 
   const {
     register,
+    setValue,
     formState: { errors },
     handleSubmit
   } = useForm<IncomeFormJobData>()
@@ -77,23 +74,23 @@ export default function IncomeFormJob(params: IncomeFormJobProps) {
         />
       </FormGroup>
 
-      {/* <FormGroup>
+      <FormGroup>
         <legend className="usa-legend text-bold">{t('add_income_taxes')}</legend>
         <Radio
           id="taxesFiledNo"
           name="taxes-filed"
           label={t('add_income_taxes_no')}
           tile
-          onChange={onTaxesRadioChanged(false)}
+          onChange={(e) => setValue("taxesFiled", false)}
         />
         <Radio
           id="taxesFiledYes"
           name="taxes-filed"
           label={t('add_income_taxes_yes')}
           tile
-          onChange={onTaxesRadioChanged(true)}
+          onChange={(e) => setValue("taxesFiled", true)}
         />
-      </FormGroup> */}
+      </FormGroup>
 
       <FormGroup>
           <Button type="submit" name="continue_button" data-testid="continue_button">{t('add_income_button')}</Button>

@@ -27,7 +27,7 @@ describe('Add Income To Ledger Page', async () => {
             }
         })
 
-        fireEvent.click(screen.getByText('Continue'))
+        fireEvent.click(screen.getByText('Add income'))
         await waitFor(() => {
             expect(screen.getByTestId("alert")).toBeDefined()
         })
@@ -46,7 +46,7 @@ describe('Add Income To Ledger Page', async () => {
             }
         })
 
-        fireEvent.click(screen.getByText('Continue'))
+        fireEvent.click(screen.getByText('Add income'))
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({

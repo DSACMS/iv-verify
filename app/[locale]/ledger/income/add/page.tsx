@@ -18,7 +18,7 @@ export default function Page() {
             description,
             business,
             amount,
-            taxesFiled,
+            taxesFiled
         }
         dispatch(addJob(jobItem))
         router.push('/ledger/income/add/payment')
