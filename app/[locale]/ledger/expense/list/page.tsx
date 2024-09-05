@@ -11,10 +11,10 @@ import VerifyNav from "@/app/components/VerifyNav"
 export default function Page() {
     const { t } = useTranslation()
     const router = useRouter()
-    const reccommendStandardDeduction = useAppSelector(state => selectRecommendStandardDeduction(state))
+    const recommendStandardDeduction = useAppSelector(state => selectRecommendStandardDeduction(state))
 
     function doneClicked() {
-        if (reccommendStandardDeduction) {
+        if (recommendStandardDeduction) {
             router.push("/ledger/expense/snap")
         } else {
             router.push("/ledger/review")
