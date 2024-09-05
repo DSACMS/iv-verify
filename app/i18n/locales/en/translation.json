@@ -30,7 +30,7 @@
   "add_income_description_field_length": "Description field can be no more than 500 characters",
   "add_income_description_field_required": "Description field is required",
   "add_income_error_header": "There are errors in the form below.",
-  "add_income_header": "Tell us about your [nth] self employed job",
+  "add_income_header": "Tell us about your {{nth}} self employed job",
   "add_income_payment_amount": "How much did you get paid?",
   "add_income_payment_amount_field_required": "Amount field is required",
   "add_income_payment_date": "Date of payment (MM/DD/YYYY)",

@@ -12,6 +12,7 @@ export default function Page() {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const items = useAppSelector(state => selectIncomeItems(state))
+    const jobCount = items.length
 
     function addIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
 
@@ -22,7 +23,7 @@ export default function Page() {
         }
         // can i add a response?
         dispatch(addJob(jobItem))
-        router.push(`/ledger/income/${items.length}/payment/add`)
+        router.push(`/ledger/income/${jobCount}/payment/add`)
     }
 
     return (
@@ -32,7 +33,10 @@ export default function Page() {
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
-                            <h3>{t('add_income_header')}</h3>
+                            <h3>{t(
+                                'add_income_header', 
+                                {'nth': jobCount === 0 ? 'first': 'next'}
+                            )}</h3>
                             <IncomeFormJob onSubmit={addIncomeClicked} />
                          </main>
                     </Grid>
