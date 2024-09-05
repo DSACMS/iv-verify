@@ -5,11 +5,13 @@ export interface JobItem {
     description: string
     business: string
     taxesFiled: boolean
+    payments?: Array<PaymentItem>
 }
 export interface PaymentItem {
-    payer: string
-    date: string
+    idx: number
     amount: number
+    date: string
+    payer: string
 }
 
 export interface SetIncomePayload {
@@ -18,7 +20,7 @@ export interface SetIncomePayload {
 }
 
 interface IncomeState {
-    items: JobItem[]
+    items: Array<JobItem>
 }
 
 export const initialState: IncomeState = {
@@ -30,10 +32,15 @@ export const incomeSlice = createSlice({
     initialState,
     reducers: {
         addJob: (state, action: PayloadAction<JobItem>) => {
+            action.payload.payments=[]
             state.items.push(action.payload)
-        },
+        },  
         addPayment: (state, action: PayloadAction<PaymentItem>) => {
-            // 
+            if (!state.items[action.payload.idx].payments) {
+                state.items[action.payload.idx].payments = []
+            }
+            
+            state.items[action.payload.idx].payments.push(action.payload)
         },
         removeIncome: (state, action: PayloadAction<number>) => {
             state.items.splice(action.payload, 1)

@@ -4,14 +4,14 @@ import ErrorSummary from "@/app/components/ErrorSummary"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 import TextAreaWithValidation from "@/app/components/TextAreaWithValidation"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
-import { IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
+import { PaymentItem } from "@/lib/features/ledger/income/incomeSlice"
 import { Button, DatePicker, Form, FormGroup, Label, RequiredMarker } from "@trussworks/react-uswds"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
 export interface IncomeFormPaymentProps {
     onSubmit: SubmitHandler<IncomeFormPaymentData>
-    item?: IncomeItem
+    item?: PaymentItem
 }
 
 export type IncomeFormPaymentData = {
@@ -76,7 +76,6 @@ export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
                 />
             </FormGroup>
             <FormGroup>
-                <Button type="button" name="more_button" data-testid="more_button">{t('add_income_button_more')}</Button>
                 <Button type="submit" name="continue_button" data-testid="continue_button">{t('add_income_button_done')}</Button>
             </FormGroup>
         </Form>

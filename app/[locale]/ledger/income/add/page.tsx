@@ -1,8 +1,8 @@
 'use client'
 import { Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
-import { useAppDispatch } from "@/lib/hooks"
-import { addJob, JobItem } from "@/lib/features/ledger/income/incomeSlice"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { addJob, JobItem, selectIncomeItems } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
 import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/ledger/income/IncomeFormJob'
@@ -11,6 +11,7 @@ export default function Page() {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
+    const items = useAppSelector(state => selectIncomeItems(state))
 
     function addIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
 
@@ -19,8 +20,9 @@ export default function Page() {
             business,
             taxesFiled
         }
+        // can i add a response?
         dispatch(addJob(jobItem))
-        router.push('/ledger/income/add/payment')
+        router.push(`/ledger/income/${items.length}/payment/add`)
     }
 
     return (

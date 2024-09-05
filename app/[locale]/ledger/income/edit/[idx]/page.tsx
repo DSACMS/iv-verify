@@ -1,6 +1,6 @@
 'use client'
 import VerifyNav from "@/app/components/VerifyNav"
-import { IncomeItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/ledger/income/incomeSlice"
+import { JobItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
@@ -14,13 +14,13 @@ export default function EditIncome({ params }: { params: { idx: number } }) {
     const router = useRouter()
     const item = useAppSelector(state => selectIncomeItemAt(state, params.idx))
 
-    function editIncomeClicked({name, description, amount}: IncomeFormJobData) {
+    function editIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
         dispatch(setIncomeItem({
             item: {
-                name,
                 description,
-                amount,
-            } as IncomeItem,
+                business,
+                taxesFiled
+            } as JobItem,
             idx: params.idx,
         }))
 

@@ -1,25 +1,27 @@
 'use client'
 import { Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
-import { useAppDispatch } from "@/lib/hooks"
-import { addPayment, PaymentItem } from "@/lib/features/ledger/income/incomeSlice"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { addPayment, PaymentItem, selectIncomeItemAt } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
 import IncomeFormPayment, { IncomeFormPaymentData } from '@/app/[locale]/ledger/income/IncomeFormPayment'
 
-export default function Page() {
+export default function Page({ params }: { params: { idx: number } }) {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
 
     function addPaymentClicked({amount, date, payer}: IncomeFormPaymentData) {
+        const idx =  params.idx
 
-        const incomeItem: PaymentItem = {
+        const paymentItem: PaymentItem = {
+            idx,
             amount,
             date,
             payer,
         }
-        dispatch(addPayment(incomeItem))
+        dispatch(addPayment(paymentItem))
         router.push('/ledger/income/list')
     }
 
