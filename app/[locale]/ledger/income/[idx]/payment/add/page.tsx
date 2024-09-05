@@ -11,6 +11,7 @@ export default function Page({ params }: { params: { idx: number } }) {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
+    const item = useAppSelector(state => selectIncomeItemAt(state, params.idx))
 
     function addPaymentClicked({amount, date, payer}: IncomeFormPaymentData) {
         const idx =  params.idx
@@ -32,7 +33,7 @@ export default function Page({ params }: { params: { idx: number } }) {
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
-                            <h3>{t('add_income_payment_header')}</h3>
+                            <h3>{t('add_income_payment_header', {description: item.description})}</h3>
                             <IncomeFormPayment onSubmit={addPaymentClicked} />
                          </main>
                     </Grid>
