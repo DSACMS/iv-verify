@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next"
-import { IncomeItem, removeIncome } from "@/lib/features/ledger/income/incomeSlice"
-import { useAppDispatch } from "@/lib/hooks"
+import { JobItem, PaymentItem, removeIncome, selectIncomeItems } from "@/lib/features/ledger/income/incomeSlice"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
 interface ItemProps {
-    item: IncomeItem
+    item: JobItem
     index: number
 }
 export default function IncomeListItem({ item, index }: ItemProps) {
@@ -13,6 +13,9 @@ export default function IncomeListItem({ item, index }: ItemProps) {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
+    const payments = item.payments.map((payment: PaymentItem) => {
+        return <li>{payment.date}: ${payment.amount} by {payment.payer}</li>
+    })
 
     function onDeleteClicked() {
         dispatch(removeIncome(index))
@@ -22,14 +25,22 @@ export default function IncomeListItem({ item, index }: ItemProps) {
         router.push(`/ledger/income/edit/${index}`)
     }
 
+    function addItemClicked() {
+        router.push(`/ledger/income/${index}/payment/add`)
+    }
+
     return (
         <Grid row gap className="margin-bottom-5">
-            <Grid col={1}>*</Grid>
-            <Grid col={6} tablet={{col: 9}}>
+            <Grid col={10}>
                 <div>{item.description}</div>
                 <div>{item.business}</div>
+                <div>
+                    <ul>
+                        {payments}
+                    </ul>
+                </div>
             </Grid>
-            <Grid col={5} tablet={{col: 2}}>
+            <Grid col={2}>
                 <ModalToggleButton modalRef={ref} opener unstyled className="margin-bottom-2">{t('list_income_delete_button')}</ModalToggleButton>
                 <Modal ref={ref} id="delete-modal">
                     <ModalHeading>{t('list_income_delete_are_you_sure')}</ModalHeading>
@@ -42,7 +53,13 @@ export default function IncomeListItem({ item, index }: ItemProps) {
                 </Modal>
                 <Button type="button" unstyled onClick={editClicked}>{t('edit')}</Button>
             </Grid>
-            <Grid col={12}><hr /></Grid>
+            <Grid col={12}>
+                <ButtonGroup>
+                    <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_payment_button')}</Button>
+                </ButtonGroup>
+
+                <hr />
+            </Grid>
         </Grid>
     )
 }

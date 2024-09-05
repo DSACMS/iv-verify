@@ -30,7 +30,7 @@ export default function IncomeList({dayCount, header}: Props) {
     }
 
     function addItemClicked() {
-        router.push("/ledger/income/[idx]/payment/add")
+        router.push("/ledger/income/add")
     }
 
     return (
@@ -43,8 +43,7 @@ export default function IncomeList({dayCount, header}: Props) {
                     </GridContainer>
                     {getTotal()}
                     <ButtonGroup>
-                        {/* ÷ should be add another job */}
-                        <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_button')}</Button>
+                        <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_job_button')}</Button>
                     </ButtonGroup>
                 </CardBody>
             </Card>

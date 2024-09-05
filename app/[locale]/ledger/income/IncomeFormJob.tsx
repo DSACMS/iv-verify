@@ -3,7 +3,7 @@
 import ErrorSummary from "@/app/components/ErrorSummary"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
-import { JobItem } from "@/lib/features/ledger/income/incomeSlice"
+import { JobItem, PaymentItem } from "@/lib/features/ledger/income/incomeSlice"
 import { 
   Button, 
   Form, 
