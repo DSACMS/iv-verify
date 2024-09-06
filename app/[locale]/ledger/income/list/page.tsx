@@ -16,13 +16,8 @@ export default function Page() {
     const benefits = useAppSelector(state => selectBenefits(state))
 
     function doneClicked() {
-        if (benefits.snap && !benefits.medicaid) {
-            // For SNAP Only Flow
-            router.push('/ledger/expense/snap')
-        } else {
-            // For Medicaid Only or SNAP+Medicaid Flows
-            router.push('/ledger/expense')
-        }
+        // For Medicaid Only or SNAP+Medicaid Flows
+        router.push('/ledger/expense')
     }
 
     return (

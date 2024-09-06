@@ -1,9 +1,23 @@
 # About the Project - Income verification
+This repo is a proof of concept of a mobile-first ledger for self employed workers to verify their income and expenses related to their self employment.
+
 This application is uses:
 * NextJS
 * React
 * USWDS react components
 * Deployment to cloud.gov
+
+## Core Team
+
+An up-to-date list of core team members can be found in [MAINTAINERS.md](MAINTAINERS.md). At this time, the project is still building the core team and defining roles and responsibilities. We are eagerly seeking individuals who would like to join the community and help us define and fill these roles.
+
+## Documentation index
+
+- [Assumptions](#assumptions)
+- [Getting started](#getting-started)
+- [Development](#development)
+- [Deploy](#deploy)
+- [Resources](#resources)
 
 ## Assumptions
 Accessibility, unit testing, and translation are being built in from the ground up. We want to make sound decisions that allow this app to scale, but understand that we also want to make a few decisions as possible at this early stage. We are still learning about this problem space, but we are sure that accessibility, testing, and translation are important.
@@ -30,8 +44,11 @@ Open [http://localhost:3000/](http://localhost:3000/) with your browser to see t
 
 ## Development
 
-### Document structure
+### Repository structure
 This application uses NextJS's default file structure. You can learn more about this from [NextJS](https://nextjs.org/docs/getting-started/project-structure). 
+
+#### `adr`
+Architecture design records are in this directory.
 
 #### `app`
 Next has a style where routing is determined by file structure. You'll find all of the application files inside of the `app` directory.
@@ -48,17 +65,35 @@ Next has a style where routing is determined by file structure. You'll find all 
 #### `public`
 Where any public assets are stored.
 
+#### `scripts`
+Tooling and scripts to make the repository run smoothly and correctly.
+
 ## Tests and linting
-Testing is a first-class citizen here
 
 ```bash
 # to run tests
 npm run test
-# to check coverage
+# to check test coverage
 npm run coverage
-# to lint
-npm run lint
 ```
+
+### Coding style and linting
+This application uses NextJS's built in linter. It's run as part of pull request checks and you cannot merge without all checks passing. 
+
+To run the linter locally, use `npm run lint`.
+
+## Branching model
+This project follows [trunk-based development](https://trunkbaseddevelopment.com/), which means:
+
+* Make small changes in [short-lived feature branches](https://trunkbaseddevelopment.com/short-lived-feature-branches/) and merge to `main` frequently.
+* Be open to submitting multiple small pull requests for a single ticket (i.e. reference the same ticket across multiple pull requests).
+* Treat each change you merge to `main` as immediately deployable to production. Do not merge changes that depend on subsequent changes you plan to make, even if you plan to make those changes shortly.
+* Ticket any unfinished or partially finished work.
+* Tests should be written for changes introduced, and adhere to the text percentage threshold determined by the project.
+
+This project uses **continuous deployment** using [Github Actions](https://github.com/features/actions) which is configured in the [./github/worfklows](.github/workflows) directory.
+
+Pull-requests are merged to `main`.
 
 ## Deploy
 1. Go to https://github.com/DSACMS/iv-verify/actions/workflows/deploy.yml
@@ -81,71 +116,17 @@ On successful deployment, you can set up the gh actions deployment
 6. `gh secret set CLOUD_GOV_DEPLOY_PASSWORD` and enter this secret when prompted
 7. From here, test out a deployment in the repo to test it out
 
-#### Resources
+#### Deployment resources
 - [Set secrets for gh actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-an-environment)
 - [`space-deployer` docs](https://cloud.gov/docs/services/cloud-gov-service-account/)
 
 ## Resources
 ### Project-specific
-`TODO`
 * JIRA
-* Mocks
-* what else what else what else?
+* Designs
 
 ### Technical
 * [NextJS docs](https://nextjs.org/docs)
-
-## Technical notes and deferred decisions
-
-Moved to [ADR](/adr) directory
-
-
-## Core Team
-
-An up-to-date list of core team members can be found in [MAINTAINERS.md](MAINTAINERS.md). At this time, the project is still building the core team and defining roles and responsibilities. We are eagerly seeking individuals who would like to join the community and help us define and fill these roles.
-
-## Documentation Index
-
-<!-- TODO: This is a like a 'table of contents" for your documentation. Tier 0/1 projects with simple README.md files without many sections may or may not need this, but it is still extremely helpful to provide "bookmark" or "anchor" links to specific sections of your file to be referenced in tickets, docs, or other communication channels. -->
-
-**{list of .md at top directory and descriptions}**
-
-## Repository Structure
-
-<!-- TODO: Using the "tree -d" command can be a helpful way to generate this information, but, be sure to update it as the project evolves and changes over time. -->
-
-**{list directories and descriptions}**
-
-# Development and Software Delivery Lifecycle
-
-The following guide is for members of the project team who have access to the repository as well as code contributors. The main difference between internal and external contributions is that external contributors will need to fork the project and will not be able to merge their own pull requests. For more information on contribributing, see: [CONTRIBUTING.md](./CONTRIBUTING.md).
-
-## Local Development
-
-<!--- TODO - with example below:
-This project is monorepo with several apps. Please see the [api](./api/README.md) and [frontend](./frontend/README.md) READMEs for information on spinning up those projects locally. Also see the project [documentation](./documentation) for more info. -->
-
-## Coding Style and Linters
-
-<!-- TODO - Add the repo's linting and code style guidelines -->
-
-Each application has its own linting and testing guidelines. Lint and code tests are run on each commit, so linters and tests should be run locally before commiting.
-
-## Branching Model
-
-<!--- TODO - with example below:
-This project follows [trunk-based development](https://trunkbaseddevelopment.com/), which means:
-
-* Make small changes in [short-lived feature branches](https://trunkbaseddevelopment.com/short-lived-feature-branches/) and merge to `main` frequently.
-* Be open to submitting multiple small pull requests for a single ticket (i.e. reference the same ticket across multiple pull requests).
-* Treat each change you merge to `main` as immediately deployable to production. Do not merge changes that depend on subsequent changes you plan to make, even if you plan to make those changes shortly.
-* Ticket any unfinished or partially finished work.
-* Tests should be written for changes introduced, and adhere to the text percentage threshold determined by the project.
-
-This project uses **continuous deployment** using [Github Actions](https://github.com/features/actions) which is configured in the [./github/worfklows](.github/workflows) directory.
-
-Pull-requests are merged to `main` and the changes are immediately deployed to the development environment. Releases are created to push changes to production.
--->
 
 ## Contributing
 
@@ -153,7 +134,7 @@ Thank you for considering contributing to an Open Source project of the US Gover
 
 ## Codeowners
 
-The contents of this repository are managed by **{responsible organization(s)}**. Those responsible for the code and documentation in this repository can be found in [CODEOWNERS.md](CODEOWNERS.md).
+The contents of this repository are managed by **the US Digital Service**. Those responsible for the code and documentation in this repository can be found in [CODEOWNERS.md](CODEOWNERS.md).
 
 ## Community
 
@@ -174,7 +155,7 @@ Information about how the iv-verify community is governed may be found in [GOVER
 
 ## Feedback
 
-If you have ideas for how we can improve or add to our capacity building efforts and methods for welcoming people into our community, please let us know at **{contact_email}**. If you would like to comment on the tool itself, please let us know by filing an **issue on our GitHub repository.**
+If you have ideas for how we can improve or add to our capacity building efforts and methods for welcoming people into our community, please let us know at iv-verify@cms.hhs.gov. If you would like to comment on the tool itself, please let us know by filing an **issue on our GitHub repository.**
 
 ## Glossary
 

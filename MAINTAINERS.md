@@ -1,61 +1,11 @@
 # Maintainers
-<!-- TODO: Who are the points of contact in your project who are responsible/accountable for the project? This can often be an engineering or design manager or leader, who may or may not be the primary maintainers of the project.-->
-This is a list of maintainers for this project. See [CODEOWNERS.md](./CODEOWNERS.md) for list of reviewers for different parts of the codebase. Team members include:
+This is a list of maintainers for this project. See [CODEOWNERS.md](./CODEOWNERS.md) for list of reviewers for different parts of the codebase.
 
 ## Maintainers:
-<!-- TODO: What groups/domains are maintainers a part of? Does your project have domains/areas that are maintained by specific people? List @USERNAMES directly, or any @ALIASES for groups/teams.-->
-- 
+* See list in [CODEOWNERS.md](./CODEOWNERS.md)
 
 ## Approvers:
-- 
+* See list in [CODEOWNERS.md](./CODEOWNERS.md)
 
 ## Reviewers:
-- 
-
-| Roles        | Responsibilities| Requirements  | Defined by|
-| -------------|:---------------|:-------------|:-------------|
-| member       | active contributor in the community | multiple contributions to the project. | PROJECT GitHub org Committer Team|
-| reviewer     | review contributions from other members | history of review and authorship in a subproject | MAINTAINERS file reviewer entry, and GitHub Org Triage Team|
-| approver     | approve accepting contributions | highly experienced and active reviewer + contributor to a subproject  | MAINTAINERS file approver entry and GitHub Triage Team |
-| lead         | set direction and priorities for a subproject | demonstrated responsibility and excellent technical judgement for the subproject |  MAINTAINERS file owner entry and GitHub Org Admin Team|
-
-## Contributors
-
-Total number of contributors: <!--CONTRIBUTOR COUNT START--> 4 <!--CONTRIBUTOR COUNT END-->
-
-<!-- readme: contributors -start -->
-<table>
-	<tbody>
-		<tr>
-            <td align="center">
-                <a href="https://github.com/JosephGasiorekUSDS">
-                    <img src="https://avatars.githubusercontent.com/u/169079684?v=4" width="100;" alt="JosephGasiorekUSDS"/>
-                    <br />
-                    <sub><b>JosephGasiorekUSDS</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/kategreenUSDS">
-                    <img src="https://avatars.githubusercontent.com/u/105316441?v=4" width="100;" alt="kategreenUSDS"/>
-                    <br />
-                    <sub><b>Kate Green</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/YvetteWhiteUSDS">
-                    <img src="https://avatars.githubusercontent.com/u/141157097?v=4" width="100;" alt="YvetteWhiteUSDS"/>
-                    <br />
-                    <sub><b>Yvette White</b></sub>
-                </a>
-            </td>
-            <td align="center">
-                <a href="https://github.com/4kategreen">
-                    <img src="https://avatars.githubusercontent.com/u/2008796?v=4" width="100;" alt="4kategreen"/>
-                    <br />
-                    <sub><b>Kate Green</b></sub>
-                </a>
-            </td>
-		</tr>
-	<tbody>
-</table>
-<!-- readme: contributors -end -->
+* See list in [CODEOWNERS.md](./CODEOWNERS.md)
