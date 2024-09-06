@@ -1,48 +1,61 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import { Provider } from 'react-redux'
 import Page from './page'
 import { makeStore } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
+import { BenefitsState, selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
+import { IncomeItem, addIncome } from '@/lib/features/ledger/income/incomeSlice'
+import TestWrapper from '@/app/TestWrapper'
 
-describe('SNAP Expense Screen', async () => {
+describe('SNAP Recommend Deduction Screen', async () => {
     let store: EnhancedStore
     beforeEach(() => {
         vi.mock('next/navigation', () => ({
             useRouter: () =>  mockRouter,
             usePathname: () => mockRouter.asPath,
         }))
-        mockRouter.push('/ledger/expense/snap')
+        mockRouter.push('/ledger/expense/snap/recommend')
         store = makeStore()
-        render (<Provider store={store}><Page /></Provider>)
+        const benefits: BenefitsState = {
+            deductionAmount: 50,
+            snap: true,
+            standardDeduction: false,
+            medicaid: true,
+        }
+        store.dispatch(setBenefits(benefits))
+
+        const incomeItem: IncomeItem = {
+            amount: 100,
+            name: "Suzy",
+            description: "Yardwork",
+        }
+        store.dispatch(addIncome(incomeItem))
+        render(<TestWrapper store={store}><Page /></TestWrapper>)
     })
     afterEach(cleanup)
 
     it('shows header', () => {
-        expect(screen.getByTestId('expense-snap-header')).toBeDefined()
+        expect(screen.getByTestId('snap_deduction_header')).toBeDefined()
     })
 
-    it('navigates to review screen if no is selected', async () => {
-        fireEvent.click(screen.getByTestId("no_radio"))
+    it('navigates to review screen if take deduction selected', async () => {
+        const radio: HTMLInputElement = screen.getByTestId("take_deduction_radio")
+        fireEvent.click(screen.getByText(/Take the standard deduction/i))
+        waitFor(() => {
+            expect(radio.checked).toEqual(true)
+        })
         fireEvent.click(screen.getByTestId("continue-button"))
+
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
                 asPath: "/ledger/review"
             })
         })
-    })
 
-    it('navigates to ledger builder if yes is selected', async () => {
-        fireEvent.click(screen.getByTestId("yes_radio"))
-        fireEvent.click(screen.getByTestId("continue-button"))
-
-        await waitFor(() => {
-            expect(mockRouter).toMatchObject({
-                asPath: "/ledger/expense"
-            })
-        })
+        const benefits = selectBenefits(store.getState())
+        expect(benefits.standardDeduction).toBeTruthy()
     })
 })
