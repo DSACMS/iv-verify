@@ -14,12 +14,13 @@ export default function Page() {
     const items = useAppSelector(state => selectIncomeItems(state))
     const jobCount = items.length
 
-    function addIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
+    function addIncomeClicked({description, business, taxesFiled, payments=[]}: IncomeFormJobData) {
 
         const jobItem: JobItem = {
             description,
             business,
-            taxesFiled
+            taxesFiled,
+            payments
         }
         // can i add a response?
         dispatch(addJob(jobItem))

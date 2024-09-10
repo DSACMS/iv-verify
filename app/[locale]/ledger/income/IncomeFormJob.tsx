@@ -3,7 +3,7 @@
 import ErrorSummary from "@/app/components/ErrorSummary"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
-import { JobItem, PaymentItem } from "@/lib/features/ledger/income/incomeSlice"
+import { JobItem } from "@/lib/features/ledger/income/incomeSlice"
 import { 
   Button, 
   Form, 
@@ -22,6 +22,7 @@ export type IncomeFormJobData = {
   description: string
   business: string
   taxesFiled: boolean
+  payments: []
 }
 
 export default function IncomeFormJob(params: IncomeFormJobProps) {
