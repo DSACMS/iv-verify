@@ -40,7 +40,7 @@ describe('Edit Income Item Page', async () => {
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
-                asPath: "/ledger/income/list"
+                asPath: "/ledger/income/0/payment/add"
             })
 
             const items = store.getState().incomeLedger.items
