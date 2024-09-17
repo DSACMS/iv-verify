@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next"
-import { JobItem, PaymentItem, removeIncome, selectIncomeItems } from "@/lib/features/ledger/income/incomeSlice"
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { JobItem, PaymentItem, removeIncome } from "@/lib/features/ledger/income/incomeSlice"
+import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
@@ -14,7 +14,7 @@ export default function IncomeListItem({ item, index }: ItemProps) {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const payments = item.payments.map((payment: PaymentItem) => {
-        return <li>{payment.date}: ${payment.amount} by {payment.payer}</li>
+        return `<li>${payment.date}: ${payment.amount} by {payment.payer}</li>`
     })
 
     function onDeleteClicked() {

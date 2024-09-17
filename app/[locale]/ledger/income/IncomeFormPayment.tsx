@@ -2,7 +2,6 @@
 
 import ErrorSummary from "@/app/components/ErrorSummary"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
-import TextAreaWithValidation from "@/app/components/TextAreaWithValidation"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 import { PaymentItem } from "@/lib/features/ledger/income/incomeSlice"
 import { Button, DatePicker, Form, FormGroup, Label, RequiredMarker } from "@trussworks/react-uswds"
@@ -32,6 +31,9 @@ export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
 
     return (
         <Form onSubmit={handleSubmit(params.onSubmit)}>
+            <RequiredFieldDescription />
+            <ErrorSummary errors={errors} headingText={t('add_income_error_header')} />
+
             <FormGroup>
                 <TextFieldWithValidation
                     id="amount"

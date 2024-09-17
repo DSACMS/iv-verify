@@ -82,14 +82,14 @@ export default function IncomeFormJob(params: IncomeFormJobProps) {
           name="taxes-filed"
           label={t('add_income_taxes_no')}
           tile
-          onChange={(e) => setValue("taxesFiled", false)}
+          onChange={() => setValue("taxesFiled", false)}
         />
         <Radio
           id="taxesFiledYes"
           name="taxes-filed"
           label={t('add_income_taxes_yes')}
           tile
-          onChange={(e) => setValue("taxesFiled", true)}
+          onChange={() => setValue("taxesFiled", true)}
         />
       </FormGroup>
 

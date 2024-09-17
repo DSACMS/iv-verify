@@ -1,29 +1,71 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
-import reducer, {IncomeItem, addJob, removeIncome, initialState, selectIncomeItems, selectIncomeTotal} from './incomeSlice'
+import reducer, {
+    JobItem, 
+    PaymentItem, 
+    addJob,
+    addPayment, 
+    removeIncome, 
+    initialState, 
+    selectIncomeItems, 
+    selectIncomeTotal
+} from './incomeSlice'
 import { makeStore } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
 
 describe('IncomeSlice', () => {
-    const item: IncomeItem = {
-        name: 'Name',
+    const item: JobItem = {
         description: 'A description',
-        amount: 45.33
+        business: 'A business name',
+        taxesFiled: true,
+        payments: [
+            {
+                idx: 0, 
+                amount: 15,
+                date: '09/09/2024',
+                payer: 'Someone'
+            }, {
+                idx: 0, 
+                amount: 25,
+                date: '09/12/2024',
+                payer: 'Someone' 
+            }
+        ]
     }
 
-    const item2: IncomeItem = {
-        name: 'Name2',
+    const item2: JobItem = {
         description: 'A description2',
-        amount: 49.44
+        business: '',
+        taxesFiled: false,
+        payments: [
+            {
+                idx: 0, 
+                amount: 10,
+                date: '09/30/2024',
+                payer: 'Someone' 
+            }
+        ]
     }
+
+    const payment: PaymentItem = {
+        idx: 0, 
+        amount: 10,
+        date: '09/30/2024',
+        payer: 'Someone' 
+    }
+
 
     describe('actions', () => {
         it('should return the initial state', () => {
-            expect(reducer(undefined, { type: 'unkown' })).toEqual({items:[]})
+            expect(reducer(undefined, { type: 'unknown' })).toEqual({items:[]})
         })
 
-        it('should handle adding income items', () => {
+        it('should handle adding job items', () => {
             expect(reducer(initialState, addJob(item))).toEqual({items:[item]})
+        })
+
+        it.skip('should handle adding payment items', () => {
+            expect(reducer(initialState, addPayment(payment))).toEqual({items:item.payments})
         })
 
         it('should handle removing income items', () => {
@@ -44,7 +86,7 @@ describe('IncomeSlice', () => {
         })
 
         it('can total the income items', () => {
-            expect(selectIncomeTotal(store.getState())).toEqual(item.amount+item2.amount)
+            expect(selectIncomeTotal(store.getState())).toEqual(50)
         })
     })
 })

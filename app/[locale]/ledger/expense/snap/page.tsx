@@ -78,7 +78,7 @@ export default function Page() {
                                         className="margin-top-5" 
                                         data-testid="take_deduction_radio" 
                                         value="on" 
-                                        onChange={(e) => setValue("snapRadio", true)}
+                                        onChange={() => setValue("snapRadio", true)}
                                     />
                                     <Radio 
                                         id="do_not_take_deduction_radio"
@@ -87,7 +87,7 @@ export default function Page() {
                                         tile 
                                         data-testid="do_not_take_deduction_radio" 
                                         value="on" 
-                                        onChange={(e) => setValue("snapRadio", false)}
+                                        onChange={() => setValue("snapRadio", false)}
                                     />
                                 </FormGroup>
 
