@@ -28,6 +28,16 @@ export type AppStore = ReturnType<typeof makeStore>
 export type RootState = ReturnType<AppStore['getState']>
 export type AppDispatch = AppStore['dispatch']
 
+/**
+ * Post-expenses, evaluate if standard deduction is more avantageous. 
+ * If total income * std ded > expenses, then should return true
+ * 
+ * TODO: Needs tests
+ * TODO: why are the std ded methods here and not in benefits slice?
+ * 
+ * @param state 
+ * @returns 
+ */
 export const isStandardDeductionBetter = (state: RootState) => {
     const benefits = selectBenefits(state)
     const incomeTotal = selectIncomeTotal(state)
@@ -37,6 +47,16 @@ export const isStandardDeductionBetter = (state: RootState) => {
     return expenseTotal < incomeTotal * percent
 }
 
+/**
+ * Do we recommend they take a standard deduction based on SNAP?
+ * This is to evaluate before they add expenses
+ * 
+ * TODO: add amount that expenses should be less than
+ * TODO: add tests
+ * 
+ * @param state RootState
+ * @returns Boolean
+ */
 export const recommendStandardDeduction = (state: RootState) => {
     const benefits = selectBenefits(state)
 

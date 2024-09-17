@@ -56,7 +56,18 @@ export const incomeSlice = createSlice({
 
 export const { addJob, addPayment, removeIncome, setIncomeItem } = incomeSlice.actions
 export const selectIncomeItems = (state: RootState) => state.incomeLedger.items
-export const selectIncomeTotal = (state: RootState) => state.incomeLedger.items.reduce((val: number, item: JobItem) => item.amount + val, 0)
+
+/**
+ * TODO: needs tests and to be a little more clear what's happening
+ * 
+ * @param state 
+ */
+export const selectIncomeTotal = (state: RootState) => {
+    return state.incomeLedger.items.reduce((total: number, item: JobItem) => 
+        total + item.payments.reduce((jobTotal: number, payment: PaymentItem) => jobTotal + payment.amount, 0)
+    , 0)
+}
+
 export const selectIncomeItemAt = (state: RootState, idx: number) => state.incomeLedger.items.at(idx)
 
 export default incomeSlice.reducer
