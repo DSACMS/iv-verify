@@ -14,7 +14,7 @@ export default function IncomeListItem({ item, index }: ItemProps) {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const payments = item.payments.map((payment: PaymentItem) => {
-        return `<li>${payment.date}: ${payment.amount} by {payment.payer}</li>`
+        return (<li key="{payment.idx}">{payment.date} ${payment.amount} {t('list_income_by')} {payment.payer}</li>)
     })
 
     function onDeleteClicked() {
