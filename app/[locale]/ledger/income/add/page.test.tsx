@@ -50,7 +50,7 @@ describe('Add Income To Ledger Page', async () => {
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
-                asPath: "/ledger/income/add/payment"
+                asPath: "/ledger/income/0/payment/add"
             })
         })
     })

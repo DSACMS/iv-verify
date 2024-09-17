@@ -6,7 +6,7 @@ import { makeStore } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { addJob, IncomeItem } from '@/lib/features/ledger/income/incomeSlice'
+import { addJob, JobItem } from '@/lib/features/ledger/income/incomeSlice'
 import { BenefitsState, setBenefits } from '@/lib/features/benefits/benefitsSlice'
 
 describe('List Income in Ledger Page', async () => {
@@ -28,15 +28,17 @@ describe('List Income in Ledger Page', async () => {
     })
     
     it('shows items in list', () => {
-        const item1: IncomeItem = {
+        const item1: JobItem = {
             description: 'desc1',
             business: 'fname lname',
-            taxesFiled: false
+            taxesFiled: false,
+            payments: []
         }
-        const item2: IncomeItem = {
+        const item2: JobItem = {
             description: 'desc2',
             business : 'foo bar',
-            taxesFiled: true
+            taxesFiled: true,
+            payments: []
         }
         const items = [item1, item2]
         store.dispatch(addJob(item1))

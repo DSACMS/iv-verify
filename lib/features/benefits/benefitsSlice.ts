@@ -2,14 +2,19 @@ import { createSlice, PayloadAction} from '@reduxjs/toolkit'
 import type { RootState } from '@/lib/store'
 
 export interface BenefitsState {
-    medicaid?: boolean
-    snap?: boolean
-    standardDeduction?: boolean
-    deductionAmount?: number
+    medicaid: boolean
+    snap: boolean
+    standardDeduction: boolean
+    deductionAmount: number
 }
 
+/**
+ * This is the defaults for the pilot for Oregon
+ */
 export const initialState: BenefitsState = { 
-    standardDeduction: true,
+    medicaid: false,
+    snap: false,
+    standardDeduction: false,
     deductionAmount: 50,
 }
 

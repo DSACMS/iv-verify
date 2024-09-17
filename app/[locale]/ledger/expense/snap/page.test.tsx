@@ -6,7 +6,7 @@ import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 import { BenefitsState, selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
-import { IncomeItem, addIncome } from '@/lib/features/ledger/income/incomeSlice'
+import { JobItem, addJob } from '@/lib/features/ledger/income/incomeSlice'
 import TestWrapper from '@/app/TestWrapper'
 
 describe('SNAP Recommend Deduction Screen', async () => {
@@ -16,7 +16,7 @@ describe('SNAP Recommend Deduction Screen', async () => {
             useRouter: () =>  mockRouter,
             usePathname: () => mockRouter.asPath,
         }))
-        mockRouter.push('/ledger/expense/snap/recommend')
+        mockRouter.push('/ledger/expense/snap')
         store = makeStore()
         const benefits: BenefitsState = {
             deductionAmount: 50,
@@ -26,36 +26,47 @@ describe('SNAP Recommend Deduction Screen', async () => {
         }
         store.dispatch(setBenefits(benefits))
 
-        const incomeItem: IncomeItem = {
-            amount: 100,
-            name: "Suzy",
+        const jobItem: JobItem = {
             description: "Yardwork",
+            business: "Suzy",
+            taxesFiled: false,
+            payments: []
         }
-        store.dispatch(addIncome(incomeItem))
+        store.dispatch(addJob(jobItem))
         render(<TestWrapper store={store}><Page /></TestWrapper>)
     })
     afterEach(cleanup)
 
     it('shows header', () => {
-        expect(screen.getByTestId('snap_deduction_header')).toBeDefined()
+        expect(screen.getByTestId('expense-snap-header')).toBeDefined()
     })
 
-    it('navigates to review screen if take deduction selected', async () => {
+    it.each([
+      { 
+        text: 'Take the standard deduction', 
+        selection: true, 
+        expectedRoute: '/ledger/review'
+      }, {
+        text: 'Do not take the SNAP standard deduction, use my Medicaid expenses',
+        selection: false,
+        expectedRoute: '/ledger/expense'
+      }
+    ])('navigates to $expectedRoute if take deduction is $selection', async ({ text, selection, expectedRoute }) => {
         const radio: HTMLInputElement = screen.getByTestId("take_deduction_radio")
-        fireEvent.click(screen.getByText(/Take the standard deduction/i))
+        fireEvent.click(screen.getByText(text))
         waitFor(() => {
-            expect(radio.checked).toEqual(true)
+            expect(radio.checked).toEqual(selection)
         })
         fireEvent.click(screen.getByTestId("continue-button"))
 
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
-                asPath: "/ledger/review"
+                asPath: expectedRoute
             })
         })
 
         const benefits = selectBenefits(store.getState())
-        expect(benefits.standardDeduction).toBeTruthy()
+        expect(benefits.standardDeduction).toBe(selection)
     })
 })

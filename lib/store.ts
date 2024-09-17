@@ -28,15 +28,17 @@ export type AppStore = ReturnType<typeof makeStore>
 export type RootState = ReturnType<AppStore['getState']>
 export type AppDispatch = AppStore['dispatch']
 
-export const selectRecommendStandardDeduction = (state: RootState) => {
+export const isStandardDeductionBetter = (state: RootState) => {
     const benefits = selectBenefits(state)
     const incomeTotal = selectIncomeTotal(state)
     const expenseTotal = selectExpenseTotal(state)
 
-    if (!benefits.snap || benefits.deductionAmount === undefined) {
-        return false
-    }
-
     const percent = benefits.deductionAmount / 100
     return expenseTotal < incomeTotal * percent
+}
+
+export const recommendStandardDeduction = (state: RootState) => {
+    const benefits = selectBenefits(state)
+
+    return (benefits.standardDeduction || benefits.snap || benefits.deductionAmount !== undefined) ? true : false
 }

@@ -3,21 +3,25 @@
 import { Button, Grid, GridContainer } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
 import { useRouter } from "next/navigation"
-import { selectBenefits } from "@/lib/features/benefits/benefitsSlice"
 import { useAppSelector } from "@/lib/hooks"
 import IncomeList from "@/app/components/IncomeList"
 import VerifyNav from "@/app/components/VerifyNav"
+import { recommendStandardDeduction } from "@/lib/store"
 
 const DAY_COUNT = 30
 
 export default function Page() {
     const { t } = useTranslation()
     const router = useRouter()
-    const benefits = useAppSelector(state => selectBenefits(state))
+    
+    const routeToStandardDeductionElection = useAppSelector(state => recommendStandardDeduction(state))
 
     function doneClicked() {
-        // For Medicaid Only or SNAP+Medicaid Flows
-        router.push('/ledger/expense')
+        if (routeToStandardDeductionElection) {
+            router.push("/ledger/expense/snap")
+        } else {
+            router.push("/ledger/expense")
+        }
     }
 
     return (
