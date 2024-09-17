@@ -28,9 +28,9 @@ describe('Edit Income Item Page', async () => {
     })
     afterEach(cleanup)
 
-    it.skip('Shows Inputs', () => {
+    it('Shows Inputs', () => {
         expect(screen.getByTestId("description")).toBeDefined()
-        expect((screen.getByTestId("description") as HTMLAreaElement).textContent).toBe(item1.description)
+        expect((screen.getByTestId("description") as HTMLInputElement).value).toBe(item1.description)
     })
 
     it('Navigates when fields are filled in', async () => {
