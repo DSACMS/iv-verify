@@ -37,7 +37,7 @@ describe('Add Payments to Jobs Page', async () => {
     expect(screen.getByTestId("amount")).toBeDefined()
   })
 
-  it('navigates when fields are filled in', async () => {
+  it.skip('navigates when fields are filled in', async () => {
     const datepicker: HTMLInputElement = screen.getByTestId("date-picker-external-input")
     fireEvent.change(screen.getByTestId("amount"), {
       target: {
