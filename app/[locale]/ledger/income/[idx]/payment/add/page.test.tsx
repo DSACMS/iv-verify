@@ -10,6 +10,34 @@ import { makeStore } from '@/lib/store'
 
 import { JobItem, addJob } from '@/lib/features/ledger/income/incomeSlice'
 
+/**
+ * Set date from month day year
+ * from https://github.com/trussworks/react-uswds/blob/main/src/components/forms/DatePicker/utils.tsx
+ *
+ * @param {number} year the year to set
+ * @param {number} month the month to set (zero-indexed)
+ * @param {number} date the date to set
+ * @returns {Date} the set date
+ */
+export const setDate = (year: number, month: number, date: number): Date => {
+  const newDate = new Date(0)
+  newDate.setFullYear(year, month, date)
+  return newDate
+}
+
+/**
+ * todays date
+ * from https://github.com/trussworks/react-uswds/blob/main/src/components/forms/DatePicker/utils.tsx
+ *
+ * @returns {Date} todays date
+ */
+export const today = (): Date => {
+  const newDate = new Date()
+  const day = newDate.getDate()
+  const month = newDate.getMonth()
+  const year = newDate.getFullYear()
+  return setDate(year, month, day)
+}
 
 describe('Add Payments to Jobs Page', async () => {
   let store: EnhancedStore
@@ -37,18 +65,23 @@ describe('Add Payments to Jobs Page', async () => {
     expect(screen.getByTestId("amount")).toBeDefined()
   })
 
-  it.skip('navigates when fields are filled in', async () => {
+  it('navigates when fields are filled in', async () => {
+    const todayDate = today()
+    const month = todayDate.getMonth()+1
+    const formattedMonth = month.toString().length === 1 ? 
+      `0${month}` : month
+    const day = todayDate.getDate().toString().length === 1 ? `0${todayDate.getDate()}` : todayDate.getDate()
+    const expectedDate = `${formattedMonth}/${day}/${todayDate.getFullYear()}`;
+
     const datepicker: HTMLInputElement = screen.getByTestId("date-picker-external-input")
     fireEvent.change(screen.getByTestId("amount"), {
       target: {
           value: '11'
       }
     })
-    fireEvent.change(datepicker, {
-      target: {
-          value: '09/09/2024'
-      }
-    })
+    fireEvent.click(screen.getByTestId('date-picker-button'))
+    fireEvent.click(screen.getByText(todayDate.getDate()))
+
     fireEvent.change(screen.getByTestId("payer"), {
       target: {
           value: 'My client'
@@ -61,7 +94,7 @@ describe('Add Payments to Jobs Page', async () => {
       expect(datepicker).toBeInstanceOf(
         HTMLInputElement
       )
-      expect(datepicker.value).toEqual("09/09/2024")
+      expect(datepicker).toHaveProperty("value", expectedDate)
       expect(mockRouter).toMatchObject({
           asPath: "/ledger/income/list"
       })
