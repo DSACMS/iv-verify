@@ -56,7 +56,6 @@ export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
                             <Label htmlFor="date">{t('add_income_payment_date')}<RequiredMarker /></Label>
                             <DatePicker
                                 id="date"
-                                data-testid="date"
                                 {...field}
                                 {...(errors.date?.message !== undefined ? {validationStatus: 'error'} : {})}
                             />

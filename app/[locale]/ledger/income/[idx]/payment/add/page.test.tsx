@@ -26,16 +26,62 @@ describe('Add Payments to Jobs Page', async () => {
       usePathname: () => mockRouter.asPath,
     }))
 
-    mockRouter.push('/ledger/income/add')
+    mockRouter.push('/ledger/income/0/payment/add')
     store = makeStore()
     store.dispatch(addJob(item1))
     render (<TestWrapper store={store}><Page params={{idx: 0}} /></TestWrapper>)
   })
   afterEach(cleanup)
 
-  it.skip('shows inputs')
+  it('shows inputs', () => {
+    expect(screen.getByTestId("amount")).toBeDefined()
+  })
 
-  it.skip('navigates when fields are filled in')
+  it('navigates when fields are filled in', async () => {
+    const datepicker: HTMLInputElement = screen.getByTestId("date-picker-external-input")
+    fireEvent.change(screen.getByTestId("amount"), {
+      target: {
+          value: '11'
+      }
+    })
+    fireEvent.change(datepicker, {
+      target: {
+          value: '09/09/2024'
+      }
+    })
+    fireEvent.change(screen.getByTestId("payer"), {
+      target: {
+          value: 'My client'
+      }
+    })
 
-  it.skip('displays error messages when fields are empty')
+  fireEvent.click(screen.getByText('Continue'))
+
+  await waitFor(() => {
+      expect(datepicker).toBeInstanceOf(
+        HTMLInputElement
+      )
+      expect(datepicker.value).toEqual("09/09/2024")
+      expect(mockRouter).toMatchObject({
+          asPath: "/ledger/income/list"
+      })
+  })
+  })
+
+  it('displays error messages when fields are empty', async () => {
+    ["amount", "date-picker-external-input", "payer"].forEach((field) => {
+      fireEvent.change(screen.getByTestId(field), { target: { value: '' }})
+    })
+
+    fireEvent.click(screen.getByText('Continue'))
+    await waitFor(() => {
+        expect(screen.getByTestId("alert")).toBeDefined()
+    })
+
+    expect(screen.getAllByTestId("errorMessage")).toBeDefined()
+
+    expect(mockRouter).toMatchObject({
+        asPath: "/ledger/income/0/payment/add"
+    })
+  })
 })

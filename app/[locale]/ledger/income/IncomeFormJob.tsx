@@ -48,7 +48,7 @@ export default function IncomeFormJob(params: IncomeFormJobProps) {
               value: true, 
               message: t('add_income_description_field_required')}, 
               maxLength: {
-                value: 500, 
+                value: 100, 
                 message: t('add_income_description_field_length')
               }
             }
