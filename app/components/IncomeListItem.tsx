@@ -41,7 +41,7 @@ export default function IncomeListItem({ item, index }: ItemProps) {
                 </div>
             </Grid>
             <Grid col={2}>
-                <ModalToggleButton modalRef={ref} opener unstyled className="margin-bottom-2">{t('list_income_delete_button')}</ModalToggleButton>
+                <ModalToggleButton modalRef={ref} opener unstyled className="margin-bottom-2 desktop:grid-col-12">{t('list_income_delete_button')}</ModalToggleButton>
                 <Modal ref={ref} id="delete-modal">
                     <ModalHeading>{t('list_income_delete_are_you_sure')}</ModalHeading>
                     <ModalFooter>
@@ -51,11 +51,11 @@ export default function IncomeListItem({ item, index }: ItemProps) {
                         </ButtonGroup>
                     </ModalFooter>
                 </Modal>
-                <Button type="button" unstyled onClick={editClicked}>{t('edit')}</Button>
+                <Button type="button" className="desktop:grid-col-12 usa-button--unstyled" onClick={editClicked}>{t('edit')}</Button>
             </Grid>
             <Grid col={12}>
                 <ButtonGroup>
-                    <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_payment_button')}</Button>
+                    <Button type="button" className="margin-top-2 margin-bottom-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_payment_button')}</Button>
                 </ButtonGroup>
 
                 <hr />

@@ -53,7 +53,7 @@ export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
                     rules={{ required: {value:true, message: t('add_income_required_field')} }}
                     render={({ field }) => (
                         <>
-                            <Label htmlFor="date">{t('add_income_payment_date')}<RequiredMarker /></Label>
+                            <Label htmlFor="date" className="text-bold">{t('add_income_payment_date')}<RequiredMarker /></Label>
                             <DatePicker
                                 id="date"
                                 {...field}
