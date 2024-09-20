@@ -61,7 +61,7 @@ export default function Page() {
                     <Grid row gap>
                         <main className="usa-layout-docs">
                             <Form onSubmit={handleSubmit(onSubmit)}>
-                                <h3 className="margin-bottom-2" data-testid="expense-snap-header">{t('expenses_snap_standard_header', {amount: MONTHLY_AMOUNT})}</h3>
+                                <h3 className="margin-bottom-2" data-testid="snap_deduction_header">{t('expenses_snap_standard_header', {amount: MONTHLY_AMOUNT})}</h3>
 
                                 <span className="usa-hint">{t('expenses_snap_standard_subheader')}</span>
 

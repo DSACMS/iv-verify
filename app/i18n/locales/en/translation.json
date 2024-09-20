@@ -82,7 +82,7 @@
   "expenses_snap_standard_no_header": "No, my monthly expenses are ${{amount}} or less",
   "expenses_snap_standard_no_subheader": "Great! You don't need to provide any more information",
   "expenses_snap_standard_subheader": "Expenses or costs from self employment work are deducted from your income",
-  "expenses_snap_standard_title": "SNAP self employement expenses",
+  "expenses_snap_standard_title": "SNAP self employment expenses",
   "expenses_snap_standard_yes_header": "Yes, my monthly expenses are more than ${{amount}}",
   "expenses_snap_standard_yes_subheader": "We will recommend you itemize or detail your expenses",
   "expenses_snap_take_body": "We recommend this!",

@@ -38,7 +38,7 @@ describe('SNAP Recommend Deduction Screen', async () => {
     afterEach(cleanup)
 
     it('shows header', () => {
-        expect(screen.getByTestId('expense-snap-header')).toBeDefined()
+        expect(screen.getByTestId('snap_deduction_header')).toBeDefined()
     })
 
     it.each([
