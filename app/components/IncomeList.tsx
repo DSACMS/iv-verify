@@ -1,6 +1,6 @@
 'use client'
 
-import { IncomeItem, selectIncomeItems, selectIncomeTotal } from "@/lib/features/ledger/income/incomeSlice"
+import { JobItem, selectIncomeItems, selectIncomeTotal } from "@/lib/features/ledger/income/incomeSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import IncomeListItem from "./IncomeListItem"
@@ -17,7 +17,7 @@ export default function IncomeList({dayCount, header}: Props) {
     const router = useRouter()
     const items = useAppSelector(state => selectIncomeItems(state))
     const incomeTotal = useAppSelector(state => selectIncomeTotal(state))
-    const incomeItemElements = items.map((item: IncomeItem, idx: number) => {
+    const incomeItemElements = items.map((item: JobItem, idx: number) => {
         return <IncomeListItem key={idx} item={item} index={idx} />
     })
 
@@ -43,7 +43,7 @@ export default function IncomeList({dayCount, header}: Props) {
                     </GridContainer>
                     {getTotal()}
                     <ButtonGroup>
-                        <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_button')}</Button>
+                        <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_job_button')}</Button>
                     </ButtonGroup>
                 </CardBody>
             </Card>

@@ -1,5 +1,5 @@
 
-import { defineConfig, coverageConfigDefaults } from 'vitest/config'
+import { defineConfig, configDefaults, coverageConfigDefaults } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
 
@@ -14,6 +14,11 @@ export default defineConfig({
                 ['html'],
                 ['json', { 'file': 'coverage.json' }]
             ]
-        }
+        },
+        // excluding a directory where there is no page to test
+        exclude: [
+            ...configDefaults.exclude,
+            'app/[locale]/ledger/income/[idx]/payment/*',
+        ]
     }
 })

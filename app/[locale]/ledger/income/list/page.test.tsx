@@ -6,7 +6,7 @@ import { makeStore } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { addIncome, IncomeItem } from '@/lib/features/ledger/income/incomeSlice'
+import { addJob, JobItem } from '@/lib/features/ledger/income/incomeSlice'
 import { BenefitsState, setBenefits } from '@/lib/features/benefits/benefitsSlice'
 
 describe('List Income in Ledger Page', async () => {
@@ -28,25 +28,26 @@ describe('List Income in Ledger Page', async () => {
     })
     
     it('shows items in list', () => {
-        const item1: IncomeItem = {
-            name: 'fname lname',
+        const item1: JobItem = {
             description: 'desc1',
-            amount: 40
+            business: 'fname lname',
+            taxesFiled: false,
+            payments: []
         }
-        const item2: IncomeItem = {
-            name : 'foo bar',
+        const item2: JobItem = {
             description: 'desc2',
-            amount: 75
+            business : 'foo bar',
+            taxesFiled: true,
+            payments: []
         }
         const items = [item1, item2]
-        store.dispatch(addIncome(item1))
-        store.dispatch(addIncome(item2))
+        store.dispatch(addJob(item1))
+        store.dispatch(addJob(item2))
         render (<Provider store={store}><Page /></Provider>)
 
         for (let item of items) {
-            expect(screen.getByText(item.name))
             expect(screen.getByText(item.description))
-            expect(screen.getByText("$" + item.amount))
+            expect(screen.getByText(item.business))
         }
     })
 

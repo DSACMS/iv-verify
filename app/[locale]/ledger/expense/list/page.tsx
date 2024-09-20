@@ -4,20 +4,24 @@ import { Button, Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
 import { useRouter } from "next/navigation"
 import ExpenseList from "@/app/components/ExpenseList"
+import { selectBenefits } from '@/lib/features/benefits/benefitsSlice'
 import { useAppSelector } from "@/lib/hooks"
-import { selectRecommendStandardDeduction } from "@/lib/store"
 import VerifyNav from "@/app/components/VerifyNav"
+import { isStandardDeductionBetter } from '@/lib/store'
 
 export default function Page() {
     const { t } = useTranslation()
     const router = useRouter()
-    const recommendStandardDeduction = useAppSelector(state => selectRecommendStandardDeduction(state))
+
+    const benefits = useAppSelector(state => selectBenefits(state))
+    const standardDeductionIsBetter = useAppSelector(state => isStandardDeductionBetter(state))
 
     function doneClicked() {
-        if (recommendStandardDeduction) {
-            router.push("/ledger/expense/snap")
-        } else {
-            router.push("/ledger/review")
+        // For Medicaid Only or SNAP+Medicaid Flows
+        if (!benefits.standardDeduction && benefits.snap && standardDeductionIsBetter) {
+            router.push('/ledger/expense/snap/recommend')
+        } else { 
+            router.push('/ledger/review')
         }
     }
 

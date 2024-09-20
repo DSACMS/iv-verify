@@ -6,14 +6,15 @@ import mockRouter from 'next-router-mock'
 import TestWrapper from '@/app/TestWrapper'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
 import { makeStore } from '@/lib/store'
-import { IncomeItem, addIncome } from '@/lib/features/ledger/income/incomeSlice'
+import { JobItem, addJob } from '@/lib/features/ledger/income/incomeSlice'
 
 describe('Edit Income Item Page', async () => {
     let store: EnhancedStore
-    const item1: IncomeItem = {
-        name: 'fname lname',
+    const item1: JobItem = {
         description: 'desc1',
-        amount: 40
+        business: 'business!',
+        taxesFiled: false,
+        payments: []
     }
     beforeEach(() => {
         vi.mock('next/navigation', () => ({
@@ -22,28 +23,20 @@ describe('Edit Income Item Page', async () => {
         }))
         mockRouter.push('/ledger/income/edit/0')
         store = makeStore()
-        store.dispatch(addIncome(item1))
+        store.dispatch(addJob(item1))
         render (<TestWrapper store={store}><Page params={{idx: 0}} /></TestWrapper>)
     })
     afterEach(cleanup)
 
     it('Shows Inputs', () => {
-        expect(screen.getByTestId("name")).toBeDefined()
-        expect((screen.getByTestId("name") as HTMLInputElement).value).toBe(item1.name)
         expect(screen.getByTestId("description")).toBeDefined()
-        expect((screen.getByTestId("description") as HTMLAreaElement).textContent).toBe(item1.description)
-        expect(screen.getByTestId("amount")).toBeDefined()
-        expect((screen.getByTestId("amount") as HTMLInputElement).value).toBe(item1.amount.toString())
+        expect((screen.getByTestId("description") as HTMLInputElement).value).toBe(item1.description)
     })
 
     it('Navigates when fields are filled in', async () => {
-        const newName = "Jane"
         const newDescription = "Landscaping"
-        const newAmount = 45.00
-        fireEvent.change(screen.getByTestId("name"), { target: { value: newName } })
         fireEvent.change(screen.getByTestId("description"), { target: { value: newDescription } })
-        fireEvent.change(screen.getByTestId("amount"), { target: { value: newAmount.toString() } })
-        fireEvent.click(screen.getByText('Continue'))
+        fireEvent.click(screen.getByText('Add income'))
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
@@ -52,19 +45,17 @@ describe('Edit Income Item Page', async () => {
 
             const items = store.getState().incomeLedger.items
             expect(items.length).toBe(1)
-            expect(items[0].name).toBe(newName)
             expect(items[0].description).toBe(newDescription)
-            expect(items[0].amount).toBe(newAmount)
         })
     })
 
 
     it('Displays error messages when fields are empty', async () => {
-        ["name", "description", "amount"].forEach((field) => {
+        ["description"].forEach((field) => {
             fireEvent.change(screen.getByTestId(field), { target: { value: '' }})
         })
 
-        fireEvent.click(screen.getByText('Continue'))
+        fireEvent.click(screen.getByText('Add income'))
         await waitFor(() => {
             expect(screen.getByTestId("alert")).toBeDefined()
         })

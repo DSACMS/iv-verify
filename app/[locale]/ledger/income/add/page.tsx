@@ -1,26 +1,30 @@
 'use client'
 import { Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
-import { useAppDispatch } from "@/lib/hooks"
-import { addIncome, IncomeItem } from "@/lib/features/ledger/income/incomeSlice"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { addJob, JobItem, selectIncomeItems } from "@/lib/features/ledger/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
-import IncomeItemForm, { IncomeItemFormData } from '@/app/[locale]/ledger/income/IncomeItemForm'
+import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/ledger/income/IncomeFormJob'
 
 export default function Page() {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
+    const items = useAppSelector(state => selectIncomeItems(state))
+    const jobCount = items.length
 
-    function addIncomeClicked({name, description, amount}: IncomeItemFormData) {
+    function addIncomeClicked({description, business, taxesFiled, payments=[]}: IncomeFormJobData) {
 
-        const incomeItem: IncomeItem = {
-            name,
+        const jobItem: JobItem = {
             description,
-            amount,
+            business,
+            taxesFiled,
+            payments
         }
-        dispatch(addIncome(incomeItem))
-        router.push('/ledger/income/list')
+        // can i add a response?
+        dispatch(addJob(jobItem))
+        router.push(`/ledger/income/${jobCount}/payment/add`)
     }
 
     return (
@@ -30,8 +34,11 @@ export default function Page() {
                 <GridContainer>
                     <Grid row gap>
                         <main className="usa-layout-docs">
-                            <h3>{t('add_income_header')}</h3>
-                            <IncomeItemForm onSubmit={addIncomeClicked} />
+                            <h3>{t(
+                                'add_income_header', 
+                                {'nth': jobCount === 0 ? 'first': 'next'}
+                            )}</h3>
+                            <IncomeFormJob onSubmit={addIncomeClicked} />
                          </main>
                     </Grid>
                 </GridContainer>

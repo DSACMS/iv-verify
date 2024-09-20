@@ -17,31 +17,17 @@ describe('Add Income To Ledger Page', async () => {
     afterEach(cleanup)
 
     it('Shows Inputs', () => {
-        expect(screen.getByTestId("name")).toBeDefined()
         expect(screen.getByTestId("description")).toBeDefined()
-        expect(screen.getByTestId("amount")).toBeDefined()
     })
 
-    it('Displays error messages when fields are empty', async () => {
-        fireEvent.change(screen.getByTestId("name"), {
-            target: {
-                value: ''
-            }
-        })
-           
+    it('Displays error messages when fields are empty', async () => {           
         fireEvent.change(screen.getByTestId("description"), {
             target: {
                 value: ''
             }
         })
 
-        fireEvent.change(screen.getByTestId("amount"), {
-            target: {
-                value: ''
-            }
-        })
-
-        fireEvent.click(screen.getByText('Continue'))
+        fireEvent.click(screen.getByText('Add income'))
         await waitFor(() => {
             expect(screen.getByTestId("alert")).toBeDefined()
         })
@@ -53,30 +39,18 @@ describe('Add Income To Ledger Page', async () => {
         })
     })
 
-    it('Navigates when fields are filled in', async () => {
-        fireEvent.change(screen.getByTestId("name"), {
-            target: {
-                value: 'Jane'
-            }
-        })
-           
+    it('Navigates when fields are filled in', async () => {           
         fireEvent.change(screen.getByTestId("description"), {
             target: {
                 value: 'Landscaping'
             }
         })
 
-        fireEvent.change(screen.getByTestId("amount"), {
-            target: {
-                value: '40.00'
-            }
-        })
-
-        fireEvent.click(screen.getByText('Continue'))
+        fireEvent.click(screen.getByText('Add income'))
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
-                asPath: "/ledger/income/list"
+                asPath: "/ledger/income/0/payment/add"
             })
         })
     })

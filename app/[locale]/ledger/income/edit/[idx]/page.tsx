@@ -1,10 +1,10 @@
 'use client'
 import VerifyNav from "@/app/components/VerifyNav"
-import { IncomeItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/ledger/income/incomeSlice"
+import { JobItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/ledger/income/incomeSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
-import IncomeItemForm, { IncomeItemFormData } from "@/app/[locale]/ledger/income/IncomeItemForm"
+import IncomeFormJob, { IncomeFormJobData } from "@/app/[locale]/ledger/income/IncomeFormJob"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
 
@@ -14,17 +14,17 @@ export default function EditIncome({ params }: { params: { idx: number } }) {
     const router = useRouter()
     const item = useAppSelector(state => selectIncomeItemAt(state, params.idx))
 
-    function editIncomeClicked({name, description, amount}: IncomeItemFormData) {
+    function editIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
         dispatch(setIncomeItem({
             item: {
-                name,
                 description,
-                amount,
-            } as IncomeItem,
+                business,
+                taxesFiled
+            } as JobItem,
             idx: params.idx,
         }))
 
-        router.push('/ledger/income/list')
+        router.push(`/ledger/income/list`)
     }
 
     return (
@@ -35,7 +35,7 @@ export default function EditIncome({ params }: { params: { idx: number } }) {
                     <Grid row gap>
                         <main className="usa-layout-docs">
                             <h3>{t('edit_income_header')}</h3>
-                            <IncomeItemForm onSubmit={editIncomeClicked} item={item} />
+                            <IncomeFormJob onSubmit={editIncomeClicked} item={item} />
                          </main>
                     </Grid>
                 </GridContainer>

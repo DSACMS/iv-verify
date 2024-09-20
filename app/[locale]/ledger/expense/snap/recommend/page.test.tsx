@@ -16,7 +16,7 @@ describe('SNAP Recommend Deduction Screen', async () => {
             useRouter: () =>  mockRouter,
             usePathname: () => mockRouter.asPath,
         }))
-        mockRouter.push('/ledger/expense/snap')
+        mockRouter.push('/ledger/expense/snap/recommend')
         store = makeStore()
         const benefits: BenefitsState = {
             deductionAmount: 50,
@@ -26,47 +26,44 @@ describe('SNAP Recommend Deduction Screen', async () => {
         }
         store.dispatch(setBenefits(benefits))
 
-        const jobItem: JobItem = {
-            description: "Yardwork",
-            business: "Suzy",
+        const incomeItem: JobItem = {
+            description: 'A description2',
+            business: '',
             taxesFiled: false,
-            payments: []
+            payments: [
+                {
+                    idx: 0, 
+                    amount: 10,
+                    date: '09/30/2024',
+                    payer: 'Someone' 
+                }
+            ]
         }
-        store.dispatch(addJob(jobItem))
+        store.dispatch(addJob(incomeItem))
         render(<TestWrapper store={store}><Page /></TestWrapper>)
     })
     afterEach(cleanup)
 
     it('shows header', () => {
-        expect(screen.getByTestId('snap_deduction_header')).toBeDefined()
+        expect(screen.getByTestId('expenses_snap_recommend_header')).toBeDefined()
     })
 
-    it.each([
-      { 
-        text: 'Take the standard deduction', 
-        selection: true, 
-        expectedRoute: '/ledger/review'
-      }, {
-        text: 'Do not take the SNAP standard deduction, use my Medicaid expenses',
-        selection: false,
-        expectedRoute: '/ledger/expense'
-      }
-    ])('navigates to $expectedRoute if take deduction is $selection', async ({ text, selection, expectedRoute }) => {
+    it('navigates to review screen if take deduction selected', async () => {
         const radio: HTMLInputElement = screen.getByTestId("take_deduction_radio")
-        fireEvent.click(screen.getByText(text))
+        fireEvent.click(screen.getByText(/Take the standard deduction/i))
         waitFor(() => {
-            expect(radio.checked).toEqual(selection)
+            expect(radio.checked).toEqual(true)
         })
         fireEvent.click(screen.getByTestId("continue-button"))
 
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
-                asPath: expectedRoute
+                asPath: "/ledger/review"
             })
         })
 
         const benefits = selectBenefits(store.getState())
-        expect(benefits.standardDeduction).toBe(selection)
+        expect(benefits.standardDeduction).toBeTruthy()
     })
 })
