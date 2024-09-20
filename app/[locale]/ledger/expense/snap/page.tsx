@@ -33,11 +33,10 @@ export default function Page() {
 
         dispatch(setBenefits(updatedBenefits))
 
-        if (snapRadio == true) {
-            router.push("/ledger/review")
-        } else if (snapRadio == false) {
-            router.push("/ledger/expense")
-        }
+        // send users who elect standard deduction to the end of the flow
+        // otherwise, send them to expenses
+        const route = snapRadio ? "review" : "expense";
+        router.push(`/ledger/${route}`)
     })
 
     const items = [
