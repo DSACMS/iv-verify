@@ -24,7 +24,7 @@ export default function EditIncome({ params }: { params: { idx: number } }) {
             idx: params.idx,
         }))
 
-        router.push(`/ledger/income/${params.idx}/payment/add`)
+        router.push(`/ledger/income/list`)
     }
 
     return (
