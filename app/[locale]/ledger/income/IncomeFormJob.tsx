@@ -83,6 +83,7 @@ export default function IncomeFormJob(params: IncomeFormJobProps) {
           label={t('add_income_taxes_no')}
           tile
           onChange={() => setValue("taxesFiled", false)}
+          {...(params.item?.taxesFiled === false ? {defaultChecked: true} : {})}
         />
         <Radio
           id="taxesFiledYes"
@@ -90,6 +91,7 @@ export default function IncomeFormJob(params: IncomeFormJobProps) {
           label={t('add_income_taxes_yes')}
           tile
           onChange={() => setValue("taxesFiled", true)}
+          {...(params.item?.taxesFiled === true ? {defaultChecked: true} : {})}
         />
       </FormGroup>
 
