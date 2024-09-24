@@ -21,7 +21,7 @@ describe('Edit Income Item Page', async () => {
             useRouter: () =>  mockRouter,
             usePathname: () => mockRouter.asPath,
         }))
-        mockRouter.push('/job/income/edit/0')
+        mockRouter.push('/job/edit/0')
         store = makeStore()
         store.dispatch(addJob(item1))
         render (<TestWrapper store={store}><Page params={{idx: 0}} /></TestWrapper>)
@@ -40,7 +40,7 @@ describe('Edit Income Item Page', async () => {
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
-                asPath: "/job/income/list"
+                asPath: "/job/list"
             })
 
             const items = store.getState().incomeLedger.items
@@ -63,7 +63,7 @@ describe('Edit Income Item Page', async () => {
         expect(screen.getAllByTestId("errorMessage")).toBeDefined()
 
         expect(mockRouter).toMatchObject({
-            asPath: "/job/income/edit/0"
+            asPath: "/job/edit/0"
         })
     })
 })

@@ -30,7 +30,7 @@ export default function IncomeList({dayCount, header}: Props) {
     }
 
     function addItemClicked() {
-        router.push("/job/income/add")
+        router.push("/job/add")
     }
 
     return (

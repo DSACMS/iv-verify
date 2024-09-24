@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { addJob, JobItem, selectIncomeItems } from "@/lib/features/job/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
-import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/job/income/IncomeFormJob'
+import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/job/IncomeFormJob'
 
 export default function Page() {
     const { t } = useTranslation()
@@ -24,7 +24,7 @@ export default function Page() {
         }
         // can i add a response?
         dispatch(addJob(jobItem))
-        router.push(`/job/income/${jobCount}/payment/add`)
+        router.push(`/job/${jobCount}/payment/add`)
     }
 
     return (

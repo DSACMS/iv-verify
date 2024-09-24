@@ -4,7 +4,7 @@ import { JobItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/job/i
 import { useAppSelector } from "@/lib/hooks"
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
-import IncomeFormJob, { IncomeFormJobData } from "@/app/[locale]/job/income/IncomeFormJob"
+import IncomeFormJob, { IncomeFormJobData } from "@/app/[locale]/job/IncomeFormJob"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
 
@@ -24,7 +24,7 @@ export default function EditIncome({ params }: { params: { idx: number } }) {
             idx: params.idx,
         }))
 
-        router.push(`/job/income/list`)
+        router.push(`/job/list`)
     }
 
     return (

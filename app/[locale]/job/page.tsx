@@ -32,7 +32,7 @@ export default function Page() {
     ]
 
     function addClicked() {
-        router.push('/job/income/add')
+        router.push('/job/add')
     }
 
     return (

@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, render, screen } from '@testing-library/react'
-import LedgerReviewHeader from './jobReviewHeader'
+import JobReviewHeader from './jobReviewHeader'
 import { BenefitsState } from '@/lib/features/benefits/benefitsSlice'
 import TestWrapper from '@/app/TestWrapper'
 
@@ -20,7 +20,7 @@ describe('Ledger Review Header', async () => {
                 snap: true,
             }
 
-            render (<TestWrapper><LedgerReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
+            render (<TestWrapper><JobReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
         })
 
         it('Displays SNAP and Medicaid header', () => {
@@ -52,7 +52,7 @@ describe('Ledger Review Header', async () => {
                 snap: false,
             }
 
-            render (<TestWrapper><LedgerReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
+            render (<TestWrapper><JobReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
         })
 
         it('Displays Medicaid only header', () => {
@@ -88,7 +88,7 @@ describe('Ledger Review Header', async () => {
                 snap: true,
             }
 
-            render (<TestWrapper><LedgerReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
+            render (<TestWrapper><JobReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
         })
 
         it('Does not display Medicaid only header', () => {

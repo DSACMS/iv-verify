@@ -11,7 +11,7 @@ describe('Add Income To Ledger Page', async () => {
             useRouter: () =>  mockRouter,
             usePathname: () => mockRouter.asPath,
         }))
-        mockRouter.push('/job/income/add')
+        mockRouter.push('/job/add')
         render (<TestWrapper><Page /></TestWrapper>)
     })
     afterEach(cleanup)
@@ -35,7 +35,7 @@ describe('Add Income To Ledger Page', async () => {
         expect(screen.getAllByTestId("errorMessage")).toBeDefined()
 
         expect(mockRouter).toMatchObject({
-            asPath: "/job/income/add"
+            asPath: "/job/add"
         })
     })
 
@@ -50,7 +50,7 @@ describe('Add Income To Ledger Page', async () => {
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
-                asPath: "/job/income/0/payment/add"
+                asPath: "/job/0/payment/add"
             })
         })
     })

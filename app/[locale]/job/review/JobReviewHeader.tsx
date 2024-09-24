@@ -7,7 +7,7 @@ interface ReviewHeaderProps {
     medicaidIncomeTotal: number
 }
 
-export default function LedgerReviewHeader({benefits, snapIncomeTotal, medicaidIncomeTotal}: ReviewHeaderProps) {
+export default function JobReviewHeader({benefits, snapIncomeTotal, medicaidIncomeTotal}: ReviewHeaderProps) {
     const { t } = useTranslation()
 
     if (benefits.medicaid && benefits.snap) {

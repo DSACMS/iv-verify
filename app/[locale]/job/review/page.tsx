@@ -8,7 +8,7 @@ import { selectIncomeTotal } from "@/lib/features/job/income/incomeSlice"
 import Link from "next/link"
 import IncomeList from "@/app/components/IncomeList"
 import ExpenseList from "@/app/components/ExpenseList"
-import LedgerReviewHeader from "./jobReviewHeader"
+import JobReviewHeader from "./JobReviewHeader"
 import SnapExpenses from "./SnapExpenses"
 import VerifyNav from "@/app/components/VerifyNav"
 
@@ -32,7 +32,7 @@ export default function Page() {
                     <Grid row gap>
                         <main className="usa-layout-docs">
                             <div className="margin-bottom-5" data-testid="review-header">
-                                <LedgerReviewHeader benefits={benefits} snapIncomeTotal={incomeTotal} medicaidIncomeTotal={incomeTotal} />
+                                <JobReviewHeader benefits={benefits} snapIncomeTotal={incomeTotal} medicaidIncomeTotal={incomeTotal} />
                                 <div className="text-center margin-top-3">
                                     <Link href="#" className="usa-link">{t("review_download_copy")}</Link>
                                 </div>

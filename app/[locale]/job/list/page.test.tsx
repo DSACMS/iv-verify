@@ -16,7 +16,7 @@ describe('List Income in Ledger Page', async () => {
             useRouter: () =>  mockRouter,
             usePathname: () => mockRouter.asPath,
         }))
-        mockRouter.push('/job/income/add')
+        mockRouter.push('/job/add')
         store = makeStore()
     })
     afterEach(cleanup)

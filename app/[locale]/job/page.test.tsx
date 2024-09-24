@@ -14,7 +14,7 @@ describe('Income Landing Screen', async () => {
             useRouter: () =>  mockRouter,
             usePathname: () => mockRouter.asPath,
         }))
-        mockRouter.push('/job/income/')
+        mockRouter.push('/job/')
         store = makeStore()
         render (<Provider store={store}><Page /></Provider>)
     })

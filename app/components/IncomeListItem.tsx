@@ -22,11 +22,11 @@ export default function IncomeListItem({ item, index }: ItemProps) {
     }
 
     function editClicked() {
-        router.push(`/job/income/edit/${index}`)
+        router.push(`/job/edit/${index}`)
     }
 
     function addItemClicked() {
-        router.push(`/job/income/${index}/payment/add`)
+        router.push(`/job/${index}/payment/add`)
     }
 
     return (

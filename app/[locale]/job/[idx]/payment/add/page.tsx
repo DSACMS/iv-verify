@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { addPayment, PaymentItem, selectIncomeItemAt } from "@/lib/features/job/income/incomeSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
-import IncomeFormPayment, { IncomeFormPaymentData } from '@/app/[locale]/job/income/IncomeFormPayment'
+import IncomeFormPayment, { IncomeFormPaymentData } from '@/app/[locale]/job/IncomeFormPayment'
 
 export default function Page({ params }: { params: { idx: number } }) {
     const { t } = useTranslation()
@@ -25,7 +25,7 @@ export default function Page({ params }: { params: { idx: number } }) {
             payer,
         }
         dispatch(addPayment(paymentItem))
-        router.push('/job/income/list')
+        router.push('/job/list')
     }
 
     return (

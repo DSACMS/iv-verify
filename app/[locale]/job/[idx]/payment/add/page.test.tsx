@@ -54,7 +54,7 @@ describe('Add Payments to Jobs Page', async () => {
       usePathname: () => mockRouter.asPath,
     }))
 
-    mockRouter.push('/job/income/0/payment/add')
+    mockRouter.push('/job/0/payment/add')
     store = makeStore()
     store.dispatch(addJob(item1))
     render (<TestWrapper store={store}><Page params={{idx: 0}} /></TestWrapper>)
@@ -96,7 +96,7 @@ describe('Add Payments to Jobs Page', async () => {
       )
       expect(datepicker).toHaveProperty("value", expectedDate)
       expect(mockRouter).toMatchObject({
-          asPath: "/job/income/list"
+          asPath: "/job/list"
       })
   })
   })
@@ -114,7 +114,7 @@ describe('Add Payments to Jobs Page', async () => {
     expect(screen.getAllByTestId("errorMessage")).toBeDefined()
 
     expect(mockRouter).toMatchObject({
-        asPath: "/job/income/0/payment/add"
+        asPath: "/job/0/payment/add"
     })
   })
 })
