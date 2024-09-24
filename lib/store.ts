@@ -1,6 +1,6 @@
 import { Action, combineReducers, configureStore } from "@reduxjs/toolkit";
-import incomeReducer, { selectIncomeTotal } from './features/ledger/income/incomeSlice'
-import expenseReducer, { selectExpenseTotal } from './features/ledger/expenses/expensesSlice'
+import incomeReducer, { selectIncomeTotal } from './features/job/income/incomeSlice'
+import expenseReducer, { selectExpenseTotal } from './features/job/expenses/expensesSlice'
 import statementReducer from './features/statement/statementSlice'
 import benefitsReducer, { selectBenefits } from './features/benefits/benefitsSlice'
 import { setInitialStateAction } from "./actions";

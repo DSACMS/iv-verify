@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { JobItem, PaymentItem, removeIncome } from "@/lib/features/ledger/income/incomeSlice"
+import { JobItem, PaymentItem, removeIncome } from "@/lib/features/job/income/incomeSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"
@@ -22,11 +22,11 @@ export default function IncomeListItem({ item, index }: ItemProps) {
     }
 
     function editClicked() {
-        router.push(`/ledger/income/edit/${index}`)
+        router.push(`/job/income/edit/${index}`)
     }
 
     function addItemClicked() {
-        router.push(`/ledger/income/${index}/payment/add`)
+        router.push(`/job/income/${index}/payment/add`)
     }
 
     return (

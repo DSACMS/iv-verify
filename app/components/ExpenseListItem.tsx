@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { ExpenseItem, removeExpense } from "@/lib/features/ledger/expenses/expensesSlice"
+import { ExpenseItem, removeExpense } from "@/lib/features/job/expenses/expensesSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { 
@@ -29,7 +29,7 @@ export default function ExpenseListItem({ item, index }: ItemProps) {
     }
 
     function editClicked() {
-        router.push(`/ledger/expense/edit/${index}`)
+        router.push(`/job/expense/edit/${index}`)
     }
 
     return (
