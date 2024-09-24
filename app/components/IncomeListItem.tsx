@@ -55,10 +55,10 @@ export default function IncomeListItem({ item, index }: ItemProps) {
             </Grid>
             <Grid col={12}>
                 <ButtonGroup>
-                    <Button type="button" className="margin-top-2 margin-bottom-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_payment_button')}</Button>
+                    <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_payment_button')}</Button>
                 </ButtonGroup>
 
-                <hr />
+                <hr className="margin-top-2" />
             </Grid>
         </Grid>
     )
