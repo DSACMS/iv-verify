@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { selectBenefits } from "@/lib/features/benefits/benefitsSlice"
-import { selectIncomeTotal } from "@/lib/features/job/income/incomeSlice"
+import { selectIncomeTotal } from "@/lib/features/job/jobSlice"
 import Link from "next/link"
 import IncomeList from "@/app/components/IncomeList"
 import ExpenseList from "@/app/components/ExpenseList"

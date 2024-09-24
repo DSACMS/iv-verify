@@ -1,6 +1,6 @@
 'use client'
 import VerifyNav from "@/app/components/VerifyNav"
-import { JobItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/job/income/incomeSlice"
+import { JobItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/job/jobSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"

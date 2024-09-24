@@ -9,11 +9,11 @@ import reducer, {
     initialState, 
     selectIncomeItems, 
     selectIncomeTotal
-} from './incomeSlice'
+} from './jobSlice'
 import { makeStore } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
 
-describe('IncomeSlice', () => {
+describe('JobSlice', () => {
     const item: JobItem = {
         description: 'A description',
         business: 'A business name',

@@ -2,7 +2,7 @@
 import { Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { addPayment, PaymentItem, selectIncomeItemAt } from "@/lib/features/job/income/incomeSlice"
+import { addPayment, PaymentItem, selectIncomeItemAt } from "@/lib/features/job/jobSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
 import IncomeFormPayment, { IncomeFormPaymentData } from '@/app/[locale]/job/IncomeFormPayment'

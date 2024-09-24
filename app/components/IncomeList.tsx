@@ -1,6 +1,6 @@
 'use client'
 
-import { JobItem, selectIncomeItems, selectIncomeTotal } from "@/lib/features/job/income/incomeSlice"
+import { JobItem, selectIncomeItems, selectIncomeTotal } from "@/lib/features/job/jobSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import IncomeListItem from "./IncomeListItem"

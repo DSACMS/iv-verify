@@ -6,7 +6,7 @@ import { selectSignedStatement } from "@/lib/features/statement/statementSlice"
 import Link from "next/link"
 import Image from "next/image"
 import ledgerImage from './ledger.png'
-import { selectIncomeItems, selectIncomeTotal } from "@/lib/features/job/income/incomeSlice"
+import { selectIncomeItems, selectIncomeTotal } from "@/lib/features/job/jobSlice"
 import { selectExpenseItems, selectExpenseTotal } from "@/lib/features/job/expenses/expensesSlice"
 import VerifyNav from "@/app/components/VerifyNav"
 

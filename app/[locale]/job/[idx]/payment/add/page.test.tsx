@@ -8,7 +8,7 @@ import Page from './page'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
 import { makeStore } from '@/lib/store'
 
-import { JobItem, addJob } from '@/lib/features/job/income/incomeSlice'
+import { JobItem, addJob } from '@/lib/features/job/jobSlice'
 
 /**
  * Set date from month day year

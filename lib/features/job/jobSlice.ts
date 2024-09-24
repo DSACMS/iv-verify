@@ -27,7 +27,7 @@ export const initialState: IncomeState = {
     items: []
 }
 
-export const incomeSlice = createSlice({
+export const JobSlice = createSlice({
     name: 'ledger/income',
     initialState,
     reducers: {
@@ -54,7 +54,7 @@ export const incomeSlice = createSlice({
     }
 })
 
-export const { addJob, addPayment, removeIncome, setIncomeItem } = incomeSlice.actions
+export const { addJob, addPayment, removeIncome, setIncomeItem } = JobSlice.actions
 export const selectIncomeItems = (state: RootState) => state.incomeLedger.items
 
 /**
@@ -70,4 +70,4 @@ export const selectIncomeTotal = (state: RootState) => {
 
 export const selectIncomeItemAt = (state: RootState, idx: number) => state.incomeLedger.items.at(idx)
 
-export default incomeSlice.reducer
+export default JobSlice.reducer

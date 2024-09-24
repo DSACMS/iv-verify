@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { JobItem, PaymentItem, removeIncome } from "@/lib/features/job/income/incomeSlice"
+import { JobItem, PaymentItem, removeIncome } from "@/lib/features/job/jobSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"

@@ -6,7 +6,7 @@ import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 import { BenefitsState, selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
-import { JobItem, addJob } from '@/lib/features/job/income/incomeSlice'
+import { JobItem, addJob } from '@/lib/features/job/jobSlice'
 import TestWrapper from '@/app/TestWrapper'
 
 describe('SNAP Recommend Deduction Screen', async () => {

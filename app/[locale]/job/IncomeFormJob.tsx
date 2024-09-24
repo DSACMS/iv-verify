@@ -3,7 +3,7 @@
 import ErrorSummary from "@/app/components/ErrorSummary"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
-import { JobItem } from "@/lib/features/job/income/incomeSlice"
+import { JobItem } from "@/lib/features/job/jobSlice"
 import { 
   Button, 
   Form, 

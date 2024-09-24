@@ -1,5 +1,5 @@
 import { Action, combineReducers, configureStore } from "@reduxjs/toolkit";
-import incomeReducer, { selectIncomeTotal } from './features/job/income/incomeSlice'
+import incomeReducer, { selectIncomeTotal } from './features/job/jobSlice'
 import expenseReducer, { selectExpenseTotal } from './features/job/expenses/expensesSlice'
 import statementReducer from './features/statement/statementSlice'
 import benefitsReducer, { selectBenefits } from './features/benefits/benefitsSlice'

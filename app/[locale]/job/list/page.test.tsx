@@ -6,7 +6,7 @@ import { makeStore } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { addJob, JobItem } from '@/lib/features/job/income/incomeSlice'
+import { addJob, JobItem } from '@/lib/features/job/jobSlice'
 import { BenefitsState, setBenefits } from '@/lib/features/benefits/benefitsSlice'
 
 describe('List Income in Ledger Page', async () => {

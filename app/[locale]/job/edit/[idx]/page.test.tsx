@@ -6,7 +6,7 @@ import mockRouter from 'next-router-mock'
 import TestWrapper from '@/app/TestWrapper'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
 import { makeStore } from '@/lib/store'
-import { JobItem, addJob } from '@/lib/features/job/income/incomeSlice'
+import { JobItem, addJob } from '@/lib/features/job/jobSlice'
 
 describe('Edit Income Item Page', async () => {
     let store: EnhancedStore

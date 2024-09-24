@@ -3,7 +3,7 @@
 import ErrorSummary from "@/app/components/ErrorSummary"
 import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
 import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
-import { PaymentItem } from "@/lib/features/job/income/incomeSlice"
+import { PaymentItem } from "@/lib/features/job/jobSlice"
 import { Button, DatePicker, Form, FormGroup, Label, RequiredMarker } from "@trussworks/react-uswds"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
