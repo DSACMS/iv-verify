@@ -1,8 +1,8 @@
-# State Configuration
+# State Configuration: Config and user access
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
@@ -31,17 +31,7 @@ This option allows for all configuration to be separated from the iv-verify serv
 
 This option would see the configuration put in a json or yaml file that is bundled with the app code on deploy. The advantages of this solution is that there is version control for all configuration changes and it does not require standing up a database or separate service. The downside is that to make a configuration change a new deploy would have to be done.
 
-### Storage of state specific copy
-
-Copy used in iv-verify shouuld be configurable by state. Additionally all copy should be able to be translated by the iv-verify i18n system. The decision of how to store the state specific copy is to either store the text in the same file with different keys or in separate files with the same key. In both options a change needs to be made to the `t()` function to look up state specific copy if it exists.
-
-#### Separate file - different keys
-
-In this option the text for state specific copy would be stored together. The `/app/i18n/locales/en/translation.json` file would have keys like: `add_expense_amount_field` and then state specific overrides like: `add_expense_amount_field__or` where "or" is the state key for Oregon. The `t()` function would keep track of which state configuration is being used and look up the state specific key if that doesn't exist it would fallback to the regular key.
-
-#### Separate files - same key
-
-In this option the text for the state specific copy is stored in spearate files such as `/app/i18n/locales/en/or.json`. This file would include keys such as `add_expense_amount_field` that overwrite the values in the `/app/i18n/locales/en/translation.json` file. The `t()` function would first look to the state configuration file before looking to the fallback file. This functionality does not exist in the i18n next infrastructure and would need to be developed.
+For reference, CBV stores their config file [here](https://github.com/DSACMS/iv-cbv-payroll/blob/main/app/config/site-config.yml)
 
 ### Routing between configurations
 
@@ -57,7 +47,7 @@ In this option the URL for the ledger add screen states the same but when the us
 
 ## Decision
 
-The recommendations are as follows:
+The accepted approaches are as follows:
 
 ### Storage
 
@@ -66,10 +56,6 @@ Configuration should be stored in files for iv-verify. This requires the least u
 ### Routing
 
 Routing should be handled through the URL. This option may require additional up front work as the URLs will need to be altered but it does create a clear system for indicating which configuration is being used. As iv-verify currently utalizes a high degree of static rendering which can be easier done on by URL.
-
-#### Copy storage
-
-Copy should be stored in the same file but with different keys. This is the easiest option to get up and running.
 
 ## Consequences
 
