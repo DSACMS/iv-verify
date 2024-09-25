@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { JobItem, PaymentItem, removeIncome } from "@/lib/features/ledger/income/incomeSlice"
+import { JobItem, PaymentItem, removeIncome } from "@/lib/features/job/jobSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"
@@ -22,11 +22,11 @@ export default function IncomeListItem({ item, index }: ItemProps) {
     }
 
     function editClicked() {
-        router.push(`/ledger/income/edit/${index}`)
+        router.push(`/job/edit/${index}`)
     }
 
     function addItemClicked() {
-        router.push(`/ledger/income/${index}/payment/add`)
+        router.push(`/job/${index}/payment/add`)
     }
 
     return (
@@ -55,10 +55,10 @@ export default function IncomeListItem({ item, index }: ItemProps) {
             </Grid>
             <Grid col={12}>
                 <ButtonGroup>
-                    <Button type="button" className="margin-top-2 margin-bottom-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_payment_button')}</Button>
+                    <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_payment_button')}</Button>
                 </ButtonGroup>
 
-                <hr />
+                <hr className="margin-top-2" />
             </Grid>
         </Grid>
     )

@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Card, CardBody, CardGroup, CardHeader, GridContain
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
-import { ExpenseItem, selectExpenseItems, selectExpenseTotal } from "@/lib/features/ledger/expenses/expensesSlice";
+import { ExpenseItem, selectExpenseItems, selectExpenseTotal } from "@/lib/features/job/expenses/expensesSlice";
 import ExpenseListItem from "./ExpenseListItem";
 
 interface ExpenseListProps {
@@ -28,7 +28,7 @@ export default function ExpenseList({header}: ExpenseListProps) {
     }
 
     function addItemClicked() {
-        router.push("/ledger/expense/add")
+        router.push("/job/expense/add")
     }
 
     return (

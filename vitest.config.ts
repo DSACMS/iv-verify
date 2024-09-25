@@ -18,7 +18,7 @@ export default defineConfig({
         // excluding a directory where there is no page to test
         exclude: [
             ...configDefaults.exclude,
-            'app/[locale]/ledger/income/[idx]/payment/*',
+            'app/[locale]/job/[idx]/payment/*',
         ]
     }
 })

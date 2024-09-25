@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next"
-import { ExpenseItem, removeExpense } from "@/lib/features/ledger/expenses/expensesSlice"
+import { ExpenseItem, removeExpense } from "@/lib/features/job/expenses/expensesSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { 
@@ -29,7 +29,7 @@ export default function ExpenseListItem({ item, index }: ItemProps) {
     }
 
     function editClicked() {
-        router.push(`/ledger/income/edit/${index}`)
+        router.push(`/job/expense/edit/${index}`)
     }
 
     return (
@@ -53,7 +53,7 @@ export default function ExpenseListItem({ item, index }: ItemProps) {
                 </Modal>
                 <Button type="button" unstyled onClick={editClicked}>{t('edit')}</Button>
             </Grid>
-            <Grid col={12}><hr /></Grid>
+            <Grid col={12}><hr className="margin-top-2" /></Grid>
         </Grid>
     )
 }

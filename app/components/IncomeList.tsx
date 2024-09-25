@@ -1,6 +1,6 @@
 'use client'
 
-import { JobItem, selectIncomeItems, selectIncomeTotal } from "@/lib/features/ledger/income/incomeSlice"
+import { JobItem, selectIncomeItems, selectIncomeTotal } from "@/lib/features/job/jobSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import IncomeListItem from "./IncomeListItem"
@@ -30,7 +30,7 @@ export default function IncomeList({dayCount, header}: Props) {
     }
 
     function addItemClicked() {
-        router.push("/ledger/income/add")
+        router.push("/job/add")
     }
 
     return (

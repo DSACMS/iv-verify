@@ -1,0 +1,73 @@
+import { createSlice, PayloadAction} from '@reduxjs/toolkit'
+import type { RootState } from '../../store'
+
+export interface JobItem {
+    description: string
+    business: string
+    taxesFiled: boolean
+    payments: Array<PaymentItem>
+}
+export interface PaymentItem {
+    idx: number
+    amount: number
+    date: string
+    payer: string
+}
+
+export interface SetIncomePayload {
+    item: JobItem
+    idx: number
+}
+
+interface IncomeState {
+    items: Array<JobItem>
+}
+
+export const initialState: IncomeState = {
+    items: []
+}
+
+export const JobSlice = createSlice({
+    name: 'ledger/income',
+    initialState,
+    reducers: {
+        addJob: (state, action: PayloadAction<JobItem>) => {
+            state.items.push(action.payload)
+        },  
+        addPayment: (state, action: PayloadAction<PaymentItem>) => {
+            if (!state.items[action.payload.idx].payments) {
+                state.items[action.payload.idx].payments = []
+            }
+            
+            state.items[action.payload.idx].payments.push(action.payload)
+        },
+        removeIncome: (state, action: PayloadAction<number>) => {
+            state.items.splice(action.payload, 1)
+        },
+        setIncomeItem: (state, action: PayloadAction<SetIncomePayload>) => {
+            if (action.payload.idx < state.items.length) {
+                state.items[action.payload.idx].description = action.payload.item.description
+                state.items[action.payload.idx].business = action.payload.item.business
+                state.items[action.payload.idx].taxesFiled = action.payload.item.taxesFiled
+            }
+        },
+    }
+})
+
+export const { addJob, addPayment, removeIncome, setIncomeItem } = JobSlice.actions
+export const selectIncomeItems = (state: RootState) => state.incomeLedger.items
+
+/**
+ * TODO: needs tests and to be a little more clear what's happening
+ * 
+ * @param state 
+ */
+export const selectIncomeTotal = (state: RootState) => {
+    return state.incomeLedger.items.reduce((total: number, item: JobItem) => 
+        total + item.payments.reduce((jobTotal: number, payment: PaymentItem) => jobTotal + payment.amount, 0)
+    , 0)
+}
+
+export const selectIncomeItemAt = (state: RootState, idx: number) => state.incomeLedger.items.at(idx)
+
+export default JobSlice.reducer
