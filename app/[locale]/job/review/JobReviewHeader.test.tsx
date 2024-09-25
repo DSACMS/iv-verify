@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, render, screen } from '@testing-library/react'
-import JobReviewHeader from './jobReviewHeader'
+import JobReviewHeader from './JobReviewHeader'
 import { BenefitsState } from '@/lib/features/benefits/benefitsSlice'
 import TestWrapper from '@/app/TestWrapper'
 
