@@ -1,17 +1,12 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit'
 import type { RootState } from '../../store'
+import type { PaymentItem } from './payments/paymentsSlice'
 
 export interface JobItem {
     description: string
     business: string
     taxesFiled: boolean
     payments: Array<PaymentItem>
-}
-export interface PaymentItem {
-    idx: number
-    amount: number
-    date: string
-    payer: string
 }
 
 export interface SetIncomePayload {
