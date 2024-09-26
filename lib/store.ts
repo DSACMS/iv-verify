@@ -4,15 +4,17 @@ import expenseReducer, { selectExpenseTotal } from './features/job/expenses/expe
 import paymentReducer from './features/job/payment/paymentSlice'
 import statementReducer from './features/statement/statementSlice'
 import benefitsReducer, { selectBenefits } from './features/benefits/benefitsSlice'
+import userReducer from './features/user/userSlice'
 import { setInitialStateAction } from "./actions";
 
 export const makeStore = () => {
     const appReducers = combineReducers({
+        benefits: benefitsReducer,
         jobs: jobReducer,
+        statement: statementReducer,
+        user: userReducer,
         payments: paymentReducer,
         expenses: expenseReducer,
-        statement: statementReducer,
-        benefits: benefitsReducer,
     })
     const rootReducer = (state: any, action: Action) => {
         if (setInitialStateAction.match(action)) {
