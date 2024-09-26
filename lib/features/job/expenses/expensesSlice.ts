@@ -18,7 +18,7 @@ export const initialState: ExpenseState = {
 }
 
 export const expenseSlice = createSlice({
-    name: 'ledger/expense',
+    name: 'job/expense',
     initialState,
     reducers: {
         addExpense: (state, action: PayloadAction<ExpenseItem>) => {
@@ -31,7 +31,7 @@ export const expenseSlice = createSlice({
 })
 
 export const { addExpense, removeExpense } = expenseSlice.actions
-export const selectExpenseItems = (state: RootState) => state.expensesLedger.items
-export const selectExpenseTotal = (state: RootState) => state.expensesLedger.items.reduce((val: number, item: ExpenseItem) => item.amount + val, 0)
+export const selectExpenseItems = (state: RootState) => state.expenses.items
+export const selectExpenseTotal = (state: RootState) => state.expenses.items.reduce((val: number, item: ExpenseItem) => item.amount + val, 0)
 
 export default expenseSlice.reducer

@@ -1,14 +1,16 @@
 import { Action, combineReducers, configureStore } from "@reduxjs/toolkit";
-import incomeReducer, { selectIncomeTotal } from './features/job/jobSlice'
+import jobReducer, { selectJobTotal } from './features/job/jobSlice'
 import expenseReducer, { selectExpenseTotal } from './features/job/expenses/expensesSlice'
+import paymentReducer from './features/job/payment/paymentSlice'
 import statementReducer from './features/statement/statementSlice'
 import benefitsReducer, { selectBenefits } from './features/benefits/benefitsSlice'
 import { setInitialStateAction } from "./actions";
 
 export const makeStore = () => {
     const appReducers = combineReducers({
-        incomeLedger: incomeReducer,
-        expensesLedger: expenseReducer,
+        jobs: jobReducer,
+        payments: paymentReducer,
+        expenses: expenseReducer,
         statement: statementReducer,
         benefits: benefitsReducer,
     })
@@ -40,7 +42,7 @@ export type AppDispatch = AppStore['dispatch']
  */
 export const isStandardDeductionBetter = (state: RootState) => {
     const benefits = selectBenefits(state)
-    const incomeTotal = selectIncomeTotal(state)
+    const incomeTotal = selectJobTotal(state)
     const expenseTotal = selectExpenseTotal(state)
 
     const percent = benefits.deductionAmount / 100

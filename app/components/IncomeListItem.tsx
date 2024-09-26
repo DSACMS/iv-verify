@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next"
-import { JobItem, PaymentItem, removeIncome } from "@/lib/features/job/jobSlice"
+import { JobItem, removeJob } from "@/lib/features/job/jobSlice"
+import { PaymentItem } from "@/lib/features/job/payment/paymentSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"
@@ -18,7 +19,7 @@ export default function IncomeListItem({ item, index }: ItemProps) {
     })
 
     function onDeleteClicked() {
-        dispatch(removeIncome(index))
+        dispatch(removeJob(index))
     }
 
     function editClicked() {

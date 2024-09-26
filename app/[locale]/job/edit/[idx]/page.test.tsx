@@ -43,7 +43,7 @@ describe('Edit Income Item Page', async () => {
                 asPath: "/job/list"
             })
 
-            const items = store.getState().incomeLedger.items
+            const items = store.getState().jobs.items
             expect(items.length).toBe(1)
             expect(items[0].description).toBe(newDescription)
         })

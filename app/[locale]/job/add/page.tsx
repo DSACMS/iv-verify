@@ -2,7 +2,7 @@
 import { Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { addJob, JobItem, selectIncomeItems } from "@/lib/features/job/jobSlice"
+import { addJob, JobItem, selectJobItems } from "@/lib/features/job/jobSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
 import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/job/IncomeFormJob'
@@ -11,7 +11,7 @@ export default function Page() {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
-    const items = useAppSelector(state => selectIncomeItems(state))
+    const items = useAppSelector(state => selectJobItems(state))
     const jobCount = items.length
 
     function addIncomeClicked({description, business, taxesFiled, payments=[]}: IncomeFormJobData) {

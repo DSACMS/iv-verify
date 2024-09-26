@@ -1,6 +1,6 @@
 'use client'
 import VerifyNav from "@/app/components/VerifyNav"
-import { JobItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/job/jobSlice"
+import { JobItem, selectJobItemAt, setJobItem } from "@/lib/features/job/jobSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
@@ -12,10 +12,10 @@ export default function EditIncome({ params }: { params: { idx: number } }) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const router = useRouter()
-    const item = useAppSelector(state => selectIncomeItemAt(state, params.idx))
+    const item = useAppSelector(state => selectJobItemAt(state, params.idx))
 
     function editIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
-        dispatch(setIncomeItem({
+        dispatch(setJobItem({
             item: {
                 description,
                 business,

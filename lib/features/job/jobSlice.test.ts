@@ -1,15 +1,15 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import reducer, {
-    JobItem, 
-    PaymentItem, 
+    JobItem,  
     addJob,
     addPayment, 
-    removeIncome, 
+    removeJob, 
     initialState, 
-    selectIncomeItems, 
-    selectIncomeTotal
+    selectJobItems, 
+    selectJobTotal
 } from './jobSlice'
+import { PaymentItem } from './payment/paymentSlice'
 import { makeStore } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
 
@@ -69,7 +69,7 @@ describe('JobSlice', () => {
         })
 
         it('should handle removing income items', () => {
-            expect(reducer({items: [item]}, removeIncome(0))).toEqual({items:[]})
+            expect(reducer({items: [item]}, removeJob(0))).toEqual({items:[]})
         })
     })
 
@@ -82,11 +82,11 @@ describe('JobSlice', () => {
         })
 
         it('can select all income items', () => {
-            expect(selectIncomeItems(store.getState())).toEqual([item, item2])
+            expect(selectJobItems(store.getState())).toEqual([item, item2])
         })
 
         it('can total the income items', () => {
-            expect(selectIncomeTotal(store.getState())).toEqual(50)
+            expect(selectJobTotal(store.getState())).toEqual(50)
         })
     })
 })
