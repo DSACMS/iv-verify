@@ -1,7 +1,6 @@
 import { Action, combineReducers, configureStore } from "@reduxjs/toolkit";
 import jobReducer, { selectJobTotal } from './features/job/jobSlice'
-import expenseReducer, { selectExpenseTotal } from './features/job/expenses/expensesSlice'
-import paymentReducer from './features/job/payment/paymentSlice'
+import { selectExpenseTotal } from './features/job/expenses/expensesSlice'
 import statementReducer from './features/statement/statementSlice'
 import benefitsReducer, { selectBenefits } from './features/benefits/benefitsSlice'
 import userReducer from './features/user/userSlice'
@@ -12,9 +11,7 @@ export const makeStore = () => {
         benefits: benefitsReducer,
         jobs: jobReducer,
         statement: statementReducer,
-        user: userReducer,
-        payments: paymentReducer,
-        expenses: expenseReducer,
+        user: userReducer
     })
     const rootReducer = (state: any, action: Action) => {
         if (setInitialStateAction.match(action)) {

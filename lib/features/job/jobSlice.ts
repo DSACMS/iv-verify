@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { combineReducers, createSlice, PayloadAction} from '@reduxjs/toolkit'
 import type { RootState } from '../../store'
-import type { PaymentItem } from './payment/paymentSlice'
-import { ExpenseItem } from './expenses/expensesSlice'
+import paymentReducer, { PaymentItem } from './payment/paymentSlice'
+import expensesReducer, { ExpenseItem } from './expenses/expensesSlice'
 
 export interface JobItem {
     description: string
@@ -21,7 +21,15 @@ interface JobState {
 }
 
 export const initialState: JobState = {
-    items: []
+    items: [
+        {
+            description: '',
+            business: '',
+            taxesFiled: false,
+            payments: [],
+            expenses: []
+        }
+    ]
 }
 
 export const JobSlice = createSlice({
@@ -31,13 +39,6 @@ export const JobSlice = createSlice({
         addJob: (state, action: PayloadAction<JobItem>) => {
             state.items.push(action.payload)
 
-        }, 
-        // to deprecate 
-        addPayment: (state, action: PayloadAction<PaymentItem>) => {
-            if (!state.items[action.payload.idx].payments) {
-                state.items[action.payload.idx].payments = []
-            }
-            state.items[action.payload.idx].payments.push(action.payload)
         },
         removeJob: (state, action: PayloadAction<number>) => {
             state.items.splice(action.payload, 1)
@@ -52,7 +53,9 @@ export const JobSlice = createSlice({
     }
 })
 
-export const { addJob, addPayment, removeJob, setJobItem } = JobSlice.actions
+// where do i add the payments and expenses in here?
+
+export const { addJob, removeJob, setJobItem } = JobSlice.actions
 export const selectJobItems = (state: RootState) => state.jobs.items
 
 /**
