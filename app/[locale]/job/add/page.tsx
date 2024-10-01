@@ -2,7 +2,7 @@
 import { Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { addJob, SetJobPayload, selectJobCount } from "@/lib/features/job/jobSlice"
+import { addJob, SetJobPayload, selectJobCount, JobItem } from "@/lib/features/job/jobSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
 import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/job/IncomeFormJob'
@@ -22,7 +22,7 @@ export default function Page() {
                 description,
                 business,
                 taxesFiled 
-            }
+            } as JobItem
         }
 
 

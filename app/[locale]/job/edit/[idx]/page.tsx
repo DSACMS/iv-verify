@@ -8,7 +8,7 @@ import IncomeFormJob, { IncomeFormJobData } from "@/app/[locale]/job/IncomeFormJ
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
 
-export default function EditIncome({ params }: { params: { idx: number } }) {
+export default function EditIncome({ params }: { params: { idx: string } }) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const router = useRouter()
@@ -16,12 +16,12 @@ export default function EditIncome({ params }: { params: { idx: number } }) {
 
     function editIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
         dispatch(setJobItem({
+            id: params.idx,
             item: {
                 description,
                 business,
                 taxesFiled
             } as JobItem,
-            idx: params.idx,
         }))
 
         router.push(`/job/list`)

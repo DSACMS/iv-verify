@@ -44,7 +44,6 @@ export const JobSlice = createSlice({
         },
         setJobItem: (state, action: PayloadAction<SetJobPayload>) => {
             const id = action.payload.id
-
             state.byId[id] = action.payload.item
         },
     }
@@ -71,6 +70,6 @@ export const selectJobTotal = (state: RootState) => {
 }
 
 // iterate until you find the id
-export const selectJobItemAt = (state: RootState, id: number) => state.jobs.byId[id]
+export const selectJobItemAt = (state: RootState, id: string) => state.jobs.byId[id]
 
 export default JobSlice.reducer
