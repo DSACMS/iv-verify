@@ -2,29 +2,32 @@
 import { Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { addJob, JobItem, selectJobItems } from "@/lib/features/job/jobSlice"
+import { addJob, SetJobPayload, selectJobCount } from "@/lib/features/job/jobSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
 import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/job/IncomeFormJob'
+import { createUuid } from '@/lib/store'
 
 export default function Page() {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
-    const items = useAppSelector(state => selectJobItems(state))
-    const jobCount = items.length
+    const jobCount = useAppSelector(state => selectJobCount(state))
 
-    function addIncomeClicked({description, business, taxesFiled, payments=[]}: IncomeFormJobData) {
-
-        const jobItem: JobItem = {
-            description,
-            business,
-            taxesFiled,
-            payments
+    function addIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
+        const id = createUuid()
+        const jobPayload: SetJobPayload = {
+            id, 
+            item: {
+                description,
+                business,
+                taxesFiled 
+            }
         }
-        // can i add a response?
-        dispatch(addJob(jobItem))
-        router.push(`/job/${jobCount}/payment/add`)
+
+
+        dispatch(addJob(jobPayload))
+        router.push(`/job/${id}/payment/add`)
     }
 
     return (

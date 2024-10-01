@@ -5,13 +5,19 @@ import statementReducer from './features/statement/statementSlice'
 import benefitsReducer, { selectBenefits } from './features/benefits/benefitsSlice'
 import userReducer from './features/user/userSlice'
 import { setInitialStateAction } from "./actions";
+import paymentReducer from './features/job/payment/paymentSlice'
+import expensesReducer from './features/job/expenses/expensesSlice'
+
+import { v4 as uuidv4 } from 'uuid';
 
 export const makeStore = () => {
     const appReducers = combineReducers({
         benefits: benefitsReducer,
+        expenses: expensesReducer,
         jobs: jobReducer,
+        payment: paymentReducer,
         statement: statementReducer,
-        user: userReducer
+        user: userReducer,
     })
     const rootReducer = (state: any, action: Action) => {
         if (setInitialStateAction.match(action)) {
@@ -63,3 +69,11 @@ export const recommendStandardDeduction = (state: RootState) => {
 
     return (benefits.standardDeduction || benefits.snap || benefits.deductionAmount !== undefined) ? true : false
 }
+
+/**
+ * Generates uuids for object ids
+ * 
+ * @returns string
+ */
+
+export const createUuid = () => uuidv4()

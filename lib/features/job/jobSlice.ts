@@ -1,54 +1,51 @@
-import { combineReducers, createSlice, PayloadAction} from '@reduxjs/toolkit'
-import type { RootState } from '../../store'
-import paymentReducer, { PaymentItem } from './payment/paymentSlice'
-import expensesReducer, { ExpenseItem } from './expenses/expensesSlice'
+import { createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { RootState } from '../../store'
+import { PaymentItem } from './payment/paymentSlice'
+import { ExpenseItem } from './expenses/expensesSlice'
+import { create } from 'domain'
 
 export interface JobItem {
     description: string
     business: string
     taxesFiled: boolean
-    payments: Array<PaymentItem>
-    expenses?: Array<ExpenseItem>
 }
 
 export interface SetJobPayload {
     item: JobItem
-    idx: number
+    id: string
 }
 
 interface JobState {
-    items: Array<JobItem>
+    byId: {
+        [id: string]: JobItem
+    },
+    allIds: Array<string>
 }
 
 export const initialState: JobState = {
-    items: [
-        {
-            description: '',
-            business: '',
-            taxesFiled: false,
-            payments: [],
-            expenses: []
-        }
-    ]
+    byId: {},
+    allIds: []
 }
 
 export const JobSlice = createSlice({
     name: 'job',
     initialState,
     reducers: {
-        addJob: (state, action: PayloadAction<JobItem>) => {
-            state.items.push(action.payload)
+        addJob: (state, action: PayloadAction<SetJobPayload>) => {
+            const id = action.payload.id
+            state.byId[id] = action.payload.item
 
+            state.allIds.push(id)
         },
-        removeJob: (state, action: PayloadAction<number>) => {
-            state.items.splice(action.payload, 1)
+        removeJob: (state, action: PayloadAction<string>) => {
+            delete state.byId[action.payload]
+
+            state.allIds = state.allIds.filter((id) => id !== action.payload )
         },
         setJobItem: (state, action: PayloadAction<SetJobPayload>) => {
-            if (action.payload.idx < state.items.length) {
-                state.items[action.payload.idx].description = action.payload.item.description
-                state.items[action.payload.idx].business = action.payload.item.business
-                state.items[action.payload.idx].taxesFiled = action.payload.item.taxesFiled
-            }
+            const id = action.payload.id
+
+            state.byId[id] = action.payload.item
         },
     }
 })
@@ -56,7 +53,8 @@ export const JobSlice = createSlice({
 // where do i add the payments and expenses in here?
 
 export const { addJob, removeJob, setJobItem } = JobSlice.actions
-export const selectJobItems = (state: RootState) => state.jobs.items
+export const selectJobItems = (state: RootState) => state.jobs.byId
+export const selectJobCount = (state: RootState) => state.jobs.allIds.length
 
 /**
  * TODO: needs tests and to be a little more clear what's happening
@@ -64,11 +62,15 @@ export const selectJobItems = (state: RootState) => state.jobs.items
  * @param state 
  */
 export const selectJobTotal = (state: RootState) => {
-    return state.jobs.items.reduce((total: number, item: JobItem) => 
-        total + item.payments.reduce((jobTotal: number, payment: PaymentItem) => jobTotal + payment.amount, 0)
-    , 0)
+    return 0
+    // state.jobs.byId.reduce((total: number, item: JobItem) => 
+    //     // move payments total to payment slice
+    //     // total + item.payments.reduce((jobTotal: number, payment: PaymentItem) => jobTotal + payment.amount, 0)
+    //     0
+    // , 0)
 }
 
-export const selectJobItemAt = (state: RootState, idx: number) => state.jobs.items.at(idx)
+// iterate until you find the id
+export const selectJobItemAt = (state: RootState, id: number) => state.jobs.byId[id]
 
 export default JobSlice.reducer
