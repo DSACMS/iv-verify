@@ -6,7 +6,7 @@ import { makeStore } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { addJob, JobItem, SetJobPayload } from '@/lib/features/job/jobSlice'
+import { addJob, SetJobPayload } from '@/lib/features/job/jobSlice'
 import { BenefitsState, setBenefits } from '@/lib/features/benefits/benefitsSlice'
 import { createUuid } from '@/lib/store'
 

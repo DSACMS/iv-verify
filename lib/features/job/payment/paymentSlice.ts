@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
 
 export interface PaymentItem {
-  idx: number
+  job: number
   amount: number
   date: string
   payer: string

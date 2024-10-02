@@ -1,8 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit'
 import { RootState } from '../../store'
-import { PaymentItem } from './payment/paymentSlice'
-import { ExpenseItem } from './expenses/expensesSlice'
-import { create } from 'domain'
 
 export interface JobItem {
     description: string
