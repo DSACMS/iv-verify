@@ -70,8 +70,8 @@ describe('Add Payments to Jobs Page', async () => {
     const month = todayDate.getMonth()+1
     const formattedMonth = month.toString().length === 1 ? 
       `0${month}` : month
-    const day = todayDate.getDate().toString().length === 1 ? `0${todayDate.getDate()}` : todayDate.getDate()
-    const expectedDate = `${formattedMonth}/${day}/${todayDate.getFullYear()}`;
+    const date = '15'
+    const expectedDate = `${formattedMonth}/${date}/${todayDate.getFullYear()}`;
 
     const datepicker: HTMLInputElement = screen.getByTestId("date-picker-external-input")
     fireEvent.change(screen.getByTestId("amount"), {
@@ -80,7 +80,8 @@ describe('Add Payments to Jobs Page', async () => {
       }
     })
     fireEvent.click(screen.getByTestId('date-picker-button'))
-    fireEvent.click(screen.getByText(todayDate.getDate()))
+    const dateButton = screen.getByText(date)
+    fireEvent.click(dateButton)
 
     fireEvent.change(screen.getByTestId("payer"), {
       target: {
