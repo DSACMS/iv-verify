@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { selectBenefits } from "@/lib/features/benefits/benefitsSlice"
-import { selectJobTotal } from "@/lib/features/job/jobSlice"
+import { selectTotalPaymentsByJob } from "@/lib/features/job/jobSlice"
 import Link from "next/link"
 import IncomeList from "@/app/components/IncomeList"
 import ExpenseList from "@/app/components/ExpenseList"
@@ -18,7 +18,7 @@ export default function Page() {
     const { t } = useTranslation()
     const router = useRouter()
     const benefits = useAppSelector(state => selectBenefits(state))
-    const incomeTotal = useAppSelector(state => selectJobTotal(state))
+    const incomeTotal = useAppSelector(state => selectTotalPaymentsByJob(state))
 
     function continueButtonClicked() {
         router.push("/statement/sign")

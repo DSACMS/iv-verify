@@ -7,6 +7,7 @@ import reducer, {
     selectJobItems, 
     selectJobCount,
     selectTotalPaymentsByJob,
+    selectTotalPaymentsByAllJobs,
     SetJobPayload
 } from './jobSlice'
 import { makeStore, createUuid } from '@/lib/store'
@@ -70,14 +71,24 @@ describe('JobSlice', () => {
             store.dispatch(addJob(job2))
         })
 
-        it('can select all income items', () => {
-            expect(selectJobCount(store.getState())).toEqual(2)
-            expect(selectJobItems(store.getState())).toEqual(0)
-        })
+        describe('selectJobItems and selectJobCount', () => {
+            it('can select all income items', () => {
+                expect(selectJobCount(store.getState())).toEqual(2)
+                expect(selectJobItems(store.getState())).toEqual(0)
+            })
+        });
 
         // not yet; gotta add payments in here yet
-        it.skip('can total the income items', () => {
-            expect(selectTotalPaymentsByJob(store.getState(), job1.id)).toEqual(50)
-        })
+        describe('selectTotalPaymentsByJob', () => {
+            it.skip('can total the income items', () => {
+                expect(selectTotalPaymentsByJob(store.getState(), job1.id)).toEqual(50)
+            })
+        });
+
+        describe('selectTotalPaymentsByAllJobs', () => {
+            it.skip('can total the income items', () => {
+                expect(selectTotalPaymentsByAllJobs(store.getState())).toEqual(50)
+            })
+        });
     })
 })

@@ -6,14 +6,14 @@ import { selectSignedStatement } from "@/lib/features/statement/statementSlice"
 import Link from "next/link"
 import Image from "next/image"
 import ledgerImage from './ledger.png'
-import { selectJobItems, selectJobTotal } from "@/lib/features/job/jobSlice"
+import { selectJobItems, selectTotalPaymentsByJob } from "@/lib/features/job/jobSlice"
 import { selectExpenseItems, selectExpenseTotal } from "@/lib/features/job/expenses/expensesSlice"
 import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
     const { t } = useTranslation()
     const signedStatement = useAppSelector((state) => selectSignedStatement(state))
-    const totalIncome = useAppSelector((state) => selectJobTotal(state))
+    const totalIncome = useAppSelector((state) => selectTotalPaymentsByJob(state))
     const totalExpense = useAppSelector((state) => selectExpenseTotal(state))
     const incomeItems = useAppSelector((state) => selectJobItems(state))
     const expenseItems = useAppSelector((state) => selectExpenseItems(state))
