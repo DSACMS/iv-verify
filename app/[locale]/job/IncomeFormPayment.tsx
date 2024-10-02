@@ -14,6 +14,7 @@ export interface IncomeFormPaymentProps {
 }
 
 export type IncomeFormPaymentData = {
+    job: string
     amount: number
     date: string
     payer: string

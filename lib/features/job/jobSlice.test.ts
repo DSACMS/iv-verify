@@ -12,7 +12,6 @@ import reducer, {
 } from './jobSlice'
 import { makeStore, createUuid } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
-import { create } from 'domain'
 
 describe('JobSlice', () => {
     const emptyJobObject = {
@@ -42,7 +41,7 @@ describe('JobSlice', () => {
             expect(reducer(undefined, { type: 'unknown' })).toEqual({items:[]})
         })
 
-        it('should handle adding job items', () => {
+        it('addJob should work', () => {
             expect(reducer(initialState, addJob(job1))).toEqual({
                 byId:{
                     id: job1.item
@@ -52,7 +51,7 @@ describe('JobSlice', () => {
         })
 
 
-        it('should handle removing income items', () => {
+        it('removeJob should work', () => {
             const jobToRemove = {
                 byId:{
                     id: job1.item
@@ -61,6 +60,8 @@ describe('JobSlice', () => {
             }
             expect(reducer(jobToRemove, removeJob(id))).toEqual(emptyJobObject)
         })
+
+        it.skip('setJobItem should update a job')
     })
 
     describe('selectors', () => {
@@ -74,7 +75,12 @@ describe('JobSlice', () => {
         describe('selectJobItems and selectJobCount', () => {
             it('can select all income items', () => {
                 expect(selectJobCount(store.getState())).toEqual(2)
-                expect(selectJobItems(store.getState())).toEqual(0)
+                
+                const jobs = selectJobItems(store.getState())
+
+                expect(jobs[job1['id']]).toEqual(job1['item']);
+                expect(jobs[job2['id']]).toEqual(job2['item']);
+                expect(Object.keys(jobs).length).toEqual(2)
             })
         });
 

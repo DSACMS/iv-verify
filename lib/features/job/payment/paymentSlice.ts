@@ -53,8 +53,8 @@ export const selectPaymentItemAt = (state:RootState, id: string) => state.paymen
 export const selectPaymentsByJob = (state: RootState, jobId: string) => {
   const selectedPayments: Array<PaymentItem> = []
 
-  for (const payment in state.payment) {
-    const currentPayment = state.payment.byId[payment]
+  for (const paymentId in state.payment.byId) {
+    const currentPayment = selectPaymentItemAt(state, paymentId)
     if (currentPayment.job == jobId)
       selectedPayments.push(currentPayment)
   }
