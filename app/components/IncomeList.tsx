@@ -15,11 +15,13 @@ interface Props {
 export default function IncomeList({dayCount, header}: Props) {
     const { t } = useTranslation()
     const router = useRouter()
-    const items = useAppSelector(state => selectJobItems(state))
+    const jobs = useAppSelector(state => selectJobItems(state))
     const incomeTotal = useAppSelector(state => selectJobTotal(state))
-    const incomeItemElements = items.map((item: JobItem, idx: number) => {
-        return <IncomeListItem key={idx} item={item} index={idx} />
-    })
+    const incomeItemElements = []
+    
+    for (const job in jobs) {
+        incomeItemElements.push(<IncomeListItem key={job} item={jobs[job]} index={job} />)
+    }
 
     function getTotal() {
         if (incomeTotal > 0) {

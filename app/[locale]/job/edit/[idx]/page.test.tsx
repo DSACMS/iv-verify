@@ -8,7 +8,6 @@ import { EnhancedStore } from '@reduxjs/toolkit/react'
 import { makeStore } from '@/lib/store'
 import { SetJobPayload, addJob } from '@/lib/features/job/jobSlice'
 import { createUuid } from '@/lib/store'
-import { create } from 'domain'
 
 describe('Edit Income Item Page', async () => {
     let store: EnhancedStore

@@ -7,16 +7,17 @@ import { useRef } from "react"
 import { useRouter } from "next/navigation"
 interface ItemProps {
     item: JobItem
-    index: number
+    index: string
 }
 export default function IncomeListItem({ item, index }: ItemProps) {
     const ref = useRef(null)
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
-    const payments = item.payments.map((payment: PaymentItem) => {
-        return (<li key="{payment.idx}">{payment.date} ${payment.amount} {t('list_income_by')} {payment.payer}</li>)
-    })
+    const payments = (<li></li>)
+    // const payments = item.payments.map((payment: PaymentItem) => {
+    //     return (<li key="{payment.idx}">{payment.date} ${payment.amount} {t('list_income_by')} {payment.payer}</li>)
+    // })
 
     function onDeleteClicked() {
         dispatch(removeJob(index))
