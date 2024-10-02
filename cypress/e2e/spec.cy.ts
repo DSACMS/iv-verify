@@ -32,21 +32,21 @@ describe('Flow Tests', () => {
     cy.get('[data-testid=continue_button]').click()
 
     // Ledger landing
-    cy.url().should('include', '/ledger/income')
+    cy.url().should('include', '/ledger/job')
     cy.get('[data-testid=accordionItem_income_landing_what_counts]').not('be.visible')
     cy.get('[data-testid=accordionButton_income_landing_what_counts').trigger("click")
     cy.get('[data-testid=accordionItem_income_landing_what_counts]').should('be.visible')
     cy.get('[data-testid=add_income_button').trigger("click")
 
     // Ledger add page
-    cy.url().should('include', '/ledger/income/add')
+    cy.url().should('include', '/ledger/job/add')
     cy.get('[data-testid=name]').type(incomeName)
     cy.get('[data-testid=description]').type(incomeDescription)
     cy.get('[data-testid=amount]').type(incomeAmount)
     cy.get('[data-testid=continue_button]').click()
 
     // Lender Income list page
-    cy.url().should('include', '/ledger/income/list')
+    cy.url().should('include', '/ledger/job/list')
     cy.contains(incomeName)
     cy.contains(incomeDescription)
     cy.contains(incomeAmount)
