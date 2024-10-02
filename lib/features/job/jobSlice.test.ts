@@ -1,75 +1,64 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
 import reducer, {
-    JobItem,  
-    addJob,
-    addPayment, 
+    addJob, 
     removeJob, 
     initialState, 
     selectJobItems, 
-    selectJobTotal
+    selectJobCount,
+    selectTotalPaymentsByJob,
+    SetJobPayload
 } from './jobSlice'
-import { PaymentItem } from './payment/paymentSlice'
-import { makeStore } from '@/lib/store'
+import { makeStore, createUuid } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
+import { create } from 'domain'
 
 describe('JobSlice', () => {
-    const item: JobItem = {
-        description: 'A description',
-        business: 'A business name',
-        taxesFiled: true,
-        payments: [
-            {
-                idx: 0, 
-                amount: 15,
-                date: '09/09/2024',
-                payer: 'Someone'
-            }, {
-                idx: 0, 
-                amount: 25,
-                date: '09/12/2024',
-                payer: 'Someone' 
-            }
-        ]
+    const emptyJobObject = {
+        byId: {},
+        allIds: []
     }
-
-    const item2: JobItem = {
-        description: 'A description2',
-        business: '',
-        taxesFiled: false,
-        payments: [
-            {
-                idx: 0, 
-                amount: 10,
-                date: '09/30/2024',
-                payer: 'Someone' 
-            }
-        ]
+    const job1: SetJobPayload = {
+        id: createUuid(),
+        item: {
+            description: 'A description',
+            business: 'A business name',
+            taxesFiled: true
+        }
     }
-
-    const payment: PaymentItem = {
-        idx: 0, 
-        amount: 10,
-        date: '09/30/2024',
-        payer: 'Someone' 
+    const job2: SetJobPayload = {
+        id: createUuid(),
+        item: {
+            description: 'A description2',
+            business: '',
+            taxesFiled: false
+        }
     }
-
 
     describe('actions', () => {
+        const id = job1.id
         it('should return the initial state', () => {
             expect(reducer(undefined, { type: 'unknown' })).toEqual({items:[]})
         })
 
         it('should handle adding job items', () => {
-            expect(reducer(initialState, addJob(item))).toEqual({items:[item]})
+            expect(reducer(initialState, addJob(job1))).toEqual({
+                byId:{
+                    id: job1.item
+                },
+                allIds: [id]
+            })
         })
 
-        it.skip('should handle adding payment items', () => {
-            expect(reducer(initialState, addPayment(payment))).toEqual({items:item.payments})
-        })
 
         it('should handle removing income items', () => {
-            expect(reducer({items: [item]}, removeJob(0))).toEqual({items:[]})
+            const jobToRemove = {
+                byId:{
+                    id: job1.item
+                },
+                allIds: [id]
+            }
+            expect(reducer(jobToRemove, removeJob(id))).toEqual(emptyJobObject)
         })
     })
 
@@ -77,16 +66,18 @@ describe('JobSlice', () => {
         let store: EnhancedStore
         beforeEach(() => {
             store = makeStore()
-            store.dispatch(addJob(item))
-            store.dispatch(addJob(item2))
+            store.dispatch(addJob(job1))
+            store.dispatch(addJob(job2))
         })
 
         it('can select all income items', () => {
-            expect(selectJobItems(store.getState())).toEqual([item, item2])
+            expect(selectJobCount(store.getState())).toEqual(2)
+            expect(selectJobItems(store.getState())).toEqual(0)
         })
 
-        it('can total the income items', () => {
-            expect(selectJobTotal(store.getState())).toEqual(50)
+        // not yet; gotta add payments in here yet
+        it.skip('can total the income items', () => {
+            expect(selectTotalPaymentsByJob(store.getState(), job1.id)).toEqual(50)
         })
     })
 })

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit'
+import { PaymentItem, selectPaymentsByJob } from './payment/paymentSlice'
 import { RootState } from '../../store'
 
 export interface JobItem {
@@ -30,14 +31,14 @@ export const JobSlice = createSlice({
     reducers: {
         addJob: (state, action: PayloadAction<SetJobPayload>) => {
             const id = action.payload.id
-            state.byId[id] = action.payload.item
 
+            state.byId[id] = action.payload.item
             state.allIds.push(id)
         },
         removeJob: (state, action: PayloadAction<string>) => {
             delete state.byId[action.payload]
 
-            state.allIds = state.allIds.filter((id) => id !== action.payload )
+            state.allIds = state.allIds.filter(id => id !== action.payload )
         },
         setJobItem: (state, action: PayloadAction<SetJobPayload>) => {
             const id = action.payload.id
@@ -57,13 +58,14 @@ export const selectJobCount = (state: RootState) => state.jobs.allIds.length
  * 
  * @param state 
  */
-export const selectJobTotal = (state: RootState) => {
-    return 0
-    // state.jobs.byId.reduce((total: number, item: JobItem) => 
-    //     // move payments total to payment slice
-    //     // total + item.payments.reduce((jobTotal: number, payment: PaymentItem) => jobTotal + payment.amount, 0)
-    //     0
-    // , 0)
+export const selectTotalPaymentsByJob = (state: RootState, jobId: string) => {
+    const jobPayments = selectPaymentsByJob(state, jobId)
+
+    return jobPayments.reduce((total: number, payment: PaymentItem) => total + payment.amount, 0)
+}
+
+export const selectTotalPaymentsByAllJobs = (state: RootState) => {
+    return state.payment.allIds.reduce((total: number, paymentId: string) => total + state.payment.byId[paymentId].amount, 0)
 }
 
 // iterate until you find the id
