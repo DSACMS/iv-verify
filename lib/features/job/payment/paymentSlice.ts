@@ -55,7 +55,7 @@ export const selectPaymentsByJob = (state: RootState, jobId: string) => {
 
   for (const paymentId in state.payment.byId) {
     const currentPayment = selectPaymentItemAt(state, paymentId)
-    if (currentPayment.job == jobId)
+    if (currentPayment.job === jobId)
       selectedPayments.push(currentPayment)
   }
 
