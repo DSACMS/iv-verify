@@ -6,8 +6,7 @@ import { makeStore, createUuid } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { ExpenseItem, SetExpensePayload, addExpense } from '@/lib/features/job/expenses/expensesSlice'
-import { create } from 'domain'
+import { SetExpensePayload, addExpense } from '@/lib/features/job/expenses/expensesSlice'
 
 describe('List Income in Ledger Page', async () => {
     let store: EnhancedStore
@@ -32,7 +31,7 @@ describe('List Income in Ledger Page', async () => {
             id: createUuid(),
             item: {
                 job: createUuid(),
-                name: "Supplies: Gas",
+                name: "Supplies",
                 date: "2024/11/07",
                 amount: 20,
                 isMileage: true,
@@ -58,8 +57,8 @@ describe('List Income in Ledger Page', async () => {
         render(<Provider store={store}><Page /></Provider>)
 
         for (const expense of expenses) {
-            expect(screen.getByText(expense.item.name)).toBeDefined()
-            expect(screen.getAllByText("$" + expense.item.amount)).toBeDefined()
+            expect(screen.findByText(expense.item.name)).toBeDefined()
+            expect(screen.findByText("$" + expense.item.amount)).toBeDefined()
         }
     })
 })

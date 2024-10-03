@@ -69,7 +69,7 @@ describe('ExpenseSlice', () => {
         })
         
         it('selectExpenseItemAt', () => {
-            expect(selectExpenseItemAt(store.getState(), item1.id)).toEqual([item1])
+            expect(selectExpenseItemAt(store.getState(), item1.id)).toEqual(item1.item)
         })
 
         it.skip('selectExpensesByJob')

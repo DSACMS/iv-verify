@@ -6,9 +6,10 @@ import mockRouter from 'next-router-mock'
 
 import Page from './page'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
-import { makeStore } from '@/lib/store'
+import { makeStore, createUuid } from '@/lib/store'
 
-import { JobItem, addJob } from '@/lib/features/job/jobSlice'
+import { SetJobPayload, addJob } from '@/lib/features/job/jobSlice'
+import { create } from 'domain'
 
 /**
  * Set date from month day year
@@ -41,11 +42,13 @@ export const today = (): Date => {
 
 describe('Add Payments to Jobs Page', async () => {
   let store: EnhancedStore
-  const item1: JobItem = {
-    description: 'desc1',
-    business: 'business!',
-    taxesFiled: false,
-    payments: []
+  const item1: SetJobPayload = {
+    id: createUuid(),
+    item: {
+      description: 'desc1',
+      business: 'business!',
+      taxesFiled: false  
+    }
   }
 
   beforeEach(() => {
@@ -57,7 +60,7 @@ describe('Add Payments to Jobs Page', async () => {
     mockRouter.push('/job/0/payment/add')
     store = makeStore()
     store.dispatch(addJob(item1))
-    render (<TestWrapper store={store}><Page params={{idx: 0}} /></TestWrapper>)
+    render (<TestWrapper store={store}><Page params={{idx: '0'}} /></TestWrapper>)
   })
   afterEach(cleanup)
 

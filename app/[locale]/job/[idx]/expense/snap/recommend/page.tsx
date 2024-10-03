@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { BenefitsState, selectBenefits, setBenefits } from "@/lib/features/benefits/benefitsSlice"
-import { selectExpenseTotal } from "@/lib/features/job/expenses/expensesSlice"
+import { selectTotalExpensesByAllJobs } from '@/lib/features/job/jobSlice'
 import { useEffect } from "react"
 import { isStandardDeductionBetter } from "@/lib/store"
 import VerifyNav from "@/app/components/VerifyNav"
@@ -16,7 +16,7 @@ export default function Page() {
     const router = useRouter()
     const dispatch = useAppDispatch()
     const benefits = useAppSelector(state => selectBenefits(state))
-    const expenseTotal = useAppSelector(state => selectExpenseTotal(state))
+    const expenseTotal = useAppSelector(state => selectTotalExpensesByAllJobs(state))
     const standardDeductionIsBetter = useAppSelector(state => isStandardDeductionBetter(state))
 
     interface FormData {
