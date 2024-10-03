@@ -1,5 +1,7 @@
 import { useTranslation } from "react-i18next"
+import { useAppSelector } from "@/lib/hooks"
 import { JobItem, removeJob } from "@/lib/features/job/jobSlice"
+import { PaymentItem, selectPaymentsByJob } from "@/lib/features/job/payment/paymentSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"
@@ -13,10 +15,10 @@ export default function IncomeListItem({ item, index }: ItemProps) {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
-    const payments = (<li></li>)
-    // const payments = item.payments.map((payment: PaymentItem) => {
-    //     return (<li key="{payment.idx}">{payment.date} ${payment.amount} {t('list_income_by')} {payment.payer}</li>)
-    // })
+    // const payments = 
+    const payments = useAppSelector(state => selectPaymentsByJob(state, index)).map((payment: PaymentItem) => {
+        return (<li key="{payment.idx}">{payment.date} ${payment.amount} {t('list_income_by')} {payment.payer}</li>)
+    })
 
     function onDeleteClicked() {
         dispatch(removeJob(index))

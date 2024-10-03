@@ -49,7 +49,7 @@ export const PaymentSlice = createSlice({
 
 export const { addPayment, removePayment, setPaymentItem } = PaymentSlice.actions
 
-export const selectPaymentItemAt = (state:RootState, id: string) => state.payment.byId[id]
+export const selectPaymentItemAt = (state: RootState, id: string) => state.payment.byId[id]
 export const selectPaymentsByJob = (state: RootState, jobId: string) => {
   const selectedPayments: Array<PaymentItem> = []
 
