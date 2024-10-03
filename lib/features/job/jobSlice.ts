@@ -47,8 +47,6 @@ export const JobSlice = createSlice({
     }
 })
 
-// where do i add the payments and expenses in here?
-
 export const { addJob, removeJob, setJobItem } = JobSlice.actions
 export const selectJobItems = (state: RootState) => state.jobs.byId
 export const selectJobCount = (state: RootState) => state.jobs.allIds.length

@@ -36,29 +36,24 @@ describe('JobSlice', () => {
     }
 
     describe('actions', () => {
-        const id = job1.id
         it('should return the initial state', () => {
-            expect(reducer(undefined, { type: 'unknown' })).toEqual({items:[]})
+            expect(reducer(undefined, { type: 'unknown' })).toEqual(       
+                 emptyJobObject)
         })
 
         it('addJob should work', () => {
             expect(reducer(initialState, addJob(job1))).toEqual({
                 byId:{
-                    id: job1.item
+                    [job1['id']]: job1.item
                 },
-                allIds: [id]
+                allIds: [job1['id']]
             })
         })
 
 
         it('removeJob should work', () => {
-            const jobToRemove = {
-                byId:{
-                    id: job1.item
-                },
-                allIds: [id]
-            }
-            expect(reducer(jobToRemove, removeJob(id))).toEqual(emptyJobObject)
+            const state = reducer(initialState, addJob(job1))
+            expect(reducer(state, removeJob(job1['id']))).toEqual(emptyJobObject)
         })
 
         it.skip('setJobItem should update a job')
