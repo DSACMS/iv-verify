@@ -14,7 +14,7 @@ import { makeStore, createUuid } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
 
 describe('JobSlice', () => {
-    const emptyJobObject = {
+    const emptyStateObject = {
         byId: {},
         allIds: []
     }
@@ -38,7 +38,7 @@ describe('JobSlice', () => {
     describe('actions', () => {
         it('should return the initial state', () => {
             expect(reducer(undefined, { type: 'unknown' })).toEqual(       
-                 emptyJobObject)
+                 emptyStateObject)
         })
 
         it('addJob should work', () => {
@@ -53,7 +53,7 @@ describe('JobSlice', () => {
 
         it('removeJob should work', () => {
             const state = reducer(initialState, addJob(job1))
-            expect(reducer(state, removeJob(job1['id']))).toEqual(emptyJobObject)
+            expect(reducer(state, removeJob(job1['id']))).toEqual(emptyStateObject)
         })
 
         it.skip('setJobItem should update a job')

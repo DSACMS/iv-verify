@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit'
 import { PaymentItem, selectPaymentsByJob } from './payment/paymentSlice'
+import { ExpenseItem } from './expenses/expensesSlice'
 import { RootState } from '../../store'
+import { selectExpensesByJob } from './expenses/expensesSlice'
 
 export interface JobItem {
     description: string
@@ -56,17 +58,19 @@ export const selectJobCount = (state: RootState) => state.jobs.allIds.length
  * 
  * @param state 
  */
-export const selectTotalPaymentsByJob = (state: RootState, jobId: string) => {
-    const jobPayments = selectPaymentsByJob(state, jobId)
+export const selectTotalPaymentsByJob = (state: RootState, jobId: string) => 
+    selectPaymentsByJob(state, jobId).reduce((total: number, payment: PaymentItem) => total + payment.amount, 0)
 
-    return jobPayments.reduce((total: number, payment: PaymentItem) => total + payment.amount, 0)
-}
+export const selectTotalPaymentsByAllJobs = (state: RootState) => 
+    state.payment.allIds.reduce((total: number, paymentId: string) => total + state.payment.byId[paymentId].amount, 0)
 
-export const selectTotalPaymentsByAllJobs = (state: RootState) => {
-    return state.payment.allIds.reduce((total: number, paymentId: string) => total + state.payment.byId[paymentId].amount, 0)
-}
 
-// iterate until you find the id
+export const selectExpenseTotalByJob = (state: RootState, jobId: string) =>
+    selectExpensesByJob(state, jobId).reduce((total: number, expense: ExpenseItem) => expense.amount + total, 0)
+
+export const selectTotalExpensesByAllJobs = (state: RootState) =>
+    state.expenses.allIds.reduce((total: number, expenseId: string) => total + state.expenses.byId[expenseId].amount, 0 )
+
 export const selectJobItemAt = (state: RootState, id: string) => state.jobs.byId[id]
 
 export default JobSlice.reducer
