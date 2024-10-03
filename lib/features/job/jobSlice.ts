@@ -65,7 +65,7 @@ export const selectTotalPaymentsByAllJobs = (state: RootState) =>
     state.payment.allIds.reduce((total: number, paymentId: string) => total + state.payment.byId[paymentId].amount, 0)
 
 
-export const selectExpenseTotalByJob = (state: RootState, jobId: string) =>
+export const selectTotalExpensesByJob = (state: RootState, jobId: string) =>
     selectExpensesByJob(state, jobId).reduce((total: number, expense: ExpenseItem) => expense.amount + total, 0)
 
 export const selectTotalExpensesByAllJobs = (state: RootState) =>
