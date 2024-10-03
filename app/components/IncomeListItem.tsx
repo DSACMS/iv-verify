@@ -46,13 +46,13 @@ export default function IncomeListItem({ item, index }: ItemProps) {
             <Grid col={10}>
                 <div>{item.description}</div>
                 <div>{item.business}</div>
-                <h4>Payments</h4>
+                <h4>{t('list_income_list_payments')}</h4>
                 <div>
                     <ul>
                         {payments}
                     </ul>
                 </div>
-                <h4>Expenses</h4>
+                <h4>{t('list_income_list_expenses')}</h4>
                 <div>
                     <ul>
                         {expenses}

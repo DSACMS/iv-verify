@@ -141,6 +141,8 @@
   "list_income_done_button": "Done",
   "list_income_header": "Would you like to add another person, client, or company who paid you in the last {{day_count}} days?",
   "list_income_list_header": "Your jobs and payments",
+  "list_income_list_expenses": "Expenses",
+  "list_income_list_payments": "Payments",
   "list_income_no_delete_item": "No, take me back to the list",
   "list_income_subheader": "Add another person, client, or company below",
   "list_income_title": "Self employment income summary",

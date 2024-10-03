@@ -1,11 +1,10 @@
-import { beforeEach, describe, expect, it } from 'vitest'
-
-import reducer, { UserItem } from './userSlice'
-import { makeStore } from '@/lib/store'
-import { EnhancedStore } from '@reduxjs/toolkit'
+import { beforeEach, describe, it } from 'vitest'
 
 describe('PaymentSlice', () => {
   describe('actions', () => {
+    beforeEach(() => {
+
+    })
     it.skip('should return the initial state')
     it.skip('should handle adding payment items')
     it.skip('should handle editing payment items')

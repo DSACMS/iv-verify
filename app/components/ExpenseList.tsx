@@ -2,7 +2,6 @@ import { Button, ButtonGroup, Card, CardBody, CardGroup, CardHeader, GridContain
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
-import { ExpenseItem } from "@/lib/features/job/expenses/expensesSlice";
 import { selectJobItems, selectTotalExpensesByAllJobs } from "@/lib/features/job/jobSlice"
 import ExpenseListItem from "./ExpenseListItem";
 
