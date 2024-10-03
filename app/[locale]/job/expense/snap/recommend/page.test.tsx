@@ -1,17 +1,17 @@
-import { afterEach, beforeEach, describe, expect, it } from 'vitest'
-import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { beforeAll, describe, expect, it } from 'vitest'
+import { fireEvent, render, screen, waitFor } from '@testing-library/react'
 import Page from './page'
-import { makeStore } from '@/lib/store'
+import { makeStore, createUuid } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 import { BenefitsState, selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
-import { JobItem, addJob } from '@/lib/features/job/jobSlice'
+import { JobItem, SetJobPayload, addJob } from '@/lib/features/job/jobSlice'
 import TestWrapper from '@/app/TestWrapper'
 
 describe('SNAP Recommend Deduction Screen', async () => {
     let store: EnhancedStore
-    beforeEach(() => {
+    beforeAll(() => {
         vi.mock('next/navigation', () => ({
             useRouter: () =>  mockRouter,
             usePathname: () => mockRouter.asPath,
@@ -26,23 +26,17 @@ describe('SNAP Recommend Deduction Screen', async () => {
         }
         store.dispatch(setBenefits(benefits))
 
-        const incomeItem: JobItem = {
-            description: 'A description2',
-            business: '',
-            taxesFiled: false,
-            payments: [
-                {
-                    idx: 0, 
-                    amount: 10,
-                    date: '09/30/2024',
-                    payer: 'Someone' 
-                }
-            ]
+        const jobItem: SetJobPayload = {
+            id: createUuid(),
+            item: {
+                description: 'A description2',
+                business: '',
+                taxesFiled: false
+            } as JobItem
         }
-        store.dispatch(addJob(incomeItem))
+        store.dispatch(addJob(jobItem))
         render(<TestWrapper store={store}><Page /></TestWrapper>)
     })
-    afterEach(cleanup)
 
     it('shows header', () => {
         expect(screen.getByTestId('expenses_snap_recommend_header')).toBeDefined()
