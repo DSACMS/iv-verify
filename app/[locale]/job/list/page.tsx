@@ -18,9 +18,9 @@ export default function Page() {
 
     function doneClicked() {
         if (routeToStandardDeductionElection) {
-            router.push("/job/expense/snap")
+            router.push("/job/expense/snap") // TODO move snap out
         } else {
-            router.push("/job/expense")
+            router.push(`/job/review`)
         }
     }
 

@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next"
-import { ExpenseItem, removeExpense } from "@/lib/features/job/expenses/expensesSlice"
-import { useAppDispatch } from "@/lib/hooks"
+import { ExpenseItem, removeExpense, selectExpensesByJob } from "@/lib/features/job/expenses/expensesSlice"
+import { JobItem } from "@/lib/features/job/jobSlice"
+import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { 
     Button, 
@@ -12,17 +13,19 @@ import {
     ModalToggleButton
 } from "@trussworks/react-uswds"
 import { useRef } from "react"
-type NewType = ExpenseItem
 
 interface ItemProps {
-    item: NewType
-    index: number
+    item: JobItem
+    index: string
 }
 export default function ExpenseListItem({ item, index }: ItemProps) {
     const ref = useRef(null)
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
+    const expenses = useAppSelector(state => selectExpensesByJob(state, index)).map((expense: ExpenseItem) => {
+        return (<li key="expense.idx}">{expense.date} ${expense.amount} {expense.name} ({expense.expenseType})</li>)
+    })
 
     function onDeleteClicked() {
         dispatch(removeExpense(index))
@@ -34,11 +37,14 @@ export default function ExpenseListItem({ item, index }: ItemProps) {
 
     return (
         <Grid row gap className="margin-bottom-5">
-            <Grid col={1}>*</Grid>
-            <Grid col={6} tablet={{col: 9}}>
-                <div>{item.name}</div>
-                <div>{item.date}</div>
-                <div>{`$${item.amount}`}</div>
+            <Grid col={10}>
+                <div>{item.description}</div>
+                <div>{item.business}</div>
+                <div>
+                    <ul>
+                        {expenses}
+                    </ul>
+                </div>
             </Grid>
             <Grid col={5} tablet={{col: 2}}>
                 <ModalToggleButton unstyled modalRef={ref} opener>{t('expenses_summary_list_delete')}</ModalToggleButton>
