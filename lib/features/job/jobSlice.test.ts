@@ -1,5 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
+import { generateExpense, generatePayment, emptyStateObject } from '@/test/fixtures/generator'
+
 import reducer, {
     addJob, 
     removeJob,
@@ -9,17 +11,17 @@ import reducer, {
     selectJobCount,
     selectTotalPaymentsByJob,
     selectTotalPaymentsByAllJobs,
+    selectTotalExpensesByJob,
+    selectTotalExpensesByAllJobs,
     SetJobPayload
 } from './jobSlice'
-import { addPayment, SetPaymentPayload } from './payment/paymentSlice'
+import { addExpense } from './expenses/expensesSlice'
+import { addPayment } from './payment/paymentSlice'
 import { makeStore, createUuid } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
 
 describe('JobSlice', () => {
-    const emptyStateObject = {
-        byId: {},
-        allIds: []
-    }
+    const emptyObject = emptyStateObject
     const job1: SetJobPayload = {
         id: createUuid(),
         item: {
@@ -40,7 +42,7 @@ describe('JobSlice', () => {
     describe('actions', () => {
         it('should return the initial state', () => {
             expect(reducer(undefined, { type: 'unknown' })).toEqual(       
-                 emptyStateObject)
+                 emptyObject)
         })
 
         it('addJob should work', () => {
@@ -55,39 +57,28 @@ describe('JobSlice', () => {
 
         it('removeJob should work', () => {
             const state = reducer(initialState, addJob(job1))
-            expect(reducer(state, removeJob(job1['id']))).toEqual(emptyStateObject)
+            expect(reducer(state, removeJob(job1['id']))).toEqual(emptyObject)
         })
 
         it('setJobItem should update a job', () => {
             let state = reducer(initialState, addJob(job2))
-            const modifiedDescription = 'Modified description'
+            const modified = 'Modified description'
             
             state = reducer(state, setJobItem({
                 id: job2.id,
                 item: {
-                    description: modifiedDescription,
+                    description: modified,
                     business: '',
                     taxesFiled: false
                 }
             }))
 
-            expect(state.byId[job2['id']].description).toEqual(modifiedDescription)
+            expect(state.byId[job2['id']].description).toEqual(modified)
         })
     })
 
     describe('selectors', () => {
         let store: EnhancedStore
-        const generatePayment = (jobId: string) => {
-            return {
-                id: createUuid(),
-                item: {
-                    job: jobId,
-                    amount: 10,
-                    date: '',
-                    payer: 'Someone'
-                } 
-            } as SetPaymentPayload
-        }
 
         beforeEach(() => {
             store = makeStore()
@@ -107,7 +98,6 @@ describe('JobSlice', () => {
             })
         });
 
-        // not yet; gotta add payments in here yet
         describe('selectTotalPaymentsByJob', () => {
             it('can total the income items', () => {
                 store.dispatch(addPayment(generatePayment(job1.id)))
@@ -122,6 +112,23 @@ describe('JobSlice', () => {
                 store.dispatch(addPayment(generatePayment(job2.id)))
                 store.dispatch(addPayment(generatePayment(job2.id)))
                 expect(selectTotalPaymentsByAllJobs(store.getState())).toEqual(30)
+            })
+        });
+
+        describe('selectTotalExpensesByJob', () => {
+            it('can total the income items', () => {
+                store.dispatch(addExpense(generateExpense(job1.id)))
+                store.dispatch(addExpense(generateExpense(job1.id)))
+                expect(selectTotalExpensesByJob(store.getState(), job1.id)).toEqual(20)
+            })
+        });
+
+        describe('selectTotalExpensesByAllJobs', () => {
+            it('can total the income items', () => {
+                store.dispatch(addExpense(generateExpense(job1.id)))
+                store.dispatch(addExpense(generateExpense(job2.id)))
+                store.dispatch(addExpense(generateExpense(job2.id)))
+                expect(selectTotalExpensesByAllJobs(store.getState())).toEqual(30)
             })
         });
     })

@@ -1,46 +1,36 @@
 import { beforeEach, describe, expect, it } from "vitest";
+import { generateExpense, emptyStateObject } from "@/test/fixtures/generator";
+
 import reducer, { 
-    SetExpensePayload, 
     initialState, 
     addExpense, 
     removeExpense, 
-    selectExpenseItemAt } from "./expensesSlice";
+    setExpenseItem,
+    selectExpenseItemAt, 
+    selectExpensesByJob 
+} from "./expensesSlice";
 import { EnhancedStore } from "@reduxjs/toolkit";
 import { makeStore, createUuid } from "@/lib/store";
 
 describe('ExpenseSlice', () => {
-    const emptyStateObject = {
-        byId: {},
-        allIds: []
-    }
+    
+    const emptyObject = emptyStateObject
+    const jobId = createUuid()
 
-    const item1: SetExpensePayload = {
-        id: createUuid(),
-        item: {
-            job: createUuid(),
-            name: 'Gas',
-            amount: 44.55,
-            date: new Date().toString(),
-            expenseType: 'Gas',
-            isMileage: false
-        }
-    }
+    const item1 = generateExpense(jobId)
 
-    const item2: SetExpensePayload = {
-        id: createUuid(),
-        item: {
-            job: createUuid(),
-            name: 'Supplies',
-            amount: 77.88,
-            date: new Date().toString(),
-            expenseType: 'Supplies',
-            isMileage: false
-        }
-    }
+    const item2 = generateExpense(jobId, {
+        job: jobId,
+        name: 'Supplies',
+        amount: 77.88,
+        date: new Date().toString(),
+        expenseType: 'Supplies',
+        isMileage: false
+    })
 
     describe('actions', () => {
         it('should return the initial state', () => {
-            expect(reducer(undefined, { type: 'unknown' })).toEqual(emptyStateObject)
+            expect(reducer(undefined, { type: 'unknown' })).toEqual(emptyObject)
         })
 
         it('addExpense should work', () => {
@@ -54,10 +44,27 @@ describe('ExpenseSlice', () => {
 
         it('removeJob should work', () => {
             const state = reducer(initialState, addExpense(item1))
-            expect(reducer(state, removeExpense(item1['id']))).toEqual(emptyStateObject)
+            expect(reducer(state, removeExpense(item1['id']))).toEqual(emptyObject)
         })
 
-        it.skip('setExpenseItem should update an expense')
+        it('setExpenseItem should update an expense', () => {
+            let state = reducer(initialState, addExpense(item1))
+            const modified = 15
+
+            state = reducer(state, setExpenseItem({
+                id: item1.id,
+                item: {
+                    job: jobId,
+                    name: 'Modified Gas',
+                    amount: modified,
+                    date: new Date().toString(),
+                    expenseType: 'Gas',
+                    isMileage: false
+                }
+            }))
+
+            expect(state.byId[item1['id']].amount).toEqual(modified)
+        })
     })
 
     describe('selectors', () => {
@@ -72,7 +79,14 @@ describe('ExpenseSlice', () => {
             expect(selectExpenseItemAt(store.getState(), item1.id)).toEqual(item1.item)
         })
 
-        it.skip('selectExpensesByJob')
+        it('selectExpensesByJob', () => {
+            const secondJobId = createUuid()
+            
+            store.dispatch(addExpense(generateExpense(secondJobId)))
+
+            expect(selectExpensesByJob(store.getState(), secondJobId).length).toBe(1)
+
+        })
 
     })
 })
