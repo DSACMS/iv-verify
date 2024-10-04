@@ -2,13 +2,14 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import TestWrapper from '@/app/TestWrapper'
 import { vi } from 'vitest'
+import { generateJob } from '@/test/fixtures/generator'
 import mockRouter from 'next-router-mock'
 
 import Page from './page'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
-import { makeStore, createUuid } from '@/lib/store'
+import { makeStore } from '@/lib/store'
 
-import { SetJobPayload, addJob } from '@/lib/features/job/jobSlice'
+import { addJob } from '@/lib/features/job/jobSlice'
 
 /**
  * Set date from month day year
@@ -41,14 +42,7 @@ export const today = (): Date => {
 
 describe('Add Payments to Jobs Page', async () => {
   let store: EnhancedStore
-  const item1: SetJobPayload = {
-    id: createUuid(),
-    item: {
-      description: 'desc1',
-      business: 'business!',
-      taxesFiled: false  
-    }
-  }
+  const item1 = generateJob()
 
   beforeEach(() => {
     vi.mock('next/navigation', () => ({

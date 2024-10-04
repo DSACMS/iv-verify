@@ -1,13 +1,16 @@
 import { beforeAll, describe, expect, it } from 'vitest'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import Page from './page'
-import { makeStore, createUuid } from '@/lib/store'
 import { vi } from 'vitest'
+import { generateBenefits, generateJob } from '@/test/fixtures/generator'
+import TestWrapper from '@/app/TestWrapper'
+
+import Page from './page'
+import { makeStore } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { BenefitsState, selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
-import { JobItem, SetJobPayload, addJob } from '@/lib/features/job/jobSlice'
-import TestWrapper from '@/app/TestWrapper'
+
+import { selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
+import { addJob } from '@/lib/features/job/jobSlice'
 
 describe('SNAP Recommend Deduction Screen', async () => {
     let store: EnhancedStore
@@ -18,22 +21,10 @@ describe('SNAP Recommend Deduction Screen', async () => {
         }))
         mockRouter.push('/job/expense/snap/recommend')
         store = makeStore()
-        const benefits: BenefitsState = {
-            deductionAmount: 50,
-            snap: true,
-            standardDeduction: false,
-            medicaid: true,
-        }
-        store.dispatch(setBenefits(benefits))
+        const benefits = generateBenefits()
+        const jobItem = generateJob()
 
-        const jobItem: SetJobPayload = {
-            id: createUuid(),
-            item: {
-                description: 'A description2',
-                business: '',
-                taxesFiled: false
-            } as JobItem
-        }
+        store.dispatch(setBenefits(benefits))
         store.dispatch(addJob(jobItem))
         render(<TestWrapper store={store}><Page /></TestWrapper>)
     })
