@@ -1,4 +1,6 @@
-# Ledger
+# Income Verfication Ledger
+
+## About the Project
 This repo is a proof of concept of a mobile-first ledger for self employed workers to verify their income and expenses related to their self employment.
 
 This application is uses:
@@ -8,11 +10,9 @@ This application is uses:
 * Deployment to cloud.gov
 
 ## Core Team
-
 An up-to-date list of core team members can be found in [MAINTAINERS.md](MAINTAINERS.md). At this time, the project is still building the core team and defining roles and responsibilities. We are eagerly seeking individuals who would like to join the community and help us define and fill these roles.
 
 ## Documentation index
-
 - [Assumptions](#assumptions)
 - [Repository structure](#repository-structure)
 - [Development](#development)
