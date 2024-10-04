@@ -9,12 +9,12 @@ import FormExpense, { ExpenseFormPaymentData } from '../FormExpense'
 import { createUuid } from '@/lib/store'
 
 
-export default function Page({ params }: { params: { idx: string } }) {
+export default function Page({ params }: { params: { jobId: string } }) {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    function addExpenseClicked ({job=params.idx, name, expenseType, amount, isMileage=false, date }: ExpenseFormPaymentData) {
+    function addExpenseClicked ({job=params.jobId, name, expenseType, amount, isMileage=false, date }: ExpenseFormPaymentData) {
         const id = createUuid()
 
         const expenseItem: SetExpensePayload = {

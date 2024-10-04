@@ -59,7 +59,7 @@ describe('Add Payments to Jobs Page', async () => {
     mockRouter.push('/job/0/payment/add')
     store = makeStore()
     store.dispatch(addJob(item1))
-    render (<TestWrapper store={store}><Page params={{idx: '0'}} /></TestWrapper>)
+    render (<TestWrapper store={store}><Page params={{jobId: '0'}} /></TestWrapper>)
   })
   afterEach(cleanup)
 
