@@ -1,4 +1,6 @@
-# About the Project - Income verification
+# Income Verfication Ledger
+
+## About the Project
 This repo is a proof of concept of a mobile-first ledger for self employed workers to verify their income and expenses related to their self employment.
 
 This application is uses:
@@ -8,13 +10,11 @@ This application is uses:
 * Deployment to cloud.gov
 
 ## Core Team
-
 An up-to-date list of core team members can be found in [MAINTAINERS.md](MAINTAINERS.md). At this time, the project is still building the core team and defining roles and responsibilities. We are eagerly seeking individuals who would like to join the community and help us define and fill these roles.
 
 ## Documentation index
-
 - [Assumptions](#assumptions)
-- [Getting started](#getting-started)
+- [Repository structure](#repository-structure)
 - [Development](#development)
 - [Deploy](#deploy)
 - [Resources](#resources)
@@ -22,29 +22,7 @@ An up-to-date list of core team members can be found in [MAINTAINERS.md](MAINTAI
 ## Assumptions
 Accessibility, unit testing, and translation are being built in from the ground up. We want to make sound decisions that allow this app to scale, but understand that we also want to make a few decisions as possible at this early stage. We are still learning about this problem space, but we are sure that accessibility, testing, and translation are important.
 
-## Getting started
-First, install the dependencies:
-```bash
-npm install
-```
-
-Next, run the development server:
-
-```bash
-npm run dev
-```
-
-Then disable `nextjs` telemetry by running your choice of:
-
-```bash
-npx next telemetry disable
-```
-
-Open [http://localhost:3000/](http://localhost:3000/) with your browser to see the result.
-
-## Development
-
-### Repository structure
+## Repository structure
 This application uses NextJS's default file structure. You can learn more about this from [NextJS](https://nextjs.org/docs/getting-started/project-structure). 
 
 #### `adr`
@@ -67,6 +45,70 @@ Where any public assets are stored.
 
 #### `scripts`
 Tooling and scripts to make the repository run smoothly and correctly.
+
+## Development
+
+### Starting the application locally
+##### Prerequisite steps
+1. Install [node.js](https://nodejs.org/en/download/package-manager). For example, installing version 20 using brew:
+    ```bash
+    brew install node@20
+    ```
+1. Clone this repo to your local workspace. For example, using github cli:
+    ```bash
+    gh repo clone DSACMS/iv-verify
+    ```
+    
+##### Steps
+1. Change into the repo's directory.
+    ```bash
+    cd iv-verify
+    ```
+1. Install dependencies.
+    ```bash
+    npm install
+    ```
+1. Run the development server.
+    ```bash
+    npm run dev
+    ```
+1. Open [http://localhost:3000/](http://localhost:3000/) with your browser to access the application.
+
+### Running the application in a docker container
+
+##### Prerequisite steps
+1. Install [docker](https://www.docker.com/get-started/). 
+1. Clone this repo to your local workspace. For example, using github cli:
+    ```bash
+    gh repo clone DSACMS/iv-verify
+    ```
+##### Steps to build the image
+1. Change into the repo's directory.
+    ```bash
+    cd iv-verify
+    ```
+1. Do a clean install of the project.
+    ```bash
+    npm ci
+    ```
+1. Build the project.
+    ```bash
+    npm run build
+    ```
+1. Build the image. For example, with no stated tag:
+    ```bash
+    docker build -t iv-verify .
+    ```
+##### Steps to start the image
+1. With an image built from above, start the image. The command below maps the external port to 3000.
+    ```bash
+    docker run -p 3000:3000 iv-verify
+    ``` 
+1. Open [http://localhost:3000/](http://localhost:3000/) with your browser to access the application.
+
+##### Chromium architecture check in the Dockerfile
+The [Dockerfile](./Dockerfile) contains logic checking to determine whether or not the server building the image uses ARM64 architecture. This is done because ARM64 does not include the Chromium open-source browser and Chromium is a dependency for some testing libraries used by the application. Without Chromium, the `npm install` step fails when building the image. 
+As a result, the Dockerfile sets the `PUPPETEER_SKIP_CHROMIUM_DOWNLOAD` environment variable to `false` if the server machine is ARM64. This will result in Chromium be downloaded during the npm install which will allow the image build to proceed successfully. For additional references, see https://github.com/puppeteer/puppeteer/issues/7740.
 
 ## Tests and linting
 
