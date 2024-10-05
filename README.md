@@ -106,6 +106,10 @@ Tooling and scripts to make the repository run smoothly and correctly.
     ``` 
 1. Open [http://localhost:3000/](http://localhost:3000/) with your browser to access the application.
 
+##### Chromium architecture check in the Dockerfile
+The [Dockerfile](./Dockerfile) contains logic checking to determine whether or not the server building the image uses ARM64 architecture. This is done because ARM64 does not include the Chromium open-source browser and Chromium is a dependency for some testing libraries used by the application. Without Chromium, the `npm install` step fails when building the image. 
+As a result, the Dockerfile sets the `PUPPETEER_SKIP_CHROMIUM_DOWNLOAD` environment variable to `false` if the server machine is ARM64. This will result in Chromium be downloaded during the npm install which will allow the image build to proceed successfully. For additional references, see https://github.com/puppeteer/puppeteer/issues/7740.
+
 ## Tests and linting
 
 ```bash
