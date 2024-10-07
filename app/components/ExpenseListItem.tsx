@@ -24,7 +24,7 @@ export default function ExpenseListItem({ item, index }: ItemProps) {
     const dispatch = useAppDispatch()
     const router = useRouter()
     const expenses = useAppSelector(state => selectExpensesByJob(state, index)).map((expense: ExpenseItem) => {
-        return (<li key="expense.idx}">{expense.date} ${expense.amount} {expense.name} ({expense.expenseType})</li>)
+        return (<li key="expense.jobId}">{expense.date} ${expense.amount} {expense.name} ({expense.expenseType})</li>)
     })
 
     function onDeleteClicked() {

@@ -1,6 +1,9 @@
-import { beforeEach, describe, expect, it } from 'vitest'
 
-import { generateExpense, generatePayment, emptyStateObject } from '@/test/fixtures/generator'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { generateExpense, generateJob, generatePayment, emptyStateObject } from '@/test/fixtures/generator'
+
+import { makeStore } from '@/lib/store'
+import { EnhancedStore } from '@reduxjs/toolkit'
 
 import reducer, {
     addJob, 
@@ -12,32 +15,19 @@ import reducer, {
     selectTotalPaymentsByJob,
     selectTotalPaymentsByAllJobs,
     selectTotalExpensesByJob,
-    selectTotalExpensesByAllJobs,
-    SetJobPayload
+    selectTotalExpensesByAllJobs
 } from './jobSlice'
 import { addExpense } from './expenses/expensesSlice'
 import { addPayment } from './payment/paymentSlice'
-import { makeStore, createUuid } from '@/lib/store'
-import { EnhancedStore } from '@reduxjs/toolkit'
 
 describe('JobSlice', () => {
     const emptyObject = emptyStateObject
-    const job1: SetJobPayload = {
-        id: createUuid(),
-        item: {
-            description: 'A description',
-            business: 'A business name',
-            taxesFiled: true
-        }
-    }
-    const job2: SetJobPayload = {
-        id: createUuid(),
-        item: {
-            description: 'A description2',
-            business: '',
-            taxesFiled: false
-        }
-    }
+    const job1 = generateJob()
+    const job2 = generateJob({
+        description: 'A description2',
+        business: '',
+        taxesFiled: false
+    })
 
     describe('actions', () => {
         it('should return the initial state', () => {
@@ -63,15 +53,13 @@ describe('JobSlice', () => {
         it('setJobItem should update a job', () => {
             let state = reducer(initialState, addJob(job2))
             const modified = 'Modified description'
+            const payload = {
+                description: modified,
+                business: '',
+                taxesFiled: false
+            }
             
-            state = reducer(state, setJobItem({
-                id: job2.id,
-                item: {
-                    description: modified,
-                    business: '',
-                    taxesFiled: false
-                }
-            }))
+            state = reducer(state, setJobItem(generateJob(payload, job2.id)))
 
             expect(state.byId[job2['id']].description).toEqual(modified)
         })

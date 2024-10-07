@@ -6,7 +6,7 @@ export async function GET(req: Request) {
     const files = await readdir(pathToFileURL('app'), { recursive: true })
     const locs = files
         .filter(file => file.endsWith('page.tsx'))
-        .filter(file => file.indexOf('[idx]') === -1)
+        .filter(file => file.indexOf('[jobId]') === -1)
         .map((file) => {
           let name = file.substring(0, file.indexOf('page.tsx'))
           if (name.indexOf('[locale]') === -1) {

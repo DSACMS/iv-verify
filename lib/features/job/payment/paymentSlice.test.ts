@@ -43,16 +43,14 @@ describe('PaymentSlice', () => {
       const payment = generatePayment(jobId)
       let state = reducer(initialState, addPayment(payment))
       const modified = 15
+      const payload = {
+        job: jobId,
+        amount: modified,
+        date: '',
+        payer: 'Someone'
+      }
 
-      state = reducer(state, setPaymentItem({
-        id: payment.id,
-        item: {
-          job: jobId,
-          amount: modified,
-          date: '',
-          payer: 'Someone'
-        }
-      }))
+      state = reducer(state, setPaymentItem(generatePayment('', payload, payment.id)))
 
       expect(state.byId[payment['id']].amount).toEqual(modified)
     })

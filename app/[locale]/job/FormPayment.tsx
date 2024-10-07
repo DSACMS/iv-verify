@@ -8,19 +8,19 @@ import { Button, DatePicker, Form, FormGroup, Label, RequiredMarker } from "@tru
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
-export interface IncomeFormPaymentProps {
-    onSubmit: SubmitHandler<IncomeFormPaymentData>
+export interface FormPaymentProps {
+    onSubmit: SubmitHandler<FormPaymentData>
     item?: PaymentItem
 }
 
-export type IncomeFormPaymentData = {
+export type FormPaymentData = {
     job: string
     amount: number
     date: string
     payer: string
 }
 
-export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
+export default function FormPayment(params: FormPaymentProps) {
     const { t } = useTranslation()
 
     const {
@@ -28,7 +28,7 @@ export default function IncomeFormPayment(params: IncomeFormPaymentProps) {
         control,
         formState: { errors },
         handleSubmit
-    } = useForm<IncomeFormPaymentData>()
+    } = useForm<FormPaymentData>()
 
     return (
         <Form onSubmit={handleSubmit(params.onSubmit)}>

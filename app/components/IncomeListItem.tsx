@@ -20,10 +20,10 @@ export default function IncomeListItem({ index, payment, jobId }: ItemProps) {
     const router = useRouter()
 <<<<<<< Updated upstream
     const payments = useAppSelector(state => selectPaymentsByJob(state, index)).map((payment: PaymentItem) => {
-        return (<li key="{payment.idx}">{payment.date} ${payment.amount} {t('list_income_by')} {payment.payer}</li>)
+        return (<li key="{payment.jobId}">{payment.date} ${payment.amount} {t('list_income_by')} {payment.payer}</li>)
     })
     const expenses = useAppSelector(state => selectExpensesByJob(state, index)).map((expense: ExpenseItem) => {
-        return (<li key="expense.idx}">{expense.date} ${expense.amount} {expense.name} ({expense.expenseType})</li>)
+        return (<li key="expense.jobId}">{expense.date} ${expense.amount} {expense.name} ({expense.expenseType})</li>)
     })
 =======
 >>>>>>> Stashed changes
