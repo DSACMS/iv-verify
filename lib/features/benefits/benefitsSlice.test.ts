@@ -4,31 +4,27 @@ import { EnhancedStore } from "@reduxjs/toolkit"
 import { makeStore } from "@/lib/store"
 
 describe('BenefitsSlice', () => {
-    const benefits: BenefitsState = {
-        deductionAmount: 50,
-        medicaid: true,
-        snap: true,
-        standardDeduction: true,
-    }
-    describe('Actions', () => {
-        it('sets initial state', () => {
-            expect(reducer(undefined, { type: 'unknown' })).toEqual(initialState)
-        })
+	const benefits = generateBenefits()
 
-        it('sets the benefits state', () => {
-            expect(reducer(initialState, setBenefits(benefits))).toEqual(benefits)
-        })
-    })
+	describe('Actions', () => {
+		it('sets initial state', () => {
+			expect(reducer(undefined, { type: 'unknown' })).toEqual(initialState)
+		})
 
-    describe('Selectors', () => {
-        let store: EnhancedStore
-        beforeEach(() => {
-            store = makeStore()
-            store.dispatch(setBenefits(benefits))
-        })
+		it('sets the benefits state', () => {
+			expect(reducer(initialState, setBenefits(benefits))).toEqual(benefits)
+		})
+	})
 
-        it('can select the benefits', () => {
-            expect(selectBenefits(store.getState())).toEqual(benefits)
-        })
-    })
+	describe('Selectors', () => {
+		let store: EnhancedStore
+		beforeEach(() => {
+			store = makeStore()
+			store.dispatch(setBenefits(benefits))
+		})
+
+		it('can select the benefits', () => {
+			expect(selectBenefits(store.getState())).toEqual(benefits)
+		})
+	})
 })

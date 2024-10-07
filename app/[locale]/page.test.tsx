@@ -8,32 +8,32 @@ import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 
 describe('Intro Page', async () => {
-    let store: EnhancedStore
-    beforeEach(() => {
-        vi.mock('next/navigation', () => ({
-            useRouter: () =>  mockRouter,
-            usePathname: () => mockRouter.asPath,
-        }))
-        mockRouter.push('/')
-        store = makeStore()
-        render (<Provider store={store}><Page /></Provider>)
-    })
-    afterEach(cleanup)
+  let store: EnhancedStore
+  beforeEach(() => {
+    vi.mock('next/navigation', () => ({
+      useRouter: () =>  mockRouter,
+      usePathname: () => mockRouter.asPath,
+    }))
+    mockRouter.push('/')
+    store = makeStore()
+    render (<Provider store={store}><Page /></Provider>)
+  })
+  afterEach(cleanup)
 
-    it('shows header', () => {
-        expect(screen.getByTestId('intro_header')).toBeDefined()
-    })
+  it('shows header', () => {
+    expect(screen.getByTestId('intro_header')).toBeDefined()
+  })
 
-    it('shows add button', () => {
-        expect(screen.getByTestId('get_started_button')).toBeDefined()
-    })
+  it('shows add button', () => {
+    expect(screen.getByTestId('get_started_button')).toBeDefined()
+  })
 
-    it('navigates when clicked', async () => {
-        fireEvent.click(screen.getByTestId('get_started_button'))
-        await waitFor(() => {
-            expect(mockRouter).toMatchObject({
-                asPath: "/introduction/how-this-works"
-            })
-        })
+  it('navigates when clicked', async () => {
+    fireEvent.click(screen.getByTestId('get_started_button'))
+    await waitFor(() => {
+      expect(mockRouter).toMatchObject({
+        asPath: "/introduction/how-this-works"
+      })
     })
+  })
 })
