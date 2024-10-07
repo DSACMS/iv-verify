@@ -18,15 +18,6 @@ export default function IncomeListItem({ index, payment, jobId }: ItemProps) {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
-<<<<<<< Updated upstream
-    const payments = useAppSelector(state => selectPaymentsByJob(state, index)).map((payment: PaymentItem) => {
-        return (<li key="{payment.jobId}">{payment.date} ${payment.amount} {t('list_income_by')} {payment.payer}</li>)
-    })
-    const expenses = useAppSelector(state => selectExpensesByJob(state, index)).map((expense: ExpenseItem) => {
-        return (<li key="expense.jobId}">{expense.date} ${expense.amount} {expense.name} ({expense.expenseType})</li>)
-    })
-=======
->>>>>>> Stashed changes
 
     function onDeleteClicked() {
         dispatch(removePayment(index))

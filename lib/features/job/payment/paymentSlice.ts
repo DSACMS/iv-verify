@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, current, PayloadAction } from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
 
 export interface PaymentItem {
@@ -49,18 +49,26 @@ export const PaymentSlice = createSlice({
 export const { addPayment, removePayment, setPaymentItem } = PaymentSlice.actions
 
 export const selectPaymentItemAt = (state: RootState, id: string) => state.payment.byId[id]
+
+// payments by job need job id
+// way to iterate
+// return state object
 export const selectPaymentsByJob = (state: RootState, jobId: string) => {
-  const selectedPayments: {
-    [id: string]: PaymentItem
-  } = {}
+  let selectedPayments: PaymentState = initialState
 
   for (const paymentId in state.payment.byId) {
-    const currentPayment = selectPaymentItemAt(state, paymentId)
-    if (currentPayment.job === jobId)
-      selectedPayments[paymentId] = currentPayment
+    const currentPayment = state.payment.byId[paymentId]
+    if (currentPayment.job === jobId) {
+      selectedPayments = PaymentSlice.reducer(
+        selectedPayments, 
+        addPayment({
+          id: paymentId,
+          item: currentPayment
+      } as SetPaymentPayload))
+    }
   }
-
   return selectedPayments
+
 }
 
 export default PaymentSlice.reducer

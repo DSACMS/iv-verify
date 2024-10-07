@@ -1,8 +1,10 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, render, screen } from '@testing-library/react'
+import TestWrapper from '@/app/TestWrapper'
+import { generateBenefits } from '@/test/fixtures/generator'
+
 import JobReviewHeader from './JobReviewHeader'
 import { BenefitsState } from '@/lib/features/benefits/benefitsSlice'
-import TestWrapper from '@/app/TestWrapper'
 
 describe('Ledger Review Header', async () => {
     const SNAP_INCOME = 350.00
@@ -13,12 +15,12 @@ describe('Ledger Review Header', async () => {
     describe('Medicaid and Snap', () => {
         let benefits: BenefitsState
         beforeEach(() => {
-            benefits = {
+            benefits = generateBenefits({
                 standardDeduction: true,
                 deductionAmount: 50,
                 medicaid: true,
                 snap: true,
-            }
+            })
 
             render (<TestWrapper><JobReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
         })
@@ -47,10 +49,12 @@ describe('Ledger Review Header', async () => {
     describe('Medicaid Only', () => {
         let benefits: BenefitsState
         beforeEach(() => {
-            benefits = {
-                medicaid: true,
-                snap: false,
-            }
+            benefits = generateBenefits({
+              standardDeduction: true,
+              deductionAmount: 50,
+              medicaid: true,
+              snap: false,
+          })
 
             render (<TestWrapper><JobReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
         })
@@ -81,12 +85,12 @@ describe('Ledger Review Header', async () => {
     describe('SNAP Only', () => {
         let benefits: BenefitsState
         beforeEach(() => {
-            benefits = {
-                standardDeduction: true,
-                deductionAmount: 50,
-                medicaid: false,
-                snap: true,
-            }
+            benefits = generateBenefits({
+              standardDeduction: true,
+              deductionAmount: 50,
+              medicaid: false,
+              snap: true,
+          })
 
             render (<TestWrapper><JobReviewHeader benefits={benefits} snapIncomeTotal={SNAP_INCOME} medicaidIncomeTotal={MEDICAID_INCOME} /></TestWrapper>)
         })
