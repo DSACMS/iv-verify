@@ -1,25 +1,20 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import Page from './page'
 import { vi } from 'vitest'
-import mockRouter from 'next-router-mock'
 import TestWrapper from '@/app/TestWrapper'
+import { generateJob } from '@/test/fixtures/generator'
+
+import Page from './page'
+import mockRouter from 'next-router-mock'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
 import { makeStore } from '@/lib/store'
-import { SetJobPayload, addJob } from '@/lib/features/job/jobSlice'
-import { createUuid } from '@/lib/store'
+
+import { addJob } from '@/lib/features/job/jobSlice'
 
 describe('Edit Income Item Page', async () => {
     let store: EnhancedStore
-    const id = createUuid()
-    const item1: SetJobPayload = {
-        id: id,
-        item: {
-            description: 'desc1',
-            business: 'business!',
-            taxesFiled: false
-        }
-    }
+    const item1 = generateJob()
+
     beforeAll(() => {
         vi.mock('next/navigation', () => ({
             useRouter: () =>  mockRouter,
@@ -29,8 +24,8 @@ describe('Edit Income Item Page', async () => {
         store.dispatch(addJob(item1))
     })
     beforeEach(() => {
-        mockRouter.push(`/job/edit/${id}`)
-        render (<TestWrapper store={store}><Page params={{jobId: id}} /></TestWrapper>)
+        mockRouter.push(`/job/edit/${item1.id}`)
+        render (<TestWrapper store={store}><Page params={{jobId: item1.id}} /></TestWrapper>)
     })
     afterEach(cleanup)
 
@@ -74,7 +69,7 @@ describe('Edit Income Item Page', async () => {
         expect(screen.getAllByTestId("errorMessage")).toBeDefined()
 
         expect(mockRouter).toMatchObject({
-            asPath: `/job/edit/${id}`
+            asPath: `/job/edit/${item1.id}`
         })
     })
 })

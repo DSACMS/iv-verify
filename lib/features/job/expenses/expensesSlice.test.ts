@@ -1,6 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { generateExpense, emptyStateObject } from "@/test/fixtures/generator";
 
+import { EnhancedStore } from "@reduxjs/toolkit";
+import { makeStore, createUuid } from "@/lib/store";
+
 import reducer, { 
     initialState, 
     addExpense, 
@@ -9,16 +12,13 @@ import reducer, {
     selectExpenseItemAt, 
     selectExpensesByJob 
 } from "./expensesSlice";
-import { EnhancedStore } from "@reduxjs/toolkit";
-import { makeStore, createUuid } from "@/lib/store";
 
 describe('ExpenseSlice', () => {
     
     const emptyObject = emptyStateObject
+    
     const jobId = createUuid()
-
     const item1 = generateExpense(jobId)
-
     const item2 = generateExpense(jobId, {
         job: jobId,
         name: 'Supplies',
@@ -50,18 +50,16 @@ describe('ExpenseSlice', () => {
         it('setExpenseItem should update an expense', () => {
             let state = reducer(initialState, addExpense(item1))
             const modified = 15
+            const payload = {
+                job: jobId,
+                name: 'Modified Gas',
+                amount: modified,
+                date: new Date().toString(),
+                expenseType: 'Gas',
+                isMileage: false
+            }
 
-            state = reducer(state, setExpenseItem({
-                id: item1.id,
-                item: {
-                    job: jobId,
-                    name: 'Modified Gas',
-                    amount: modified,
-                    date: new Date().toString(),
-                    expenseType: 'Gas',
-                    isMileage: false
-                }
-            }))
+            state = reducer(state, setExpenseItem(generateExpense('', payload, item1.id)))
 
             expect(state.byId[item1['id']].amount).toEqual(modified)
         })
@@ -80,8 +78,7 @@ describe('ExpenseSlice', () => {
         })
 
         it('selectExpensesByJob', () => {
-            const secondJobId = createUuid()
-            
+            const secondJobId = createUuid()       
             store.dispatch(addExpense(generateExpense(secondJobId)))
 
             expect(selectExpensesByJob(store.getState(), secondJobId).length).toBe(1)
