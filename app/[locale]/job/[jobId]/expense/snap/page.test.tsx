@@ -21,6 +21,7 @@ describe('SNAP Recommend Deduction Screen', async () => {
         }))
         mockRouter.push('/job/expense/snap')
         store = makeStore()
+
         const benefits = generateBenefits()
         const jobItem = generateJob()
 

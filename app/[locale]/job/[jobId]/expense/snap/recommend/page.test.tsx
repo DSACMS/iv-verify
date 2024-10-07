@@ -1,5 +1,6 @@
 import { beforeAll, describe, expect, it } from 'vitest'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
+
 import { vi } from 'vitest'
 import { generateBenefits, generateJob } from '@/test/fixtures/generator'
 import TestWrapper from '@/app/TestWrapper'
@@ -21,10 +22,12 @@ describe('SNAP Recommend Deduction Screen', async () => {
         }))
         mockRouter.push('/job/expense/snap/recommend')
         store = makeStore()
+
         const benefits = generateBenefits()
         const jobItem = generateJob()
 
         store.dispatch(setBenefits(benefits))
+
         store.dispatch(addJob(jobItem))
         render(<TestWrapper store={store}><Page /></TestWrapper>)
     })
