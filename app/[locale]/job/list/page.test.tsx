@@ -6,8 +6,9 @@ import { makeStore } from '@/lib/store'
 import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { addJob, JobItem } from '@/lib/features/job/jobSlice'
+import { addJob, SetJobPayload } from '@/lib/features/job/jobSlice'
 import { BenefitsState, setBenefits } from '@/lib/features/benefits/benefitsSlice'
+import { createUuid } from '@/lib/store'
 
 describe('List Income in Ledger Page', async () => {
     let store: EnhancedStore
@@ -28,26 +29,30 @@ describe('List Income in Ledger Page', async () => {
     })
     
     it('shows items in list', () => {
-        const item1: JobItem = {
-            description: 'desc1',
-            business: 'fname lname',
-            taxesFiled: false,
-            payments: []
+        const job1: SetJobPayload = {
+            id: createUuid(),
+            item: {
+                description: 'desc1',
+                business: 'business!',
+                taxesFiled: false
+            }
         }
-        const item2: JobItem = {
-            description: 'desc2',
-            business : 'foo bar',
-            taxesFiled: true,
-            payments: []
+        const job2: SetJobPayload = {
+            id: createUuid(),
+            item: {
+                description: 'desc2',
+                business : 'foo bar',
+                taxesFiled: true
+            }
         }
-        const items = [item1, item2]
-        store.dispatch(addJob(item1))
-        store.dispatch(addJob(item2))
+        const jobs = [job1, job2]
+        store.dispatch(addJob(job1))
+        store.dispatch(addJob(job2))
         render (<Provider store={store}><Page /></Provider>)
 
-        for (let item of items) {
-            expect(screen.getByText(item.description))
-            expect(screen.getByText(item.business))
+        for (let job of jobs) {
+            expect(screen.getByText(job.item.description))
+            expect(screen.getByText(job.item.business))
         }
     })
 
@@ -55,6 +60,8 @@ describe('List Income in Ledger Page', async () => {
         const benefits: BenefitsState = {
             snap: true,
             medicaid: false,
+            standardDeduction: false,
+            deductionAmount: 0
         }
         store.dispatch(setBenefits(benefits))
         render (<Provider store={store}><Page /></Provider>)
@@ -71,6 +78,8 @@ describe('List Income in Ledger Page', async () => {
         const benefits: BenefitsState = {
             snap: false,
             medicaid: true,
+            standardDeduction: false,
+            deductionAmount: 0
         }
         store.dispatch(setBenefits(benefits))
         render (<Provider store={store}><Page /></Provider>)
@@ -87,6 +96,8 @@ describe('List Income in Ledger Page', async () => {
         const benefits: BenefitsState = {
             snap: false,
             medicaid: true,
+            standardDeduction: false,
+            deductionAmount: 0
         }
         store.dispatch(setBenefits(benefits))
         render (<Provider store={store}><Page /></Provider>)

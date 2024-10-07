@@ -16,7 +16,7 @@ describe('Add Income To Ledger Page', async () => {
         }))
         mockRouter.push('/job/expense/add')
         store = makeStore()
-        render (<Provider store={store}><Page /></Provider>)
+        render (<Provider store={store}><Page params={{idx: '0'}} /></Provider>)
     })
     afterEach(cleanup)
 
@@ -59,7 +59,7 @@ describe('Add Income To Ledger Page', async () => {
 
         await waitFor(() => {
             expect(mockRouter).toMatchObject({
-                asPath: "/job/expense/list"
+                asPath: "/job/list"
             })
         })
     })

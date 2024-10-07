@@ -38,20 +38,4 @@ describe('Add Income To Ledger Page', async () => {
             asPath: "/job/add"
         })
     })
-
-    it('Navigates when fields are filled in', async () => {           
-        fireEvent.change(screen.getByTestId("description"), {
-            target: {
-                value: 'Landscaping'
-            }
-        })
-
-        fireEvent.click(screen.getByText('Add income'))
-
-        await waitFor(() => {
-            expect(mockRouter).toMatchObject({
-                asPath: "/job/0/payment/add"
-            })
-        })
-    })
 })

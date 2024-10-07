@@ -2,7 +2,7 @@ import { Button, ButtonGroup, Card, CardBody, CardGroup, CardHeader, GridContain
 import { useTranslation } from "react-i18next";
 import { useAppSelector } from "@/lib/hooks";
 import { useRouter } from "next/navigation";
-import { ExpenseItem, selectExpenseItems, selectExpenseTotal } from "@/lib/features/job/expenses/expensesSlice";
+import { selectJobItems, selectTotalExpensesByAllJobs } from "@/lib/features/job/jobSlice"
 import ExpenseListItem from "./ExpenseListItem";
 
 interface ExpenseListProps {
@@ -12,13 +12,14 @@ interface ExpenseListProps {
 export default function ExpenseList({header}: ExpenseListProps) {
     const { t } = useTranslation()
     const router = useRouter()
-    const items = useAppSelector(state => selectExpenseItems(state))
-    const expenseTotal = useAppSelector(state => selectExpenseTotal(state))
+    const jobs = useAppSelector(state => selectJobItems(state))
+    const expenseTotal = useAppSelector(state => selectTotalExpensesByAllJobs(state))
+    const expenseItemElements = []
 
-    const expenseItemElements = items.map((item: ExpenseItem, idx: number) => {
-        return <ExpenseListItem key={idx} item={item} index={idx} />
-    })
-
+    for (const job in jobs) {
+        expenseItemElements.push(<ExpenseListItem key={job} item={jobs[job]} index={job} />)
+    }
+    
     function getTotal() {
         if (expenseTotal > 0) {
             return (t('expenses_summary_total', {amount: expenseTotal}))

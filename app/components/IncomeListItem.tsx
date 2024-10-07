@@ -1,32 +1,44 @@
 import { useTranslation } from "react-i18next"
-import { JobItem, PaymentItem, removeIncome } from "@/lib/features/job/jobSlice"
+import { useAppSelector } from "@/lib/hooks"
+import { JobItem, removeJob } from "@/lib/features/job/jobSlice"
+import { PaymentItem, selectPaymentsByJob } from "@/lib/features/job/payment/paymentSlice"
+import { selectExpensesByJob } from "@/lib/features/job/expenses/expensesSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
+import { ExpenseItem } from "@/lib/features/job/expenses/expensesSlice"
+
 interface ItemProps {
     item: JobItem
-    index: number
+    index: string
 }
 export default function IncomeListItem({ item, index }: ItemProps) {
     const ref = useRef(null)
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
-    const payments = item.payments.map((payment: PaymentItem) => {
+    const payments = useAppSelector(state => selectPaymentsByJob(state, index)).map((payment: PaymentItem) => {
         return (<li key="{payment.idx}">{payment.date} ${payment.amount} {t('list_income_by')} {payment.payer}</li>)
+    })
+    const expenses = useAppSelector(state => selectExpensesByJob(state, index)).map((expense: ExpenseItem) => {
+        return (<li key="expense.idx}">{expense.date} ${expense.amount} {expense.name} ({expense.expenseType})</li>)
     })
 
     function onDeleteClicked() {
-        dispatch(removeIncome(index))
+        dispatch(removeJob(index))
     }
 
     function editClicked() {
         router.push(`/job/edit/${index}`)
     }
 
-    function addItemClicked() {
+    function addPaymentClicked() {
         router.push(`/job/${index}/payment/add`)
+    }
+
+    function addExpenseClicked() {
+        router.push(`/job/${index}/expense/add`)
     }
 
     return (
@@ -34,9 +46,16 @@ export default function IncomeListItem({ item, index }: ItemProps) {
             <Grid col={10}>
                 <div>{item.description}</div>
                 <div>{item.business}</div>
+                <h4>{t('list_income_list_payments')}</h4>
                 <div>
                     <ul>
                         {payments}
+                    </ul>
+                </div>
+                <h4>{t('list_income_list_expenses')}</h4>
+                <div>
+                    <ul>
+                        {expenses}
                     </ul>
                 </div>
             </Grid>
@@ -55,7 +74,8 @@ export default function IncomeListItem({ item, index }: ItemProps) {
             </Grid>
             <Grid col={12}>
                 <ButtonGroup>
-                    <Button type="button" className="margin-top-2" onClick={addItemClicked} data-testid="add_another_button">{t('list_income_add_payment_button')}</Button>
+                    <Button type="button" className="margin-top-2" onClick={addPaymentClicked} data-testid="add_another_button">{t('list_income_add_payment_button')}</Button>
+                    <Button type="button" className="margin-top-2" onClick={addExpenseClicked} data-testid="add_another_button">{t('list_income_add_expense_button')}</Button>
                 </ButtonGroup>
 
                 <hr className="margin-top-2" />

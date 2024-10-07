@@ -1,6 +1,6 @@
 'use client'
 
-import { JobItem, selectIncomeItems, selectIncomeTotal } from "@/lib/features/job/jobSlice"
+import { selectJobItems, selectTotalPaymentsByAllJobs } from "@/lib/features/job/jobSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import IncomeListItem from "./IncomeListItem"
@@ -15,11 +15,13 @@ interface Props {
 export default function IncomeList({dayCount, header}: Props) {
     const { t } = useTranslation()
     const router = useRouter()
-    const items = useAppSelector(state => selectIncomeItems(state))
-    const incomeTotal = useAppSelector(state => selectIncomeTotal(state))
-    const incomeItemElements = items.map((item: JobItem, idx: number) => {
-        return <IncomeListItem key={idx} item={item} index={idx} />
-    })
+    const jobs = useAppSelector(state => selectJobItems(state))
+    const incomeTotal = useAppSelector(state => selectTotalPaymentsByAllJobs(state))
+    const incomeItemElements = []
+    
+    for (const job in jobs) {
+        incomeItemElements.push(<IncomeListItem key={job} item={jobs[job]} index={job} />)
+    }
 
     function getTotal() {
         if (incomeTotal > 0) {

@@ -2,6 +2,7 @@ import { createSlice, PayloadAction} from '@reduxjs/toolkit'
 import type { RootState } from '../../../store'
 
 export interface ExpenseItem {
+    job: string
     name: string
     expenseType: string
     amount: number
@@ -9,29 +10,60 @@ export interface ExpenseItem {
     isMileage: boolean
 }
 
+export interface SetExpensePayload {
+    item: ExpenseItem
+    id: string
+}
+
 interface ExpenseState {
-    items: ExpenseItem[]
+    byId: {
+        [id: string]: ExpenseItem
+    },
+    allIds: Array<string>
 }
 
 export const initialState: ExpenseState = {
-    items: []
+    byId: {},
+    allIds: []
 }
 
 export const expenseSlice = createSlice({
-    name: 'ledger/expense',
+    name: 'job/expense',
     initialState,
     reducers: {
-        addExpense: (state, action: PayloadAction<ExpenseItem>) => {
-            state.items.push(action.payload)
+        addExpense: (state, action: PayloadAction<SetExpensePayload>) => {
+            const id = action.payload.id
+
+            state.byId[id] = action.payload.item
+            state.allIds.push(id)
         },
-        removeExpense: (state, action: PayloadAction<number>) => {
-            state.items.splice(action.payload, 1)
+        removeExpense: (state, action: PayloadAction<string>) => {
+            delete state.byId[action.payload]
+
+            state.allIds = state.allIds.filter(id => id !== action.payload )
+        },
+        setExpenseItem: (state, action: PayloadAction<SetExpensePayload>) => {
+            const id = action.payload.id
+            state.byId[id] = action.payload.item
         }
     }
 })
 
-export const { addExpense, removeExpense } = expenseSlice.actions
-export const selectExpenseItems = (state: RootState) => state.expensesLedger.items
-export const selectExpenseTotal = (state: RootState) => state.expensesLedger.items.reduce((val: number, item: ExpenseItem) => item.amount + val, 0)
+export const { addExpense, removeExpense, setExpenseItem } = expenseSlice.actions
+
+export const selectExpenseItemAt = (state: RootState, id: string) => state.expenses.byId[id]
+export const selectExpensesByJob = (state: RootState, jobId: string) => {
+    const selectedExpenses: Array<ExpenseItem> = []
+
+    for (const expenseId in state.expenses.byId) {
+        const currentExpense = selectExpenseItemAt(state, expenseId)
+        if (currentExpense.job === jobId)
+            selectedExpenses.push(currentExpense)
+    }
+
+    return selectedExpenses
+}
+
+
 
 export default expenseSlice.reducer

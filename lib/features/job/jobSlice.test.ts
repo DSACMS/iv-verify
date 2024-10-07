@@ -1,92 +1,135 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 
+import { generateExpense, generatePayment, emptyStateObject } from '@/test/fixtures/generator'
+
 import reducer, {
-    JobItem, 
-    PaymentItem, 
-    addJob,
-    addPayment, 
-    removeIncome, 
+    addJob, 
+    removeJob,
+    setJobItem,
     initialState, 
-    selectIncomeItems, 
-    selectIncomeTotal
+    selectJobItems, 
+    selectJobCount,
+    selectTotalPaymentsByJob,
+    selectTotalPaymentsByAllJobs,
+    selectTotalExpensesByJob,
+    selectTotalExpensesByAllJobs,
+    SetJobPayload
 } from './jobSlice'
-import { makeStore } from '@/lib/store'
+import { addExpense } from './expenses/expensesSlice'
+import { addPayment } from './payment/paymentSlice'
+import { makeStore, createUuid } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
 
 describe('JobSlice', () => {
-    const item: JobItem = {
-        description: 'A description',
-        business: 'A business name',
-        taxesFiled: true,
-        payments: [
-            {
-                idx: 0, 
-                amount: 15,
-                date: '09/09/2024',
-                payer: 'Someone'
-            }, {
-                idx: 0, 
-                amount: 25,
-                date: '09/12/2024',
-                payer: 'Someone' 
-            }
-        ]
+    const emptyObject = emptyStateObject
+    const job1: SetJobPayload = {
+        id: createUuid(),
+        item: {
+            description: 'A description',
+            business: 'A business name',
+            taxesFiled: true
+        }
     }
-
-    const item2: JobItem = {
-        description: 'A description2',
-        business: '',
-        taxesFiled: false,
-        payments: [
-            {
-                idx: 0, 
-                amount: 10,
-                date: '09/30/2024',
-                payer: 'Someone' 
-            }
-        ]
+    const job2: SetJobPayload = {
+        id: createUuid(),
+        item: {
+            description: 'A description2',
+            business: '',
+            taxesFiled: false
+        }
     }
-
-    const payment: PaymentItem = {
-        idx: 0, 
-        amount: 10,
-        date: '09/30/2024',
-        payer: 'Someone' 
-    }
-
 
     describe('actions', () => {
         it('should return the initial state', () => {
-            expect(reducer(undefined, { type: 'unknown' })).toEqual({items:[]})
+            expect(reducer(undefined, { type: 'unknown' })).toEqual(       
+                 emptyObject)
         })
 
-        it('should handle adding job items', () => {
-            expect(reducer(initialState, addJob(item))).toEqual({items:[item]})
+        it('addJob should work', () => {
+            expect(reducer(initialState, addJob(job1))).toEqual({
+                byId:{
+                    [job1['id']]: job1.item
+                },
+                allIds: [job1['id']]
+            })
         })
 
-        it.skip('should handle adding payment items', () => {
-            expect(reducer(initialState, addPayment(payment))).toEqual({items:item.payments})
+
+        it('removeJob should work', () => {
+            const state = reducer(initialState, addJob(job1))
+            expect(reducer(state, removeJob(job1['id']))).toEqual(emptyObject)
         })
 
-        it('should handle removing income items', () => {
-            expect(reducer({items: [item]}, removeIncome(0))).toEqual({items:[]})
+        it('setJobItem should update a job', () => {
+            let state = reducer(initialState, addJob(job2))
+            const modified = 'Modified description'
+            
+            state = reducer(state, setJobItem({
+                id: job2.id,
+                item: {
+                    description: modified,
+                    business: '',
+                    taxesFiled: false
+                }
+            }))
+
+            expect(state.byId[job2['id']].description).toEqual(modified)
         })
     })
 
     describe('selectors', () => {
         let store: EnhancedStore
+
         beforeEach(() => {
             store = makeStore()
-            store.dispatch(addJob(item))
-            store.dispatch(addJob(item2))
+            store.dispatch(addJob(job1))
+            store.dispatch(addJob(job2))
         })
 
-        it('can select all income items', () => {
-            expect(selectIncomeItems(store.getState())).toEqual([item, item2])
-        })
+        describe('selectJobItems and selectJobCount', () => {
+            it('can select all income items', () => {
+                expect(selectJobCount(store.getState())).toEqual(2)
+                
+                const jobs = selectJobItems(store.getState())
 
-        it('can total the income items', () => {
-            expect(selectIncomeTotal(store.getState())).toEqual(50)
-        })
+                expect(jobs[job1['id']]).toEqual(job1['item']);
+                expect(jobs[job2['id']]).toEqual(job2['item']);
+                expect(Object.keys(jobs).length).toEqual(2)
+            })
+        });
+
+        describe('selectTotalPaymentsByJob', () => {
+            it('can total the income items', () => {
+                store.dispatch(addPayment(generatePayment(job1.id)))
+                store.dispatch(addPayment(generatePayment(job1.id)))
+                expect(selectTotalPaymentsByJob(store.getState(), job1.id)).toEqual(20)
+            })
+        });
+
+        describe('selectTotalPaymentsByAllJobs', () => {
+            it('can total the income items', () => {
+                store.dispatch(addPayment(generatePayment(job1.id)))
+                store.dispatch(addPayment(generatePayment(job2.id)))
+                store.dispatch(addPayment(generatePayment(job2.id)))
+                expect(selectTotalPaymentsByAllJobs(store.getState())).toEqual(30)
+            })
+        });
+
+        describe('selectTotalExpensesByJob', () => {
+            it('can total the income items', () => {
+                store.dispatch(addExpense(generateExpense(job1.id)))
+                store.dispatch(addExpense(generateExpense(job1.id)))
+                expect(selectTotalExpensesByJob(store.getState(), job1.id)).toEqual(20)
+            })
+        });
+
+        describe('selectTotalExpensesByAllJobs', () => {
+            it('can total the income items', () => {
+                store.dispatch(addExpense(generateExpense(job1.id)))
+                store.dispatch(addExpense(generateExpense(job2.id)))
+                store.dispatch(addExpense(generateExpense(job2.id)))
+                expect(selectTotalExpensesByAllJobs(store.getState())).toEqual(30)
+            })
+        });
     })
 })

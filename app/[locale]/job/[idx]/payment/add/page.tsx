@@ -2,27 +2,32 @@
 import { Grid, GridContainer } from '@trussworks/react-uswds'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch, useAppSelector } from "@/lib/hooks"
-import { addPayment, PaymentItem, selectIncomeItemAt } from "@/lib/features/job/jobSlice"
+import { selectJobItemAt } from "@/lib/features/job/jobSlice"
+import { addPayment, SetPaymentPayload } from '@/lib/features/job/payment/paymentSlice'
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
 import IncomeFormPayment, { IncomeFormPaymentData } from '@/app/[locale]/job/IncomeFormPayment'
+import { createUuid } from '@/lib/store'
 
-export default function Page({ params }: { params: { idx: number } }) {
+export default function Page({ params }: { params: { idx: string } }) {
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
 
-    const item = useAppSelector(state => selectIncomeItemAt(state, params.idx))
-    const jobDescription = item ? item.description: 'yourJob"'
+    const job = useAppSelector(state => selectJobItemAt(state, params.idx))
+    const jobDescription = job ? job.description : 'your job'
 
-    function addPaymentClicked({amount, date, payer}: IncomeFormPaymentData) {
-        const idx =  params.idx
+    function addPaymentClicked({job=params.idx, amount, date, payer}: IncomeFormPaymentData) {
+        const id = createUuid()
 
-        const paymentItem: PaymentItem = {
-            idx,
-            amount,
-            date,
-            payer,
+        const paymentItem: SetPaymentPayload = {
+            id, 
+            item: {
+                job,
+                amount,
+                date,
+                payer
+            }
         }
         dispatch(addPayment(paymentItem))
         router.push('/job/list')

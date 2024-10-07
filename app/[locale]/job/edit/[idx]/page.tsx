@@ -1,6 +1,6 @@
 'use client'
 import VerifyNav from "@/app/components/VerifyNav"
-import { JobItem, selectIncomeItemAt, setIncomeItem } from "@/lib/features/job/jobSlice"
+import { JobItem, selectJobItemAt, setJobItem } from "@/lib/features/job/jobSlice"
 import { useAppSelector } from "@/lib/hooks"
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
@@ -8,20 +8,20 @@ import IncomeFormJob, { IncomeFormJobData } from "@/app/[locale]/job/IncomeFormJ
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
 
-export default function EditIncome({ params }: { params: { idx: number } }) {
+export default function EditIncome({ params }: { params: { idx: string } }) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const router = useRouter()
-    const item = useAppSelector(state => selectIncomeItemAt(state, params.idx))
+    const item = useAppSelector(state => selectJobItemAt(state, params.idx))
 
     function editIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
-        dispatch(setIncomeItem({
+        dispatch(setJobItem({
+            id: params.idx,
             item: {
                 description,
                 business,
                 taxesFiled
             } as JobItem,
-            idx: params.idx,
         }))
 
         router.push(`/job/list`)

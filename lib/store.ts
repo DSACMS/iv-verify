@@ -1,16 +1,22 @@
 import { Action, combineReducers, configureStore } from "@reduxjs/toolkit";
-import incomeReducer, { selectIncomeTotal } from './features/job/jobSlice'
-import expenseReducer, { selectExpenseTotal } from './features/job/expenses/expensesSlice'
+import jobReducer, { selectTotalPaymentsByAllJobs, selectTotalExpensesByAllJobs } from './features/job/jobSlice'
 import statementReducer from './features/statement/statementSlice'
 import benefitsReducer, { selectBenefits } from './features/benefits/benefitsSlice'
+import userReducer from './features/user/userSlice'
 import { setInitialStateAction } from "./actions";
+import paymentReducer from './features/job/payment/paymentSlice'
+import expensesReducer from './features/job/expenses/expensesSlice'
+
+import { v4 as uuidv4 } from 'uuid';
 
 export const makeStore = () => {
     const appReducers = combineReducers({
-        incomeLedger: incomeReducer,
-        expensesLedger: expenseReducer,
-        statement: statementReducer,
         benefits: benefitsReducer,
+        expenses: expensesReducer,
+        jobs: jobReducer,
+        payment: paymentReducer,
+        statement: statementReducer,
+        user: userReducer,
     })
     const rootReducer = (state: any, action: Action) => {
         if (setInitialStateAction.match(action)) {
@@ -40,8 +46,8 @@ export type AppDispatch = AppStore['dispatch']
  */
 export const isStandardDeductionBetter = (state: RootState) => {
     const benefits = selectBenefits(state)
-    const incomeTotal = selectIncomeTotal(state)
-    const expenseTotal = selectExpenseTotal(state)
+    const incomeTotal = selectTotalPaymentsByAllJobs(state)
+    const expenseTotal = selectTotalExpensesByAllJobs(state)
 
     const percent = benefits.deductionAmount / 100
     return expenseTotal < incomeTotal * percent
@@ -62,3 +68,11 @@ export const recommendStandardDeduction = (state: RootState) => {
 
     return (benefits.standardDeduction || benefits.snap || benefits.deductionAmount !== undefined) ? true : false
 }
+
+/**
+ * Generates uuids for object ids
+ * 
+ * @returns string
+ */
+
+export const createUuid = () => uuidv4()
