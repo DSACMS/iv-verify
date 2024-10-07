@@ -1,7 +1,8 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import Page from './page'
 import { vi } from 'vitest'
+
+import Page from './page'
 import mockRouter from 'next-router-mock'
 import TestWrapper from '@/app/TestWrapper'
 

@@ -1,7 +1,10 @@
 import { beforeEach, describe, expect, it } from "vitest"
-import reducer, { BenefitsState, initialState, selectBenefits, setBenefits } from './benefitsSlice'
+import { generateBenefits } from "@/test/fixtures/generator"
+
 import { EnhancedStore } from "@reduxjs/toolkit"
 import { makeStore } from "@/lib/store"
+
+import reducer, { initialState, selectBenefits, setBenefits } from './benefitsSlice'
 
 describe('BenefitsSlice', () => {
 	const benefits = generateBenefits()

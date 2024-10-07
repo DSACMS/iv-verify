@@ -1,13 +1,17 @@
 import { beforeAll, describe, expect, it } from 'vitest'
 import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import Page from './page'
-import { makeStore, createUuid } from '@/lib/store'
+
 import { vi } from 'vitest'
+import { generateBenefits, generateJob } from '@/test/fixtures/generator'
+import TestWrapper from '@/app/TestWrapper'
+
+import Page from './page'
+import { makeStore } from '@/lib/store'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { BenefitsState, selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
-import { JobItem, SetJobPayload, addJob } from '@/lib/features/job/jobSlice'
-import TestWrapper from '@/app/TestWrapper'
+
+import { selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSlice'
+import { addJob } from '@/lib/features/job/jobSlice'
 
 describe('SNAP Recommend Deduction Screen', async () => {
   let store: EnhancedStore

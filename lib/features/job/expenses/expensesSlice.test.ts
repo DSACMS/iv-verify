@@ -1,6 +1,9 @@
 import { beforeEach, describe, expect, it } from "vitest";
 import { generateExpense, emptyStateObject } from "@/test/fixtures/generator";
 
+import { EnhancedStore } from "@reduxjs/toolkit";
+import { makeStore, createUuid } from "@/lib/store";
+
 import reducer, { 
   initialState, 
   addExpense, 
@@ -9,8 +12,6 @@ import reducer, {
   selectExpenseItemAt, 
   selectExpensesByJob 
 } from "./expensesSlice";
-import { EnhancedStore } from "@reduxjs/toolkit";
-import { makeStore, createUuid } from "@/lib/store";
 
 describe('ExpenseSlice', () => {
   

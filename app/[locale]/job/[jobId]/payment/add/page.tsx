@@ -7,7 +7,7 @@ import { selectJobItemAt } from "@/lib/features/job/jobSlice"
 import { addPayment, SetPaymentPayload } from '@/lib/features/job/payment/paymentSlice'
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
-import IncomeFormPayment, { IncomeFormPaymentData } from '@/app/[locale]/job/IncomeFormPayment'
+import FormPayment, { FormPaymentData } from '@/app/[locale]/job/FormPayment'
 import { createUuid } from '@/lib/store'
 
 export default function Page({ params }: { params: { jobId: string } }) {

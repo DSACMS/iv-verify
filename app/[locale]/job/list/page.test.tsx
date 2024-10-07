@@ -1,14 +1,16 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
+import { vi } from 'vitest'
+import { generateBenefits, generateJob } from '@/test/fixtures/generator'
+
 import { Provider } from 'react-redux'
 import Page from './page'
 import { makeStore } from '@/lib/store'
-import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { addJob, SetJobPayload } from '@/lib/features/job/jobSlice'
-import { BenefitsState, setBenefits } from '@/lib/features/benefits/benefitsSlice'
-import { createUuid } from '@/lib/store'
+
+import { addJob } from '@/lib/features/job/jobSlice'
+import { setBenefits } from '@/lib/features/benefits/benefitsSlice'
 
 describe('List Income in Ledger Page', async () => {
   let store: EnhancedStore

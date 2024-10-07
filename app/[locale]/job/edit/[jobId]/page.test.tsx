@@ -1,13 +1,15 @@
 import { afterEach, beforeAll, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
-import Page from './page'
 import { vi } from 'vitest'
-import mockRouter from 'next-router-mock'
 import TestWrapper from '@/app/TestWrapper'
+import { generateJob } from '@/test/fixtures/generator'
+
+import Page from './page'
+import mockRouter from 'next-router-mock'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
 import { makeStore } from '@/lib/store'
-import { SetJobPayload, addJob } from '@/lib/features/job/jobSlice'
-import { createUuid } from '@/lib/store'
+
+import { addJob } from '@/lib/features/job/jobSlice'
 
 describe('Edit Income Item Page', async () => {
   let store: EnhancedStore

@@ -4,7 +4,7 @@ import { JobItem, selectJobItemAt, setJobItem } from "@/lib/features/job/jobSlic
 import { useAppSelector } from "@/lib/hooks"
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
-import IncomeFormJob, { IncomeFormJobData } from "@/app/[locale]/job/IncomeFormJob"
+import FormJob, { FormJobData } from "@/app/[locale]/job/FormJob"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
 

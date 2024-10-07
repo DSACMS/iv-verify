@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { addJob, SetJobPayload, selectJobCount, JobItem } from "@/lib/features/job/jobSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
-import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/job/IncomeFormJob'
+import FormJob, { FormJobData } from '@/app/[locale]/job/FormJob'
 import { createUuid } from '@/lib/store'
 
 export default function Page() {

@@ -1,12 +1,15 @@
 import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+import { generateExpense } from '@/test/fixtures/generator'
+
 import { Provider } from 'react-redux'
 import Page from './page'
 import { makeStore, createUuid } from '@/lib/store'
-import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
-import { SetExpensePayload, addExpense } from '@/lib/features/job/expenses/expensesSlice'
+
+import { addExpense } from '@/lib/features/job/expenses/expensesSlice'
 
 describe('List Income in Ledger Page', async () => {
   let store: EnhancedStore

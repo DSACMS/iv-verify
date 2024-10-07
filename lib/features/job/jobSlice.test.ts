@@ -1,6 +1,9 @@
-import { beforeEach, describe, expect, it } from 'vitest'
 
-import { generateExpense, generatePayment, emptyStateObject } from '@/test/fixtures/generator'
+import { beforeEach, describe, expect, it } from 'vitest'
+import { generateExpense, generateJob, generatePayment, emptyStateObject } from '@/test/fixtures/generator'
+
+import { makeStore } from '@/lib/store'
+import { EnhancedStore } from '@reduxjs/toolkit'
 
 import reducer, {
   addJob, 
@@ -16,8 +19,6 @@ import reducer, {
 } from './jobSlice'
 import { addExpense } from './expenses/expensesSlice'
 import { addPayment } from './payment/paymentSlice'
-import { makeStore, createUuid } from '@/lib/store'
-import { EnhancedStore } from '@reduxjs/toolkit'
 
 describe('JobSlice', () => {
   const emptyObject = emptyStateObject
