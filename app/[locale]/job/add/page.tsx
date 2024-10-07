@@ -5,7 +5,7 @@ import { useAppDispatch, useAppSelector } from "@/lib/hooks"
 import { addJob, SetJobPayload, selectJobCount, JobItem } from "@/lib/features/job/jobSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
-import IncomeFormJob, { IncomeFormJobData } from '@/app/[locale]/job/IncomeFormJob'
+import FormJob, { FormJobData } from '@/app/[locale]/job/FormJob'
 import { createUuid } from '@/lib/store'
 
 export default function Page() {
@@ -14,7 +14,7 @@ export default function Page() {
     const router = useRouter()
     const jobCount = useAppSelector(state => selectJobCount(state))
 
-    function addIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
+    function addIncomeClicked({description, business, taxesFiled}: FormJobData) {
         const id = createUuid()
         const jobPayload: SetJobPayload = {
             id, 
@@ -41,7 +41,7 @@ export default function Page() {
                                 'add_income_header', 
                                 {'nth': jobCount === 0 ? 'first': 'next'}
                             )}</h3>
-                            <IncomeFormJob onSubmit={addIncomeClicked} />
+                            <FormJob onSubmit={addIncomeClicked} />
                          </main>
                     </Grid>
                 </GridContainer>

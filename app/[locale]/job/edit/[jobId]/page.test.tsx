@@ -30,7 +30,7 @@ describe('Edit Income Item Page', async () => {
     })
     beforeEach(() => {
         mockRouter.push(`/job/edit/${id}`)
-        render (<TestWrapper store={store}><Page params={{idx: id}} /></TestWrapper>)
+        render (<TestWrapper store={store}><Page params={{jobId: id}} /></TestWrapper>)
     })
     afterEach(cleanup)
 

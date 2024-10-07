@@ -13,19 +13,19 @@ import {
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
-export interface IncomeFormJobProps {
-  onSubmit: SubmitHandler<IncomeFormJobData>
+export interface FormJobProps {
+  onSubmit: SubmitHandler<FormJobData>
   item?: JobItem
 }
 
-export type IncomeFormJobData = {
+export type FormJobData = {
   description: string
   business: string
   taxesFiled: boolean
   payments: []
 }
 
-export default function IncomeFormJob(params: IncomeFormJobProps) {
+export default function FormJob(params: FormJobProps) {
   const { t } = useTranslation()
 
   const {
@@ -33,7 +33,7 @@ export default function IncomeFormJob(params: IncomeFormJobProps) {
     setValue,
     formState: { errors },
     handleSubmit
-  } = useForm<IncomeFormJobData>()
+  } = useForm<FormJobData>()
 
   return (
     <Form onSubmit={handleSubmit(params.onSubmit)}>

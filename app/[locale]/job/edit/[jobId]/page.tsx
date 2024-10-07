@@ -4,19 +4,19 @@ import { JobItem, selectJobItemAt, setJobItem } from "@/lib/features/job/jobSlic
 import { useAppSelector } from "@/lib/hooks"
 import { Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
-import IncomeFormJob, { IncomeFormJobData } from "@/app/[locale]/job/IncomeFormJob"
+import FormJob, { FormJobData } from "@/app/[locale]/job/FormJob"
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
 
-export default function EditIncome({ params }: { params: { idx: string } }) {
+export default function EditIncome({ params }: { params: { jobId: string } }) {
     const { t } = useTranslation()
     const dispatch = useDispatch()
     const router = useRouter()
-    const item = useAppSelector(state => selectJobItemAt(state, params.idx))
+    const item = useAppSelector(state => selectJobItemAt(state, params.jobId))
 
-    function editIncomeClicked({description, business, taxesFiled}: IncomeFormJobData) {
+    function editIncomeClicked({description, business, taxesFiled}: FormJobData) {
         dispatch(setJobItem({
-            id: params.idx,
+            id: params.jobId,
             item: {
                 description,
                 business,
@@ -35,7 +35,7 @@ export default function EditIncome({ params }: { params: { idx: string } }) {
                     <Grid row gap>
                         <main className="usa-layout-docs">
                             <h3>{t('edit_income_header')}</h3>
-                            <IncomeFormJob onSubmit={editIncomeClicked} item={item} />
+                            <FormJob onSubmit={editIncomeClicked} item={item} />
                          </main>
                     </Grid>
                 </GridContainer>
