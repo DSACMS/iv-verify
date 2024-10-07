@@ -1,12 +1,15 @@
 'use client'
-import VerifyNav from "@/app/components/VerifyNav"
-import { JobItem, selectJobItemAt, setJobItem } from "@/lib/features/job/jobSlice"
-import { useAppSelector } from "@/lib/hooks"
-import { Grid, GridContainer } from "@trussworks/react-uswds"
-import { useTranslation } from "react-i18next"
-import IncomeFormJob, { IncomeFormJobData } from "@/app/[locale]/job/IncomeFormJob"
+
 import { useDispatch } from "react-redux"
 import { useRouter } from "next/navigation"
+import { Grid, GridContainer } from "@trussworks/react-uswds"
+import { useTranslation } from "react-i18next"
+import { useAppSelector } from "@/lib/hooks"
+
+import { JobItem, selectJobItemAt, setJobItem } from "@/lib/features/job/jobSlice"
+
+import FormJob, { FormJobData } from "@/app/[locale]/job/FormJob"
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function EditIncome({ params }: { params: { idx: string } }) {
     const { t } = useTranslation()

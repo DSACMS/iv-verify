@@ -50,12 +50,14 @@ export const { addPayment, removePayment, setPaymentItem } = PaymentSlice.action
 
 export const selectPaymentItemAt = (state: RootState, id: string) => state.payment.byId[id]
 export const selectPaymentsByJob = (state: RootState, jobId: string) => {
-  const selectedPayments: Array<PaymentItem> = []
+  const selectedPayments: {
+    [id: string]: PaymentItem
+  } = {}
 
   for (const paymentId in state.payment.byId) {
     const currentPayment = selectPaymentItemAt(state, paymentId)
     if (currentPayment.job === jobId)
-      selectedPayments.push(currentPayment)
+      selectedPayments[paymentId] = currentPayment
   }
 
   return selectedPayments
