@@ -40,7 +40,7 @@ describe('SNAP Recommend Deduction Screen', async () => {
     selection: true, 
     expectedRoute: '/job/review'
     }, {
-    text: 'Do not take the SNAP standard deduction, use my Medicaid expenses',
+    text: 'Do not take the SNAP standard deduction, use my Medicaid business expenses',
     selection: false,
     expectedRoute: '/job/expense'
     }
