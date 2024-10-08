@@ -1,15 +1,14 @@
 import { beforeEach, describe, expect, it } from "vitest"
-import reducer, { BenefitsState, initialState, selectBenefits, setBenefits } from './benefitsSlice'
+import { generateBenefits } from "@/test/fixtures/generator"
+
 import { EnhancedStore } from "@reduxjs/toolkit"
 import { makeStore } from "@/lib/store"
 
+import reducer, { initialState, selectBenefits, setBenefits } from './benefitsSlice'
+
 describe('BenefitsSlice', () => {
-    const benefits: BenefitsState = {
-        deductionAmount: 50,
-        medicaid: true,
-        snap: true,
-        standardDeduction: true,
-    }
+    const benefits = generateBenefits()
+
     describe('Actions', () => {
         it('sets initial state', () => {
             expect(reducer(undefined, { type: 'unknown' })).toEqual(initialState)
