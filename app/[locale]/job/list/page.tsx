@@ -24,13 +24,13 @@ export default function Page() {
     
     const routeToStandardDeductionElection = useAppSelector(state => recommendStandardDeduction(state))
 
-    function doneClicked() {
-        if (routeToStandardDeductionElection) {
-            router.push("/job/expense/snap") // TODO move snap out
-        } else {
-            router.push(`/job/review`)
-        }
+  function doneClicked() {
+    if (routeToStandardDeductionElection) {
+      router.push("/job/expense/snap") // TODO move snap out
+    } else {
+      router.push(`/job/review`)
     }
+  }
 
     return (
         <div>

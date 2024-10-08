@@ -5,8 +5,8 @@ import { initTranslations} from '@/app/i18n'
 import { createInstance } from 'i18next'
 
 interface TranslationsProviderProps {
-    children: React.ReactNode
-    locale: string
+  children: React.ReactNode
+  locale: string
 }
 
 export default async function TranslationsProvider({ children, locale }: TranslationsProviderProps) {

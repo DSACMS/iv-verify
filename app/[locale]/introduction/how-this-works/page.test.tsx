@@ -10,13 +10,13 @@ import mockRouter from 'next-router-mock'
 describe('How this works page', async () => {
   let store: EnhancedStore;
   beforeEach(() => {
-      vi.mock('next/navigation', () => ({
-          useRouter: () =>  mockRouter,
-          usePathname: () => mockRouter.asPath,
-      }))
-      mockRouter.push('/')
-      store = makeStore()
-      render (<Provider store={store}><Page /></Provider>)
+    vi.mock('next/navigation', () => ({
+      useRouter: () =>  mockRouter,
+      usePathname: () => mockRouter.asPath,
+    }))
+    mockRouter.push('/')
+    store = makeStore()
+    render (<Provider store={store}><Page /></Provider>)
   })
   afterEach(cleanup)
 
@@ -27,9 +27,9 @@ describe('How this works page', async () => {
   it('navigates when clicked', async () => {
     fireEvent.click(screen.getByTestId('get_started_button'))
     await waitFor(() => {
-        expect(mockRouter).toMatchObject({
-            asPath: "/introduction/benefits"
-        })
+      expect(mockRouter).toMatchObject({
+        asPath: "/introduction/benefits"
+      })
     })
   })
 })

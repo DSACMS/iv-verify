@@ -13,54 +13,53 @@ import { selectBenefits, setBenefits } from '@/lib/features/benefits/benefitsSli
 import { addJob } from '@/lib/features/job/jobSlice'
 
 describe('SNAP Recommend Deduction Screen', async () => {
-    let store: EnhancedStore
-    beforeEach(() => {
-        vi.mock('next/navigation', () => ({
-            useRouter: () =>  mockRouter,
-            usePathname: () => mockRouter.asPath,
-        }))
-        mockRouter.push('/job/expense/snap')
-        store = makeStore()
+  let store: EnhancedStore
+  beforeEach(() => {
+    vi.mock('next/navigation', () => ({
+      useRouter: () =>  mockRouter,
+      usePathname: () => mockRouter.asPath,
+    }))
+    mockRouter.push('/job/expense/snap')
+    store = makeStore()
+    const benefits = generateBenefits()
+    const jobItem = generateJob()
 
-        const benefits = generateBenefits()
-        const jobItem = generateJob()
+    store.dispatch(setBenefits(benefits))
+    store.dispatch(addJob(jobItem))
+    render(<TestWrapper store={store}><Page /></TestWrapper>)
+  })
+  afterEach(cleanup)
 
-        store.dispatch(setBenefits(benefits))
-        store.dispatch(addJob(jobItem))
-        render(<TestWrapper store={store}><Page /></TestWrapper>)
+  it('shows header', () => {
+    expect(screen.getByTestId('snap_deduction_header')).toBeDefined()
+  })
+
+  it.each([
+    { 
+    text: 'Take the standard deduction', 
+    selection: true, 
+    expectedRoute: '/job/review'
+    }, {
+    text: 'Do not take the SNAP standard deduction, use my Medicaid expenses',
+    selection: false,
+    expectedRoute: '/job/expense'
+    }
+  ])('navigates to $expectedRoute if take deduction is $selection', async ({ text, selection, expectedRoute }) => {
+    const radio: HTMLInputElement = screen.getByTestId("take_deduction_radio")
+    fireEvent.click(screen.getByText(text))
+    waitFor(() => {
+      expect(radio.checked).toEqual(selection)
     })
-    afterEach(cleanup)
+    fireEvent.click(screen.getByTestId("continue-button"))
 
-    it('shows header', () => {
-        expect(screen.getByTestId('snap_deduction_header')).toBeDefined()
+
+    await waitFor(() => {
+      expect(mockRouter).toMatchObject({
+        asPath: expectedRoute
+      })
     })
 
-    it.each([
-      { 
-        text: 'Take the standard deduction', 
-        selection: true, 
-        expectedRoute: '/job/review'
-      }, {
-        text: 'Do not take the SNAP standard deduction, use my Medicaid expenses',
-        selection: false,
-        expectedRoute: '/job/expense'
-      }
-    ])('navigates to $expectedRoute if take deduction is $selection', async ({ text, selection, expectedRoute }) => {
-        const radio: HTMLInputElement = screen.getByTestId("take_deduction_radio")
-        fireEvent.click(screen.getByText(text))
-        waitFor(() => {
-            expect(radio.checked).toEqual(selection)
-        })
-        fireEvent.click(screen.getByTestId("continue-button"))
-
-
-        await waitFor(() => {
-            expect(mockRouter).toMatchObject({
-                asPath: expectedRoute
-            })
-        })
-
-        const benefits = selectBenefits(store.getState())
-        expect(benefits.standardDeduction).toBe(selection)
-    })
+    const benefits = selectBenefits(store.getState())
+    expect(benefits.standardDeduction).toBe(selection)
+  })
 })

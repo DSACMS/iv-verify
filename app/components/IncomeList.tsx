@@ -27,17 +27,12 @@ export default function IncomeList({dayCount, job, jobId}: Props) {
         incomeItemElements.push(<IncomeListItem index={payment} payment={payments[payment]} jobId={jobId} />)
     }
 
-    function getTotal() {
-        if (incomeTotal > 0) {
-            return (t('list_income_total', {day_count: dayCount, amount: incomeTotal}))
-        }
+    return <></>
+  }
 
-        return <></>
-    }
-
-    function addItemClicked() {
-        router.push("/job/add")
-    }
+  function addItemClicked() {
+    router.push("/job/add")
+  }
 
     function addPaymentClicked() {
         router.push(`/job/${jobId}/payment/add`)

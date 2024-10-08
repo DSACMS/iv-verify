@@ -9,84 +9,85 @@ import mockRouter from 'next-router-mock'
 import { selectBenefits } from '@/lib/features/benefits/benefitsSlice'
 
 describe('Choose Benefits', async () => {
-    let store: EnhancedStore
-    beforeEach(() => {
-        vi.mock('next/navigation', () => ({
-            useRouter: () =>  mockRouter,
-            usePathname: () => mockRouter.asPath,
-        }))
-        mockRouter.push('/benefits')
-        store = makeStore()
-        render (<Provider store={store}><Page /></Provider>)
-    })
-    afterEach(cleanup)
+  let store: EnhancedStore
+  beforeEach(() => {
+    vi.mock('next/navigation', () => ({
+      useRouter: () =>  mockRouter,
+      usePathname: () => mockRouter.asPath,
+    }))
+    
+    mockRouter.push('/benefits')
+    store = makeStore()
+    render (<Provider store={store}><Page /></Provider>)
+  })
+  afterEach(cleanup)
 
-    it('Shows Inputs', async () => {
-        expect(screen.getByTestId("medicaid")).toBeDefined()
-        expect(screen.getByTestId("snap")).toBeDefined()
-    })
+  it('Shows Inputs', async () => {
+    expect(screen.getByTestId("medicaid")).toBeDefined()
+    expect(screen.getByTestId("snap")).toBeDefined()
+  })
 
-    it('Displays error messages when no checkbox is selected', async () => {
-        fireEvent.click(screen.getByTestId('continue_button'))
+  it('Displays error messages when no checkbox is selected', async () => {
+    fireEvent.click(screen.getByTestId('continue_button'))
 
-        await waitFor(() => {
-            expect(screen.getByTestId("alert")).toBeDefined()
-        })
-
-        expect(mockRouter).toMatchObject({
-            asPath: "/benefits"
-        })
+    await waitFor(() => {
+      expect(screen.getByTestId("alert")).toBeDefined()
     })
 
-    it('Navigates when just medicaid checkbox is checked', async() => {
-        const checkbox = screen.getByTestId('medicaid') as HTMLInputElement
-        fireEvent.click(checkbox)
-        fireEvent.click(screen.getByTestId("continue_button"))
+    expect(mockRouter).toMatchObject({
+      asPath: "/benefits"
+    })
+  })
 
-        await waitFor(() => {
-            expect(mockRouter).toMatchObject({
-                asPath: "/job"
-            })
-        })
+  it('Navigates when just medicaid checkbox is checked', async() => {
+    const checkbox = screen.getByTestId('medicaid') as HTMLInputElement
+    fireEvent.click(checkbox)
+    fireEvent.click(screen.getByTestId("continue_button"))
 
-        expect(checkbox.checked).toBeTruthy()
-        
-        const benefits = selectBenefits(store.getState())
-        expect(benefits.medicaid).toBeTruthy()
-        expect(benefits.snap).toBeFalsy()
+    await waitFor(() => {
+      expect(mockRouter).toMatchObject({
+        asPath: "/job"
+      })
     })
 
-    it('Navigates when just snap checkbox is checked', async() => {
-        const checkbox = screen.getByTestId('snap') as HTMLInputElement
-        fireEvent.click(checkbox)
-        fireEvent.click(screen.getByTestId("continue_button"))
+    expect(checkbox.checked).toBeTruthy()
+    
+    const benefits = selectBenefits(store.getState())
+    expect(benefits.medicaid).toBeTruthy()
+    expect(benefits.snap).toBeFalsy()
+  })
 
-        await waitFor(() => {
-            expect(mockRouter).toMatchObject({
-                asPath: "/job"
-            })
-        })
+  it('Navigates when just snap checkbox is checked', async() => {
+    const checkbox = screen.getByTestId('snap') as HTMLInputElement
+    fireEvent.click(checkbox)
+    fireEvent.click(screen.getByTestId("continue_button"))
 
-        expect(checkbox.checked).toBeTruthy()
-        
-        const benefits = selectBenefits(store.getState())
-        expect(benefits.medicaid).toBeFalsy()
-        expect(benefits.snap).toBeTruthy()
+    await waitFor(() => {
+      expect(mockRouter).toMatchObject({
+        asPath: "/job"
+      })
     })
 
-    it('Navigates when two checkboxes are checked', async () => {
-        fireEvent.click(screen.getByTestId('medicaid'))
-        fireEvent.click(screen.getByTestId('snap'))
-        fireEvent.click(screen.getByTestId("continue_button"))
+    expect(checkbox.checked).toBeTruthy()
+    
+    const benefits = selectBenefits(store.getState())
+    expect(benefits.medicaid).toBeFalsy()
+    expect(benefits.snap).toBeTruthy()
+  })
 
-        await waitFor(() => {
-            expect(mockRouter).toMatchObject({
-                asPath: "/job"
-            })
-        })
+  it('Navigates when two checkboxes are checked', async () => {
+    fireEvent.click(screen.getByTestId('medicaid'))
+    fireEvent.click(screen.getByTestId('snap'))
+    fireEvent.click(screen.getByTestId("continue_button"))
 
-        const benefits = selectBenefits(store.getState())
-        expect(benefits.medicaid).toBeTruthy()
-        expect(benefits.snap).toBeTruthy()
+    await waitFor(() => {
+      expect(mockRouter).toMatchObject({
+        asPath: "/job"
+      })
     })
+
+    const benefits = selectBenefits(store.getState())
+    expect(benefits.medicaid).toBeTruthy()
+    expect(benefits.snap).toBeTruthy()
+  })
 })
