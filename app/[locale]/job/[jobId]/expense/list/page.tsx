@@ -10,36 +10,36 @@ import VerifyNav from "@/app/components/VerifyNav"
 import { isStandardDeductionBetter } from '@/lib/store'
 
 export default function Page() {
-    const { t } = useTranslation()
-    const router = useRouter()
+  const { t } = useTranslation()
+  const router = useRouter()
 
-    const benefits = useAppSelector(state => selectBenefits(state))
-    const standardDeductionIsBetter = useAppSelector(state => isStandardDeductionBetter(state))
+  const benefits = useAppSelector(state => selectBenefits(state))
+  const standardDeductionIsBetter = useAppSelector(state => isStandardDeductionBetter(state))
 
-    function doneClicked() {
-        // For Medicaid Only or SNAP+Medicaid Flows
-        if (!benefits.standardDeduction && benefits.snap && standardDeductionIsBetter) {
-            router.push('/job/expense/snap/recommend')
-        } else { 
-            router.push('/job/review')
-        }
+  function doneClicked() {
+    // For Medicaid Only or SNAP+Medicaid Flows
+    if (!benefits.standardDeduction && benefits.snap && standardDeductionIsBetter) {
+      router.push('/job/expense/snap/recommend')
+    } else { 
+      router.push('/job/review')
     }
+  }
 
-    return (
-        <div>
-            <VerifyNav title={t('expenses_summary_title')} />
-            <div className="usa-section">
-                <GridContainer>
-                    <Grid row gap>
-                        <main className="usa-layout-docs">
-                            <h3>{t('expenses_summary_header')}</h3>
-                            <span className="usa-hint">{t('expenses_summary_subheader')}</span>
-                            <ExpenseList header={t('expenses_summary_list_header')} />
-                            <Button type="button" onClick={doneClicked} data-testid="continue_button">{t('expenses_summary_review_button')}</Button>
-                        </main>
-                    </Grid>
-                </GridContainer>
-            </div>
-        </div>
-    )
+  return (
+    <div>
+      <VerifyNav title={t('expenses_summary_title')} />
+      <div className="usa-section">
+        <GridContainer>
+          <Grid row gap>
+            <main className="usa-layout-docs">
+              <h3>{t('expenses_summary_header')}</h3>
+              <span className="usa-hint">{t('expenses_summary_subheader')}</span>
+              <ExpenseList header={t('expenses_summary_list_header')} />
+              <Button type="button" onClick={doneClicked} data-testid="continue_button">{t('expenses_summary_review_button')}</Button>
+            </main>
+          </Grid>
+        </GridContainer>
+      </div>
+    </div>
+  )
 }

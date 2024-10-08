@@ -5,17 +5,17 @@ import { EnhancedStore } from '@reduxjs/toolkit'
 import { makeStore } from "@/lib/store";
 
 interface Props {
-    store?: EnhancedStore
-    children: React.ReactNode
+  store?: EnhancedStore
+  children: React.ReactNode
 }
 
 export default function TestWrapper({ children, store }: Props) {
-    store = store || makeStore()
-    return (
-        <Provider store={store}>
-            <I18nextProvider i18n={i18nTesting}>
-                {children}
-            </I18nextProvider>
-        </Provider>
-    )
+  store = store || makeStore()
+  return (
+    <Provider store={store}>
+      <I18nextProvider i18n={i18nTesting}>
+        {children}
+      </I18nextProvider>
+    </Provider>
+  )
 }

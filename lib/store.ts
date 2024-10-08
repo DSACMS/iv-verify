@@ -10,24 +10,24 @@ import expensesReducer from './features/job/expenses/expensesSlice'
 import { v4 as uuidv4 } from 'uuid';
 
 export const makeStore = () => {
-    const appReducers = combineReducers({
-        benefits: benefitsReducer,
-        expenses: expensesReducer,
-        jobs: jobReducer,
-        payment: paymentReducer,
-        statement: statementReducer,
-        user: userReducer,
-    })
-    const rootReducer = (state: any, action: Action) => {
-        if (setInitialStateAction.match(action)) {
-            state = action.payload
-        }
-        return appReducers(state, action)
+  const appReducers = combineReducers({
+    benefits: benefitsReducer,
+    expenses: expensesReducer,
+    jobs: jobReducer,
+    payment: paymentReducer,
+    statement: statementReducer,
+    user: userReducer,
+  })
+  const rootReducer = (state: any, action: Action) => {
+    if (setInitialStateAction.match(action)) {
+      state = action.payload
     }
+    return appReducers(state, action)
+  }
 
-    return configureStore({
-        reducer: rootReducer
-    })
+  return configureStore({
+    reducer: rootReducer
+  })
 }
 
 export type AppStore = ReturnType<typeof makeStore>
@@ -45,12 +45,12 @@ export type AppDispatch = AppStore['dispatch']
  * @returns 
  */
 export const isStandardDeductionBetter = (state: RootState) => {
-    const benefits = selectBenefits(state)
-    const incomeTotal = selectTotalPaymentsByAllJobs(state)
-    const expenseTotal = selectTotalExpensesByAllJobs(state)
+  const benefits = selectBenefits(state)
+  const incomeTotal = selectTotalPaymentsByAllJobs(state)
+  const expenseTotal = selectTotalExpensesByAllJobs(state)
 
-    const percent = benefits.deductionAmount / 100
-    return expenseTotal < incomeTotal * percent
+  const percent = benefits.deductionAmount / 100
+  return expenseTotal < incomeTotal * percent
 }
 
 /**
@@ -64,9 +64,9 @@ export const isStandardDeductionBetter = (state: RootState) => {
  * @returns Boolean
  */
 export const recommendStandardDeduction = (state: RootState) => {
-    const benefits = selectBenefits(state)
+  const benefits = selectBenefits(state)
 
-    return (benefits.standardDeduction || benefits.snap || benefits.deductionAmount !== undefined) ? true : false
+  return (benefits.standardDeduction || benefits.snap || benefits.deductionAmount !== undefined) ? true : false
 }
 
 /**

@@ -9,53 +9,53 @@ import mockRouter from 'next-router-mock'
 import { selectSignedStatement } from '@/lib/features/statement/statementSlice'
 
 describe('Sign Statement', async () => {
-    let store: EnhancedStore
-    beforeEach(() => {
-        vi.mock('next/navigation', () => ({
-            useRouter: () =>  mockRouter,
-            usePathname: () => mockRouter.asPath,
-        }))
-        mockRouter.push('/statement/sign')
-        store = makeStore()
-        render (<Provider store={store}><Page /></Provider>)
-    })
-    afterEach(cleanup)
+  let store: EnhancedStore
+  beforeEach(() => {
+    vi.mock('next/navigation', () => ({
+      useRouter: () =>  mockRouter,
+      usePathname: () => mockRouter.asPath,
+    }))
+    mockRouter.push('/statement/sign')
+    store = makeStore()
+    render (<Provider store={store}><Page /></Provider>)
+  })
+  afterEach(cleanup)
 
-    it('Shows Inputs', async () => {
-        expect(screen.getByTestId("understood")).toBeDefined()
-        expect(screen.getByTestId("signedName")).toBeDefined()
-    })
+  it('Shows Inputs', async () => {
+    expect(screen.getByTestId("understood")).toBeDefined()
+    expect(screen.getByTestId("signedName")).toBeDefined()
+  })
 
-    it('Displays error messages when fields are not complete', async () => {
-        fireEvent.click(screen.getByTestId('continue_button'))
+  it('Displays error messages when fields are not complete', async () => {
+    fireEvent.click(screen.getByTestId('continue_button'))
 
-        await waitFor(() => {
-            expect(screen.getByTestId("alert")).toBeDefined()
-        })
-
-        expect(screen.getAllByTestId("errorMessage")).toBeDefined()
-
-        expect(mockRouter).toMatchObject({
-            asPath: "/statement/sign"
-        })
+    await waitFor(() => {
+      expect(screen.getByTestId("alert")).toBeDefined()
     })
 
-    it('Navigates when fields are filled in', async () => {
-        fireEvent.click(screen.getByTestId('understood'))
-        fireEvent.change(screen.getByTestId("signedName"), {
-            target: { value: 'John Doe' }
-        })
+    expect(screen.getAllByTestId("errorMessage")).toBeDefined()
 
-        fireEvent.click(screen.getByTestId('continue_button'))
-
-        await waitFor(() => {
-            expect(mockRouter).toMatchObject({
-                asPath: "/statement/confirmation"
-            })
-        })
-
-        const statement = selectSignedStatement(store.getState())
-        expect(statement.understood).toBeTruthy()
-        expect(statement.signedName).toEqual("John Doe")
+    expect(mockRouter).toMatchObject({
+      asPath: "/statement/sign"
     })
+  })
+
+  it('Navigates when fields are filled in', async () => {
+    fireEvent.click(screen.getByTestId('understood'))
+    fireEvent.change(screen.getByTestId("signedName"), {
+      target: { value: 'John Doe' }
+    })
+
+    fireEvent.click(screen.getByTestId('continue_button'))
+
+    await waitFor(() => {
+      expect(mockRouter).toMatchObject({
+        asPath: "/statement/confirmation"
+      })
+    })
+
+    const statement = selectSignedStatement(store.getState())
+    expect(statement.understood).toBeTruthy()
+    expect(statement.signedName).toEqual("John Doe")
+  })
 })

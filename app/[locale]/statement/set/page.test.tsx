@@ -8,57 +8,57 @@ import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 
 describe('Set Signed Statment', async () => {
-    let store: EnhancedStore
-    beforeEach(() => {
-        vi.mock('next/navigation', () => ({
-            useRouter: () =>  mockRouter,
-            usePathname: () => mockRouter.asPath,
-        }))
-        mockRouter.push('/statement/set')
-        store = makeStore()
-        render (<Provider store={store}><Page /></Provider>)
-    })
-    afterEach(cleanup)
+  let store: EnhancedStore
+  beforeEach(() => {
+    vi.mock('next/navigation', () => ({
+      useRouter: () =>  mockRouter,
+      usePathname: () => mockRouter.asPath,
+    }))
+    mockRouter.push('/statement/set')
+    store = makeStore()
+    render (<Provider store={store}><Page /></Provider>)
+  })
+  afterEach(cleanup)
 
-    it('Shows Inputs', async () => {
-        expect(screen.getByTestId("name")).toBeDefined()
-        expect(screen.getByTestId("amount")).toBeDefined()
-    })
+  it('Shows Inputs', async () => {
+    expect(screen.getByTestId("name")).toBeDefined()
+    expect(screen.getByTestId("amount")).toBeDefined()
+  })
 
-    it('Displays error messages when fields are empty', async () => {
-        fireEvent.click(screen.getByTestId('continue_button'))
+  it('Displays error messages when fields are empty', async () => {
+    fireEvent.click(screen.getByTestId('continue_button'))
 
-        await waitFor(() => {
-            expect(screen.getByTestId("alert")).toBeDefined()
-        })
-
-        expect(screen.getAllByTestId("errorMessage")).toBeDefined()
-
-        expect(mockRouter).toMatchObject({
-            asPath: "/statement/set"
-        })
+    await waitFor(() => {
+      expect(screen.getByTestId("alert")).toBeDefined()
     })
 
-    it('Navigates when fields are filled in', async () => {
-        fireEvent.change(screen.getByTestId("name"), {
-            target: { value: 'Suzy' }
-        })
+    expect(screen.getAllByTestId("errorMessage")).toBeDefined()
 
-        for (const button of screen.getAllByTestId('date-picker-button')) {
-            fireEvent.click(button)
-            fireEvent.click(screen.getByText('10'))
-        }
-
-        fireEvent.change(screen.getByTestId("amount"), {
-            target: { value: '23.00' }
-        })
-
-        fireEvent.click(screen.getByTestId('continue_button'))
-
-        await waitFor(() => {
-            expect(mockRouter).toMatchObject({
-                asPath: "/statement/sign"
-            })
-        })
+    expect(mockRouter).toMatchObject({
+      asPath: "/statement/set"
     })
+  })
+
+  it('Navigates when fields are filled in', async () => {
+    fireEvent.change(screen.getByTestId("name"), {
+      target: { value: 'Suzy' }
+    })
+
+    for (const button of screen.getAllByTestId('date-picker-button')) {
+      fireEvent.click(button)
+      fireEvent.click(screen.getByText('10'))
+    }
+
+    fireEvent.change(screen.getByTestId("amount"), {
+      target: { value: '23.00' }
+    })
+
+    fireEvent.click(screen.getByTestId('continue_button'))
+
+    await waitFor(() => {
+      expect(mockRouter).toMatchObject({
+        asPath: "/statement/sign"
+      })
+    })
+  })
 })
