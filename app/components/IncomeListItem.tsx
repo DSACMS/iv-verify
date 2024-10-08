@@ -30,25 +30,25 @@ export default function IncomeListItem({ index, payment, jobId }: ItemProps) {
     
 
     return (
-        <Grid row gap className="border-bottom">
-            <Grid col={10}>
-                <div>${payment.amount}</div>
-                <div>{payment.date}</div>
-                <div>{payment.payer}</div>
-            </Grid>
-            <Grid col={2}>
-                <ModalToggleButton modalRef={ref} opener unstyled className="margin-bottom-2 desktop:grid-col-12">{t('list_income_delete_button')}</ModalToggleButton>
-                <Modal ref={ref} id="delete-modal">
-                    <ModalHeading>{t('list_income_delete_are_you_sure')}</ModalHeading>
-                    <ModalFooter>
-                        <ButtonGroup>
-                            <ModalToggleButton modalRef={ref} closer>{t('list_income_no_delete_item')}</ModalToggleButton>
-                            <ModalToggleButton modalRef={ref} closer onClick={onDeleteClicked}>{t('list_income_yes_delete_item')}</ModalToggleButton>
-                        </ButtonGroup>
-                    </ModalFooter>
-                </Modal>
-                <Button type="button" className="desktop:grid-col-12 usa-button--unstyled" onClick={editClicked}>{t('edit')}</Button>
-            </Grid>
+      <Grid row gap className="border-bottom">
+        <Grid col={10}>
+          <div>${payment.amount}</div>
+          <div>{payment.date}</div>
+          <div>{payment.payer}</div>
         </Grid>
+        <Grid col={2}>
+          <ModalToggleButton modalRef={ref} opener unstyled className="margin-bottom-2 desktop:grid-col-12">{t('list_income_delete_button')}</ModalToggleButton>
+          <Modal ref={ref} id="delete-modal">
+            <ModalHeading>{t('list_income_delete_are_you_sure')}</ModalHeading>
+            <ModalFooter>
+              <ButtonGroup>
+                <ModalToggleButton modalRef={ref} closer>{t('list_income_no_delete_item')}</ModalToggleButton>
+                <ModalToggleButton modalRef={ref} closer onClick={onDeleteClicked}>{t('list_income_yes_delete_item')}</ModalToggleButton>
+              </ButtonGroup>
+            </ModalFooter>
+          </Modal>
+          <Button type="button" className="desktop:grid-col-12 usa-button--unstyled" onClick={editClicked}>{t('edit')}</Button>
+        </Grid>
+      </Grid>
     )
 }
