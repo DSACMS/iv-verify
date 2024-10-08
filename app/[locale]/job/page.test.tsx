@@ -8,23 +8,23 @@ import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 
 describe('Income Landing Screen', async () => {
-    let store: EnhancedStore
-    beforeEach(() => {
-        vi.mock('next/navigation', () => ({
-            useRouter: () =>  mockRouter,
-            usePathname: () => mockRouter.asPath,
-        }))
-        mockRouter.push('/job/')
-        store = makeStore()
-        render (<Provider store={store}><Page /></Provider>)
-    })
-    afterEach(cleanup)
+  let store: EnhancedStore
+  beforeEach(() => {
+    vi.mock('next/navigation', () => ({
+      useRouter: () =>  mockRouter,
+      usePathname: () => mockRouter.asPath,
+    }))
+    mockRouter.push('/job/')
+    store = makeStore()
+    render (<Provider store={store}><Page /></Provider>)
+  })
+  afterEach(cleanup)
 
-    it('shows header', () => {
-        expect(screen.getByTestId('income_landing_what_counts_heading')).toBeDefined()
-    })
+  it('shows header', () => {
+    expect(screen.getByTestId('income_landing_what_counts_heading')).toBeDefined()
+  })
 
-    it('shows add button', () => {
-        expect(screen.getByTestId('add_income_button')).toBeDefined()
-    })
+  it('shows add button', () => {
+    expect(screen.getByTestId('add_income_button')).toBeDefined()
+  })
 })

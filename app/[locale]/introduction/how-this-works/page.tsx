@@ -18,7 +18,7 @@ export default function Page() {
   const router = useRouter()
 
   function mainButtonClicked() {
-  	router.push('/introduction/benefits/');
+    router.push('/introduction/benefits/');
   }
 
   const whatIsSelfEmployment = [{
@@ -42,11 +42,11 @@ export default function Page() {
   }];
 
   return (
-  	<div>
-  		<VerifyNav title={t('intro_title')} />
-  		<div className="usa-section">
-  			<GridContainer>
-  				<Grid row gap>
+    <div>
+      <VerifyNav title={t('intro_title')} />
+      <div className="usa-section">
+        <GridContainer>
+          <Grid row gap>
             <main className="usa-layout-docs">
               <h3 className="margin-bottom-2" data-testid="how_this_works_header">{t('how_this_works_header')}</h3>
 
