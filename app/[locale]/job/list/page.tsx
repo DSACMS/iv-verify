@@ -19,7 +19,7 @@ export default function Page() {
     const incomeList = []
 
     for (const job in jobs) {
-        incomeList.push(<IncomeList dayCount={DAY_COUNT} job={[jobs[jobs]]} jobId={job} />)
+        incomeList.push(<IncomeList dayCount={DAY_COUNT} job={jobs[job]} jobId={job} />)
     }
     
     const routeToStandardDeductionElection = useAppSelector(state => recommendStandardDeduction(state))

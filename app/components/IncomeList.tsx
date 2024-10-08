@@ -23,12 +23,9 @@ export default function IncomeList({dayCount, job, jobId}: Props) {
     const incomeTotal = useAppSelector(state => selectTotalPaymentsByAllJobs(state))
     const incomeItemElements = []
     
-    for (const payment in payments) {
-        incomeItemElements.push(<IncomeListItem index={payment} payment={payments[payment]} jobId={jobId} />)
+    for (const payment in payments.byId) {
+        incomeItemElements.push(<IncomeListItem index={payment} payment={payments.byId[payment]} jobId={jobId} />)
     }
-
-    return <></>
-  }
 
   function addItemClicked() {
     router.push("/job/add")
@@ -40,6 +37,12 @@ export default function IncomeList({dayCount, job, jobId}: Props) {
 
     function addExpenseClicked() {
         router.push(`/job/${jobId}/expense/add`)
+    }
+
+    function getTotal() {
+        return incomeTotal > 0 ?
+            (t('list_income_total', { day_count: dayCount, amount: incomeTotal})) :
+            (<></>)
     }
 
     return (

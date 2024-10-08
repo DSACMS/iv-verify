@@ -74,7 +74,7 @@ describe('PaymentSlice', () => {
 
       const payments = selectPaymentsByJob(store.getState(), secondJobId)
 
-      expect(payments.byId.keys().length).toBe(1)
+      expect(payments.allIds.length).toBe(1)
     })
   })
 })
