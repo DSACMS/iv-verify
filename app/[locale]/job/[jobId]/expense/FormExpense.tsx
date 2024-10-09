@@ -8,12 +8,12 @@ import { Button, Form, FormGroup, Checkbox, DatePicker, ComboBox, Label, Require
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
 
-interface ExpenseFormPaymentProps {
-  onSubmit: SubmitHandler<ExpenseFormPaymentData>
+interface FormExpenseProps {
+  onSubmit: SubmitHandler<FormExpenseData>
   item?: ExpenseItem
 }
 
-export type ExpenseFormPaymentData = {
+export type FormExpenseData = {
   job: string
   name: string
   expenseType: string
@@ -22,7 +22,7 @@ export type ExpenseFormPaymentData = {
   isMileage: boolean
 }
 
-export default function FormExpense(params: ExpenseFormPaymentProps) {
+export default function FormExpense(params: FormExpenseProps) {
   const { t } = useTranslation()
 
   const expenseTypeOptions = [
@@ -41,7 +41,7 @@ export default function FormExpense(params: ExpenseFormPaymentProps) {
     control,
     formState: { errors },
     handleSubmit
-  } = useForm<ExpenseFormPaymentData>()
+  } = useForm<FormExpenseData>()
 
   return (<Form onSubmit={handleSubmit(params.onSubmit)}>
     <RequiredFieldDescription />
@@ -54,6 +54,7 @@ export default function FormExpense(params: ExpenseFormPaymentProps) {
             label={t('add_expense_name_field')}
             error={errors.name?.message}
             data-testid="name"
+            value={params.item?.name?.toString()}
             requiredMarker
         />
     </FormGroup>
@@ -67,7 +68,6 @@ export default function FormExpense(params: ExpenseFormPaymentProps) {
                     id="isMileage"
                     {...field}
                     label={t('add_expense_mileage_field')}
-                    value="true"
                     data-testid="isMileage"
                 />
             }
@@ -104,6 +104,7 @@ export default function FormExpense(params: ExpenseFormPaymentProps) {
             error={errors.amount?.message}
             data-testid="amount"
             requiredMarker
+            value={params.item?.amount?.toString()}
         />
     </FormGroup>
     

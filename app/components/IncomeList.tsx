@@ -24,7 +24,7 @@ export default function IncomeList({dayCount, job, jobId}: Props) {
   const incomeItemElements = []
   
   for (const payment in payments.byId) {
-    incomeItemElements.push(<IncomeListItem index={payment} payment={payments.byId[payment]} jobId={jobId} />)
+    incomeItemElements.push(<IncomeListItem paymentId={payment} jobId={jobId} payment={payments.byId[payment]} />)
   }
 
   function addItemClicked() {

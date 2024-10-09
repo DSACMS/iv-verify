@@ -9,22 +9,22 @@ import { useRouter } from "next/navigation"
 import { ExpenseItem } from "@/lib/features/job/expenses/expensesSlice"
 
 interface ItemProps {
-  index: string
-  payment: PaymentItem
+  paymentId: string
   jobId: string
+  payment: PaymentItem
 }
-export default function IncomeListItem({ index, payment, jobId }: ItemProps) {
+export default function IncomeListItem({ paymentId, jobId, payment }: ItemProps) {
     const ref = useRef(null)
     const { t } = useTranslation()
     const dispatch = useAppDispatch()
     const router = useRouter()
 
     function onDeleteClicked() {
-        dispatch(removePayment(index))
+        dispatch(removePayment(paymentId))
     }
 
     function editClicked() {
-        router.push(`/job/${index}/payment/edit`)
+        router.push(`/job/${jobId}/payment/${paymentId}/edit`)
     }
 
     

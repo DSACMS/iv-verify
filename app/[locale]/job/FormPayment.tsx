@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next"
 export interface FormPaymentProps {
   onSubmit: SubmitHandler<FormPaymentData>
   item?: PaymentItem
+  formattedDate: string
 }
 
 export type FormPaymentData = {
@@ -22,6 +23,21 @@ export type FormPaymentData = {
 
 export default function FormPayment(params: FormPaymentProps) {
   const { t } = useTranslation()
+
+  let formatDate = () => {
+    let formattedDate: string = '';
+    if (params.item?.date) {
+      const paymentDate = new Date(params.item?.date)
+
+      const addLeadingZero = (d: number) => d.toString().length === 1 ? 
+      `0${d}` : d
+
+      formattedDate = `${paymentDate.getFullYear()}-${addLeadingZero(paymentDate.getMonth())}-${addLeadingZero(paymentDate.getDate())}`
+    }
+
+    return formattedDate
+  }
+  const formattedDate = formatDate()
 
   const {
     register,
@@ -51,13 +67,18 @@ export default function FormPayment(params: FormPaymentProps) {
         <Controller
           name="date"
           control={control}
+          defaultValue={params.formattedDate}
           rules={{ required: {value:true, message: t('add_income_required_field')} }}
-          render={({ field }) => (
+          render={({ 
+            field: { onChange, onBlur, value, name, ref },
+          }) => (
             <>
               <Label htmlFor="date" className="text-bold">{t('add_income_payment_date')}<RequiredMarker /></Label>
               <DatePicker
                 id="date"
-                {...field}
+                name={name}
+                defaultValue={value}
+                onChange={onChange}
                 {...(errors.date?.message !== undefined ? {validationStatus: 'error'} : {})}
               />
             </>
