@@ -24,11 +24,11 @@ export default function Page() {
                 <GridContainer>
                 <Grid row gap>
                     <main className="usa-layout-docs">
-                        <h3>{t('placeholder_text')}</h3>
+                        <h3 data-testid="placeholder_header">{t('placeholder_text')}</h3>
                         <span className="usa-hint">{t('placeholder_text')}</span>
                         <p className="text-center">
                             <Button type="button" 
-                                onClick={mainButtonClicked} data-testid="get_started_button" className="margin-bottom-3 margin-top-3">{t('placeholder_button')}</Button>
+                                onClick={mainButtonClicked} data-testid="placeholder_button" className="margin-bottom-3 margin-top-3">{t('placeholder_button')}</Button>
                         </p>
                     </main>
                 </Grid>
@@ -36,5 +36,4 @@ export default function Page() {
             </div>
         </div>
     )
-
 }
