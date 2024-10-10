@@ -7,7 +7,7 @@ import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 
-describe('Intro Page', async () => {
+describe('Grounding and context page', async () => {
   let store: EnhancedStore
   beforeEach(() => {
     vi.mock('next/navigation', () => ({
@@ -21,18 +21,18 @@ describe('Intro Page', async () => {
   afterEach(cleanup)
 
   it('shows header', () => {
-    expect(screen.getByTestId('intro_header')).toBeDefined()
+    expect(screen.getByTestId('placeholder_header')).toBeDefined()
   })
 
-  it('shows add button', () => {
-    expect(screen.getByTestId('get_started_button')).toBeDefined()
+  it('shows button', () => {
+    expect(screen.getByTestId('placeholder_button')).toBeDefined()
   })
 
   it('navigates when clicked', async () => {
-    fireEvent.click(screen.getByTestId('get_started_button'))
+    fireEvent.click(screen.getByTestId('placeholder_button'))
     await waitFor(() => {
       expect(mockRouter).toMatchObject({
-        asPath: "/introduction"
+        asPath: "/introduction/how-this-works"
       })
     })
   })
