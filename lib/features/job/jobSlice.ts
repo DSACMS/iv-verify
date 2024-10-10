@@ -62,7 +62,7 @@ export const selectTotalPaymentsByJob = (state: RootState, jobId: string) => {
   let total = 0,
       payments = selectPaymentsByJob(state, jobId)
 
-  for (const payment in payments) {
+  for (const payment in payments.byId) {
     total = total + payments.byId[payment].amount
   }
   

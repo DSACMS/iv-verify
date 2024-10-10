@@ -67,10 +67,10 @@ export default function FormPayment(params: FormPaymentProps) {
         <Controller
           name="date"
           control={control}
-          defaultValue={params.formattedDate}
+          defaultValue={formattedDate}
           rules={{ required: {value:true, message: t('add_income_required_field')} }}
           render={({ 
-            field: { onChange, onBlur, value, name, ref },
+            field: { onChange, onBlur, value="2024-09-30", name, ref },
           }) => (
             <>
               <Label htmlFor="date" className="text-bold">{t('add_income_payment_date')}<RequiredMarker /></Label>

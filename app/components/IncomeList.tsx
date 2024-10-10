@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { Button, ButtonGroup, Card, CardBody, CardGroup, CardHeader, Grid, GridContainer } from "@trussworks/react-uswds"
 import { useTranslation } from "react-i18next"
 
-import { JobItem, selectTotalPaymentsByAllJobs } from "@/lib/features/job/jobSlice"
+import { JobItem, selectJobItemAt, selectTotalPaymentsByAllJobs } from "@/lib/features/job/jobSlice"
 
 import IncomeListItem from "./IncomeListItem"
 import { selectPaymentsByJob } from "@/lib/features/job/payment/paymentSlice"
