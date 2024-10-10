@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit'
-import { PaymentItem, selectPaymentsByJob } from './payment/paymentSlice'
+import { selectPaymentsByJob } from './payment/paymentSlice'
 import { ExpenseItem } from './expenses/expensesSlice'
 import { RootState } from '../../store'
 import { selectExpensesByJob } from './expenses/expensesSlice'

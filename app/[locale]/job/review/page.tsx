@@ -11,7 +11,6 @@ import ExpenseList from "@/app/components/ExpenseList"
 import JobReviewHeader from "./JobReviewHeader"
 import SnapExpenses from "./SnapExpenses"
 import VerifyNav from "@/app/components/VerifyNav"
-import { use } from 'chai'
 
 const DAY_COUNT = 30
 
