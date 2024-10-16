@@ -68,6 +68,7 @@ export default function FormExpense(params: FormExpenseProps) {
                     id="isMileage"
                     {...field}
                     label={t('add_expense_mileage_field')}
+                    value="true"
                     data-testid="isMileage"
                 />
             }
@@ -87,7 +88,6 @@ export default function FormExpense(params: FormExpenseProps) {
                     <DatePicker
                         id="date"
                         data-testid="date"
-                        defaultValue="2024-10-01"
                         {...field}
                         {...(errors.date?.message !== undefined ? {validationStatus: 'error'} : {})}
                     />
