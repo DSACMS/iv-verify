@@ -5,6 +5,8 @@ import { SetExpensePayload, ExpenseItem } from "@/lib/features/job/expenses/expe
 import { SetJobPayload, JobItem } from "@/lib/features/job/jobSlice"
 import { SetPaymentPayload, PaymentItem } from "@/lib/features/job/payment/paymentSlice"
 
+import { generateFormattedDate, today } from "./date"
+
 /**
  * emptyStateObject
  * Object
@@ -49,7 +51,7 @@ export const generateExpense = (jobId: string, payload?: ExpenseItem, expenseId?
     job: jobId,
     name: 'Gas',
     amount: 10,
-    date: new Date().toString(),
+    date: generateFormattedDate(new Date('2024-08-22')),
     expenseType: 'Gas',
     isMileage: false
   } as ExpenseItem
@@ -91,10 +93,11 @@ export const generateJob = (payload?: JobItem, jobId?: string) => {
  * @returns SetPaymentPayload
  */
 export const generatePayment = (jobId: string, payload?: PaymentItem, paymentId?: string) => {
+  const todaysDate = today()
   const defaultPayload = {
     job: jobId,
     amount: 10,
-    date: '',
+    date: generateFormattedDate(todaysDate),
     payer: 'Someone'
   } as PaymentItem
 
