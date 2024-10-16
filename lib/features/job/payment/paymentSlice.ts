@@ -50,9 +50,6 @@ export const { addPayment, removePayment, setPaymentItem } = PaymentSlice.action
 
 export const selectPaymentItemAt = (state: RootState, id: string) => state.payment.byId[id]
 
-// payments by job need job id
-// way to iterate
-// return state object
 export const selectPaymentsByJob = (state: RootState, jobId: string) => {
   let selectedPayments: PaymentState = initialState
 
