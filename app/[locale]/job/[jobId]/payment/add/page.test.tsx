@@ -2,43 +2,16 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 import { cleanup, fireEvent, render, screen, waitFor } from '@testing-library/react'
 import TestWrapper from '@/app/TestWrapper'
 import { vi } from 'vitest'
-import { generateJob } from '@/test/fixtures/generator'
 import mockRouter from 'next-router-mock'
+
+import { generateJob } from '@/test/fixtures/generator'
+import { generateFormattedDate, today } from '@/test/fixtures/date'
 
 import Page from './page'
 import { EnhancedStore } from '@reduxjs/toolkit/react'
 import { makeStore } from '@/lib/store'
 
 import { addJob } from '@/lib/features/job/jobSlice'
-
-/**
- * Set date from month day year
- * from https://github.com/trussworks/react-uswds/blob/main/src/components/forms/DatePicker/utils.tsx
- *
- * @param {number} year the year to set
- * @param {number} month the month to set (zero-indexed)
- * @param {number} date the date to set
- * @returns {Date} the set date
- */
-export const setDate = (year: number, month: number, date: number): Date => {
-  const newDate = new Date(0)
-  newDate.setFullYear(year, month, date)
-  return newDate
-}
-
-/**
- * todays date
- * from https://github.com/trussworks/react-uswds/blob/main/src/components/forms/DatePicker/utils.tsx
- *
- * @returns {Date} todays date
- */
-export const today = (): Date => {
-  const newDate = new Date()
-  const day = newDate.getDate()
-  const month = newDate.getMonth()
-  const year = newDate.getFullYear()
-  return setDate(year, month, day)
-}
 
 describe('Add Payments to Jobs Page', async () => {
   let store: EnhancedStore
@@ -62,12 +35,8 @@ describe('Add Payments to Jobs Page', async () => {
   })
 
   it('navigates when fields are filled in', async () => {
-    const todayDate = today()
-    const month = todayDate.getMonth()+1
-    const formattedMonth = month.toString().length === 1 ? 
-      `0${month}` : month
     const date = '15'
-    const expectedDate = `${formattedMonth}/${date}/${todayDate.getFullYear()}`;
+    const expectedDate = generateFormattedDate(today(), date)
 
     const datepicker: HTMLInputElement = screen.getByTestId("date-picker-external-input")
     fireEvent.change(screen.getByTestId("amount"), {

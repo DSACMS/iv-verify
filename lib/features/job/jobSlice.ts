@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction} from '@reduxjs/toolkit'
-import { PaymentItem, selectPaymentsByJob } from './payment/paymentSlice'
+import { selectPaymentsByJob } from './payment/paymentSlice'
 import { ExpenseItem } from './expenses/expensesSlice'
 import { RootState } from '../../store'
 import { selectExpensesByJob } from './expenses/expensesSlice'
@@ -58,8 +58,16 @@ export const selectJobCount = (state: RootState) => state.jobs.allIds.length
  * 
  * @param state 
  */
-export const selectTotalPaymentsByJob = (state: RootState, jobId: string) => 
-  selectPaymentsByJob(state, jobId).reduce((total: number, payment: PaymentItem) => total + payment.amount, 0)
+export const selectTotalPaymentsByJob = (state: RootState, jobId: string) => {
+  let total = 0,
+      payments = selectPaymentsByJob(state, jobId)
+
+  for (const payment in payments.byId) {
+    total = total + payments.byId[payment].amount
+  }
+  
+  return total
+}
 
 export const selectTotalPaymentsByAllJobs = (state: RootState) => 
   state.payment.allIds.reduce((total: number, paymentId: string) => total + state.payment.byId[paymentId].amount, 0)
