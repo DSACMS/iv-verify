@@ -1,0 +1,71 @@
+# This workflow will build and push a new container image to Amazon ECR.
+
+name: Push Image to Registry
+
+on: 
+  workflow_dispatch:
+    inputs:
+      aws-region:
+        description: 'Region of the AWS account'
+        required: true
+        default: us-gov-west-1
+        type: choice
+        options:
+          - us-gov-west-1
+      aws-access-key-id:
+        description: 'AWS access key id'
+        required: true
+        type: string
+      aws-secret-access-key:
+        description: 'AWS secret access key'
+        required: true
+        type: string
+      aws-session-token:
+        description: 'AWS session token'
+        required: true
+        type: string
+
+env:
+  ECR_REPOSITORY: iv-verify
+
+permissions:
+  contents: read
+
+jobs:    
+  push-image-to-registry:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up node
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+
+    - name: Build code
+      run: |
+        npm ci
+        npm run build
+
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ github.event.inputs.aws-access-key-id }}
+        aws-secret-access-key: ${{ github.event.inputs.aws-secret-access-key }}
+        aws-session-token: ${{ github.event.inputs.aws-session-token }}
+        aws-region: ${{ github.event.inputs.aws-region }}
+
+    - name: Login to Amazon ECR
+      id: login-ecr
+      uses: aws-actions/amazon-ecr-login@v2
+
+    - name: Build, tag, and push image to Amazon ECR
+      id: build-image
+      env:
+        ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+        IMAGE_TAG: ${{ github.sha }}
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+        echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
