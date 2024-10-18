@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next'
 import { useAppSelector } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
 import { selectBenefits } from "@/lib/features/benefits/benefitsSlice"
-import { selectTotalPaymentsByAllJobs } from "@/lib/features/job/jobSlice"
+import { selectJobItems, selectTotalPaymentsByAllJobs } from "@/lib/features/job/jobSlice"
 import Link from "next/link"
 import IncomeList from "@/app/components/IncomeList"
 import ExpenseList from "@/app/components/ExpenseList"
@@ -17,8 +17,17 @@ const DAY_COUNT = 30
 export default function Page() {
   const { t } = useTranslation()
   const router = useRouter()
+  const allJobs = useAppSelector(state => selectJobItems(state))
   const benefits = useAppSelector(state => selectBenefits(state))
   const incomeTotal = useAppSelector(state => selectTotalPaymentsByAllJobs(state))
+
+  const jobItems = []
+  const expenseItems = []
+
+  for (const job in allJobs) {
+    jobItems.push(<IncomeList dayCount={DAY_COUNT} job={allJobs[job]} jobId={job} />)
+    expenseItems.push(<ExpenseList header={t('review_expenses_header', {days: DAY_COUNT})} jobId={job} />)
+  }
 
   function continueButtonClicked() {
     router.push("/statement/sign")
@@ -39,8 +48,8 @@ export default function Page() {
                 <div className="text-center margin-top-3">
                   {t("review_legally_sign")}
                 </div>
-                <IncomeList dayCount={DAY_COUNT} header={t('review_income_header', {days: DAY_COUNT})} />
-                <ExpenseList header={t('review_expenses_header', {days: DAY_COUNT})} />
+                {jobItems}
+                {expenseItems}
                 <SnapExpenses benefits={benefits} snapIncomeTotal={incomeTotal} />
 
                 <Button type="button" data-testid="continue-button" onClick={continueButtonClicked}>{t('review_continue_button')}</Button>

@@ -1,17 +1,26 @@
 'use client'
 
-import { Button, Grid, GridContainer } from '@trussworks/react-uswds' 
 import { useTranslation } from 'react-i18next'
 import { useRouter } from "next/navigation"
-import ExpenseList from "@/app/components/ExpenseList"
-import { selectBenefits } from '@/lib/features/benefits/benefitsSlice'
 import { useAppSelector } from "@/lib/hooks"
-import VerifyNav from "@/app/components/VerifyNav"
+
+import { selectBenefits } from '@/lib/features/benefits/benefitsSlice'
+import { selectJobItems } from '@/lib/features/job/jobSlice'
 import { isStandardDeductionBetter } from '@/lib/store'
+
+import { Button, Grid, GridContainer } from '@trussworks/react-uswds' 
+import ExpenseList from "@/app/components/ExpenseList"
+import VerifyNav from "@/app/components/VerifyNav"
 
 export default function Page() {
   const { t } = useTranslation()
   const router = useRouter()
+  const jobs = useAppSelector(state => selectJobItems(state))
+  const expenseList = []
+
+  for (const job in jobs) {
+    expenseList.push(<ExpenseList header={t('expenses_summary_list_header')} jobId={job} />)
+  }
 
   const benefits = useAppSelector(state => selectBenefits(state))
   const standardDeductionIsBetter = useAppSelector(state => isStandardDeductionBetter(state))
@@ -34,7 +43,7 @@ export default function Page() {
             <main className="usa-layout-docs">
               <h3>{t('expenses_summary_header')}</h3>
               <span className="usa-hint">{t('expenses_summary_subheader')}</span>
-              <ExpenseList header={t('expenses_summary_list_header')} />
+              {expenseList}
               <Button type="button" onClick={doneClicked} data-testid="continue_button">{t('expenses_summary_review_button')}</Button>
             </main>
           </Grid>

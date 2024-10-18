@@ -72,7 +72,9 @@ describe('PaymentSlice', () => {
 
       store.dispatch(addPayment(generatePayment(secondJobId)))
 
-      expect(selectPaymentsByJob(store.getState(), secondJobId).length).toBe(1)
+      const payments = selectPaymentsByJob(store.getState(), secondJobId)
+
+      expect(payments.allIds.length).toBe(1)
     })
   })
 })

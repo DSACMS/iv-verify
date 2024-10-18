@@ -1,8 +1,10 @@
 import { useTranslation } from "react-i18next"
-import { ExpenseItem, removeExpense, selectExpensesByJob } from "@/lib/features/job/expenses/expensesSlice"
-import { JobItem } from "@/lib/features/job/jobSlice"
-import { useAppDispatch, useAppSelector } from "@/lib/hooks"
+import { useAppDispatch } from "@/lib/hooks"
 import { useRouter } from "next/navigation"
+import { useRef } from "react"
+
+import { ExpenseItem, removeExpense } from "@/lib/features/job/expenses/expensesSlice"
+
 import { 
   Button, 
   ButtonGroup,
@@ -12,41 +14,35 @@ import {
   ModalHeading, 
   ModalToggleButton
 } from "@trussworks/react-uswds"
-import { useRef } from "react"
 
 interface ItemProps {
-  item: JobItem
-  index: string
+  expenseId: string
+  jobId: string
+  expense: ExpenseItem
 }
-export default function ExpenseListItem({ item, index }: ItemProps) {
+
+export default function ExpenseListItem({ expenseId, jobId, expense }: ItemProps) {
   const ref = useRef(null)
   const { t } = useTranslation()
   const dispatch = useAppDispatch()
   const router = useRouter()
-  const expenses = useAppSelector(state => selectExpensesByJob(state, index)).map((expense: ExpenseItem) => {
-    return (<li key="expense.jobId}">{expense.date} ${expense.amount} {expense.name} ({expense.expenseType})</li>)
-  })
 
   function onDeleteClicked() {
-    dispatch(removeExpense(index))
+    dispatch(removeExpense(expenseId))
   }
 
   function editClicked() {
-    router.push(`/job/expense/edit/${index}`)
+    router.push(`/job/${jobId}/expense/edit/${expenseId}`)
   }
 
   return (
     <Grid row gap className="margin-bottom-5">
       <Grid col={10}>
-        <div>{item.description}</div>
-        <div>{item.business}</div>
-        <div>
-          <ul>
-            {expenses}
-          </ul>
-        </div>
+        <div>${expense.amount}</div>
+        <div>{expense.date}</div>
+        <div>{expense.name}</div>
       </Grid>
-      <Grid col={5} tablet={{col: 2}}>
+      <Grid col={2}>
         <ModalToggleButton unstyled modalRef={ref} opener>{t('expenses_summary_list_delete')}</ModalToggleButton>
         <Modal ref={ref} id="delete-modal">
           <ModalHeading>{t('expenses_summary_delete_are_you_sure')}</ModalHeading>

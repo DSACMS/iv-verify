@@ -25,7 +25,6 @@ describe('List Income in Ledger Page', async () => {
   
   it('shows navigation buttons', () => {
     render (<Provider store={store}><Page /></Provider>)
-    expect(screen.getByTestId('add_another_button')).toBeDefined()
     expect(screen.getByTestId('continue_button')).toBeDefined()
   })
 

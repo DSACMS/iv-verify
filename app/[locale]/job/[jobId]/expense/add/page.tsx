@@ -5,7 +5,7 @@ import { useAppDispatch } from "@/lib/hooks"
 import { SetExpensePayload, addExpense } from "@/lib/features/job/expenses/expensesSlice"
 import { useRouter } from "next/navigation"
 import VerifyNav from "@/app/components/VerifyNav"
-import FormExpense, { ExpenseFormPaymentData } from '../FormExpense'
+import FormExpense, { FormExpenseData } from '../FormExpense'
 import { createUuid } from '@/lib/store'
 
 
@@ -14,7 +14,7 @@ export default function Page({ params }: { params: { jobId: string } }) {
   const dispatch = useAppDispatch()
   const router = useRouter()
 
-  function addExpenseClicked ({job=params.jobId, name, expenseType, amount, isMileage=false, date }: ExpenseFormPaymentData) {
+  function addExpenseClicked ({job=params.jobId, name, expenseType, amount, isMileage=false, date }: FormExpenseData) {
     const id = createUuid()
 
     const expenseItem: SetExpensePayload = {
@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { jobId: string } }) {
     }
 
     dispatch(addExpense(expenseItem))
-    router.push('/job/list')
+    router.push('/expense/list')
   }
 
   return (

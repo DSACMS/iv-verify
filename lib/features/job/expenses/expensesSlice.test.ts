@@ -81,7 +81,7 @@ describe('ExpenseSlice', () => {
       const secondJobId = createUuid()       
       store.dispatch(addExpense(generateExpense(secondJobId)))
 
-      expect(selectExpensesByJob(store.getState(), secondJobId).length).toBe(1)
+      expect(selectExpensesByJob(store.getState(), secondJobId).allIds.length).toBe(1)
 
     })
 

@@ -1,12 +1,14 @@
 'use client'
 
-import ErrorSummary from "@/app/components/ErrorSummary"
-import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
-import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
-import { PaymentItem } from "@/lib/features/job/payment/paymentSlice"
 import { Button, DatePicker, Form, FormGroup, Label, RequiredMarker } from "@trussworks/react-uswds"
 import { Controller, SubmitHandler, useForm } from "react-hook-form"
 import { useTranslation } from "react-i18next"
+
+import { PaymentItem } from "@/lib/features/job/payment/paymentSlice"
+
+import ErrorSummary from "@/app/components/ErrorSummary"
+import RequiredFieldDescription from "@/app/components/RequiredFieldDescription"
+import TextFieldWithValidation from "@/app/components/TextFieldWithValidation"
 
 export interface FormPaymentProps {
   onSubmit: SubmitHandler<FormPaymentData>
@@ -23,12 +25,34 @@ export type FormPaymentData = {
 export default function FormPayment(params: FormPaymentProps) {
   const { t } = useTranslation()
 
+  let formatDate = () => {
+    let formattedDate: string = '';
+    if (params.item?.date) {
+      const paymentDate = new Date(params.item?.date)
+
+      const addLeadingZero = (d: number) => d.toString().length === 1 ? 
+      `0${d}` : d
+
+      formattedDate = `${paymentDate.getFullYear()}-${addLeadingZero(paymentDate.getMonth())}-${addLeadingZero(paymentDate.getDate())}`
+    }
+
+    return formattedDate
+  }
+  const formattedDate = formatDate()
+
   const {
     register,
+    getValues,
     control,
     formState: { errors },
     handleSubmit
-  } = useForm<FormPaymentData>()
+  } = useForm<FormPaymentData>({
+    defaultValues: { 
+      amount: params.item?.amount,
+      date: formattedDate,
+      payer: params.item?.payer
+    }
+  })
 
   return (
     <Form onSubmit={handleSubmit(params.onSubmit)}>
@@ -52,12 +76,16 @@ export default function FormPayment(params: FormPaymentProps) {
           name="date"
           control={control}
           rules={{ required: {value:true, message: t('add_income_required_field')} }}
-          render={({ field }) => (
+          render={({ 
+            field: { onChange, name },
+          }) => (
             <>
               <Label htmlFor="date" className="text-bold">{t('add_income_payment_date')}<RequiredMarker /></Label>
               <DatePicker
                 id="date"
-                {...field}
+                name={name}
+                defaultValue={formattedDate}
+                onChange={onChange}
                 {...(errors.date?.message !== undefined ? {validationStatus: 'error'} : {})}
               />
             </>
@@ -78,8 +106,12 @@ export default function FormPayment(params: FormPaymentProps) {
         />
       </FormGroup>
       <FormGroup>
-        <Button type="submit" name="continue_button" data-testid="continue_button">{t('add_income_button_done')}</Button>
+        <Button type="submit" name="continue_button" data-testid="continue_button" onClick={() => {
+        console.log(getValues())
+    }}>{t('add_income_button_done')}</Button>
       </FormGroup>
+
+      {/* <DevTool control={control} />  */}
     </Form>
   )
 }
