@@ -21,17 +21,16 @@ export default function Page() {
   const benefits = useAppSelector(state => selectBenefits(state))
   const incomeTotal = useAppSelector(state => selectTotalPaymentsByAllJobs(state))
 
-  function continueButtonClicked() {
-    router.push("/statement/sign")
+  const jobItems = []
+  const expenseItems = []
+
+  for (const job in allJobs) {
+    jobItems.push(<IncomeList dayCount={DAY_COUNT} job={allJobs[job]} jobId={job} />)
+    expenseItems.push(<ExpenseList header={t('review_expenses_header', {days: DAY_COUNT})} jobId={job} />)
   }
 
-  const jobItemList = () => {
-    const jobItems = []
-
-    for (const job in allJobs)
-      jobItems.push(<IncomeList dayCount={DAY_COUNT} job={allJobs[job]} jobId={job} />)
-
-    return jobItems
+  function continueButtonClicked() {
+    router.push("/statement/sign")
   }
 
   return (
@@ -49,8 +48,8 @@ export default function Page() {
                 <div className="text-center margin-top-3">
                   {t("review_legally_sign")}
                 </div>
-                {jobItemList()}
-                <ExpenseList header={t('review_expenses_header', {days: DAY_COUNT})} />
+                {jobItems}
+                {expenseItems}
                 <SnapExpenses benefits={benefits} snapIncomeTotal={incomeTotal} />
 
                 <Button type="button" data-testid="continue-button" onClick={continueButtonClicked}>{t('review_continue_button')}</Button>

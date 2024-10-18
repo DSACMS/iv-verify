@@ -38,7 +38,7 @@ export default function EditExpense({ params }: { params: { expenseId: string, j
 
     dispatch(setExpenseItem(expense))
 
-    router.push(`/job/list`)
+    router.push(`/expense/list`)
   }
 
   return (

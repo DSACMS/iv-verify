@@ -53,17 +53,21 @@ export const { addExpense, removeExpense, setExpenseItem } = expenseSlice.action
 
 export const selectExpenseItemAt = (state: RootState, id: string) => state.expenses.byId[id]
 export const selectExpensesByJob = (state: RootState, jobId: string) => {
-  const selectedExpenses: Array<ExpenseItem> = []
+  let selectedExpenses: ExpenseState = initialState
 
   for (const expenseId in state.expenses.byId) {
-    const currentExpense = selectExpenseItemAt(state, expenseId)
-    if (currentExpense.job === jobId)
-      selectedExpenses.push(currentExpense)
+    const currentExpense = state.expenses.byId[expenseId]
+    if (currentExpense.job === jobId) {
+      selectedExpenses = expenseSlice.reducer(
+        selectedExpenses, 
+        addExpense({
+          id: expenseId,
+          item: currentExpense
+      } as SetExpensePayload))
+    }
   }
 
   return selectedExpenses
 }
-
-
 
 export default expenseSlice.reducer

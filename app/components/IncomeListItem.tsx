@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next"
-import { PaymentItem, removePayment } from "@/lib/features/job/payment/paymentSlice"
 import { useAppDispatch } from "@/lib/hooks"
 import { Grid, ModalToggleButton, Modal, ModalHeading, ModalFooter, ButtonGroup, Button } from "@trussworks/react-uswds"
 import { useRef } from "react"
 import { useRouter } from "next/navigation"
+
+import { PaymentItem, removePayment } from "@/lib/features/job/payment/paymentSlice"
 
 interface ItemProps {
   paymentId: string

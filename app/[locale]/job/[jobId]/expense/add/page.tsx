@@ -30,7 +30,7 @@ export default function Page({ params }: { params: { jobId: string } }) {
     }
 
     dispatch(addExpense(expenseItem))
-    router.push('/job/list')
+    router.push('/expense/list')
   }
 
   return (
