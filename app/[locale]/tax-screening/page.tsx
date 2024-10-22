@@ -14,7 +14,7 @@ export default function Page() {
     const router = useRouter()
 
     function continueButtonClicked() {
-        router.push('/introduction/benefits/');
+        router.push('/job');
     }
 
     return (

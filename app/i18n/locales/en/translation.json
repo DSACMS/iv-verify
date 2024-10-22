@@ -43,8 +43,6 @@
   "add_income_taxes_yes": "Yes I claimed self-employment income on last year’s taxes",
   "add_income_title": "Self-employment work",
   "add_income_total_total": "Add up the payments from this person, client, or company and enter it below.",
-  "benefits_applied_for_continue_button": "Continue",
-  "benefits_applied_for_title": "Benefits applied for",
   "benefits_continue_button": "Continue",
   "benefits_error_message": "You must select at least one of the benefits below",
   "benefits_header": "Which benefit programs should the ledger demonstrate?",

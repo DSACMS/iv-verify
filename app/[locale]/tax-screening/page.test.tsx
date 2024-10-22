@@ -32,7 +32,7 @@ describe('Grounding and context page', async () => {
     fireEvent.click(screen.getByTestId('tax_screening_continue_button'))
     await waitFor(() => {
       expect(mockRouter).toMatchObject({
-        asPath: "/introduction/benefits"
+        asPath: "/job"
       })
     })
   })

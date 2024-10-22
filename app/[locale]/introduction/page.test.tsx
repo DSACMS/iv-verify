@@ -32,7 +32,7 @@ describe('Grounding and context page', async () => {
     fireEvent.click(screen.getByTestId('introduction_continue_button'))
     await waitFor(() => {
       expect(mockRouter).toMatchObject({
-        asPath: "/introduction/how-this-works"
+        asPath: "/how-this-works"
       })
     })
   })

@@ -18,7 +18,7 @@ export default function Page() {
   const router = useRouter()
 
   function mainButtonClicked() {
-    router.push('/benefits-applied-for');
+    router.push('/benefits');
   }
 
   const whatIsSelfEmployment = [{

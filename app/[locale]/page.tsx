@@ -10,7 +10,7 @@ export default function Home() {
   const router = useRouter()
 
   function getStartedClicked() {
-    router.push('/introduction/')
+    router.push('/introduction')
   }
 
   const items = [

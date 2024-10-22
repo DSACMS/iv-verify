@@ -14,7 +14,7 @@ export default function Page() {
     const router = useRouter()
 
     function continueButtonClicked() {
-        router.push('/introduction/how-this-works/');
+        router.push('/how-this-works');
     }
 
     return (
