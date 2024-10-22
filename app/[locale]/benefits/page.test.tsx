@@ -46,7 +46,7 @@ describe('Choose Benefits', async () => {
 
     await waitFor(() => {
       expect(mockRouter).toMatchObject({
-        asPath: "/job"
+        asPath: "/personal-details"
       })
     })
 
@@ -64,7 +64,7 @@ describe('Choose Benefits', async () => {
 
     await waitFor(() => {
       expect(mockRouter).toMatchObject({
-        asPath: "/job"
+        asPath: "/personal-details"
       })
     })
 
@@ -82,7 +82,7 @@ describe('Choose Benefits', async () => {
 
     await waitFor(() => {
       expect(mockRouter).toMatchObject({
-        asPath: "/job"
+        asPath: "/personal-details"
       })
     })
 

@@ -28,7 +28,7 @@ describe('How this works page', async () => {
     fireEvent.click(screen.getByTestId('get_started_button'))
     await waitFor(() => {
       expect(mockRouter).toMatchObject({
-        asPath: "/introduction/benefits"
+        asPath: "/benefits"
       })
     })
   })

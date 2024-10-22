@@ -25,14 +25,14 @@ describe('Grounding and context page', async () => {
   })
 
   it('shows button', () => {
-    expect(screen.getByTestId('introduction_continue_button')).toBeDefined()
+    expect(screen.getByTestId('personal_details_continue_button')).toBeDefined()
   })
 
   it('navigates when clicked', async () => {
-    fireEvent.click(screen.getByTestId('introduction_continue_button'))
+    fireEvent.click(screen.getByTestId('personal_details_continue_button'))
     await waitFor(() => {
       expect(mockRouter).toMatchObject({
-        asPath: "/how-this-works"
+        asPath: "/tax-screening"
       })
     })
   })
