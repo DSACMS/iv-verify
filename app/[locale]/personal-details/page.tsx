@@ -14,12 +14,12 @@ export default function Page() {
     const router = useRouter()
 
     function continueButtonClicked() {
-        router.push('/introduction/how-this-works/');
+        router.push('/tax-screening');
     }
 
     return (
         <div>
-            <VerifyNav title={t('introduction_title')} />
+            <VerifyNav title={t('personal_details_title')} />
             <div className="usa-section">
                 <GridContainer>
                 <Grid row gap>
@@ -28,7 +28,7 @@ export default function Page() {
                         <span className="usa-hint">{t('placeholder_text')}</span>
                         <p className="text-center">
                             <Button type="button" 
-                                onClick={continueButtonClicked} data-testid="introduction_continue_button" className="margin-bottom-3 margin-top-3">{t('introduction_continue_button')}</Button>
+                                onClick={continueButtonClicked} data-testid="personal_details_continue_button" className="margin-bottom-3 margin-top-3">{t('personal_details_continue_button')}</Button>
                         </p>
                     </main>
                 </Grid>

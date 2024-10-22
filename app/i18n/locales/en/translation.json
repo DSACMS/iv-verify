@@ -43,6 +43,8 @@
   "add_income_taxes_yes": "Yes I claimed self-employment income on last year’s taxes",
   "add_income_title": "Self-employment work",
   "add_income_total_total": "Add up the payments from this person, client, or company and enter it below.",
+  "benefits_applied_for_continue_button": "Continue",
+  "benefits_applied_for_title": "Benefits applied for",
   "benefits_continue_button": "Continue",
   "benefits_error_message": "You must select at least one of the benefits below",
   "benefits_header": "Which benefit programs should the ledger demonstrate?",
@@ -132,6 +134,8 @@
   "intro_secure": "Your information is secure",
   "intro_subheader": "We'll help you document your self-employed or cash based income and send it to your benefits application so you can get benefits faster",
   "intro_title": "Verify.gov | Self-employment",
+  "introduction_continue_button": "Continue",
+  "introduction_title": "Introduction",
   "list_income_add_expense_button": "+ Add exenses for this job",
   "list_income_add_job_button": "+ Add another job",
   "list_income_add_payment_button": "+ Add another payment",
@@ -151,7 +155,8 @@
   "nav_english": "English",
   "nav_espanol": "Español",
   "nav_home": "Home",
-  "placeholder_button": "Lorem ipsum Next",
+  "personal_details_continue_button": "Continue",
+  "personal_details_title": "Personal details",
   "placeholder_text": "Lorem ipsum",
   "required_field_description": "A red asterisk (<0></0>) indicates a required field.",
   "review_continue_button": "Continue",
@@ -203,5 +208,7 @@
   "statement_sign_name_label": "Type your full name",
   "statement_sign_name_required": "You must sign your name",
   "statement_sign_subheader": "You must check the boxes below and type your name. This is a legally binding statement.",
-  "statement_sign_title": "Read and sign"
+  "statement_sign_title": "Read and sign",
+  "tax_screening_continue_button": "Continue",
+  "tax_screening_title": "Tax screening"
 }

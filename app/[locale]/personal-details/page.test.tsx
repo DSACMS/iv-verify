@@ -7,8 +7,8 @@ import { vi } from 'vitest'
 import { EnhancedStore } from '@reduxjs/toolkit'
 import mockRouter from 'next-router-mock'
 
-describe('How this works page', async () => {
-  let store: EnhancedStore;
+describe('Grounding and context page', async () => {
+  let store: EnhancedStore
   beforeEach(() => {
     vi.mock('next/navigation', () => ({
       useRouter: () =>  mockRouter,
@@ -21,14 +21,18 @@ describe('How this works page', async () => {
   afterEach(cleanup)
 
   it('shows header', () => {
-    expect(screen.getByTestId('how_this_works_header')).toBeDefined()
+    expect(screen.getByTestId('placeholder_header')).toBeDefined()
+  })
+
+  it('shows button', () => {
+    expect(screen.getByTestId('personal_details_continue_button')).toBeDefined()
   })
 
   it('navigates when clicked', async () => {
-    fireEvent.click(screen.getByTestId('get_started_button'))
+    fireEvent.click(screen.getByTestId('personal_details_continue_button'))
     await waitFor(() => {
       expect(mockRouter).toMatchObject({
-        asPath: "/benefits-applied-for"
+        asPath: "/tax-screening"
       })
     })
   })
