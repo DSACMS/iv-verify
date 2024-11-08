@@ -1,0 +1,45 @@
+# Deploys the application to cloud.gov sandbox where this application is registered.
+# The application 
+
+name: Deploy to cloud.gov Sandbox
+
+on: 
+  workflow_dispatch:
+    inputs:
+      cf-service-acct-username:
+        description: 'Cloud.gov service account username'
+        required: true
+        type: string
+      cf-service-acct-password:
+        description: 'Cloud.gov service account password'
+        required: true
+        type: string
+
+jobs:
+  deployment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+      - uses: actions/checkout@v4
+
+      - name: Set up node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build code 
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install Cloud Foundry
+        run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -zx
+
+      - name: Deploy app to sandbox
+        env:
+          CF_USERNAME: ${{ github.event.inputs.cf-service-acct-username }}
+          CF_PASSWORD: ${{ github.event.inputs.cf-service-acct-password }}
+        run: |
+          ./cf login -a api.fr.cloud.gov -u ${{ github.event.inputs.cf-service-acct-username }} -p ${{ github.event.inputs.cf-service-acct-password }}
+#          ./cf login -a api.fr.cloud.gov -u ${CF_USERNAME} -p ${CF_PASSWORD}
+          ./cf push
