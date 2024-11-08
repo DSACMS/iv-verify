@@ -1,5 +1,4 @@
-# Deploys the application to cloud.gov sandbox where this application is registered.
-# The application 
+# Deploys the application to the sandbox sandbox environment
 
 name: Deploy to cloud.gov Sandbox
 
