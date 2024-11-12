@@ -38,7 +38,7 @@ jobs:
         id: deploy-to-cloudgov-sandbox
         run: |
           SVC_ACCT_SECRET=${{ github.event.inputs.service-acct-password }}
-          echo "::add-mask::${SVC_ACCT_SECRET}}"
+          echo "::add-mask::${SVC_ACCT_SECRET}"
           echo SVC_ACCT_SECRET=$SVC_ACCT_SECRET >> $GITHUB_OUTPUT
           ./cf login -a api.fr.cloud.gov -u ${{ github.event.inputs.service-acct-username }} -p $SVC_ACCT_SECRET
           ./cf push
