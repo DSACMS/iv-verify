@@ -11,24 +11,28 @@ on:
         description: 'Cloud.gov service account password'
         required: true
         type: string
+      application_name:
+        description: 'Application name (uses manifest.yml if blank)'
+        required: false
+        type: string
 
 jobs:
   deployment:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      # - name: Checkout code
+      #   uses: actions/checkout@v4
 
-      - name: Set up node js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
+      # - name: Set up node js
+      #   uses: actions/setup-node@v4
+      #   with:
+      #     node-version: 22
 
-      - name: Build code
-        id: build-code
-        run: |
-          npm ci
-          npm run build
+      # - name: Build code
+      #   id: build-code
+      #   run: |
+      #     npm ci
+      #     npm run build
 
       - name: Install Cloud Foundry cli
         id: install-cf-cli
@@ -45,4 +49,4 @@ jobs:
           echo SVC_ACCT_USERNAME=$SVC_ACCT_USERNAME >> $GITHUB_OUTPUT
           echo SVC_ACCT_PASSWORD=$SVC_ACCT_PASSWORD >> $GITHUB_OUTPUT
           ./cf login -a api.fr.cloud.gov -u $SVC_ACCT_USERNAME -p $SVC_ACCT_PASSWORD
-          ./cf push
+          ./cf push ${{ github.event.inputs.application_name }}
