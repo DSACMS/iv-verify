@@ -16,12 +16,27 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up node js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build code
+        id: build-code
+        run: |
+          npm ci
+          npm run build
+
       - name: Install Cloud Foundry cli
         id: install-cf-cli
         run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -zx
 
       - name: Deploy app to sandbox
         id: deploy-to-cloudgov-sandbox
+        # Mask input values so that values do not appear as clear text in the logs.
         run: |
           SVC_ACCT_USERNAME=$(jq '.inputs.service_acct_username' $GITHUB_EVENT_PATH)
           SVC_ACCT_PASSWORD=$(jq '.inputs.service_acct_password' $GITHUB_EVENT_PATH)
@@ -30,4 +45,4 @@ jobs:
           echo SVC_ACCT_USERNAME=$SVC_ACCT_USERNAME >> $GITHUB_OUTPUT
           echo SVC_ACCT_PASSWORD=$SVC_ACCT_PASSWORD >> $GITHUB_OUTPUT
           ./cf login -a api.fr.cloud.gov -u $SVC_ACCT_USERNAME -p $SVC_ACCT_PASSWORD
-#          ./cf push
+          ./cf push
