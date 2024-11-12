@@ -23,6 +23,7 @@ jobs:
       - name: Deploy app to sandbox
         id: deploy-to-cloudgov-sandbox
         run: |
+          cat $GITHUB_EVENT_PATH
           echo $GITHUB_EVENT_PATH
           echo jq '.' $GITHUB_EVENT_PATH
 #          SVC_ACCT_PASSWORD=$(jq -r '.inputs.service-acct-password' $GITHUB_EVENT_PATH)
