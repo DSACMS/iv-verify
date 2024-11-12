@@ -138,6 +138,9 @@ This project uses **continuous deployment** using [Github Actions](https://githu
 Pull-requests are merged to `main`.
 
 ## Deploy
+
+### Deploying to the cloud.gov sandbox environment
+
 1. Go to https://github.com/DSACMS/iv-verify/actions/workflows/deploy.yml
 1. Click "Run Workflow" button on the right
 1. Click "Run Workflow" in the dialog that appears
@@ -150,13 +153,51 @@ Here is how to migrate from one deployment namespace to another. We'll need to r
 2. `cf push [name-in-manifest]`
 
 On successful deployment, you can set up the gh actions deployment
-1. `cf create-service cloud-gov-service-account space-deployer [name-in-manifest]`
-2. `cf create-service-key [name-in-manifest] [your-key-name]`
-3. `cf service-key [name-in-manifest] [your-key-name]`
-4. A username and password will be printed in your terminal. Using these, proceed to the next steps:
-5. `gh secret set CLOUD_GOV_DEPLOY_USERNAME` and enter this secret when prompted
-6. `gh secret set CLOUD_GOV_DEPLOY_PASSWORD` and enter this secret when prompted
-7. From here, test out a deployment in the repo to test it out
+Reference: https://cloud.gov/docs/services/cloud-gov-service-account/#how-to-create-an-instance
+
+1. To create a service account to use for deployments, first create a service instance associated with your 
+   ```bash
+   cf create-service cloud-gov-service-account space-deployer [name-in-manifest]
+   ```
+   
+   For example:
+   ```bash
+   cf create-service cloud-gov-service-account space-deployer verify-ledger-prototype
+   ```
+
+1. Create a service account and bind it to your service instance.
+   ```bash
+   cf create-service-key [name-in-manifest] [your-key-name]
+   ```
+
+   For example:
+   ```bash
+   cf create-service-key verify-ledger-prototype ledger-service-key
+   ```
+1. Generate the service key for the account.
+   ```bash
+   cf service-key [name-in-manifest] [your-key-name]
+   ```
+
+    For example:
+    ```bash
+   cf service-key verify-ledger-prototype ledger-service-key
+   ```
+
+   The command will output a username and password that you will use for deploying the application.
+   ```bash
+    {
+        "credentials": {
+            "password": "oYasdfliaweinasfdliecVfake/",
+            "username": "fakebeed-aabb-1234-feha0987654321000"
+        }
+    }
+    ```
+  
+1. The `service-key` command will output to your terminal a username and password. Using these, proceed to the next steps:
+1. `gh secret set CLOUD_GOV_DEPLOY_USERNAME` and enter this secret when prompted
+1. `gh secret set CLOUD_GOV_DEPLOY_PASSWORD` and enter this secret when prompted
+1. From here, test out a deployment in the repo to test it out
 
 #### Deployment resources
 - [Set secrets for gh actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-an-environment)
