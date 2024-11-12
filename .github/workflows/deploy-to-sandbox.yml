@@ -32,7 +32,7 @@ jobs:
 
       - name: Install Cloud Foundry cli
         id: install-cf-cli
-        run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -
+        run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -zx
 
       - name: Deploy app to sandbox
         id: deploy-to-cloudgov-sandbox
