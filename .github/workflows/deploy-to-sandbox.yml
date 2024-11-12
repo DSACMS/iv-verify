@@ -1,6 +1,4 @@
-# Deploys the application to the sandbox sandbox environment
-
-name: Deploy to cloud.gov Sandbox
+name: Deploy to Sandbox
 
 on: 
   workflow_dispatch:
@@ -32,13 +30,10 @@ jobs:
           npm run build
 
       - name: Install Cloud Foundry
-        run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -zx
+        run: |
+          curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -zx
 
       - name: Deploy app to sandbox
-        env:
-          CF_USERNAME: ${{ github.event.inputs.cf-service-acct-username }}
-          CF_PASSWORD: ${{ github.event.inputs.cf-service-acct-password }}
         run: |
           ./cf login -a api.fr.cloud.gov -u ${{ github.event.inputs.cf-service-acct-username }} -p ${{ github.event.inputs.cf-service-acct-password }}
-#          ./cf login -a api.fr.cloud.gov -u ${CF_USERNAME} -p ${CF_PASSWORD}
           ./cf push
