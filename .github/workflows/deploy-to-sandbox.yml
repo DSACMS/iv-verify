@@ -3,11 +3,11 @@ name: Deploy to Sandbox
 on: 
   workflow_dispatch:
     inputs:
-      cf-service-acct-username:
+      service-acct-username:
         description: 'Cloud.gov service account username'
         required: true
         type: string
-      cf-service-acct-password:
+      service-acct-password:
         description: 'Cloud.gov service account password'
         required: true
         type: string
@@ -18,20 +18,27 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-      - name: Set up node
+
+      - name: Set up node js
         uses: actions/setup-node@v4
         with:
           node-version: 22
+
       - name: Build code
         id: build-code
         run: |
           npm ci
           npm run build
-      - name: Install Cloud Foundry
+
+      - name: Install Cloud Foundry cli
         id: install-cf-cli
-        run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -zx
+        run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -
+
       - name: Deploy app to sandbox
         id: deploy-to-cloudgov-sandbox
+        env:
+          SVC_ACCT_USERNAME: ${{ github.event.inputs.service-acct-username }}
+          SVC_ACCT_PASSWORD: ${{ github.event.inputs.service-acct-password }}
         run: |
-          ./cf login -a api.fr.cloud.gov -u ${{ github.event.inputs.cf-service-acct-username }} -p ${{ github.event.inputs.cf-service-acct-password }}
+          ./cf login -a api.fr.cloud.gov -u ${SVC_ACCT_USERNAME} -p ${SVC_ACCT_PASSWORD}
           ./cf push
