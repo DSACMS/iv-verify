@@ -1,7 +1,6 @@
+name: Update contributors
+
 on:
-    push:
-        branches:
-            - main
     workflow_dispatch:
 
 jobs:
