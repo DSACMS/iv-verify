@@ -18,22 +18,20 @@ jobs:
     steps:
       - name: Checkout code
       - uses: actions/checkout@v4
-
       - name: Set up node
         uses: actions/setup-node@v4
         with:
           node-version: 22
-
-      - name: Build code 
+      - name: Build code
+        id: build-code
         run: |
           npm ci
           npm run build
-
       - name: Install Cloud Foundry
-        run: |
-          curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -zx
-
+        id: install-cf-cli
+        run: curl -L "https://packages.cloudfoundry.org/stable?release=linux64-binary&version=v8&source=github" | tar -zx
       - name: Deploy app to sandbox
+        id: deploy-to-cloudgov-sandbox
         run: |
           ./cf login -a api.fr.cloud.gov -u ${{ github.event.inputs.cf-service-acct-username }} -p ${{ github.event.inputs.cf-service-acct-password }}
           ./cf push
