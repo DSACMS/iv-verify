@@ -23,12 +23,11 @@ jobs:
       - name: Deploy app to sandbox
         id: deploy-to-cloudgov-sandbox
         run: |
-          cat $GITHUB_EVENT_PATH
-          echo $GITHUB_EVENT_PATH
+          SVC_ACCT_USERNAME=$(jq '.inputs.service_acct_username' $GITHUB_EVENT_PATH)
           SVC_ACCT_PASSWORD=$(jq '.inputs.service_acct_password' $GITHUB_EVENT_PATH)
-          echo 1 = $SVC_ACCT_PASSWORD
-          echo 2 = ${SVC_ACCT_PASSWORD}
-#          echo "::add-mask::${SVC_ACCT_PASSWORD}"
-#          echo SVC_ACCT_PASSWORD=$SVC_ACCT_PASSWORD >> $GITHUB_OUTPUT
-#          ./cf login -a api.fr.cloud.gov -u ${{ github.event.inputs.service_acct_username }} -p $SVC_ACCT_PASSWORD
+          echo "::add-mask::${SVC_ACCT_USERNAME}"
+          echo "::add-mask::${SVC_ACCT_PASSWORD}"
+          echo SVC_ACCT_USERNAME=$SVC_ACCT_USERNAME >> $GITHUB_OUTPUT
+          echo SVC_ACCT_PASSWORD=$SVC_ACCT_PASSWORD >> $GITHUB_OUTPUT
+          ./cf login -a api.fr.cloud.gov -u $SVC_ACCT_USERNAME -p $SVC_ACCT_PASSWORD
 #          ./cf push
