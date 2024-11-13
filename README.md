@@ -25,10 +25,10 @@ Accessibility, unit testing, and translation are being built in from the ground 
 ## Repository structure
 This application uses NextJS's default file structure. You can learn more about this from [NextJS](https://nextjs.org/docs/getting-started/project-structure). 
 
-#### `adr`
+### `adr`
 Architecture design records are in this directory.
 
-#### `app`
+### `app`
 Next has a style where routing is determined by file structure. You'll find all of the application files inside of the `app` directory.
 * `[locale]`: where the pages live
 * `api`: looks like api endpoints with some automagic nextjs things
@@ -37,14 +37,28 @@ Next has a style where routing is determined by file structure. You'll find all 
 * `components`: reused components in the application
 * `i18n`: translation keys
 
-#### `lib`
+### `lib`
 `features` contains our redux stores, which is our data structure in this local-storage-focused app. You'll notice below that there's a question about Store default values and other data structure thoughts below in our notes and decisions but for now this is where we're keeping our data structures. As things become more complicated we will want to revisit our decisions in this area.
 
-#### `public`
+### `public`
 Where any public assets are stored.
 
-#### `scripts`
+### `scripts`
 Tooling and scripts to make the repository run smoothly and correctly.
+
+
+## Branching model
+This project follows [trunk-based development](https://trunkbaseddevelopment.com/), which means:
+
+* Make small changes in [short-lived feature branches](https://trunkbaseddevelopment.com/short-lived-feature-branches/) and merge to `main` frequently.
+* Be open to submitting multiple small pull requests for a single ticket (i.e. reference the same ticket across multiple pull requests).
+* Treat each change you merge to `main` as immediately deployable to production. Do not merge changes that depend on subsequent changes you plan to make, even if you plan to make those changes shortly.
+* Ticket any unfinished or partially finished work.
+* Tests should be written for changes introduced, and adhere to the text percentage threshold determined by the project.
+
+This project uses **continuous deployment** using [Github Actions](https://github.com/features/actions) which is configured in the [./github/worfklows](.github/workflows) directory.
+
+Pull-requests are merged to `main`.
 
 ## Development
 
@@ -112,92 +126,92 @@ As a result, the Dockerfile sets the `PUPPETEER_SKIP_CHROMIUM_DOWNLOAD` environm
 
 ## Tests and linting
 
+To run tests:
 ```bash
-# to run tests
 npm run test
-# to check test coverage
+```
+
+To check the test coverage:
+```bash
 npm run coverage
 ```
 
-### Coding style and linting
-This application uses NextJS's built in linter. It's run as part of pull request checks and you cannot merge without all checks passing. 
+This application uses the linter in NextJS and is executed as part of the pull request checks and you cannot merge without all checks passing. 
+To run the linter locally:
+```bash
+npm run lint
+```
 
-To run the linter locally, use `npm run lint`.
+## Deploy to cloud.gov
 
-## Branching model
-This project follows [trunk-based development](https://trunkbaseddevelopment.com/), which means:
+### Set up your cloud.gov sandbox environment
+The following steps only need to be done once per person. Once you have set up your sandbox environment, you will be able to deploy the application to it and access it publically.
 
-* Make small changes in [short-lived feature branches](https://trunkbaseddevelopment.com/short-lived-feature-branches/) and merge to `main` frequently.
-* Be open to submitting multiple small pull requests for a single ticket (i.e. reference the same ticket across multiple pull requests).
-* Treat each change you merge to `main` as immediately deployable to production. Do not merge changes that depend on subsequent changes you plan to make, even if you plan to make those changes shortly.
-* Ticket any unfinished or partially finished work.
-* Tests should be written for changes introduced, and adhere to the text percentage threshold determined by the project.
+#### Sign up for an account
+Before being able to deploy into cloud.gov, you will need to sign up for a sandbox account on the platform. Only federal employees and contractors with a qualified US federal government email may obtain free sandbox space. To register, go to the [sign up page](https://account.fr.cloud.gov/signup). You will need access to your email and an authenticator app (such as Google Authenticator, 1password, Microsoft Authenticator, or Authy).
 
-This project uses **continuous deployment** using [Github Actions](https://github.com/features/actions) which is configured in the [./github/worfklows](.github/workflows) directory.
+#### Download the Cloud Foundry CLI
 
-Pull-requests are merged to `main`.
+Refer to the [Getting Started - Setting up the command line](https://cloud.gov/docs/getting-started/setup/#set-up-the-command-line) documentation on cloud.gov. The instructions will step through how to set up the Cloud Foundry command line interface and authenticate to your cloud.gov instance.
 
-## Deploy
-
-### Deploying to the cloud.gov sandbox environment
-
-1. Go to https://github.com/DSACMS/iv-verify/actions/workflows/deploy.yml
-1. Click "Run Workflow" button on the right
-1. Click "Run Workflow" in the dialog that appears
-
-### Change sandbox locations
+#### Establish the application in your sandbox
 Here is how to migrate from one deployment namespace to another. We'll need to run a manual deployment to set up the namespace before setting up the gh action to reflect the new location. 
 
 1. In the new owner's repo, `npm i && npm run build` if you haven't already
 2. Edit the `manifest.yml` to create the name you want. I've been using `verify-ledger-prototype`
 2. `cf push [name-in-manifest]`
 
-On successful deployment, you can set up the gh actions deployment
 Reference: https://cloud.gov/docs/services/cloud-gov-service-account/#how-to-create-an-instance
 
-1. To create a service account to use for deployments, first create a service instance associated with your 
+#### Create a service account for your deployments
+
+To create a service account to use for deployments, first create a service instance associated with your 
    ```bash
    cf create-service cloud-gov-service-account space-deployer [name-in-manifest]
-   ```
-   
-   For example:
-   ```bash
+
+   # For example:
    cf create-service cloud-gov-service-account space-deployer verify-ledger-prototype
    ```
 
-1. Create a service account and bind it to your service instance.
+Next, create a service account and bind it to your service instance.
    ```bash
    cf create-service-key [name-in-manifest] [your-key-name]
-   ```
-
-   For example:
-   ```bash
+   
+   # For example:
    cf create-service-key verify-ledger-prototype ledger-service-key
    ```
-1. Generate the service key for the account.
+
+Generate the service key for the account.
    ```bash
    cf service-key [name-in-manifest] [your-key-name]
-   ```
-
-    For example:
-    ```bash
+    
+   # For example:
    cf service-key verify-ledger-prototype ledger-service-key
    ```
 
-   The command will output a username and password that you will use for deploying the application.
-   ```bash
+The command will output a username and password that you will use for deploying the application. You will be prompted for your credentials when using the sandbox deployment workflow.
+
     {
         "credentials": {
             "password": "oYasdfliaweinasfdliecVfake/",
             "username": "fakebeed-aabb-1234-feha0987654321000"
         }
     }
-    ```
-  
-1. The `service-key` command will output to your terminal a username and password. Using these, proceed to the next steps:
-1. `gh secret set CLOUD_GOV_DEPLOY_USERNAME` and enter this secret when prompted
-1. `gh secret set CLOUD_GOV_DEPLOY_PASSWORD` and enter this secret when prompted
-1. From here, test out a deployment in the repo to test it out
+
+### Deploy to the cloud.gov sandbox environment
+The repository has a workflow for building and deploying the application to a cloud.gov sandbox.
+
+1. Go to https://github.com/DSACMS/iv-verify/actions/workflows/deploy-to-sandbox.yml.
+1. Click "Run Workflow" button on the right.
+1. Fill out the following three fields:
+
+    | Field | Required | Description |
+    | --- | --- | --- |
+    | Cloud.gov service account username  | Yes | The user name of service account of the sandbox owner's space. |
+    | Cloud.gov service account password | Yes | The password of service account of the sandbox owner's space. |
+    | Application name    | No | The name of the application as it is defined in the owner's sandbox space. If no value is given, then the value in the manifest.yml is used. |
+1. Click the "Run Workflow" button in the dialog to start the processing.
+
 
 #### Deployment resources
 - [Set secrets for gh actions](https://docs.github.com/en/actions/security-guides/using-secrets-in-github-actions#creating-secrets-for-an-environment)

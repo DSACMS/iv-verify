@@ -20,19 +20,19 @@ jobs:
   deployment:
     runs-on: ubuntu-latest
     steps:
-      # - name: Checkout code
-      #   uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      # - name: Set up node js
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 22
+      - name: Set up node js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
 
-      # - name: Build code
-      #   id: build-code
-      #   run: |
-      #     npm ci
-      #     npm run build
+      - name: Build code
+        id: build-code
+        run: |
+          npm ci
+          npm run build
 
       - name: Install Cloud Foundry cli
         id: install-cf-cli
