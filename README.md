@@ -142,7 +142,9 @@ To run the linter locally:
 npm run lint
 ```
 
-## Deploy to cloud.gov
+## Deploy
+
+This section refers to deploying to a cloud.gov sandbox environment.
 
 ### Set up your cloud.gov sandbox environment
 The following steps only need to be done once per person. Once you have set up your sandbox environment, you will be able to deploy the application to it and access it publically.
