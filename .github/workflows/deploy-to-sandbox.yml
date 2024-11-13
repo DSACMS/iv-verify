@@ -3,13 +3,17 @@ name: Deploy to Sandbox
 on: 
   workflow_dispatch:
     inputs:
-      service-acct-username:
+      service_acct_username:
         description: 'Cloud.gov service account username'
         required: true
         type: string
-      service-acct-password:
+      service_acct_password:
         description: 'Cloud.gov service account password'
         required: true
+        type: string
+      application_name:
+        description: 'Application name (uses manifest.yml if blank)'
+        required: false
         type: string
 
 jobs:
@@ -36,9 +40,13 @@ jobs:
 
       - name: Deploy app to sandbox
         id: deploy-to-cloudgov-sandbox
+        # Mask input values so that values do not appear as clear text in the logs.
         run: |
-          SVC_ACCT_PASSWORD=$(jq -r '.inputs.service-acct-password' $GITHUB_EVENT_PATH)
+          SVC_ACCT_USERNAME=$(jq '.inputs.service_acct_username' $GITHUB_EVENT_PATH)
+          SVC_ACCT_PASSWORD=$(jq '.inputs.service_acct_password' $GITHUB_EVENT_PATH)
+          echo "::add-mask::${SVC_ACCT_USERNAME}"
           echo "::add-mask::${SVC_ACCT_PASSWORD}"
+          echo SVC_ACCT_USERNAME=$SVC_ACCT_USERNAME >> $GITHUB_OUTPUT
           echo SVC_ACCT_PASSWORD=$SVC_ACCT_PASSWORD >> $GITHUB_OUTPUT
-          ./cf login -a api.fr.cloud.gov -u ${{ github.event.inputs.service-acct-username }} -p $SVC_ACCT_PASSWORD
-          ./cf push
+          ./cf login -a api.fr.cloud.gov -u $SVC_ACCT_USERNAME -p $SVC_ACCT_PASSWORD
+          ./cf push ${{ github.event.inputs.application_name }}
