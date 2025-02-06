@@ -1,7 +1,9 @@
-# Income Verfication Ledger
+# Income Verfication as a Service - Digital Ledger Intervention
 
 ## About the Project
-This repo is a proof of concept of a mobile-first ledger for self employed workers to verify their income and expenses related to their self employment.
+Income Verification as a Service (IVaaS) is a platform to aid in verifying income across means based benefit programs. It comprises multiple interventions to meet the needs of different income earner types. Background and context on the project can be found here
+
+This repo is specific to the Digital Ledger intervention. The digital ledger is in the proof-of-concept stage. It is a mobile-first self guided applicaiton to be used by individuals who are self-employed to aid in creating business income and expenses ledgers, to be used for income verification. 
 
 This application is uses:
 * NextJS
