@@ -1,8 +1,9 @@
 {
   "name": "iv-verify",
+  "version": "",
   "description": "The Digital Ledger is a mobile-first self guided application to be used by individuals who are self-employed to aid in creating business income and expenses ledgers for income verification",
   "longDescription": "The Digital Ledger is a mobile-first, self-guided web application built with Next.js and React  to be used by individuals who are self-employed to aid in creating business income and expenses ledgers for income verification",
-  "status": "Ideation",
+  "status": "Archival",
   "permissions": {
     "licenses": [
       {
@@ -18,10 +19,15 @@
   "repositoryURL": "https://github.com/DSACMS/iv-verify",
   "repositoryHost": "github.com/DSACMS",
   "repositoryVisibility": "public",
+  "homepageURL": "",
+  "downloadURL": "",
+  "disclaimerURL": "",
+  "disclaimerText": "",
   "vcs": "git",
-  "laborHours": 670,
+  "laborHours": 5162,
   "reuseFrequency": {
-    "forks": 2
+    "forks": 2,
+    "clones": 0
   },
   "platforms": [
     "web"
@@ -41,16 +47,20 @@
     "0"
   ],
   "SBOM": "https://github.com/DSACMS/iv-verify/network/dependencies",
+  "relatedCode": [],
+  "reusedCode": [],
+  "partners": [],
   "date": {
     "created": "2024-05-30T22:51:47Z",
-    "lastModified": "2026-06-02T04:44:41Z",
-    "metadataLastUpdated": "2026-08-11T22:43:34.933Z"
+    "lastModified": "2026-08-18T17:36:40Z",
+    "metadataLastUpdated": "2026-08-20T14:33:48.145Z"
   },
   "tags": [
     "income-verification",
     "self-employment",
     "benefits",
-    "financial-records"
+    "financial-records",
+    "archived"
   ],
   "contact": {
     "email": "opensource@cms.hhs.gov",
