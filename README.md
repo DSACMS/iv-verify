@@ -1,4 +1,7 @@
 # Income Verfication as a Service - Digital Ledger Intervention
+> [!WARNING]
+> This project is now archived and no longer actively maintained. It has been archived to retain its contents for reference. Feel free to explore and fork the repository, but please note that updates or support will not be provided.
+
 
 ## About the Project
 Income Verification as a Service (IVaaS) is a platform to aid in verifying income across means based benefit programs. It comprises multiple interventions to meet the needs of different income earner types. Background and context on the project can be found here
